@@ -2,15 +2,8 @@ import { Link, useLocation } from 'react-router-dom'
 import './BookingConfirmation.css'
 
 const MOCK_BOOKING = {
-  circuit: {
-    name: "Parc d'Isalo",
-    slug: 'parc-isalo',
-  },
-  guide: {
-    nom: 'Rakoto Jean',
-    photo: '/images/avatar1.jpg',
-    note: 4.9,
-  },
+  circuit: { name: "Trek Découverte Isalo", slug: 'decouverte-isalo' },
+  guide: { id: 1, nom: 'Rakoto Jean', photo: '/images/avatar1.jpg', note: 4.9 },
   checkin: '2026-08-10',
   checkout: '2026-08-15',
   nb_personnes: 2,
@@ -118,7 +111,11 @@ export default function BookingConfirmation() {
             <Link to={`/circuits/${booking.circuit.slug}`} className="btn-secondary booking-confirm__btn">
               Votre séjour
             </Link>
-            <Link to="/contact" className="btn-primary booking-confirm__btn">
+            <Link
+              to={`/chat/${booking.guide?.id ?? 1}`}
+              state={booking}
+              className="btn-primary booking-confirm__btn"
+            >
               Discutez avec votre guide
             </Link>
           </div>

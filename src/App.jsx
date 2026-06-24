@@ -11,6 +11,9 @@ import Blog from './pages/Blog'
 import BlogPost from './pages/BlogPost'
 import Contact from './pages/Contact'
 import BookingConfirmation from './pages/BookingConfirmation'
+import BookingRecap from './pages/BookingRecap'
+import GuideSelection from './pages/GuideSelection'
+import Chat from './pages/Chat'
 import Footer from './components/Footer'
 import InstallPWA from './components/InstallPWA'
 import './App.css'
@@ -30,8 +33,11 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/circuits" element={<CircuitsPage />} />
           <Route path="/circuits/:slug" element={<CircuitDetail />} />
+          <Route path="/reservation/recap" element={<BookingRecap />} />
+          <Route path="/reservation/guides" element={<GuideSelection />} />
           <Route path="/reservation/confirmation" element={<BookingConfirmation />} />
           <Route path="/checkout/confirmer" element={<BookingConfirmation />} />
+          <Route path="/chat/:guideId" element={<Chat />} />
           <Route path="/a-propos" element={<About />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogPost />} />

@@ -435,6 +435,48 @@
 
 .bm__pay-btn { background: var(--fern-frond); }
 
+/* ── Payment methods ── */
+.bm__payment-methods {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.bm__method {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 14px 16px;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.bm__method input[type='radio'] { display: none; }
+
+.bm__method--active {
+  border-color: var(--fern-frond);
+  background: rgba(91,140,26,0.04);
+}
+
+.bm__method-logo { height: 24px; object-fit: contain; }
+.bm__method-icons { font-size: 1.2rem; }
+.bm__method-label { font-size: 0.85rem; font-weight: 600; color: var(--log-cabin); }
+
+/* ── Card block ── */
+.bm__card-block {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.bm__card-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
 /* ── Paying state ── */
 .bm__paying {
   display: flex;

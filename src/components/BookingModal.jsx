@@ -57,6 +57,10 @@ export default function BookingModal({ circuit, selectedDays, priceAr, onClose }
   const [promoInput, setPromoInput] = useState('')
   const [promoApplied, setPromoApplied] = useState(false)
   const [promoError, setPromoError] = useState('')
+  const [paymentMethod, setPaymentMethod] = useState('mvola')
+  const [cardNumber, setCardNumber] = useState('')
+  const [cardExpiry, setCardExpiry] = useState('')
+  const [cardCvv, setCardCvv] = useState('')
   const [paying, setPaying] = useState(false)
 
   const prixBase = priceAr * nbPersonnes
@@ -79,23 +83,24 @@ export default function BookingModal({ circuit, selectedDays, priceAr, onClose }
     }
   }
 
+  const bookingState = {
+    circuit: { name: circuit.name, slug: circuit.slug },
+    checkin: date,
+    checkout,
+    nb_personnes: nbPersonnes,
+    activite: `${circuit.name} – ${selectedDays} jours`,
+    code_promo: promoApplied ? PROMO_CODE : null,
+    remise,
+    frais_service: FRAIS_SERVICE,
+    prix_total: total,
+    payment_method: paymentMethod,
+    guide_ids: circuit.guideIds ?? [1, 2],
+  }
+
   function handlePay() {
     setPaying(true)
     setTimeout(() => {
-      navigate('/reservation/confirmation', {
-        state: {
-          circuit: { name: circuit.name, slug: circuit.slug },
-          guide: { nom: 'Rakoto Jean', photo: '/images/avatar1.jpg', note: 4.9 },
-          checkin: date,
-          checkout,
-          nb_personnes: nbPersonnes,
-          activite: `${circuit.name} – ${selectedDays} jours`,
-          code_promo: promoApplied ? PROMO_CODE : null,
-          remise,
-          frais_service: FRAIS_SERVICE,
-          prix_total: total,
-        },
-      })
+      navigate('/reservation/recap', { state: bookingState })
     }, 2200)
   }
 
@@ -237,11 +242,13 @@ export default function BookingModal({ circuit, selectedDays, priceAr, onClose }
             {paying ? (
               <div className="bm__paying">
                 <div className="bm__paying-spinner" />
-                <p className="bm__paying-text">Traitement du paiement MVola…</p>
+                <p className="bm__paying-text">
+                  {paymentMethod === 'mvola' ? 'Traitement du paiement MVola…' : 'Vérification de votre carte…'}
+                </p>
               </div>
             ) : (
               <>
-                <h3 className="bm__step-title">Paiement MVola</h3>
+                <h3 className="bm__step-title">Paiement</h3>
 
                 <div className="bm__recap-box">
                   <div className="bm__recap-row">
@@ -257,10 +264,6 @@ export default function BookingModal({ circuit, selectedDays, priceAr, onClose }
                     <span>{formatDate(checkout)}</span>
                   </div>
                   <div className="bm__recap-row">
-                    <span>Durée</span>
-                    <span>{selectedDays} jours</span>
-                  </div>
-                  <div className="bm__recap-row">
                     <span>Voyageurs</span>
                     <span>{nbPersonnes}</span>
                   </div>
@@ -270,24 +273,95 @@ export default function BookingModal({ circuit, selectedDays, priceAr, onClose }
                   </div>
                 </div>
 
-                <div className="bm__mvola-block">
-                  <div className="bm__mvola-logo">
-                    <img src="/images/mvola.png" alt="MVola" className="bm__mvola-img" />
-                  </div>
-                  <div className="bm__field">
-                    <label className="bm__label">Votre numéro MVola</label>
+                {/* Choix méthode de paiement */}
+                <div className="bm__payment-methods">
+                  <label className={`bm__method ${paymentMethod === 'mvola' ? 'bm__method--active' : ''}`}>
                     <input
-                      type="tel"
-                      className="bm__input"
-                      defaultValue="034 86 123 45"
-                      readOnly
+                      type="radio"
+                      name="payment"
+                      value="mvola"
+                      checked={paymentMethod === 'mvola'}
+                      onChange={() => setPaymentMethod('mvola')}
                     />
-                    <p className="bm__field-hint">Compte : {user?.name}</p>
-                  </div>
-                  <div className="bm__mvola-amount">
-                    Montant à payer : <strong>{formatAr(total)}</strong>
-                  </div>
+                    <img src="/images/mvola.png" alt="MVola" className="bm__method-logo" />
+                    <span className="bm__method-label">MVola</span>
+                  </label>
+                  <label className={`bm__method ${paymentMethod === 'carte' ? 'bm__method--active' : ''}`}>
+                    <input
+                      type="radio"
+                      name="payment"
+                      value="carte"
+                      checked={paymentMethod === 'carte'}
+                      onChange={() => setPaymentMethod('carte')}
+                    />
+                    <span className="bm__method-icons">💳</span>
+                    <span className="bm__method-label">Carte bancaire</span>
+                  </label>
                 </div>
+
+                {/* Formulaire MVola */}
+                {paymentMethod === 'mvola' && (
+                  <div className="bm__mvola-block">
+                    <div className="bm__field">
+                      <label className="bm__label">Numéro MVola</label>
+                      <input type="tel" className="bm__input" defaultValue="034 86 123 45" readOnly />
+                      <p className="bm__field-hint">Compte associé : {user?.name}</p>
+                    </div>
+                    <div className="bm__mvola-amount">
+                      À débiter : <strong>{formatAr(total)}</strong>
+                    </div>
+                  </div>
+                )}
+
+                {/* Formulaire carte bancaire */}
+                {paymentMethod === 'carte' && (
+                  <div className="bm__card-block">
+                    <div className="bm__field">
+                      <label className="bm__label">Numéro de carte</label>
+                      <input
+                        type="text"
+                        className="bm__input"
+                        placeholder="1234 5678 9012 3456"
+                        maxLength={19}
+                        value={cardNumber}
+                        onChange={(e) => {
+                          const v = e.target.value.replace(/\D/g, '').slice(0, 16)
+                          setCardNumber(v.replace(/(.{4})/g, '$1 ').trim())
+                        }}
+                      />
+                    </div>
+                    <div className="bm__card-row">
+                      <div className="bm__field">
+                        <label className="bm__label">Date d'expiration</label>
+                        <input
+                          type="text"
+                          className="bm__input"
+                          placeholder="MM/AA"
+                          maxLength={5}
+                          value={cardExpiry}
+                          onChange={(e) => {
+                            const v = e.target.value.replace(/\D/g, '').slice(0, 4)
+                            setCardExpiry(v.length > 2 ? v.slice(0, 2) + '/' + v.slice(2) : v)
+                          }}
+                        />
+                      </div>
+                      <div className="bm__field">
+                        <label className="bm__label">CVV</label>
+                        <input
+                          type="text"
+                          className="bm__input"
+                          placeholder="123"
+                          maxLength={3}
+                          value={cardCvv}
+                          onChange={(e) => setCardCvv(e.target.value.replace(/\D/g, '').slice(0, 3))}
+                        />
+                      </div>
+                    </div>
+                    <div className="bm__mvola-amount">
+                      À débiter : <strong>{formatAr(total)}</strong>
+                    </div>
+                  </div>
+                )}
 
                 <div className="bm__btn-row">
                   <button className="bm__back-btn" onClick={() => setStep(2)}>← Retour</button>

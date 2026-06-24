@@ -1,0 +1,152 @@
+.guide-sel {
+  min-height: 100vh;
+  background: var(--velvety-cream);
+}
+
+/* ── Hero ── */
+.guide-sel__hero {
+  background: var(--english-holly);
+  text-align: center;
+  padding: 80px 24px 56px;
+  color: #fff;
+}
+
+.guide-sel__eyebrow {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 12px;
+}
+
+.guide-sel__title {
+  font-family: var(--font-primary);
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.guide-sel__subtitle {
+  font-size: 0.92rem;
+  color: rgba(255,255,255,0.65);
+}
+
+/* ── Body ── */
+.guide-sel__body {
+  padding: 48px 24px 80px;
+}
+
+/* ── Grid ── */
+.guide-sel__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 24px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* ── Card ── */
+.guide-sel__card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 28px;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.07);
+  border: 1px solid #eee;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.guide-sel__card:hover {
+  box-shadow: 0 8px 36px rgba(0,0,0,0.12);
+  transform: translateY(-2px);
+}
+
+/* ── Top row ── */
+.guide-sel__card-top {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.guide-sel__avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 3px solid var(--velvety-cream);
+}
+
+.guide-sel__info { flex: 1; }
+
+.guide-sel__name {
+  font-family: var(--font-primary);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--log-cabin);
+  margin-bottom: 4px;
+}
+
+.guide-sel__rating {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.guide-sel__star { color: var(--golden-cypress); font-size: 0.95rem; }
+.guide-sel__note { font-weight: 700; font-size: 0.88rem; color: var(--log-cabin); }
+.guide-sel__reviews { font-size: 0.78rem; color: #aaa; }
+
+.guide-sel__available-dot {
+  color: var(--fern-frond);
+  font-size: 0.7rem;
+  flex-shrink: 0;
+  align-self: flex-start;
+}
+
+/* ── Tags spécialités ── */
+.guide-sel__specialites {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.guide-sel__tag {
+  background: rgba(91,140,26,0.1);
+  color: var(--fern-frond);
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+/* ── Langues ── */
+.guide-sel__langues {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+}
+
+.guide-sel__langues-label {
+  color: #bbb;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  flex-shrink: 0;
+}
+
+.guide-sel__langues-val { color: #555; }
+
+/* ── CTA ── */
+.guide-sel__choose-btn {
+  width: 100%;
+  justify-content: center;
+  margin-top: auto;
+}
+
+@media (max-width: 640px) {
+  .guide-sel__grid { grid-template-columns: 1fr; }
+}

@@ -5,6 +5,7 @@ import { adaptItinerary, adaptPrice } from '../utils/adaptItinerary'
 import { useCurrency } from '../context/CurrencyContext'
 import { useAuth } from '../context/AuthContext'
 import BookingModal from '../components/BookingModal'
+import CircuitMap from '../components/CircuitMap'
 import './CircuitDetail.css'
 
 function infoIcon(text) {
@@ -182,13 +183,28 @@ export default function CircuitDetail() {
                       onClick={() => setOpenStep(openStep === idx ? null : idx)}
                     >
                       <span className="cd__day-badge">J{step.day}</span>
-                      <span className="cd__step-title-text">{step.title}</span>
+                      <div className="cd__step-meta">
+                        <span className="cd__step-title-text">{step.title}</span>
+                        {circuit.waypoints?.[idx] && (
+                          <span className="cd__step-location">
+                            📍 {circuit.waypoints[idx].title}
+                          </span>
+                        )}
+                      </div>
                       <span className="cd__accordion-chevron">
                         {openStep === idx ? '▲' : '▼'}
                       </span>
                     </button>
                     <div className="cd__accordion-body">
                       <p>{step.description}</p>
+                      {circuit.waypoints?.[idx] && (
+                        <div className="cd__step-coords">
+                          <span>🗺️</span>
+                          <span>Point {idx + 1} sur le tracé</span>
+                          {idx === 0 && <span className="cd__step-badge cd__step-badge--start">Départ</span>}
+                          {idx === itinerary.length - 1 && <span className="cd__step-badge cd__step-badge--end">Arrivée</span>}
+                        </div>
+                      )}
                     </div>
                   </div>
                 ))}
@@ -199,9 +215,30 @@ export default function CircuitDetail() {
                   Les dates de départ sont disponibles sur demande. Contactez-nous pour
                   connaître les prochains départs groupés ou organiser un départ privé.
                 </p>
-                <Link to={contactUrl} className="btn-primary cd__depart-btn">
+                <Link to="/contact" className="btn-primary cd__depart-btn">
                   Demander les dates de départ
                 </Link>
+              </div>
+            )}
+
+            {/* CARTE SOUS LE PLAN ÉCRIT */}
+            {circuit.waypoints?.length > 0 && (
+              <div className="cd__plan-map">
+                <div className="cd__plan-map-header">
+                  <span className="cd__plan-map-title">Tracé du circuit</span>
+                  <div className="cd__plan-map-legend">
+                    <span className="cd__legend-item cd__legend-item--start">① Départ</span>
+                    <span className="cd__legend-item cd__legend-item--end">② Arrivée</span>
+                    <span className="cd__legend-item cd__legend-item--route">— Tracé</span>
+                  </div>
+                </div>
+                <CircuitMap
+                  waypoints={circuit.waypoints}
+                  circuitName={circuit.name}
+                />
+                <p className="cd__plan-map-hint">
+                  Cliquez sur un point pour voir le détail de l'étape · Molette pour zoomer
+                </p>
               </div>
             )}
           </section>
@@ -218,31 +255,6 @@ export default function CircuitDetail() {
               ))}
             </div>
           </section>
-
-          {/* SECTION 7 · CARTE */}
-          {circuit.coordonnees_gps && (
-            <section className="cd__section">
-              <h2 className="cd__section-title">Localisation</h2>
-              <p className="cd__map-location">📍 {circuit.location}</p>
-              <div className="cd__map-wrap">
-                <iframe
-                  title={`Carte ${circuit.name}`}
-                  src={`https://www.openstreetmap.org/export/embed.html?bbox=${circuit.coordonnees_gps.lng - 0.8}%2C${circuit.coordonnees_gps.lat - 0.8}%2C${circuit.coordonnees_gps.lng + 0.8}%2C${circuit.coordonnees_gps.lat + 0.8}&layer=mapnik&marker=${circuit.coordonnees_gps.lat}%2C${circuit.coordonnees_gps.lng}`}
-                  allowFullScreen
-                  loading="lazy"
-                  className="cd__map-iframe"
-                />
-              </div>
-              <a
-                href={`https://www.openstreetmap.org/?mlat=${circuit.coordonnees_gps.lat}&mlon=${circuit.coordonnees_gps.lng}#map=10/${circuit.coordonnees_gps.lat}/${circuit.coordonnees_gps.lng}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="cd__map-link"
-              >
-                Voir en plein écran ↗
-              </a>
-            </section>
-          )}
 
         </div>
 
