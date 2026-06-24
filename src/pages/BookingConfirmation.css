@@ -1,0 +1,234 @@
+.booking-confirm {
+  min-height: 100vh;
+  background: var(--velvety-cream);
+}
+
+/* ── Hero ── */
+.booking-confirm__hero {
+  background: var(--english-holly);
+  text-align: center;
+  padding: 80px 24px 64px;
+  color: #fff;
+}
+
+.booking-confirm__emoji {
+  font-size: 3rem;
+  margin-bottom: 16px;
+  line-height: 1;
+}
+
+.booking-confirm__title {
+  font-family: var(--font-primary);
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.booking-confirm__subtitle {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* ── Body ── */
+.booking-confirm__body {
+  padding: 48px 24px 80px;
+  display: flex;
+  justify-content: center;
+}
+
+/* ── Card ── */
+.booking-confirm__card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.1);
+  border: 1px solid #eee;
+  width: 100%;
+  max-width: 560px;
+}
+
+.booking-confirm__circuit-name {
+  font-family: var(--font-primary);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--log-cabin);
+  margin-bottom: 24px;
+}
+
+/* ── Guide ── */
+.booking-confirm__guide {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  background: var(--velvety-cream);
+  border-radius: 12px;
+  margin-bottom: 28px;
+}
+
+.booking-confirm__guide-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.booking-confirm__guide-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.booking-confirm__guide-name {
+  font-family: var(--font-primary);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--log-cabin);
+}
+
+.booking-confirm__guide-meta {
+  font-size: 0.78rem;
+  color: #aaa;
+}
+
+.booking-confirm__guide-rating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.booking-confirm__guide-star {
+  color: var(--golden-cypress);
+  font-size: 1rem;
+  line-height: 1;
+}
+
+.booking-confirm__guide-note {
+  font-family: var(--font-primary);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--log-cabin);
+}
+
+/* ── Section titles ── */
+.booking-confirm__section-title {
+  font-family: var(--font-secondary);
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #aaa;
+  margin-bottom: 14px;
+}
+
+/* ── Récapitulatif ── */
+.booking-confirm__recap {
+  padding-bottom: 24px;
+  border-bottom: 1px solid #f0f0f0;
+  margin-bottom: 24px;
+}
+
+.booking-confirm__recap-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.booking-confirm__recap-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.booking-confirm__recap-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #bbb;
+}
+
+.booking-confirm__recap-value {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--log-cabin);
+}
+
+/* ── Pricing ── */
+.booking-confirm__pricing {
+  padding-bottom: 28px;
+  border-bottom: 1px solid #f0f0f0;
+  margin-bottom: 28px;
+}
+
+.booking-confirm__price-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.booking-confirm__price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.88rem;
+  color: #666;
+}
+
+.booking-confirm__price-row--total {
+  margin-top: 8px;
+  padding-top: 14px;
+  border-top: 1px solid #f0f0f0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--log-cabin);
+}
+
+.booking-confirm__price-discount {
+  color: var(--mojo);
+  font-weight: 600;
+}
+
+.booking-confirm__price-total {
+  color: var(--fern-frond);
+  font-family: var(--font-primary);
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+.booking-confirm__promo-code {
+  font-family: monospace;
+  font-size: 0.78rem;
+  background: rgba(91, 140, 26, 0.1);
+  color: var(--fern-frond);
+  padding: 2px 8px;
+  border-radius: 6px;
+  margin-left: 8px;
+}
+
+/* ── Actions ── */
+.booking-confirm__actions {
+  display: flex;
+  gap: 14px;
+}
+
+.booking-confirm__btn {
+  flex: 1;
+  text-align: center;
+}
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+  .booking-confirm__card {
+    padding: 28px 20px;
+  }
+
+  .booking-confirm__recap-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .booking-confirm__actions {
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,189 @@
+/* ===========================
+   Variables CSS - Charte Treky
+   =========================== */
+:root {
+  --golden-cypress: #958958;
+  --mojo: #C2462E;
+  --english-holly: #00271A;
+  --velvety-cream: #F5F3EE;
+  --fern-frond: #5B8C1A;
+  --log-cabin: #202C1B;
+
+  --font-primary: 'Bricolage Grotesque', sans-serif;
+  --font-secondary: 'Questrial', sans-serif;
+
+  --transition: all 0.3s ease;
+}
+
+/* ===========================
+   Reset & Base
+   =========================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-secondary);
+  background-color: var(--velvety-cream);
+  color: var(--log-cabin);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+}
+
+/* ===========================
+   Boutons
+   =========================== */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 28px;
+  background-color: var(--fern-frond);
+  color: #fff;
+  border-radius: 30px;
+  font-family: var(--font-secondary);
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: var(--transition);
+  border: 2px solid var(--fern-frond);
+}
+
+.btn-primary:hover {
+  background-color: var(--english-holly);
+  border-color: var(--english-holly);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 24px;
+  background-color: transparent;
+  color: var(--log-cabin);
+  border-radius: 30px;
+  font-family: var(--font-secondary);
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: var(--transition);
+  border: 2px solid var(--log-cabin);
+}
+
+.btn-secondary:hover {
+  background-color: var(--log-cabin);
+  color: #fff;
+}
+
+.btn-outline-white {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 28px;
+  background-color: transparent;
+  color: #fff;
+  border-radius: 30px;
+  font-family: var(--font-secondary);
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: var(--transition);
+  border: 2px solid #fff;
+}
+
+.btn-outline-white:hover {
+  background-color: #fff;
+  color: var(--log-cabin);
+}
+
+/* ===========================
+   Container
+   =========================== */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ===========================
+   Badges
+   =========================== */
+.badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.badge-offer {
+  background-color: var(--mojo);
+  color: #fff;
+}
+
+.badge-new {
+  background-color: var(--golden-cypress);
+  color: #fff;
+}
+
+/* ===========================
+   Section titles
+   =========================== */
+.section-title {
+  font-family: var(--font-primary);
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 700;
+  color: var(--log-cabin);
+  line-height: 1.2;
+}
+
+.section-subtitle {
+  font-family: var(--font-secondary);
+  font-size: 1rem;
+  color: #666;
+  line-height: 1.7;
+}
+
+/* ===========================
+   Scrollbar
+   =========================== */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--velvety-cream);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--fern-frond);
+  border-radius: 3px;
+}

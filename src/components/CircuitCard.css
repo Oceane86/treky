@@ -1,0 +1,19 @@
+.circuit-card--link {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+}
+
+.circuit-card__teaser {
+  font-size: 0.85rem;
+  color: #777;
+  line-height: 1.55;
+  margin-bottom: 14px;
+  flex: 1;
+}
+
+.circuit-card__duration {
+  font-size: 0.8rem;
+  color: #999;
+}

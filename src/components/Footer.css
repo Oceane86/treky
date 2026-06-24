@@ -1,0 +1,178 @@
+.footer {
+  background-color: #fff;
+  border-top: 1px solid #eee;
+}
+
+/* ─── Partie principale ─── */
+.footer__main {
+  padding: 56px 0 44px;
+}
+
+.footer__grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr;
+  gap: 40px;
+  align-items: start;
+}
+
+/* ─── Colonne brand ─── */
+.footer__logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.footer__logo-img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.footer__logo-name {
+  font-family: var(--font-primary);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--log-cabin);
+  letter-spacing: -0.01em;
+}
+
+.footer__tagline {
+  font-size: 0.83rem;
+  line-height: 1.75;
+  color: #888;
+  max-width: 240px;
+}
+
+/* ─── Labels colonnes ─── */
+.footer__col-label {
+  font-family: var(--font-secondary);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #aaa;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin-bottom: 18px;
+}
+
+/* ─── Liens ─── */
+.footer__links {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.footer__links a {
+  font-size: 0.85rem;
+  color: #555;
+  text-decoration: none;
+  transition: color 0.2s ease;
+  line-height: 1.4;
+}
+
+.footer__links a:hover {
+  color: var(--log-cabin);
+}
+
+/* ─── Contact ─── */
+.footer__contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer__contact-list li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.83rem;
+  color: #666;
+}
+
+.footer__contact-icon {
+  font-size: 0.8rem;
+  flex-shrink: 0;
+  opacity: 0.6;
+  width: 14px;
+  text-align: center;
+}
+
+.footer__contact-list a {
+  color: #666;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer__contact-list a:hover {
+  color: var(--log-cabin);
+}
+
+/* ─── MVola ─── */
+.footer__mvola {
+  margin-top: 20px;
+}
+
+.footer__mvola-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #bbb;
+  margin-bottom: 8px;
+}
+
+.footer__mvola img {
+  height: 36px;
+  object-fit: contain;
+  display: block;
+}
+
+/* ─── Barre copyright ─── */
+.footer__bottom {
+  border-top: 1px solid #eee;
+  padding: 16px 0;
+}
+
+.footer__bottom-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.footer__bottom p {
+  font-size: 0.75rem;
+  color: #bbb;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 1024px) {
+  .footer__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+
+  .footer__brand {
+    grid-column: 1 / -1;
+  }
+
+  .footer__tagline {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .footer__grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .footer__brand {
+    grid-column: auto;
+  }
+
+  .footer__bottom-inner {
+    flex-direction: column;
+    text-align: center;
+  }
+}
