@@ -1,4 +1,5 @@
 import { Routes, Route, useLocation } from 'react-router-dom'
+import { AuthProvider } from './context/AuthContext'
 import Navbar from './components/Navbar'
 import Home from './pages/Home'
 import Register from './pages/Register'
@@ -21,6 +22,7 @@ function App() {
   const isAuth = AUTH_ROUTES.includes(pathname)
 
   return (
+    <AuthProvider>
     <div className="app">
       {!isAuth && <Navbar />}
       <main>
@@ -41,6 +43,7 @@ function App() {
       {!isAuth && <Footer />}
       <InstallPWA />
     </div>
+    </AuthProvider>
   )
 }
 

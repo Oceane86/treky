@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
 import './Auth.css'
 
 function SocialModal({ provider, onClose, onSuccess }) {
@@ -70,6 +71,10 @@ function SocialModal({ provider, onClose, onSuccess }) {
 
 export default function Login() {
   const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
+  const returnTo = searchParams.get('return') || '/'
+  const auth = useAuth()
+
   const [form, setForm]   = useState({ email: '', password: '' })
   const [errors, setErrors] = useState({})
   const [showPass, setShowPass] = useState(false)
@@ -89,14 +94,20 @@ export default function Login() {
   const handleSubmit = (e) => {
     e.preventDefault()
     if (!validate()) return
+    const ok = auth.login(form.email, form.password)
+    if (!ok) {
+      setErrors({ password: 'Identifiants incorrects. Compte démo : oceane@treky.mg / treky2026' })
+      return
+    }
     setSuccess(true)
-    setTimeout(() => navigate('/'), 1800)
+    setTimeout(() => navigate(returnTo), 1500)
   }
 
   const handleSocialSuccess = () => {
     setSocialModal(null)
+    auth.loginSocial()
     setSuccess(true)
-    setTimeout(() => navigate('/'), 1500)
+    setTimeout(() => navigate(returnTo), 1500)
   }
 
   if (success) {

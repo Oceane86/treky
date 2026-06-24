@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react'
-import { Link, useParams, Navigate } from 'react-router-dom'
+import { Link, useParams, Navigate, useNavigate } from 'react-router-dom'
 import { getCircuitBySlug } from '../data/circuits'
 import { adaptItinerary, adaptPrice } from '../utils/adaptItinerary'
 import { useCurrency } from '../context/CurrencyContext'
+import { useAuth } from '../context/AuthContext'
+import BookingModal from '../components/BookingModal'
 import './CircuitDetail.css'
 
 function infoIcon(text) {
@@ -21,10 +23,14 @@ export default function CircuitDetail() {
   const { slug } = useParams()
   const circuit = getCircuitBySlug(slug)
   const { format } = useCurrency()
+  const { isLoggedIn } = useAuth()
+  const navigate = useNavigate()
   const [selectedDays, setSelectedDays] = useState(5)
   const [descExpanded, setDescExpanded] = useState(false)
   const [activeTab, setActiveTab] = useState('jour')
   const [openStep, setOpenStep] = useState(null)
+  const [showBooking, setShowBooking] = useState(false)
+  const [showLoginGate, setShowLoginGate] = useState(false)
 
   useEffect(() => {
     if (circuit) setSelectedDays(circuit.recommendedDays)
@@ -34,9 +40,17 @@ export default function CircuitDetail() {
 
   const itinerary = adaptItinerary(circuit.steps, selectedDays)
   const price = adaptPrice(circuit.priceAr, circuit.recommendedDays, selectedDays)
+  const priceAr = Math.round(circuit.priceAr * selectedDays / circuit.recommendedDays)
   const isAdapted = selectedDays < circuit.recommendedDays
-  const contactUrl = `/checkout/confirmer?circuit=${circuit.slug}&days=${selectedDays}`
   const photos = circuit.photos?.length >= 1 ? circuit.photos : [circuit.image]
+
+  function handleReserve() {
+    if (isLoggedIn) {
+      setShowBooking(true)
+    } else {
+      setShowLoginGate(true)
+    }
+  }
 
   const stars = Math.round(circuit.rating)
 
@@ -205,6 +219,31 @@ export default function CircuitDetail() {
             </div>
           </section>
 
+          {/* SECTION 7 · CARTE */}
+          {circuit.coordonnees_gps && (
+            <section className="cd__section">
+              <h2 className="cd__section-title">Localisation</h2>
+              <p className="cd__map-location">📍 {circuit.location}</p>
+              <div className="cd__map-wrap">
+                <iframe
+                  title={`Carte ${circuit.name}`}
+                  src={`https://www.openstreetmap.org/export/embed.html?bbox=${circuit.coordonnees_gps.lng - 0.8}%2C${circuit.coordonnees_gps.lat - 0.8}%2C${circuit.coordonnees_gps.lng + 0.8}%2C${circuit.coordonnees_gps.lat + 0.8}&layer=mapnik&marker=${circuit.coordonnees_gps.lat}%2C${circuit.coordonnees_gps.lng}`}
+                  allowFullScreen
+                  loading="lazy"
+                  className="cd__map-iframe"
+                />
+              </div>
+              <a
+                href={`https://www.openstreetmap.org/?mlat=${circuit.coordonnees_gps.lat}&mlon=${circuit.coordonnees_gps.lng}#map=10/${circuit.coordonnees_gps.lat}/${circuit.coordonnees_gps.lng}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="cd__map-link"
+              >
+                Voir en plein écran ↗
+              </a>
+            </section>
+          )}
+
         </div>
 
         {/* ── COLONNE DROITE · WIDGET RÉSERVATION ── */}
@@ -269,14 +308,53 @@ export default function CircuitDetail() {
               )}
             </div>
 
-            <Link to={contactUrl} className="btn-primary cd__book-btn">
+            <button className="btn-primary cd__book-btn" onClick={handleReserve}>
               Réserver ce trek
-            </Link>
+            </button>
             <p className="cd__book-note">Paiement MVola accepté · Annulation flexible</p>
           </div>
         </aside>
 
       </div>
+
+      {/* ── Modal réservation ── */}
+      {showBooking && (
+        <BookingModal
+          circuit={circuit}
+          selectedDays={selectedDays}
+          priceAr={priceAr}
+          onClose={() => setShowBooking(false)}
+        />
+      )}
+
+      {/* ── Gate connexion requise ── */}
+      {showLoginGate && (
+        <div className="cd__gate-overlay" onClick={(e) => e.target === e.currentTarget && setShowLoginGate(false)}>
+          <div className="cd__gate-card">
+            <button className="cd__gate-close" onClick={() => setShowLoginGate(false)}>✕</button>
+            <div className="cd__gate-icon">🔒</div>
+            <h3 className="cd__gate-title">Connexion requise</h3>
+            <p className="cd__gate-text">
+              Pour réserver ce trek, vous devez être connecté à votre compte Treky.
+            </p>
+            <div className="cd__gate-hint">
+              <span className="cd__gate-hint-label">Compte démo</span>
+              <code>oceane@treky.mg</code>
+              <code>treky2026</code>
+            </div>
+            <button
+              className="btn-primary cd__gate-btn"
+              onClick={() => navigate(`/connexion?return=/circuits/${circuit.slug}`)}
+            >
+              Se connecter
+            </button>
+            <Link to="/inscription" className="cd__gate-register">
+              Pas encore inscrit ? Créer un compte
+            </Link>
+          </div>
+        </div>
+      )}
+
     </div>
   )
 }

@@ -1,0 +1,473 @@
+/* ── Overlay ── */
+.bm__overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(4px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+/* ── Card ── */
+.bm__card {
+  background: #fff;
+  border-radius: 24px;
+  width: 100%;
+  max-width: 520px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 36px 36px 32px;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+}
+
+.bm__close {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  background: #f2f2f2;
+  border: none;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-size: 0.85rem;
+  color: #666;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+.bm__close:hover { background: #e0e0e0; }
+
+/* ── Header ── */
+.bm__header {
+  margin-bottom: 24px;
+}
+
+.bm__title {
+  font-family: var(--font-primary);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--log-cabin);
+  margin-bottom: 4px;
+}
+
+.bm__circuit-name {
+  font-size: 0.85rem;
+  color: var(--fern-frond);
+  font-weight: 600;
+}
+
+/* ── Step indicator ── */
+.bm__steps {
+  display: flex;
+  align-items: center;
+  margin-bottom: 28px;
+  gap: 0;
+}
+
+.bm__step-item {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  gap: 0;
+  position: relative;
+}
+
+.bm__step-circle {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #eee;
+  color: #aaa;
+  font-size: 0.8rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.3s;
+  z-index: 1;
+}
+
+.bm__step-circle.active {
+  background: var(--fern-frond);
+  color: #fff;
+}
+
+.bm__step-circle.done {
+  background: var(--fern-frond);
+  color: #fff;
+  font-size: 0.75rem;
+}
+
+.bm__step-label {
+  font-size: 0.72rem;
+  color: #bbb;
+  margin-left: 6px;
+  white-space: nowrap;
+  transition: color 0.3s;
+}
+
+.bm__step-label.active {
+  color: var(--log-cabin);
+  font-weight: 600;
+}
+
+.bm__step-line {
+  flex: 1;
+  height: 2px;
+  background: #eee;
+  margin: 0 6px;
+  transition: background 0.3s;
+}
+
+.bm__step-line.done { background: var(--fern-frond); }
+
+/* ── Step body ── */
+.bm__step-body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.bm__step-title {
+  font-family: var(--font-primary);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--log-cabin);
+}
+
+/* ── Fields ── */
+.bm__field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.bm__label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #555;
+}
+
+.bm__optional {
+  font-weight: 400;
+  color: #aaa;
+}
+
+.bm__input {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 10px;
+  font-family: var(--font-secondary);
+  font-size: 0.9rem;
+  color: var(--log-cabin);
+  transition: border-color 0.2s;
+  background: #fff;
+}
+
+.bm__input:focus {
+  outline: none;
+  border-color: var(--fern-frond);
+}
+
+.bm__input--error { border-color: var(--mojo); }
+.bm__input--success { border-color: var(--fern-frond); background: rgba(91,140,26,0.04); }
+
+.bm__error {
+  font-size: 0.78rem;
+  color: var(--mojo);
+}
+
+.bm__field-hint {
+  font-size: 0.76rem;
+  color: #aaa;
+}
+
+/* ── Duration row (step 1) ── */
+.bm__duration-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.bm__duration-item {
+  background: var(--velvety-cream);
+  border-radius: 10px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.bm__duration-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: #aaa;
+}
+
+.bm__duration-val {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--log-cabin);
+}
+
+.bm__info-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(91,140,26,0.07);
+  border: 1px solid rgba(91,140,26,0.2);
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-size: 0.85rem;
+  color: var(--log-cabin);
+}
+
+/* ── Counter (step 2) ── */
+.bm__counter {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 10px;
+  overflow: hidden;
+  width: fit-content;
+}
+
+.bm__counter-btn {
+  width: 40px;
+  height: 40px;
+  background: #f8f8f8;
+  border: none;
+  font-size: 1.2rem;
+  color: var(--log-cabin);
+  cursor: pointer;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bm__counter-btn:hover:not(:disabled) { background: #efefef; }
+.bm__counter-btn:disabled { color: #ccc; cursor: default; }
+
+.bm__counter-val {
+  width: 48px;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--log-cabin);
+}
+
+/* ── Promo ── */
+.bm__promo-row {
+  display: flex;
+  gap: 8px;
+}
+
+.bm__input--promo { flex: 1; }
+
+.bm__promo-btn {
+  padding: 11px 18px;
+  border-radius: 10px;
+  border: 1.5px solid var(--fern-frond);
+  background: transparent;
+  color: var(--fern-frond);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.bm__promo-btn:hover:not(:disabled) {
+  background: var(--fern-frond);
+  color: #fff;
+}
+
+.bm__promo-btn:disabled { opacity: 0.4; cursor: default; }
+
+.bm__promo-btn--applied {
+  background: var(--fern-frond);
+  color: #fff;
+}
+
+.bm__promo-success {
+  font-size: 0.78rem;
+  color: var(--fern-frond);
+  font-weight: 600;
+}
+
+/* ── Price preview ── */
+.bm__price-preview {
+  background: #f9f9f9;
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.bm__price-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.bm__price-row--discount { color: var(--mojo); font-weight: 600; }
+
+.bm__price-row--total {
+  padding-top: 10px;
+  border-top: 1px solid #eee;
+  font-weight: 700;
+  color: var(--log-cabin);
+  font-size: 0.95rem;
+}
+
+/* ── Recap box (step 3) ── */
+.bm__recap-box {
+  background: var(--velvety-cream);
+  border-radius: 12px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.bm__recap-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.bm__recap-row span:first-child { color: #aaa; }
+.bm__recap-row span:last-child { font-weight: 600; color: var(--log-cabin); }
+
+.bm__recap-row--total {
+  padding-top: 10px;
+  border-top: 1px solid #ddd;
+  font-size: 0.95rem;
+}
+.bm__recap-row--total span:last-child {
+  color: var(--fern-frond);
+  font-family: var(--font-primary);
+  font-size: 1.1rem;
+}
+
+/* ── MVola block ── */
+.bm__mvola-block {
+  background: #fff;
+  border: 1.5px solid #f0f0f0;
+  border-radius: 14px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.bm__mvola-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.bm__mvola-img {
+  height: 32px;
+  object-fit: contain;
+}
+
+.bm__mvola-amount {
+  background: rgba(91,140,26,0.08);
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-size: 0.9rem;
+  color: var(--log-cabin);
+  text-align: center;
+}
+
+.bm__mvola-amount strong {
+  color: var(--fern-frond);
+  font-size: 1.1rem;
+}
+
+/* ── Buttons ── */
+.bm__next-btn {
+  width: 100%;
+  justify-content: center;
+}
+
+.bm__next-btn--flex { width: auto; flex: 1; }
+
+.bm__btn-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.bm__back-btn {
+  background: none;
+  border: 1.5px solid #ddd;
+  border-radius: 30px;
+  padding: 9px 18px;
+  font-size: 0.85rem;
+  color: #888;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.bm__back-btn:hover {
+  border-color: var(--log-cabin);
+  color: var(--log-cabin);
+}
+
+.bm__pay-btn { background: var(--fern-frond); }
+
+/* ── Paying state ── */
+.bm__paying {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 48px 0;
+}
+
+.bm__paying-spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid #eee;
+  border-top-color: var(--fern-frond);
+  border-radius: 50%;
+  animation: bm-spin 0.8s linear infinite;
+}
+
+@keyframes bm-spin {
+  to { transform: rotate(360deg); }
+}
+
+.bm__paying-text {
+  font-size: 0.95rem;
+  color: #666;
+}
+
+/* ── Responsive ── */
+@media (max-width: 540px) {
+  .bm__card {
+    padding: 24px 20px 24px;
+    border-radius: 20px;
+  }
+  .bm__step-label { display: none; }
+}
