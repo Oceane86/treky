@@ -1,0 +1,84 @@
+.favoris-gate {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 120px 24px;
+  text-align: center;
+}
+
+.favoris-gate__icon {
+  font-size: 3rem;
+}
+
+.favoris-gate h2 {
+  font-family: var(--font-primary);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--log-cabin);
+}
+
+.favoris-gate p {
+  color: #888;
+  font-size: 0.95rem;
+  margin-bottom: 8px;
+}
+
+.favoris-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 80px 24px;
+  text-align: center;
+}
+
+.favoris-empty__icon {
+  font-size: 3.5rem;
+  color: #ddd;
+}
+
+.favoris-empty h3 {
+  font-family: var(--font-primary);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--log-cabin);
+}
+
+.favoris-empty p {
+  color: #888;
+  font-size: 0.92rem;
+  max-width: 400px;
+  line-height: 1.6;
+  margin-bottom: 8px;
+}
+
+.favoris-card-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.favoris-remove-btn {
+  background: rgba(194,70,46,0.08);
+  color: var(--mojo);
+  border: none;
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  align-self: flex-start;
+}
+
+.favoris-remove-btn:hover {
+  background: rgba(194,70,46,0.16);
+}
+
+.favoris-cta {
+  display: flex;
+  justify-content: center;
+  margin-top: 48px;
+}

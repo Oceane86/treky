@@ -1,0 +1,204 @@
+.newsletter {
+  background: #fff;
+  overflow: hidden;
+}
+
+.newsletter__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+/* ── Contenu gauche ── */
+.newsletter__eyebrow {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--fern-frond);
+  margin-bottom: 16px;
+}
+
+.newsletter__title {
+  font-family: var(--font-primary);
+  font-size: clamp(1.7rem, 2.8vw, 2.4rem);
+  font-weight: 800;
+  color: var(--log-cabin);
+  line-height: 1.2;
+  margin-bottom: 18px;
+}
+
+.newsletter__subtitle {
+  font-size: 0.95rem;
+  color: #777;
+  line-height: 1.75;
+  margin-bottom: 32px;
+  max-width: 440px;
+}
+
+.newsletter__form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.newsletter__input {
+  flex: 1;
+  padding: 13px 18px;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 28px;
+  font-family: var(--font-secondary);
+  font-size: 0.9rem;
+  color: var(--log-cabin);
+  background: #fff;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.newsletter__input:focus {
+  border-color: var(--fern-frond);
+}
+
+.newsletter__btn {
+  white-space: nowrap;
+  padding: 13px 28px;
+  border-radius: 28px;
+}
+
+.newsletter__success {
+  background: rgba(91, 140, 26, 0.1);
+  color: var(--fern-frond);
+  border-radius: 12px;
+  padding: 16px 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 14px;
+  line-height: 1.5;
+}
+
+.newsletter__note {
+  font-size: 0.72rem;
+  color: #bbb;
+  line-height: 1.5;
+}
+
+.newsletter__content {
+  position: relative;
+}
+
+/* ── Visuels droite ── */
+.newsletter__visuals {
+  position: relative;
+  height: 460px;
+}
+
+.newsletter__photo-grid {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 12px;
+  padding: 0 0 40px 0;
+}
+
+.newsletter__photo {
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+}
+
+.newsletter__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Décalage vertical pour l'effet maquette */
+.newsletter__photo--top-left  { margin-top: 40px; }
+.newsletter__photo--top-right { margin-top: 0; }
+.newsletter__photo--bottom-left  { margin-top: -20px; }
+.newsletter__photo--bottom-right { margin-top: 20px; }
+
+/* ── Nuages décoratifs ── */
+.newsletter__cloud {
+  position: absolute;
+  bottom: -10px;
+  width: 200px;
+  height: 80px;
+  background: radial-gradient(ellipse, rgba(255,255,255,0.95) 60%, transparent 100%);
+  filter: blur(8px);
+  pointer-events: none;
+}
+
+.newsletter__cloud--left  { left: -20px; }
+.newsletter__cloud--right { right: -20px; bottom: 20px; width: 160px; }
+
+/* ── Points colorés ── */
+.newsletter__dot {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.newsletter__dot--yellow { background: #f5c842; width: 10px; height: 10px; }
+.newsletter__dot--purple { background: #8b5cf6; width: 8px; height: 8px; }
+.newsletter__dot--blue   { background: #3b82f6; width: 9px; height: 9px; }
+.newsletter__dot--pink   { background: #ec4899; width: 7px; height: 7px; }
+
+/* Positions des dots dans la colonne gauche */
+.newsletter__content .newsletter__dots-left {
+  position: absolute;
+  top: -20px;
+  right: 0;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.newsletter__content .newsletter__dots-left .newsletter__dot {
+  position: static;
+}
+
+/* Positions des dots sur les visuels */
+.newsletter__dot--top-right   { top: 24px;  right: -4px; }
+.newsletter__dot--mid-right   { top: 50%;   right: -8px; }
+.newsletter__dot--bottom-left { bottom: 60px; left: -4px; }
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .newsletter__inner {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .newsletter__visuals {
+    height: 300px;
+  }
+
+  .newsletter__photo-grid {
+    padding-bottom: 20px;
+  }
+
+  .newsletter__photo { border-radius: 16px; }
+  .newsletter__photo--top-left  { margin-top: 20px; }
+  .newsletter__photo--bottom-left  { margin-top: -10px; }
+  .newsletter__photo--bottom-right { margin-top: 10px; }
+}
+
+@media (max-width: 600px) {
+  .newsletter__form {
+    flex-direction: column;
+  }
+
+  .newsletter__btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .newsletter__visuals {
+    height: 260px;
+  }
+}

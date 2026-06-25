@@ -1,0 +1,144 @@
+.resa-gate {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 120px 24px;
+  text-align: center;
+}
+
+.resa-gate__icon { font-size: 3rem; }
+
+.resa-gate h2 {
+  font-family: var(--font-primary);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--log-cabin);
+}
+
+.resa-gate p { color: #888; font-size: 0.95rem; margin-bottom: 8px; }
+
+.resa-card {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 0;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.1);
+  border: 1px solid #eeebe3;
+  margin-bottom: 40px;
+}
+
+.resa-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.resa-card__body {
+  padding: 32px;
+  background: #fff;
+}
+
+.resa-card__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.resa-card__title {
+  font-family: var(--font-primary);
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--log-cabin);
+  margin-bottom: 4px;
+}
+
+.resa-card__id {
+  font-size: 0.75rem;
+  color: #bbb;
+}
+
+.resa-card__statut {
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 20px;
+  flex-shrink: 0;
+}
+
+.resa-card__statut--confirmed {
+  background: rgba(91,140,26,0.12);
+  color: var(--fern-frond);
+}
+
+.resa-card__details {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  padding: 20px 0;
+  border-top: 1px solid #f0f0f0;
+  border-bottom: 1px solid #f0f0f0;
+  margin-bottom: 24px;
+}
+
+.resa-card__detail {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.resa-card__detail-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #bbb;
+}
+
+.resa-card__detail-val {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--log-cabin);
+}
+
+.resa-card__detail-val--price {
+  color: var(--mojo);
+  font-size: 1rem;
+}
+
+.resa-card__actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.resa-empty-hint {
+  text-align: center;
+  color: #aaa;
+  font-size: 0.88rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 32px 0 48px;
+}
+
+@media (max-width: 700px) {
+  .resa-card {
+    grid-template-columns: 1fr;
+  }
+
+  .resa-card__img {
+    height: 200px;
+  }
+
+  .resa-card__details {
+    grid-template-columns: 1fr 1fr;
+  }
+}

@@ -1,6 +1,10 @@
-import { useState, useEffect } from 'react'
-import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
+'use client'
+import { useState, useEffect, useRef } from 'react'
+import Link from 'next/link'
+import { usePathname, useRouter } from 'next/navigation'
 import { useCurrency } from '../context/CurrencyContext'
+import { useAuth } from '../context/AuthContext'
+import { useFavorites } from '../context/FavoritesContext'
 import './Navbar.css'
 
 const navLinks = [
@@ -13,9 +17,13 @@ const navLinks = [
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
-  const location = useLocation()
-  const navigate = useNavigate()
+  const [accountOpen, setAccountOpen] = useState(false)
+  const pathname = usePathname()
+  const router = useRouter()
   const { currency, toggle } = useCurrency()
+  const { user, isLoggedIn, logout } = useAuth()
+  const { favorites } = useFavorites()
+  const dropdownRef = useRef(null)
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50)
@@ -25,14 +33,31 @@ export default function Navbar() {
 
   useEffect(() => {
     setMenuOpen(false)
-  }, [location])
+    setAccountOpen(false)
+  }, [pathname])
 
-  const isHome = location.pathname === '/'
+  useEffect(() => {
+    function handleClickOutside(e) {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setAccountOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
+
+  const isHome = pathname === '/'
+
+  function handleLogout() {
+    logout()
+    setAccountOpen(false)
+    router.push('/')
+  }
 
   return (
     <nav className={`navbar ${(isScrolled || !isHome) ? 'navbar--scrolled' : ''}`}>
       <div className="navbar__container">
-        <Link to="/" className="navbar__logo">
+        <Link href="/" className="navbar__logo">
           <img src="/logo.png" alt="Treky" className="navbar__logo-img" />
           <span className="navbar__logo-text">Treky</span>
         </Link>
@@ -40,16 +65,33 @@ export default function Navbar() {
         <ul className={`navbar__links ${menuOpen ? 'navbar__links--open' : ''}`}>
           {navLinks.map(({ to, label }) => (
             <li key={to}>
-              <NavLink
-                to={to}
-                className={({ isActive }) =>
-                  `navbar__link ${isActive ? 'navbar__link--active' : ''}`
-                }
+              <Link
+                href={to}
+                className={`navbar__link ${pathname === to ? 'navbar__link--active' : ''}`}
               >
                 {label}
-              </NavLink>
+              </Link>
             </li>
           ))}
+          {/* Mobile-only auth links */}
+          {menuOpen && !isLoggedIn && (
+            <>
+              <li><Link href="/inscription" className="navbar__link">S'inscrire</Link></li>
+              <li><Link href="/connexion" className="navbar__link">Connexion</Link></li>
+            </>
+          )}
+          {menuOpen && isLoggedIn && (
+            <>
+              <li><Link href="/compte/reservations" className="navbar__link">Mes réservations</Link></li>
+              <li><Link href="/compte/favoris" className="navbar__link">Mes favoris</Link></li>
+              <li><Link href="/chat/1" className="navbar__link">Messages guide</Link></li>
+              <li>
+                <button className="navbar__link navbar__link--logout" onClick={handleLogout}>
+                  Déconnexion
+                </button>
+              </li>
+            </>
+          )}
         </ul>
 
         <div className="navbar__actions">
@@ -64,12 +106,65 @@ export default function Navbar() {
             <span className={`navbar__currency-opt ${currency === 'EUR' ? 'active' : ''}`}>€</span>
           </button>
 
-          <button className="navbar__btn-login" onClick={() => navigate('/inscription')}>
-            S'inscrire
-          </button>
-          <button className="navbar__btn-cta" onClick={() => navigate('/connexion')}>
-            Connexion
-          </button>
+          {isLoggedIn ? (
+            <div className="navbar__account" ref={dropdownRef}>
+              <button
+                className="navbar__account-btn"
+                onClick={() => setAccountOpen((v) => !v)}
+                aria-expanded={accountOpen}
+              >
+                {user?.avatar
+                  ? <img src={user.avatar} alt={user.name} className="navbar__account-avatar" />
+                  : <span className="navbar__account-initials">{user?.name?.[0] ?? 'U'}</span>
+                }
+                <span className="navbar__account-name">{user?.name?.split(' ')[0]}</span>
+                <span className="navbar__account-chevron">{accountOpen ? '▲' : '▼'}</span>
+              </button>
+
+              {accountOpen && (
+                <div className="navbar__dropdown">
+                  <div className="navbar__dropdown-header">
+                    <span className="navbar__dropdown-name">{user?.name}</span>
+                    <span className="navbar__dropdown-email">{user?.email}</span>
+                  </div>
+
+                  <Link href="/compte/reservations" className="navbar__dropdown-item">
+                    <span className="navbar__dropdown-icon">📋</span>
+                    Mes réservations
+                  </Link>
+
+                  <Link href="/compte/favoris" className="navbar__dropdown-item">
+                    <span className="navbar__dropdown-icon">♡</span>
+                    Mes favoris
+                    {favorites.length > 0 && (
+                      <span className="navbar__dropdown-badge">{favorites.length}</span>
+                    )}
+                  </Link>
+
+                  <Link href="/chat/1" className="navbar__dropdown-item">
+                    <span className="navbar__dropdown-icon">💬</span>
+                    Messages guide
+                  </Link>
+
+                  <div className="navbar__dropdown-sep" />
+
+                  <button className="navbar__dropdown-logout" onClick={handleLogout}>
+                    <span className="navbar__dropdown-icon">↪</span>
+                    Déconnexion
+                  </button>
+                </div>
+              )}
+            </div>
+          ) : (
+            <>
+              <button className="navbar__btn-login" onClick={() => router.push('/inscription')}>
+                S'inscrire
+              </button>
+              <button className="navbar__btn-cta" onClick={() => router.push('/connexion')}>
+                Connexion
+              </button>
+            </>
+          )}
         </div>
 
         <button

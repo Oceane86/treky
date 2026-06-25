@@ -1,7 +1,68 @@
+/* ── Filtres catégories ── */
+.blog-categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.blog-cat-btn {
+  padding: 7px 18px;
+  border-radius: 24px;
+  border: 1.5px solid #ddd;
+  background: #fff;
+  font-family: var(--font-secondary);
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: #666;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.blog-cat-btn:hover {
+  border-color: var(--fern-frond);
+  color: var(--fern-frond);
+}
+
+.blog-cat-btn--active {
+  background: var(--fern-frond);
+  border-color: var(--fern-frond);
+  color: #fff;
+}
+
+.blog-count {
+  font-size: 0.82rem;
+  color: #aaa;
+  margin-bottom: 28px;
+}
+
+/* ── Grille ── */
 .blog-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 28px;
+}
+
+/* Article vedette (premier, sur toute la largeur) */
+.blog-card--featured {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-radius: 20px;
+}
+
+.blog-card--featured .blog-card__image-wrap {
+  height: 100%;
+  min-height: 280px;
+  border-radius: 20px 0 0 20px;
+}
+
+.blog-card--featured .blog-card__title {
+  font-size: 1.3rem;
+}
+
+.blog-card--featured .blog-card__body {
+  padding: 32px;
 }
 
 .blog-card {

@@ -58,8 +58,274 @@
   line-height: 1.75;
 }
 
+/* ── Titres de section ── */
+.about-section-title {
+  font-family: var(--font-primary);
+  font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+  font-weight: 800;
+  color: var(--log-cabin);
+  margin-bottom: 12px;
+}
+
+.about-section-subtitle {
+  font-size: 0.95rem;
+  color: #888;
+  line-height: 1.65;
+  max-width: 560px;
+  margin-bottom: 36px;
+}
+
+/* ── Engagements ── */
+.about-engagements {
+  margin: 72px 0;
+}
+
+.about-engagements__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.about-engagement-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 28px 24px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+  border: 1px solid #f0f0f0;
+}
+
+.about-engagement-card__icon {
+  font-size: 2rem;
+  display: block;
+  margin-bottom: 16px;
+}
+
+.about-engagement-card h3 {
+  font-family: var(--font-primary);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--log-cabin);
+  margin-bottom: 10px;
+}
+
+.about-engagement-card p {
+  font-size: 0.85rem;
+  color: #777;
+  line-height: 1.7;
+}
+
+/* ── Guides ── */
+.about-team {
+  margin: 72px 0;
+}
+
+.about-team__grid {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.about-guide-card {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 28px;
+  background: #fff;
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+  border: 1px solid #f0f0f0;
+  align-items: start;
+}
+
+.about-guide-card__photo {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.about-guide-card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.about-guide-card__name {
+  font-family: var(--font-primary);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--log-cabin);
+  margin-bottom: 4px;
+}
+
+.about-guide-card__role {
+  font-size: 0.8rem;
+  color: var(--fern-frond);
+  font-weight: 600;
+}
+
+.about-guide-card__note {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.85rem;
+  color: #888;
+  flex-shrink: 0;
+}
+
+.about-guide-card__star {
+  color: var(--golden-cypress);
+  font-size: 0.9rem;
+}
+
+.about-guide-card__bio {
+  font-size: 0.88rem;
+  color: #666;
+  line-height: 1.7;
+  margin-bottom: 14px;
+}
+
+.about-guide-card__langues {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.about-guide-card__langue {
+  background: rgba(91,140,26,0.1);
+  color: var(--fern-frond);
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+/* ── Associations ── */
+.about-associations {
+  margin: 72px 0;
+}
+
+.about-associations__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.about-assoc-card {
+  background: var(--velvety-cream);
+  border-radius: 16px;
+  padding: 28px 24px;
+  border: 1px solid #eeebe3;
+}
+
+.about-assoc-card__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+
+.about-assoc-card__name {
+  font-family: var(--font-primary);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--log-cabin);
+  margin-bottom: 4px;
+}
+
+.about-assoc-card__lieu {
+  font-size: 0.78rem;
+  color: #aaa;
+}
+
+.about-assoc-card__role-tag {
+  background: rgba(91,140,26,0.12);
+  color: var(--fern-frond);
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 20px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.about-assoc-card__desc {
+  font-size: 0.85rem;
+  color: #666;
+  line-height: 1.7;
+}
+
+/* ── CTA ── */
+.about-cta {
+  text-align: center;
+  padding: 64px 24px;
+  margin-top: 40px;
+  background: var(--english-holly);
+  border-radius: 24px;
+  color: #fff;
+}
+
+.about-cta h2 {
+  font-family: var(--font-primary);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 800;
+  margin-bottom: 14px;
+}
+
+.about-cta p {
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 32px;
+  line-height: 1.6;
+}
+
+.about-cta__btns {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ── Responsive ── */
+@media (max-width: 960px) {
+  .about-engagements__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .about-associations__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
 @media (max-width: 768px) {
   .about-page__stats {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .about-guide-card {
+    grid-template-columns: 72px 1fr;
+    gap: 16px;
+    padding: 20px;
+  }
+
+  .about-guide-card__photo {
+    width: 72px;
+    height: 72px;
+  }
+}
+
+@media (max-width: 600px) {
+  .about-engagements__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .about-associations__grid {
+    grid-template-columns: 1fr;
   }
 }

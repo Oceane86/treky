@@ -7,6 +7,7 @@
   background: #fff;
   border-bottom: 1px solid #f0f0f0;
   padding: 24px 0 20px;
+  padding-top: 96px; /* offset navbar fixe (~72px) + marge */
 }
 
 .cd__back {
@@ -788,6 +789,462 @@
 }
 .cd__gate-register:hover { color: var(--fern-frond); }
 
+/* ── SECTION · CLIMAT & MÉTÉO ── */
+.cd__climat-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 6px;
+  margin-bottom: 20px;
+}
+
+.cd__climat-month {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.cd__climat-month-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #aaa;
+  letter-spacing: 0.03em;
+}
+
+.cd__climat-bar {
+  width: 100%;
+  height: 52px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  transition: transform 0.15s;
+  cursor: default;
+}
+.cd__climat-bar:hover { transform: scaleY(1.08); }
+
+.cd__climat-bar--ideal  { background: rgba(91,140,26,0.18); }
+.cd__climat-bar--ok     { background: rgba(200,169,110,0.22); }
+.cd__climat-bar--avoid  { background: rgba(194,70,46,0.13); }
+
+.cd__climat-legend {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.cd__climat-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.78rem;
+  color: #666;
+}
+
+.cd__climat-legend-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+.cd__climat-legend-dot--ideal { background: rgba(91,140,26,0.4); }
+.cd__climat-legend-dot--ok    { background: rgba(200,169,110,0.5); }
+.cd__climat-legend-dot--avoid { background: rgba(194,70,46,0.3); }
+
+.cd__climat-note {
+  margin-top: 14px;
+  background: var(--velvety-cream);
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-size: 0.82rem;
+  color: #666;
+  line-height: 1.6;
+}
+
+/* ── SECTION · AVIS VOYAGEURS ── */
+.cd__reviews-summary {
+  display: flex;
+  align-items: flex-start;
+  gap: 32px;
+  padding: 24px;
+  background: #f9f9f9;
+  border-radius: 16px;
+  margin-bottom: 28px;
+}
+
+.cd__reviews-score {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.cd__reviews-score-val {
+  font-family: var(--font-primary);
+  font-size: 3rem;
+  font-weight: 800;
+  color: var(--log-cabin);
+  line-height: 1;
+}
+
+.cd__reviews-score-stars {
+  color: var(--golden-cypress);
+  font-size: 1rem;
+  letter-spacing: 2px;
+}
+
+.cd__reviews-score-count {
+  font-size: 0.72rem;
+  color: #aaa;
+  white-space: nowrap;
+}
+
+.cd__reviews-bars {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cd__reviews-bar-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cd__reviews-bar-label {
+  font-size: 0.75rem;
+  color: #888;
+  width: 20px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.cd__reviews-bar-track {
+  flex: 1;
+  height: 7px;
+  background: #e8e8e8;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.cd__reviews-bar-fill {
+  height: 100%;
+  background: var(--golden-cypress);
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+
+.cd__reviews-bar-count {
+  font-size: 0.72rem;
+  color: #aaa;
+  width: 20px;
+  flex-shrink: 0;
+}
+
+/* Liste des avis */
+.cd__reviews-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 36px;
+}
+
+.cd__review-card {
+  border: 1px solid #f0f0f0;
+  border-radius: 14px;
+  padding: 20px 22px;
+  transition: box-shadow 0.2s;
+}
+.cd__review-card:hover { box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+
+.cd__review-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.cd__review-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.cd__review-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #e0e0e0;
+}
+
+.cd__review-avatar-placeholder {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--fern-frond);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.cd__review-name {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--log-cabin);
+}
+
+.cd__review-date {
+  font-size: 0.72rem;
+  color: #bbb;
+  margin-top: 2px;
+}
+
+.cd__review-stars {
+  color: var(--golden-cypress);
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+}
+
+.cd__review-text {
+  font-size: 0.88rem;
+  color: #555;
+  line-height: 1.75;
+}
+
+.cd__review-tag {
+  display: inline-block;
+  margin-top: 10px;
+  background: rgba(91,140,26,0.1);
+  color: var(--fern-frond);
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+/* Formulaire ajouter un avis */
+.cd__review-form {
+  background: #f9f9f9;
+  border-radius: 16px;
+  padding: 28px;
+  border: 1px solid #ebebeb;
+}
+
+.cd__review-form-title {
+  font-family: var(--font-primary);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--log-cabin);
+  margin-bottom: 20px;
+}
+
+.cd__review-form-stars {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 20px;
+}
+
+.cd__star-btn {
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  cursor: pointer;
+  color: #ddd;
+  transition: color 0.15s, transform 0.15s;
+  line-height: 1;
+  padding: 0 2px;
+}
+.cd__star-btn:hover { transform: scale(1.2); }
+.cd__star-btn--active { color: var(--golden-cypress); }
+
+.cd__review-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.cd__review-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cd__review-form-field label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.cd__review-form-field input,
+.cd__review-form-field textarea {
+  border: 1.5px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-family: var(--font-secondary);
+  font-size: 0.88rem;
+  color: var(--log-cabin);
+  background: #fff;
+  transition: border-color 0.2s;
+  resize: none;
+  outline: none;
+}
+.cd__review-form-field input:focus,
+.cd__review-form-field textarea:focus {
+  border-color: var(--fern-frond);
+}
+
+.cd__review-form-field--full {
+  grid-column: 1 / -1;
+}
+
+.cd__review-form-submit {
+  margin-top: 4px;
+}
+
+.cd__review-success {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 18px;
+  background: rgba(91,140,26,0.1);
+  border-radius: 10px;
+  color: var(--fern-frond);
+  font-size: 0.88rem;
+  font-weight: 600;
+  margin-top: 14px;
+}
+
+/* ── LODGE + ACTIVITÉS DANS L'ACCORDÉON ── */
+.cd__step-lodge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 14px 0 10px;
+  padding: 12px 14px;
+  background: #f9f8f5;
+  border-radius: 10px;
+  border: 1px solid #eeebe3;
+}
+
+.cd__step-lodge-icon {
+  font-size: 1.2rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.cd__step-lodge-name {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--log-cabin);
+  display: block;
+  line-height: 1.3;
+}
+
+.cd__step-lodge-type {
+  font-size: 0.72rem;
+  color: #aaa;
+  font-weight: 500;
+  margin-left: 6px;
+  background: rgba(0,0,0,0.05);
+  padding: 1px 8px;
+  border-radius: 20px;
+  vertical-align: middle;
+}
+
+.cd__step-activities {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-bottom: 12px;
+}
+
+.cd__step-activity {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 0.84rem;
+  color: #555;
+  line-height: 1.4;
+}
+
+.cd__step-activity-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--fern-frond);
+  flex-shrink: 0;
+}
+
+/* ── JOURNÉE LIBRE (étape étendue) ── */
+.cd__accordion-trigger--libre {
+  background: rgba(91, 140, 26, 0.04);
+  border-left: 3px solid rgba(91, 140, 26, 0.3);
+}
+
+.cd__day-badge--libre {
+  background: rgba(91, 140, 26, 0.15);
+  color: var(--fern-frond);
+}
+
+.cd__step-libre-tag {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--fern-frond);
+  background: rgba(91, 140, 26, 0.1);
+  padding: 2px 8px;
+  border-radius: 20px;
+  display: inline-block;
+}
+
+/* ── SLIDER — variantes de mode ── */
+.cd__adapted-tag--condensed {
+  background: var(--mojo);
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 20px;
+}
+
+.cd__adapted-tag--extended {
+  background: var(--fern-frond);
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 20px;
+}
+
+.cd__adapted-tag--reco {
+  background: rgba(200, 169, 110, 0.2);
+  color: var(--golden-cypress);
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 20px;
+}
+
+.cd__adapt-notice--extended {
+  color: var(--fern-frond);
+}
+
 /* ── RESPONSIVE ── */
 @media (max-width: 1024px) {
   .cd__layout {
@@ -797,6 +1254,24 @@
 }
 
 @media (max-width: 768px) {
+  .cd__header-wrap {
+    padding-top: 76px;
+  }
+
+  .cd__climat-grid {
+    grid-template-columns: repeat(6, 1fr);
+    row-gap: 12px;
+  }
+
+  .cd__reviews-summary {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .cd__review-form-grid {
+    grid-template-columns: 1fr;
+  }
+
   .cd__gallery {
     grid-template-columns: 1fr;
     height: 260px;
