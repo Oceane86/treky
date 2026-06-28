@@ -120,7 +120,7 @@
 .circuit-card__badge--grande-traversee{ background-color: #e07020; color: #fff; }
 .circuit-card__badge--nature          { background-color: #2e7d4f; color: #fff; }
 .circuit-card__badge--culture         { background-color: #5a35a8; color: #fff; }
-.circuit-card__badge--populaire       { background-color: var(--golden-cypress); color: #fff; }
+.circuit-card__badge--populaire       { background-color: var(--mojo); color: #fff; }
 
 /* Favorite button */
 .circuit-card__fav {

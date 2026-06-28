@@ -121,7 +121,7 @@ export default function CircuitsPage() {
 
   return (
     <div className="page">
-      <header className="page-hero page-hero--compact">
+      <header className="page-hero page-hero--compact page-hero--circuits">
         <div className="container page-hero__inner">
           <p className="page-hero__eyebrow">Nos treks</p>
           <h1 className="page-hero__title">Circuits</h1>
