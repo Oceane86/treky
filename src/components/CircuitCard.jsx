@@ -25,7 +25,7 @@ export default function CircuitCard({ circuit }) {
   return (
     <Link href={`/circuits/${circuit.slug}`} className="circuit-card circuit-card--link">
       <div className="circuit-card__image-wrap">
-        <span className={`circuit-card__badge circuit-card__badge--${circuit.thematique}`}>{circuit.badge}</span>
+        <span className={`circuit-card__badge circuit-card__badge--${circuit.badge.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/\s+/g,'-')}`}>{circuit.badge}</span>
         <img src={circuit.image} alt={circuit.name} className="circuit-card__image" />
         <button
           className={`circuit-card__fav${fav ? ' active' : ''}`}

@@ -115,9 +115,12 @@
   letter-spacing: 0.05em;
 }
 
-.circuit-card__badge--aventure { background-color: #c2481e; }
-.circuit-card__badge--nature   { background-color: #2e7d4f; }
-.circuit-card__badge--culture  { background-color: #5a35a8; }
+.circuit-card__badge--aventure        { background-color: #d4a600; color: #fff; }
+.circuit-card__badge--expedition      { background-color: #e07020; color: #fff; }
+.circuit-card__badge--grande-traversee{ background-color: #e07020; color: #fff; }
+.circuit-card__badge--nature          { background-color: #2e7d4f; color: #fff; }
+.circuit-card__badge--culture         { background-color: #5a35a8; color: #fff; }
+.circuit-card__badge--populaire       { background-color: var(--golden-cypress); color: #fff; }
 
 /* Favorite button */
 .circuit-card__fav {
