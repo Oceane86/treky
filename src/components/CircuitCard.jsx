@@ -1,7 +1,9 @@
 'use client'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { useCurrency } from '../context/CurrencyContext'
 import { useFavorites } from '../context/FavoritesContext'
+import { useAuth } from '../context/AuthContext'
 import './CircuitCard.css'
 
 const LEVEL_MAP = {
@@ -15,6 +17,8 @@ const LEVEL_MAP = {
 export default function CircuitCard({ circuit }) {
   const { format } = useCurrency()
   const { isFavorite, toggleFavorite } = useFavorites()
+  const { isLoggedIn } = useAuth()
+  const router = useRouter()
   const fav = isFavorite(circuit.id)
   const level = LEVEL_MAP[circuit.level] ?? { label: circuit.level, cls: 'easy' }
   const minDays = circuit.minDays ?? circuit.recommendedDays
@@ -29,7 +33,14 @@ export default function CircuitCard({ circuit }) {
         <img src={circuit.image} alt={circuit.name} className="circuit-card__image" />
         <button
           className={`circuit-card__fav${fav ? ' active' : ''}`}
-          onClick={(e) => { e.preventDefault(); toggleFavorite(circuit.id) }}
+          onClick={(e) => {
+            e.preventDefault()
+            if (!isLoggedIn) {
+              router.push(`/connexion?return=/circuits/${circuit.slug}`)
+              return
+            }
+            toggleFavorite(circuit.id)
+          }}
           title={fav ? 'Retirer des favoris' : 'Ajouter aux favoris'}
           aria-label={fav ? 'Retirer des favoris' : 'Ajouter aux favoris'}
         >
