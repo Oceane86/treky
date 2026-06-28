@@ -6,9 +6,7 @@
 }
 
 .page-hero--circuits {
-  background:
-    linear-gradient(to bottom, rgba(0,39,26,0.55) 0%, rgba(0,39,26,0.72) 100%),
-    url('/images/hero_tours.png') center/cover no-repeat;
+  background: url('/images/hero_tours.png') center/cover no-repeat;
 }
 
 .page-hero--compact {
