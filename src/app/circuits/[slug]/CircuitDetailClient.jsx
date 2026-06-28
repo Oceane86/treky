@@ -8,6 +8,7 @@ import { getCircuitBySlug } from '../../../data/circuits'
 import { adaptItinerary, adaptPrice } from '../../../utils/adaptItinerary'
 import { useCurrency } from '../../../context/CurrencyContext'
 import { useAuth } from '../../../context/AuthContext'
+import { useFavorites } from '../../../context/FavoritesContext'
 import BookingModal from '../../../components/BookingModal'
 import '../../../pages/CircuitDetail.css'
 
@@ -58,12 +59,14 @@ export default function CircuitDetailPage() {
   const circuit = getCircuitBySlug(slug)
   const { format } = useCurrency()
   const { isLoggedIn } = useAuth()
+  const { isFavorite, toggleFavorite } = useFavorites()
   const [selectedDays, setSelectedDays] = useState(5)
   const [descExpanded, setDescExpanded] = useState(false)
   const [activeTab, setActiveTab] = useState('jour')
   const [openStep, setOpenStep] = useState(null)
   const [showBooking, setShowBooking] = useState(false)
   const [showLoginGate, setShowLoginGate] = useState(false)
+  const [toast, setToast] = useState(null)
   const [reviews, setReviews] = useState(SAMPLE_REVIEWS)
   const [reviewStars, setReviewStars] = useState(0)
   const [reviewHover, setReviewHover] = useState(0)
@@ -85,12 +88,38 @@ export default function CircuitDetailPage() {
   const isAdapted   = isCondensed || isExtended
   const photos = circuit.photos?.length >= 1 ? circuit.photos : [circuit.image]
 
+  const fav = isFavorite(circuit.id)
+
+  function showToast(msg) {
+    setToast(msg)
+    setTimeout(() => setToast(null), 3000)
+  }
+
   function handleReserve() {
     if (isLoggedIn) {
       setShowBooking(true)
     } else {
       setShowLoginGate(true)
     }
+  }
+
+  function handleFav() {
+    if (!isLoggedIn) { setShowLoginGate(true); return }
+    toggleFavorite(circuit.id)
+    showToast(fav ? 'Retiré des favoris' : 'Ajouté aux favoris ♥')
+  }
+
+  function handleShare() {
+    const url = window.location.href
+    if (navigator.share) {
+      navigator.share({ title: circuit.name, text: circuit.teaser, url })
+    } else {
+      navigator.clipboard.writeText(url).then(() => showToast('Lien copié dans le presse-papier'))
+    }
+  }
+
+  function handleCompare() {
+    showToast('Comparateur bientôt disponible')
   }
 
   function handleReviewSubmit(e) {
@@ -133,15 +162,15 @@ export default function CircuitDetailPage() {
               </div>
             </div>
             <div className="cd__actions">
-              <button className="cd__action-btn" title="Ajouter aux favoris">
-                <span>♡</span>
+              <button className={`cd__action-btn${fav ? ' cd__action-btn--active' : ''}`} onClick={handleFav} title={fav ? 'Retirer des favoris' : 'Ajouter aux favoris'}>
+                <span>{fav ? '♥' : '♡'}</span>
                 <small>Favoris</small>
               </button>
-              <button className="cd__action-btn" title="Partager">
+              <button className="cd__action-btn" onClick={handleShare} title="Partager">
                 <span>⤴</span>
                 <small>Partager</small>
               </button>
-              <button className="cd__action-btn" title="Comparer">
+              <button className="cd__action-btn" onClick={handleCompare} title="Comparer">
                 <span>⊞</span>
                 <small>Comparer</small>
               </button>
@@ -567,6 +596,10 @@ export default function CircuitDetailPage() {
             </Link>
           </div>
         </div>
+      )}
+
+      {toast && (
+        <div className="cd__toast">{toast}</div>
       )}
     </div>
   )

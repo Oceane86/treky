@@ -1311,3 +1311,31 @@
     grid-template-columns: 1fr 1fr;
   }
 }
+
+/* ── Toast notification ── */
+.cd__toast {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--log-cabin);
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  z-index: 2000;
+  white-space: nowrap;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.18);
+  animation: toast-in 0.25s ease;
+}
+
+@keyframes toast-in {
+  from { opacity: 0; transform: translateX(-50%) translateY(12px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+/* ── Bouton favoris actif ── */
+.cd__action-btn--active span {
+  color: #e03a3a;
+}
