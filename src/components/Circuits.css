@@ -115,6 +115,10 @@
   letter-spacing: 0.05em;
 }
 
+.circuit-card__badge--aventure { background-color: #c2481e; }
+.circuit-card__badge--nature   { background-color: #2e7d4f; }
+.circuit-card__badge--culture  { background-color: #5a35a8; }
+
 /* Favorite button */
 .circuit-card__fav {
   position: absolute;

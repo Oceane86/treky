@@ -30,32 +30,6 @@
   color: #b83320;
 }
 
-/* Thématique — pill colorée */
-.circuit-card__theme {
-  display: inline-block;
-  font-size: 0.72rem;
-  font-weight: 700;
-  padding: 4px 12px;
-  border-radius: 20px;
-  margin-bottom: 10px;
-  letter-spacing: 0.03em;
-}
-
-.circuit-card__theme--aventure {
-  background: rgba(210, 90, 20, 0.13);
-  color: #b84e10;
-}
-
-.circuit-card__theme--nature {
-  background: rgba(20, 140, 80, 0.12);
-  color: #0e7a45;
-}
-
-.circuit-card__theme--culture {
-  background: rgba(90, 60, 180, 0.12);
-  color: #4a35a0;
-}
-
 /* Durée — pill vert */
 .circuit-card__duration-pill {
   display: inline-flex;
