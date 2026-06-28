@@ -41,22 +41,22 @@ export default function CircuitCard({ circuit }) {
       </div>
 
       <div className="circuit-card__body">
-        <div className="circuit-card__meta">
-          <span className="circuit-card__region">📍 {circuit.region}</span>
-          <span className={`circuit-card__level circuit-card__level--${level.cls}`}>
-            {level.label}
-          </span>
-        </div>
+        <span className="circuit-card__region">📍 {circuit.region}</span>
 
         <h3 className="circuit-card__name">{circuit.name}</h3>
 
-        {circuit.thematique && (
-          <span className={`circuit-card__theme circuit-card__theme--${circuit.thematique}`}>
-            {circuit.thematique === 'aventure' && '⛰ Aventure'}
-            {circuit.thematique === 'nature' && '🌿 Nature'}
-            {circuit.thematique === 'culture' && '🏛 Culture'}
+        <div className="circuit-card__tags">
+          <span className={`circuit-card__level circuit-card__level--${level.cls}`}>
+            {level.label}
           </span>
-        )}
+          {circuit.thematique && (
+            <span className={`circuit-card__theme circuit-card__theme--${circuit.thematique}`}>
+              {circuit.thematique === 'aventure' && '⛰ Aventure'}
+              {circuit.thematique === 'nature' && '🌿 Nature'}
+              {circuit.thematique === 'culture' && '🏛 Culture'}
+            </span>
+          )}
+        </div>
 
         <p className="circuit-card__teaser">{circuit.teaser}</p>
 

@@ -1,0 +1,130 @@
+.legal-hero {
+  background: var(--velvety-cream);
+  padding: 64px 0 48px;
+  margin-bottom: 56px;
+}
+
+.legal-hero__eyebrow {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--fern-frond);
+  margin-bottom: 12px;
+}
+
+.legal-hero__title {
+  font-family: var(--font-primary);
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 800;
+  color: var(--log-cabin);
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+
+.legal-hero__date {
+  font-size: 0.82rem;
+  color: #aaa;
+}
+
+.legal-nav {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 48px;
+}
+
+.legal-nav__link {
+  font-size: 0.8rem;
+  font-family: var(--font-secondary);
+  padding: 6px 16px;
+  border-radius: 20px;
+  background: var(--velvety-cream);
+  color: #666;
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+  border: 1.5px solid transparent;
+}
+
+.legal-nav__link:hover {
+  background: #e8f0db;
+  color: var(--fern-frond);
+}
+
+.legal-nav__link--active {
+  background: var(--fern-frond);
+  color: #fff;
+  border-color: var(--fern-frond);
+}
+
+.legal-body {
+  padding-bottom: 100px;
+}
+
+.legal-content {
+  max-width: 740px;
+}
+
+.legal-content h2 {
+  font-family: var(--font-primary);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--log-cabin);
+  margin: 44px 0 14px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--velvety-cream);
+}
+
+.legal-content h2:first-child {
+  margin-top: 0;
+}
+
+.legal-content h3 {
+  font-family: var(--font-primary);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--log-cabin);
+  margin: 22px 0 8px;
+}
+
+.legal-content p {
+  font-size: 0.88rem;
+  color: #555;
+  line-height: 1.85;
+  margin-bottom: 14px;
+}
+
+.legal-content ul,
+.legal-content ol {
+  margin: 6px 0 16px 22px;
+}
+
+.legal-content li {
+  font-size: 0.88rem;
+  color: #555;
+  line-height: 1.8;
+  margin-bottom: 6px;
+}
+
+.legal-content a {
+  color: var(--fern-frond);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.legal-content strong {
+  color: var(--log-cabin);
+  font-weight: 600;
+}
+
+.legal-content address {
+  font-style: normal;
+  background: var(--velvety-cream);
+  border-radius: 10px;
+  padding: 16px 20px;
+  font-size: 0.88rem;
+  color: #555;
+  line-height: 1.8;
+  margin-bottom: 16px;
+  display: inline-block;
+}

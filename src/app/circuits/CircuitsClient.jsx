@@ -1,10 +1,11 @@
+'use client'
 import { useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
-import { circuits } from '../data/circuits'
-import CircuitCard from '../components/CircuitCard'
-import '../components/Circuits.css'
-import './CircuitsPage.css'
-import './Page.css'
+import { useSearchParams } from 'next/navigation'
+import { circuits } from '../../data/circuits'
+import CircuitCard from '../../components/CircuitCard'
+import '../../components/Circuits.css'
+import '../../pages/CircuitsPage.css'
+import '../../pages/Page.css'
 
 const DUREE_OPTIONS = [
   { label: '1 – 3 jours', value: '1-3' },
@@ -35,7 +36,6 @@ const SAISON_OPTIONS = [
   { label: 'Saison des pluies', value: 'pluies' },
 ]
 
-// Maps URL param values to internal filter values
 const NIVEAU_FROM_PARAM = {
   debutant: 'Débutant',
   modere: 'Intermédiaire',
@@ -57,25 +57,39 @@ function inBudgetRange(priceAr, range) {
   return false
 }
 
-function initFilters(searchParams) {
-  const dureeParam = searchParams.get('duree')
-  const budgetParam = searchParams.get('budget')
-  const themeParam = searchParams.get('theme')
-  const niveauParam = searchParams.get('niveau')
-  const saisonParam = searchParams.get('saison')
-
-  return {
-    duree: dureeParam ? [dureeParam] : [],
-    budget: budgetParam ? [budgetParam] : [],
-    theme: themeParam ? themeParam.split(',').map((t) => t.trim()) : [],
-    niveau: niveauParam ? [NIVEAU_FROM_PARAM[niveauParam] ?? niveauParam] : [],
-    saison: saisonParam ? [saisonParam] : [],
-  }
+function FilterGroup({ title, options, selected, onToggle }) {
+  return (
+    <div className="circuits-sidebar__group">
+      <h4 className="circuits-sidebar__group-title">{title}</h4>
+      <ul className="circuits-sidebar__options">
+        {options.map((opt) => (
+          <li key={opt.value}>
+            <label className="circuits-sidebar__option">
+              <input
+                type="checkbox"
+                checked={selected.includes(opt.value)}
+                onChange={() => onToggle(opt.value)}
+              />
+              <span>{opt.label}</span>
+            </label>
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
 }
 
 export default function CircuitsPage() {
-  const [searchParams] = useSearchParams()
-  const [filters, setFilters] = useState(() => initFilters(searchParams))
+  const searchParams = useSearchParams()
+
+  const [filters, setFilters] = useState(() => ({
+    duree: searchParams.get('duree') ? [searchParams.get('duree')] : [],
+    budget: searchParams.get('budget') ? [searchParams.get('budget')] : [],
+    theme: searchParams.get('theme') ? searchParams.get('theme').split(',').map((t) => t.trim()) : [],
+    niveau: searchParams.get('niveau') ? [NIVEAU_FROM_PARAM[searchParams.get('niveau')] ?? searchParams.get('niveau')] : [],
+    saison: searchParams.get('saison') ? [searchParams.get('saison')] : [],
+  }))
+
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   function toggle(category, value) {
@@ -117,7 +131,7 @@ export default function CircuitsPage() {
         </div>
       </header>
 
-      <section className="section-padding">
+      <section className="section-padding" style={{ paddingTop: '56px' }}>
         <div className="container">
           <button
             className="circuits-layout__filter-toggle"
@@ -139,36 +153,11 @@ export default function CircuitsPage() {
                 )}
               </div>
 
-              <FilterGroup
-                title="Durée"
-                options={DUREE_OPTIONS}
-                selected={filters.duree}
-                onToggle={(v) => toggle('duree', v)}
-              />
-              <FilterGroup
-                title="Budget"
-                options={BUDGET_OPTIONS}
-                selected={filters.budget}
-                onToggle={(v) => toggle('budget', v)}
-              />
-              <FilterGroup
-                title="Thématique"
-                options={THEME_OPTIONS}
-                selected={filters.theme}
-                onToggle={(v) => toggle('theme', v)}
-              />
-              <FilterGroup
-                title="Niveau"
-                options={NIVEAU_OPTIONS}
-                selected={filters.niveau}
-                onToggle={(v) => toggle('niveau', v)}
-              />
-              <FilterGroup
-                title="Saison"
-                options={SAISON_OPTIONS}
-                selected={filters.saison}
-                onToggle={(v) => toggle('saison', v)}
-              />
+              <FilterGroup title="Durée" options={DUREE_OPTIONS} selected={filters.duree} onToggle={(v) => toggle('duree', v)} />
+              <FilterGroup title="Budget" options={BUDGET_OPTIONS} selected={filters.budget} onToggle={(v) => toggle('budget', v)} />
+              <FilterGroup title="Thématique" options={THEME_OPTIONS} selected={filters.theme} onToggle={(v) => toggle('theme', v)} />
+              <FilterGroup title="Niveau" options={NIVEAU_OPTIONS} selected={filters.niveau} onToggle={(v) => toggle('niveau', v)} />
+              <FilterGroup title="Saison" options={SAISON_OPTIONS} selected={filters.saison} onToggle={(v) => toggle('saison', v)} />
             </aside>
 
             <div className="circuits-results">
@@ -201,28 +190,6 @@ export default function CircuitsPage() {
           </div>
         </div>
       </section>
-    </div>
-  )
-}
-
-function FilterGroup({ title, options, selected, onToggle }) {
-  return (
-    <div className="circuits-sidebar__group">
-      <h4 className="circuits-sidebar__group-title">{title}</h4>
-      <ul className="circuits-sidebar__options">
-        {options.map((opt) => (
-          <li key={opt.value}>
-            <label className="circuits-sidebar__option">
-              <input
-                type="checkbox"
-                checked={selected.includes(opt.value)}
-                onChange={() => onToggle(opt.value)}
-              />
-              <span>{opt.label}</span>
-            </label>
-          </li>
-        ))}
-      </ul>
     </div>
   )
 }

@@ -1,3 +1,4 @@
+'use client'
 import { useState, useEffect } from 'react'
 import './InstallPWA.css'
 
@@ -7,7 +8,6 @@ export default function InstallPWA() {
   const [installed, setInstalled] = useState(false)
 
   useEffect(() => {
-    // Vérifie si l'app est déjà installée
     if (window.matchMedia('(display-mode: standalone)').matches) {
       setInstalled(true)
       return

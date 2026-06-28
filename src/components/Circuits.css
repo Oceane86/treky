@@ -56,7 +56,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
-  align-items: start;
+  align-items: stretch;
 }
 
 .circuits__cta-wrap {
@@ -186,21 +186,22 @@
   flex: 1;
 }
 
-.circuit-card__meta {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  margin-bottom: 8px;
-}
-
 .circuit-card__region {
+  display: block;
   font-size: 0.72rem;
   color: #aaa;
   font-family: var(--font-secondary);
+  margin-bottom: 4px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.circuit-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 10px;
 }
 
 .circuit-card__level {
@@ -213,27 +214,14 @@
   flex-shrink: 0;
 }
 
-.circuit-card__level--debutant {
-  background-color: rgba(91, 140, 26, 0.12);
-  color: var(--fern-frond);
-}
-
-.circuit-card__level--intermediaire {
-  background-color: rgba(149, 137, 88, 0.14);
-  color: var(--golden-cypress);
-}
-
-.circuit-card__level--difficile {
-  background-color: rgba(194, 70, 46, 0.12);
-  color: var(--mojo);
-}
+/* Niveau — redéfini dans CircuitCard.css (easy / medium / hard) */
 
 .circuit-card__name {
   font-family: var(--font-primary);
   font-size: 1rem;
   font-weight: 700;
   color: var(--log-cabin);
-  margin-bottom: 4px;
+  margin-bottom: 8px;
   line-height: 1.3;
 }
 

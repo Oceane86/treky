@@ -1,4 +1,4 @@
-export const circuits = [
+﻿export const circuits = [
   {
     id: 1,
     slug: 'decouverte-isalo',
@@ -980,8 +980,8 @@ export const blogPosts = [
   {
     id: 4,
     slug: 'artisans-zafimaniry-bois-unesco',
-    title: 'Les artisans Zafimaniry : gardiens d'un savoir-faire UNESCO',
-    excerpt: 'Dans les villages perchés des Hautes Terres, les Zafimaniry perpétuent l'art ancestral de la sculpture sur bois — rencontre avec des maîtres artisans.',
+    title: `Les artisans Zafimaniry : gardiens d'un savoir-faire UNESCO`,
+    excerpt: `Dans les villages perchés des Hautes Terres, les Zafimaniry perpétuent l'art ancestral de la sculpture sur bois — rencontre avec des maîtres artisans.`,
     image: '/images/about2.jpg',
     date: '2026-04-08',
     category: 'Artisanat',
@@ -1000,7 +1000,7 @@ export const blogPosts = [
   {
     id: 6,
     slug: 'recit-camille-isalo-solo',
-    title: 'Récit de Camille : 4 jours dans l'Isalo en solo',
+    title: `Récit de Camille : 4 jours dans l'Isalo en solo`,
     excerpt: '"Je suis partie seule avec mon guide Jean. Quatre jours plus tard, je comprenais enfin pourquoi Madagascar est surnommée la huitième merveille du monde."',
     image: '/images/isalo.jpg',
     date: '2026-04-20',
@@ -1011,7 +1011,7 @@ export const blogPosts = [
     id: 7,
     slug: 'recit-marco-traversee-nord-sud',
     title: 'Marco : 28 jours pour traverser Madagascar de bout en bout',
-    excerpt: '"Diego Suarez, Ankarana, Andringitra, Isalo, Tuléar. Chaque étape était un pays différent. La Grande Traversée m'a changé."',
+    excerpt: `"Diego Suarez, Ankarana, Andringitra, Isalo, Tuléar. Chaque étape était un pays différent. La Grande Traversée m'a changé."`,
     image: '/images/hero-bg.jpg',
     date: '2026-05-05',
     category: 'Récits',
@@ -1021,7 +1021,7 @@ export const blogPosts = [
     id: 8,
     slug: 'epices-madagascar-voyage-olfactif',
     title: 'Les épices de Madagascar : un voyage olfactif unique',
-    excerpt: 'Vanille Bourbon, ylang-ylang, girofle — les plantations de l'Est malgache sont un univers sensoriel à elles seules. Notre guide pour les découvrir.',
+    excerpt: `Vanille Bourbon, ylang-ylang, girofle — les plantations de l'Est malgache sont un univers sensoriel à elles seules. Notre guide pour les découvrir.`,
     image: '/images/circuit2.jpg',
     date: '2026-02-10',
     category: 'Nature',

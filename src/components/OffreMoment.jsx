@@ -1,9 +1,10 @@
-import { Link } from 'react-router-dom'
+'use client'
+import Link from 'next/link'
 import { useCurrency } from '../context/CurrencyContext'
 import './OffreMoment.css'
 
-const SLUG = 'canyons-couleurs'
-const PRICE_AR = 850_000
+const SLUG = 'sainte-marie-pirates-baleines'
+const PRICE_AR = 4_000_000
 
 export default function OffreMoment() {
   const { format } = useCurrency()
@@ -16,38 +17,38 @@ export default function OffreMoment() {
         </div>
 
         <div className="offre__card" data-reveal>
-          <Link to={`/circuits/${SLUG}`} className="offre__image-wrap offre__image-link">
+          <Link href={`/circuits/${SLUG}`} className="offre__image-wrap offre__image-link">
             <span className="badge badge-offer offre__badge">Offre spéciale</span>
             <img
-              src="/images/canyon-couleurs.jpg"
-              alt="Trek Canyons & Couleurs"
+              src="/images/about2.jpg"
+              alt="Sainte-Marie : Pirates & Baleines"
               className="offre__image"
             />
           </Link>
 
           <div className="offre__content">
-            <h3 className="offre__title">Trek "Canyons &amp; Couleurs"</h3>
+            <h3 className="offre__title">Sainte-Marie : Pirates &amp; Baleines</h3>
             <p className="offre__description">
-              Partez à la découverte des paysages époustouflants de l'Isalo et de ses formations
-              rocheuses exceptionnelles. Une expérience immersive au cœur de la nature malgache,
-              entre canyons de grès, piscines naturelles et savanes dorées.
+              Découvrez l'île Sainte-Marie et son cimetière pirate unique au monde, puis partez en
+              mer observer les baleines à bosse. Plages sauvages, villages de pêcheurs et forêts
+              côtières font de ce circuit une escapade inoubliable.
             </p>
             <ul className="offre__details">
               <li>
                 <span className="offre__detail-icon">📍</span>
-                <span>Parc National de l'Isalo, Madagascar</span>
+                <span>Île Sainte-Marie, côte est de Madagascar</span>
               </li>
               <li>
                 <span className="offre__detail-icon">⏱</span>
-                <span>7 jours / 6 nuits</span>
+                <span>4 à 5 jours</span>
               </li>
               <li>
                 <span className="offre__detail-icon">👥</span>
-                <span>Groupe de 4 à 10 personnes</span>
+                <span>Groupe de 2 à 12 personnes</span>
               </li>
               <li>
                 <span className="offre__detail-icon">⭐</span>
-                <span>Niveau intermédiaire</span>
+                <span>Niveau facile</span>
               </li>
             </ul>
             <div className="offre__price-row">
@@ -55,7 +56,7 @@ export default function OffreMoment() {
                 <span className="offre__price-label">À partir de</span>
                 <span className="offre__price-amount">{format(PRICE_AR)}</span>
               </div>
-              <Link to={`/circuits/${SLUG}`} className="btn-primary">Voir le circuit</Link>
+              <Link href={`/circuits/${SLUG}`} className="btn-primary">Voir le circuit</Link>
             </div>
           </div>
         </div>

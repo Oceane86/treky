@@ -354,6 +354,17 @@
   padding: 0;
 }
 
+/* Écrans moyens : réduire les gaps avant que le burger apparaisse */
+@media (max-width: 1024px) {
+  .navbar__container {
+    gap: 24px;
+  }
+
+  .navbar__links {
+    gap: 20px;
+  }
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .navbar__burger {

@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 import { circuits } from '../data/circuits'
 import CircuitCard from './CircuitCard'
 import './Circuits.css'
@@ -24,7 +24,7 @@ export default function CircuitsPreview() {
         </div>
 
         <div className="circuits__cta-wrap" data-reveal data-reveal-delay="2">
-          <Link to="/circuits" className="btn-secondary">Voir tous nos circuits</Link>
+          <Link href="/circuits" className="btn-secondary">Voir tous nos circuits</Link>
         </div>
       </div>
     </section>

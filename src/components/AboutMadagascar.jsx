@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import Link from 'next/link'
 import './AboutMadagascar.css'
 
 export default function AboutMadagascar() {
@@ -46,7 +46,7 @@ export default function AboutMadagascar() {
         </div>
 
         <div className="about__cta" data-reveal data-reveal-delay="2">
-          <Link to="/a-propos" className="btn-secondary">En savoir plus sur Treky</Link>
+          <Link href="/a-propos" className="btn-secondary">En savoir plus sur Treky</Link>
         </div>
       </div>
     </section>

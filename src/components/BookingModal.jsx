@@ -1,6 +1,8 @@
+'use client'
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useRouter } from 'next/navigation'
 import { useAuth } from '../context/AuthContext'
+import { useBooking } from '../context/BookingContext'
 import './BookingModal.css'
 
 const PROMO_CODE = 'TREKY10'
@@ -46,8 +48,9 @@ function StepIndicator({ current }) {
 }
 
 export default function BookingModal({ circuit, selectedDays, priceAr, onClose }) {
-  const navigate = useNavigate()
+  const router = useRouter()
   const { user } = useAuth()
+  const { setBooking } = useBooking()
 
   const today = new Date().toISOString().split('T')[0]
   const [step, setStep] = useState(1)
@@ -100,7 +103,8 @@ export default function BookingModal({ circuit, selectedDays, priceAr, onClose }
   function handlePay() {
     setPaying(true)
     setTimeout(() => {
-      navigate('/reservation/recap', { state: bookingState })
+      setBooking(bookingState)
+      router.push('/reservation/recap')
     }, 2200)
   }
 
@@ -236,7 +240,7 @@ export default function BookingModal({ circuit, selectedDays, priceAr, onClose }
           </div>
         )}
 
-        {/* ── ÉTAPE 3 : PAIEMENT MVOLA ── */}
+        {/* ── ÉTAPE 3 : PAIEMENT ── */}
         {step === 3 && (
           <div className="bm__step-body">
             {paying ? (
@@ -273,7 +277,6 @@ export default function BookingModal({ circuit, selectedDays, priceAr, onClose }
                   </div>
                 </div>
 
-                {/* Choix méthode de paiement */}
                 <div className="bm__payment-methods">
                   <label className={`bm__method ${paymentMethod === 'mvola' ? 'bm__method--active' : ''}`}>
                     <input
@@ -299,7 +302,6 @@ export default function BookingModal({ circuit, selectedDays, priceAr, onClose }
                   </label>
                 </div>
 
-                {/* Formulaire MVola */}
                 {paymentMethod === 'mvola' && (
                   <div className="bm__mvola-block">
                     <div className="bm__field">
@@ -313,7 +315,6 @@ export default function BookingModal({ circuit, selectedDays, priceAr, onClose }
                   </div>
                 )}
 
-                {/* Formulaire carte bancaire */}
                 {paymentMethod === 'carte' && (
                   <div className="bm__card-block">
                     <div className="bm__field">

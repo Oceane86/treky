@@ -2,14 +2,51 @@ import Providers from '../components/Providers'
 import '../index.css'
 
 export const metadata = {
-  title: "Treky – Le trek qui vous connecte à l'essentiel",
-  description: 'Découvrez Madagascar à travers des treks inoubliables avec Treky.',
-  manifest: '/manifest.webmanifest',
-  icons: {
-    icon: '/logo.png',
-    apple: '/logo.png',
+  metadataBase: new URL('https://treky.mg'),
+  title: {
+    default: 'Treky – Trek Madagascar avec guides locaux certifiés',
+    template: '%s | Treky',
   },
-  themeColor: '#c8a96e',
+  description:
+    "Treky organise des circuits de trekking à Madagascar avec des guides locaux certifiés. Isalo, Tsingy de Bemaraha, Tsaratanana — vivez l'aventure malgache en toute sécurité.",
+  keywords: [
+    'trek Madagascar',
+    'trekking Madagascar',
+    'circuits Madagascar',
+    'guides locaux Madagascar',
+    'Isalo',
+    'Tsingy de Bemaraha',
+    'Tsaratanana',
+    'randonnée Madagascar',
+    'voyage Madagascar',
+  ],
+  manifest: '/manifest.webmanifest',
+  icons: { icon: '/logo.png', apple: '/logo.png' },
+  themeColor: '#5b8c1a',
+  openGraph: {
+    siteName: 'Treky',
+    locale: 'fr_FR',
+    type: 'website',
+    url: 'https://treky.mg',
+    title: "Treky – Trek Madagascar avec guides locaux certifiés",
+    description:
+      "Circuits de trekking à Madagascar avec des guides locaux certifiés. Isalo, Tsingy, Tsaratanana.",
+    images: [
+      {
+        url: '/images/hero-bg.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Trek Madagascar – Treky',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Treky – Trek Madagascar',
+    description: "Circuits de trekking avec guides locaux à Madagascar.",
+    images: ['/images/hero-bg.jpg'],
+  },
+  robots: { index: true, follow: true },
 }
 
 export default function RootLayout({ children }) {
