@@ -51,22 +51,22 @@ const ENGAGEMENTS = [
   {
     icon: '🌿',
     titre: 'Écotourisme responsable',
-    texte: 'Chaque circuit est conçu pour minimiser l'impact sur les écosystèmes : groupes limités, bivouacs zéro déchet, sentiers balisés avec les parcs nationaux.',
+    texte: "Chaque circuit est conçu pour minimiser l'impact sur les écosystèmes : groupes limités, bivouacs zéro déchet, sentiers balisés avec les parcs nationaux.",
   },
   {
     icon: '🤝',
-    titre: 'Économie locale d'abord',
-    texte: 'Guides, porteurs, cuisiniers, hébergeurs — 100% de nos prestataires sont issus des régions traversées. Votre voyage crée des emplois durables sur place.',
+    titre: "Économie locale d'abord",
+    texte: "Guides, porteurs, cuisiniers, hébergeurs — 100% de nos prestataires sont issus des régions traversées. Votre voyage crée des emplois durables sur place.",
   },
   {
     icon: '🏡',
     titre: 'Immersion authentique',
-    texte: 'Nuits chez l'habitant, repas familiaux, ateliers artisanaux : nous privilégions les rencontres réelles aux expériences standardisées.',
+    texte: "Nuits chez l'habitant, repas familiaux, ateliers artisanaux : nous privilégions les rencontres réelles aux expériences standardisées.",
   },
   {
     icon: '🌍',
     titre: 'Contribution conservation',
-    texte: 'Une partie de chaque réservation est reversée aux associations de protection de la biodiversité malgache avec lesquelles nous travaillons.',
+    texte: "Une partie de chaque réservation est reversée aux associations de protection de la biodiversité malgache avec lesquelles nous travaillons.",
   },
 ]
 
