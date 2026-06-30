@@ -73,6 +73,12 @@ export default function CircuitDetailPage() {
   const [reviewName, setReviewName] = useState('')
   const [reviewText, setReviewText] = useState('')
   const [reviewSuccess, setReviewSuccess] = useState(false)
+  const [lightboxIdx, setLightboxIdx] = useState(null)
+
+  function openLightbox(idx) { setLightboxIdx(idx) }
+  function closeLightbox() { setLightboxIdx(null) }
+  function lightboxPrev() { setLightboxIdx((i) => (i - 1 + photos.length) % photos.length) }
+  function lightboxNext() { setLightboxIdx((i) => (i + 1) % photos.length) }
 
   useEffect(() => {
     if (circuit) setSelectedDays(circuit.recommendedDays)
@@ -181,13 +187,13 @@ export default function CircuitDetailPage() {
 
       {/* ── SECTION 2 · GALERIE ── */}
       <div className="container cd__gallery">
-        <div className="cd__gallery-main">
+        <div className="cd__gallery-main" onClick={() => openLightbox(0)} style={{ cursor: 'pointer' }}>
           <img src={photos[0]} alt={circuit.name} className="cd__gallery-big" />
-          <button className="cd__gallery-all-btn">📷 Voir tout</button>
+          <button className="cd__gallery-all-btn" onClick={(e) => { e.stopPropagation(); openLightbox(0) }}>📷 Voir tout</button>
         </div>
         <div className="cd__gallery-grid">
           {photos.slice(1, 5).map((src, i) => (
-            <div key={i} className="cd__gallery-thumb">
+            <div key={i} className="cd__gallery-thumb" onClick={() => openLightbox(i + 1)} style={{ cursor: 'pointer' }}>
               <img src={src} alt={`${circuit.name} photo ${i + 2}`} />
             </div>
           ))}
@@ -605,6 +611,18 @@ export default function CircuitDetailPage() {
 
       {toast && (
         <div className="cd__toast">{toast}</div>
+      )}
+
+      {lightboxIdx !== null && (
+        <div className="cd__lightbox" onClick={closeLightbox}>
+          <button className="cd__lightbox-close" onClick={closeLightbox}>✕</button>
+          <button className="cd__lightbox-prev" onClick={(e) => { e.stopPropagation(); lightboxPrev() }}>‹</button>
+          <div className="cd__lightbox-img-wrap" onClick={(e) => e.stopPropagation()}>
+            <img src={photos[lightboxIdx]} alt={`${circuit.name} ${lightboxIdx + 1}`} className="cd__lightbox-img" />
+            <span className="cd__lightbox-counter">{lightboxIdx + 1} / {photos.length}</span>
+          </div>
+          <button className="cd__lightbox-next" onClick={(e) => { e.stopPropagation(); lightboxNext() }}>›</button>
+        </div>
       )}
     </div>
   )
