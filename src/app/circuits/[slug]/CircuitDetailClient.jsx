@@ -186,9 +186,9 @@ export default function CircuitDetailPage() {
           <button className="cd__gallery-all-btn">📷 Voir tout</button>
         </div>
         <div className="cd__gallery-grid">
-          {[1, 2, 3, 4].map((i) => (
+          {photos.slice(1, 5).map((src, i) => (
             <div key={i} className="cd__gallery-thumb">
-              <img src={photos[i % photos.length]} alt={`${circuit.name} photo ${i + 1}`} />
+              <img src={src} alt={`${circuit.name} photo ${i + 2}`} />
             </div>
           ))}
         </div>
