@@ -697,7 +697,7 @@
       { lat: -16.85, lng: 49.95, title: 'Plages + Village de pêcheurs' },
       { lat: -16.90, lng: 49.90, title: 'Retour' },
     ],
-    photos: ['/images/sainte_marie.jpg', '/images/sainte_marie_baleine.jpg', '/images/sainte_marie_lodge.jpg', '/images/cap_sainte_marie.jpg', '/images/hero-bg.jpg'],
+    photos: ['/images/sainte_marie.jpg', '/images/sainte_marie_baleine.jpg', '/images/sainte_marie_lodge.jpg', '/images/cap_sainte_marie.jpg', '/images/sainte_marie_pirate.jpg'],
     steps: [
       {
         title: "Île Sainte-Marie · Arrivée",
