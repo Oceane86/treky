@@ -164,7 +164,7 @@
     maxDays: 9,
     level: 'Sportif',
     badge: 'Aventure',
-    image: '/images/tsingy.jpg',
+    image: '/images/tsingy_vu.jpg',
     priceAr: 6_000_000,
     prix_original: 9_000_000,
     prix_reduit: 6_000_000,
@@ -197,7 +197,7 @@
       { lat: -20.10, lng: 44.30, title: 'Côte sauvage' },
       { lat: -20.30, lng: 44.32, title: 'Retour Morondava' },
     ],
-    photos: ['/images/tsingy.jpg', '/images/tsingy_pont.jpg', '/images/tsingy_visite.jpg', '/images/tsingy_couche.jpg', '/images/tsingy_photo.jpg', '/images/tsingy_vu.jpg'],
+    photos: ['/images/tsingy_vu.jpg', '/images/tsingy_pont.jpg', '/images/tsingy_visite.jpg', '/images/tsingy_couche.jpg', '/images/tsingy_photo.jpg', '/images/tsingy.jpg'],
     steps: [
       {
         title: 'Morondava · Départ',
