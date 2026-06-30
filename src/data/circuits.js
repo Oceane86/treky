@@ -197,7 +197,7 @@
       { lat: -20.10, lng: 44.30, title: 'Côte sauvage' },
       { lat: -20.30, lng: 44.32, title: 'Retour Morondava' },
     ],
-    photos: ['/images/tsingy_vu.jpg', '/images/tsingyy_ok.jpg', '/images/tsingy_pont.jpg', '/images/tsingy_couche.jpg'],
+    photos: ['/images/tsingy_vu2.jpg', '/images/tsingyy_ok.jpg', '/images/tsingy_pont.jpg', '/images/tsingy_couche.jpg'],
     steps: [
       {
         title: 'Morondava · Départ',
