@@ -10,7 +10,7 @@
     maxDays: 6,
     level: 'Facile',
     badge: 'Populaire',
-    image: '/images/isalo.jpg',
+    image: '/images/isalo_dmitry.jpg',
     priceAr: 2_000_000,
     prix_original: 3_000_000,
     prix_reduit: 2_000_000,
@@ -40,7 +40,7 @@
       { lat: -22.51, lng: 45.30, title: 'Crête des singes' },
       { lat: -22.55, lng: 45.42, title: "Fenêtre de l'Isalo + Retour" },
     ],
-    photos: ['/images/isalo.jpg', '/images/isalo_canyon.jpg', '/images/isalo_cascade.jpg', '/images/Isalo-National-Park.jpg', '/images/canyon-couleurs.jpg'],
+    photos: ['/images/isalo_dmitry.jpg', '/images/isalo_canyon.jpg', '/images/isalo_cascade.jpg', '/images/Isalo-National-Park.jpg', '/images/canyon-couleurs.jpg'],
     steps: [
       {
         title: 'Ranohira · Accueil',
