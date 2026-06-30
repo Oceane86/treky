@@ -40,7 +40,7 @@
       { lat: -22.51, lng: 45.30, title: 'Crête des singes' },
       { lat: -22.55, lng: 45.42, title: "Fenêtre de l'Isalo + Retour" },
     ],
-    photos: ['/images/isalo.jpg', '/images/canyon-couleurs.jpg', '/images/about1.jpg'],
+    photos: ['/images/isalo.jpg', '/images/isalo_canyon.jpg', '/images/isalo_cascade.jpg', '/images/Isalo-National-Park.jpg', '/images/canyon-couleurs.jpg'],
     steps: [
       {
         title: 'Ranohira · Accueil',
@@ -114,7 +114,7 @@
       { lat: -22.21, lng: 47.05, title: 'Sommet Pic Boby · 2 876 m' },
       { lat: -21.84, lng: 46.93, title: 'Descente + Retour' },
     ],
-    photos: ['/images/tsaratanana.jpg', '/images/about3.jpg', '/images/hero-bg.jpg'],
+    photos: ['/images/tsaratanana.jpg', '/images/about3.jpg', '/images/hero-bg.jpg', '/images/about1.jpg', '/images/about2.jpg'],
     steps: [
       {
         title: 'Ambalavao · Départ',
@@ -294,7 +294,7 @@
       { lat: -21.85, lng: 44.52, title: 'Sortie canyon J9' },
       { lat: -23.35, lng: 43.67, title: 'Retour Tuléar J10' },
     ],
-    photos: ['/images/canyon-couleurs.jpg', '/images/tsaratanana.jpg', '/images/about3.jpg'],
+    photos: ['/images/canyon-couleurs.jpg', '/images/tsaratanana.jpg', '/images/about3.jpg', '/images/isalo_canyon.jpg', '/images/hero-bg.jpg'],
     steps: [
       {
         title: 'Tuléar · Départ',
@@ -389,7 +389,7 @@
       { lat: -20.63, lng: 47.35, title: 'Atelier artisanat' },
       { lat: -20.52, lng: 47.25, title: 'Retour Ambositra' },
     ],
-    photos: ['/images/about2.jpg', '/images/about1.jpg', '/images/hero-bg.jpg'],
+    photos: ['/images/about2.jpg', '/images/about1.jpg', '/images/hero-bg.jpg', '/images/about3.jpg', '/images/canyon-couleurs.jpg'],
     steps: [
       {
         title: 'Ambositra · Arrivée',
@@ -471,7 +471,7 @@
       { lat: -20.48, lng: 48.38, title: 'Marché aux épices' },
       { lat: -21.20, lng: 48.35, title: 'Retour Mananjary' },
     ],
-    photos: ['/images/circuit2.jpg', '/images/about3.jpg', '/images/about2.jpg'],
+    photos: ['/images/circuit2.jpg', '/images/about3.jpg', '/images/about2.jpg', '/images/marche_sac.jpg', '/images/about1.jpg'],
     steps: [
       {
         title: 'Mananjary · Départ',
@@ -557,7 +557,7 @@
       { lat: -18.78, lng: 48.45, title: 'Mantadia · Forêt primaire' },
       { lat: -18.95, lng: 48.40, title: 'Réserve communautaire + Retour' },
     ],
-    photos: ['/images/circuit2.jpg', '/images/about2.jpg', '/images/about1.jpg'],
+    photos: ['/images/circuit2.jpg', '/images/about2.jpg', '/images/about1.jpg', '/images/about3.jpg', '/images/hero-bg.jpg'],
     steps: [
       {
         title: 'Andasibe · Indris + Lémuriens nocturnes',
@@ -623,7 +623,7 @@
       { lat: -21.45, lng: 47.09, title: 'Vieille ville Fianarantsoa' },
       { lat: -18.92, lng: 47.54, title: 'Retour' },
     ],
-    photos: ['/images/about1.jpg', '/images/about2.jpg', '/images/hero-bg.jpg'],
+    photos: ['/images/about1.jpg', '/images/about2.jpg', '/images/hero-bg.jpg', '/images/about3.jpg', '/images/tsaratanana.jpg'],
     steps: [
       {
         title: "Antananarivo · Rova",
@@ -697,7 +697,7 @@
       { lat: -16.85, lng: 49.95, title: 'Plages + Village de pêcheurs' },
       { lat: -16.90, lng: 49.90, title: 'Retour' },
     ],
-    photos: ['/images/sainte_marie.jpg', '/images/sainte_marie_baleine.jpg', '/images/sainte_marie_lodge.jpg', '/images/cap_sainte_marie.jpg'],
+    photos: ['/images/sainte_marie.jpg', '/images/sainte_marie_baleine.jpg', '/images/sainte_marie_lodge.jpg', '/images/cap_sainte_marie.jpg', '/images/hero-bg.jpg'],
     steps: [
       {
         title: "Île Sainte-Marie · Arrivée",
@@ -777,7 +777,7 @@
       { lat: -21.58, lng: 47.20, title: 'Village Betsileo · Cuisine + Tissage' },
       { lat: -21.45, lng: 47.09, title: 'Retour Fianarantsoa' },
     ],
-    photos: ['/images/about2.jpg', '/images/about1.jpg', '/images/hero-bg.jpg'],
+    photos: ['/images/about2.jpg', '/images/about1.jpg', '/images/hero-bg.jpg', '/images/about3.jpg', '/images/tsaratanana.jpg'],
     steps: [
       {
         title: 'Fianarantsoa · Arrivée',
@@ -854,7 +854,7 @@
       { lat: -23.35, lng: 43.80, title: 'Côte sud J21-24' },
       { lat: -23.35, lng: 43.67, title: 'Tuléar J25-28' },
     ],
-    photos: ['/images/hero-bg.jpg', '/images/tsaratanana.jpg', '/images/isalo.jpg'],
+    photos: ['/images/hero-bg.jpg', '/images/tsaratanana.jpg', '/images/isalo.jpg', '/images/canyon-couleurs.jpg', '/images/isalo_canyon.jpg'],
     steps: [
       {
         title: "Diego Suarez + Montagne d'Ambre J1-3",
