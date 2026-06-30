@@ -52,21 +52,21 @@ export default function NewsletterSection() {
         </div>
 
         <div className="newsletter__photos" aria-hidden="true">
-          <picture>
-            <source media="(min-width: 900px)" srcSet="/images/newletters_pc.png" />
-            <img
-              src="/images/newsletters_mobile.png"
-              alt=""
-              className="newsletter__photo"
-            />
-          </picture>
+          <div className="newsletter__grid">
+            <div className="newsletter__col newsletter__col--a">
+              <img className="newsletter__photo" src="/images/about1.jpg" alt="" />
+              <img className="newsletter__photo" src="/images/canyon-couleurs.jpg" alt="" />
+            </div>
+            <div className="newsletter__col newsletter__col--b">
+              <img className="newsletter__photo" src="/images/tsaratanana.jpg" alt="" />
+              <img className="newsletter__photo" src="/images/isalo.jpg" alt="" />
+            </div>
+          </div>
 
           <span className="newsletter__dot dot--pink" />
           <span className="newsletter__dot dot--yellow" />
           <span className="newsletter__dot dot--teal" />
-
-          <div className="newsletter__cloud cloud--left" />
-          <div className="newsletter__cloud cloud--right" />
+          <div className="newsletter__cloud" />
         </div>
 
       </div>
