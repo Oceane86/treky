@@ -22,7 +22,6 @@ export const metadata = {
   ],
   manifest: '/manifest.webmanifest',
   icons: { icon: '/logo.png', apple: '/logo.png' },
-  themeColor: '#5b8c1a',
   openGraph: {
     siteName: 'Treky',
     locale: 'fr_FR',
@@ -47,6 +46,10 @@ export const metadata = {
     images: ['/images/hero-bg.jpg'],
   },
   robots: { index: true, follow: true },
+}
+
+export function generateViewport() {
+  return { themeColor: '#5b8c1a' }
 }
 
 export default function RootLayout({ children }) {
