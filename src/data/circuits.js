@@ -40,7 +40,7 @@
       { lat: -22.51, lng: 45.30, title: 'Crête des singes' },
       { lat: -22.55, lng: 45.42, title: "Fenêtre de l'Isalo + Retour" },
     ],
-    photos: ['/images/isalo_dmitry.jpg', '/images/isalo_canyon.jpg', '/images/isalo_cascade.jpg', '/images/Isalo-National-Park.jpg', '/images/isalo_images.jpg'],
+    photos: ['/images/isalo_dmitry.jpg', '/images/isalo_canyon.jpg', '/images/isalo_cascade.jpg', '/images/Isalo-National-Park.jpg', '/images/isalo_chemin.jpg'],
     steps: [
       {
         title: 'Ranohira · Accueil',
