@@ -47,11 +47,13 @@ export default function BlogPage() {
           </p>
 
           <div className="blog-grid">
-            {visible.map((post, i) => (
-              <article key={post.id} className={`blog-card${i === 0 && activeCategory === 'Tous' ? ' blog-card--featured' : ''}`}>
+            {visible.map((post) => {
+              const catSlug = post.category.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/\s+/g,'-')
+              return (
+              <article key={post.id} className="blog-card">
                 <div className="blog-card__image-wrap">
                   <img src={post.image} alt={post.title} />
-                  <span className="blog-card__category">{post.category}</span>
+                  <span className={`blog-card__category blog-card__category--${catSlug}`}>{post.category}</span>
                 </div>
                 <div className="blog-card__body">
                   <div className="blog-card__meta">
@@ -71,7 +73,7 @@ export default function BlogPage() {
                   </Link>
                 </div>
               </article>
-            ))}
+            )})}
           </div>
         </div>
       </section>
