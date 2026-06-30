@@ -7,6 +7,16 @@ import '../../pages/Blog.css'
 
 const ALL_CATEGORIES = ['Tous', ...Array.from(new Set(blogPosts.map((p) => p.category)))]
 
+const CATEGORY_COLOR = {
+  'Conseils':     '#2563eb',
+  'Équipe':       '#7c3aed',
+  'Destinations': '#ea580c',
+  'Artisanat':    '#b45309',
+  'Engagements':  '#059669',
+  'Récits':       '#dc2626',
+  'Nature':       '#16a34a',
+}
+
 export default function BlogPage() {
   const [activeCategory, setActiveCategory] = useState('Tous')
 
@@ -47,13 +57,14 @@ export default function BlogPage() {
           </p>
 
           <div className="blog-grid">
-            {visible.map((post) => {
-              const catSlug = post.category.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/\s+/g,'-')
-              return (
+            {visible.map((post) => (
               <article key={post.id} className="blog-card">
                 <div className="blog-card__image-wrap">
                   <img src={post.image} alt={post.title} />
-                  <span className={`blog-card__category blog-card__category--${catSlug}`}>{post.category}</span>
+                  <span
+                    className="blog-card__category"
+                    style={{ background: CATEGORY_COLOR[post.category] || 'var(--fern-frond)' }}
+                  >{post.category}</span>
                 </div>
                 <div className="blog-card__body">
                   <div className="blog-card__meta">
@@ -73,7 +84,7 @@ export default function BlogPage() {
                   </Link>
                 </div>
               </article>
-            )})}
+            ))}
           </div>
         </div>
       </section>

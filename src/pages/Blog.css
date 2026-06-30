@@ -89,13 +89,6 @@
   text-transform: capitalize;
 }
 
-.blog-card__category--conseils     { background: #2563eb; }
-.blog-card__category--equipe       { background: #7c3aed; }
-.blog-card__category--destinations { background: #ea580c; }
-.blog-card__category--artisanat    { background: #b45309; }
-.blog-card__category--engagements  { background: #059669; }
-.blog-card__category--recits       { background: #dc2626; }
-.blog-card__category--nature       { background: #16a34a; }
 
 .blog-card__body {
   padding: 22px 24px 26px;
