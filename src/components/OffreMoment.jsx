@@ -20,7 +20,7 @@ export default function OffreMoment() {
           <Link href={`/circuits/${SLUG}`} className="offre__image-wrap offre__image-link">
             <span className="badge badge-offer offre__badge">Offre spéciale</span>
             <img
-              src="/images/about2.jpg"
+              src="/images/sainte_marie.jpg"
               alt="Sainte-Marie : Pirates & Baleines"
               className="offre__image"
             />

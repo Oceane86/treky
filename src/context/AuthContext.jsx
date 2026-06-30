@@ -34,9 +34,10 @@ export function AuthProvider({ children }) {
     return false
   }
 
-  function loginSocial() {
-    setUser(DEMO_USER)
-    localStorage.setItem(LS_KEY, JSON.stringify(DEMO_USER))
+  function loginSocial(userData) {
+    const u = userData || DEMO_USER
+    setUser(u)
+    localStorage.setItem(LS_KEY, JSON.stringify(u))
   }
 
   function logout() {

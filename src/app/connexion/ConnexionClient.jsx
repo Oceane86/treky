@@ -103,9 +103,12 @@ export default function ConnexionClient() {
     setTimeout(() => router.push(returnTo), 1500)
   }
 
-  const handleSocialSuccess = () => {
+  const handleSocialSuccess = (provider) => {
     setSocialModal(null)
-    auth.loginSocial()
+    const userData = provider === 'google'
+      ? { name: 'Jean Randria', email: 'utilisateur@gmail.com', avatar: null }
+      : { name: 'Jean Randria', email: 'utilisateur@facebook.com', avatar: null }
+    auth.loginSocial(userData)
     setSuccess(true)
     setTimeout(() => router.push(returnTo), 1500)
   }
