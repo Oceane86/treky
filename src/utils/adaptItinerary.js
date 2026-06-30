@@ -54,8 +54,8 @@ export function adaptItinerary(steps, targetDays) {
   for (const pos of positions) {
     const refStep = base[pos - 1]
     base.splice(pos, 0, {
-      title: 'Journée libre · Exploration',
-      description: "Journée flexible pour explorer les environs à votre rythme, profiter des équipements du lodge ou choisir une activité optionnelle proposée par votre guide.",
+      title: 'Journée libre',
+      description: '',
       lodge: refStep?.lodge ?? null,
       typeHebergement: refStep?.typeHebergement ?? null,
       activities: ['Exploration libre', 'Activité optionnelle au choix', 'Repos et détente'],

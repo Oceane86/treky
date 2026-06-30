@@ -264,38 +264,44 @@ export default function CircuitDetailPage() {
                       <span className="cd__accordion-chevron">{openStep === idx ? '▲' : '▼'}</span>
                     </button>
                     <div className="cd__accordion-body">
-                      <p>{step.description}</p>
+                      {step.extra ? (
+                        <p className="cd__libre-desc">Journée à votre rythme — exploration libre, activité optionnelle ou repos.</p>
+                      ) : (
+                        <>
+                          <p>{step.description}</p>
 
-                      {step.lodge && (
-                        <div className="cd__step-lodge">
-                          <span className="cd__step-lodge-icon">
-                            {step.typeHebergement === 'Bivouac' ? '⛺' : step.typeHebergement === 'Bungalow' ? '🏝' : step.typeHebergement === "Chez l'habitant" ? '🏡' : '🏨'}
-                          </span>
-                          <div>
-                            <span className="cd__step-lodge-name">{step.lodge}</span>
-                            <span className="cd__step-lodge-type">{step.typeHebergement}</span>
-                          </div>
-                        </div>
-                      )}
+                          {step.lodge && (
+                            <div className="cd__step-lodge">
+                              <span className="cd__step-lodge-icon">
+                                {step.typeHebergement === 'Bivouac' ? '⛺' : step.typeHebergement === 'Bungalow' ? '🏝' : step.typeHebergement === "Chez l'habitant" ? '🏡' : '🏨'}
+                              </span>
+                              <div>
+                                <span className="cd__step-lodge-name">{step.lodge}</span>
+                                <span className="cd__step-lodge-type">{step.typeHebergement}</span>
+                              </div>
+                            </div>
+                          )}
 
-                      {step.activities?.length > 0 && (
-                        <ul className="cd__step-activities">
-                          {step.activities.map((act, ai) => (
-                            <li key={ai} className="cd__step-activity">
-                              <span className="cd__step-activity-dot" />
-                              {act}
-                            </li>
-                          ))}
-                        </ul>
-                      )}
+                          {step.activities?.length > 0 && (
+                            <ul className="cd__step-activities">
+                              {step.activities.map((act, ai) => (
+                                <li key={ai} className="cd__step-activity">
+                                  <span className="cd__step-activity-dot" />
+                                  {act}
+                                </li>
+                              ))}
+                            </ul>
+                          )}
 
-                      {circuit.waypoints?.[idx] && !step.extra && (
-                        <div className="cd__step-coords">
-                          <span>🗺️</span>
-                          <span>Point {idx + 1} sur le tracé</span>
-                          {idx === 0 && <span className="cd__step-badge cd__step-badge--start">Départ</span>}
-                          {idx === itinerary.length - 1 && <span className="cd__step-badge cd__step-badge--end">Arrivée</span>}
-                        </div>
+                          {circuit.waypoints?.[idx] && (
+                            <div className="cd__step-coords">
+                              <span>🗺️</span>
+                              <span>Point {idx + 1} sur le tracé</span>
+                              {idx === 0 && <span className="cd__step-badge cd__step-badge--start">Départ</span>}
+                              {idx === itinerary.length - 1 && <span className="cd__step-badge cd__step-badge--end">Arrivée</span>}
+                            </div>
+                          )}
+                        </>
                       )}
                     </div>
                   </div>
