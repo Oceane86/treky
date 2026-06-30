@@ -259,7 +259,6 @@ export default function CircuitDetailPage() {
                       <span className={`cd__day-badge${step.extra ? ' cd__day-badge--libre' : ''}`}>J{step.day}</span>
                       <div className="cd__step-meta">
                         <span className="cd__step-title-text">{step.title}</span>
-                        {step.extra && <span className="cd__step-libre-tag">Journée libre</span>}
                       </div>
                       <span className="cd__accordion-chevron">{openStep === idx ? '▲' : '▼'}</span>
                     </button>
