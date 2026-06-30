@@ -666,7 +666,7 @@
     maxDays: 7,
     level: 'Facile',
     badge: 'Nature',
-    image: '/images/about2.jpg',
+    image: '/images/sainte_marie.jpg',
     priceAr: 4_000_000,
     prix_original: 6_000_000,
     prix_reduit: 4_000_000,
@@ -697,7 +697,7 @@
       { lat: -16.85, lng: 49.95, title: 'Plages + Village de pêcheurs' },
       { lat: -16.90, lng: 49.90, title: 'Retour' },
     ],
-    photos: ['/images/about2.jpg', '/images/hero-bg.jpg', '/images/about1.jpg'],
+    photos: ['/images/sainte_marie.jpg', '/images/sainte_marie_baleine.jpg', '/images/sainte_marie_lodge.jpg', '/images/cap_sainte_marie.jpg'],
     steps: [
       {
         title: "Île Sainte-Marie · Arrivée",
@@ -1022,7 +1022,7 @@ export const blogPosts = [
     slug: 'epices-madagascar-voyage-olfactif',
     title: 'Les épices de Madagascar : un voyage olfactif unique',
     excerpt: `Vanille Bourbon, ylang-ylang, girofle — les plantations de l'Est malgache sont un univers sensoriel à elles seules. Notre guide pour les découvrir.`,
-    image: '/images/circuit2.jpg',
+    image: '/images/marche_sac.jpg',
     date: '2026-02-10',
     category: 'Nature',
     readTime: '5 min',
