@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import './Hero.css'
 
 export default function Hero() {
@@ -23,11 +24,11 @@ export default function Hero() {
           sauvages et préservés de Madagascar.
         </p>
         <div className="hero__actions">
-          <a href="#circuits" className="btn-primary hero__cta">
+          <Link href="/composer" className="btn-primary hero__cta">
+            Composer mon trek sur-mesure
+          </Link>
+          <a href="#circuits" className="btn-outline-white">
             Découvrir nos circuits
-          </a>
-          <a href="#about" className="btn-outline-white">
-            En savoir plus
           </a>
         </div>
       </div>

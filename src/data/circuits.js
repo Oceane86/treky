@@ -20,6 +20,7 @@
     reviews: 203,
     groupSize: '2 à 15 personnes',
     thematique: 'aventure',
+    themes: ['paysages-mineraux', 'faune-biodiversite'],
     saison: 'seche',
     teaser: "Canyon des Makis, piscines naturelles et crête des singes : le meilleur de l'Isalo en 3-4 jours.",
     description:
@@ -93,6 +94,7 @@
     reviews: 63,
     groupSize: '2 à 8 personnes',
     thematique: 'aventure',
+    themes: ['aventure-sommets', 'paysages-mineraux'],
     saison: 'seche',
     teaser: "Ascension du Pic Boby (2 876 m), point culminant accessible de Madagascar.",
     description:
@@ -174,6 +176,7 @@
     reviews: 91,
     groupSize: '4 à 10 personnes',
     thematique: 'aventure',
+    themes: ['paysages-mineraux', 'aventure-sommets'],
     saison: 'seche',
     teaser: 'Forêt de calcaire classée UNESCO, ponts de singe et pirogue sur la Manambolo.',
     description:
@@ -271,6 +274,7 @@
     reviews: 34,
     groupSize: '4 à 8 personnes',
     thematique: 'aventure',
+    themes: ['expedition-integrale', 'paysages-mineraux'],
     saison: 'seche',
     teaser: "Gorges sauvages, forêt fossile et bivouacs au cœur du massif le plus isolé de Madagascar.",
     description:
@@ -368,6 +372,7 @@
     reviews: 58,
     groupSize: '2 à 12 personnes',
     thematique: 'culture',
+    themes: ['culture-traditions'],
     saison: 'toute-saison',
     teaser: "Villages Zafimaniry, sculpture sur bois classée UNESCO et chemins entre collines.",
     description:
@@ -449,6 +454,7 @@
     reviews: 47,
     groupSize: '2 à 10 personnes',
     thematique: 'nature',
+    themes: ['saveurs-artisanat', 'faune-biodiversite'],
     saison: 'seche',
     teaser: "Vanille, girofle, ylang-ylang : une odyssée olfactive dans les plantations de l'Est malgache.",
     description:
@@ -538,6 +544,7 @@
     reviews: 145,
     groupSize: '2 à 15 personnes',
     thematique: 'nature',
+    themes: ['faune-biodiversite'],
     saison: 'toute-saison',
     teaser: "Indris, lémuriens nocturnes et forêt primaire à 3h d'Antananarivo.",
     description:
@@ -603,6 +610,7 @@
     reviews: 72,
     groupSize: '2 à 15 personnes',
     thematique: 'culture',
+    themes: ['histoire-patrimoine', 'culture-traditions'],
     saison: 'toute-saison',
     teaser: "Palais royaux, colline sacrée UNESCO et vieille ville de Fianarantsoa : l'âme historique de Madagascar.",
     description:
@@ -676,6 +684,7 @@
     reviews: 88,
     groupSize: '2 à 12 personnes',
     thematique: 'nature',
+    themes: ['plages-ocean', 'faune-biodiversite'],
     saison: 'toute-saison',
     teaser: "Cimetière pirate, observation des baleines à bosse et plages sauvages sur l'île aux parfums.",
     description:
@@ -757,6 +766,7 @@
     reviews: 74,
     groupSize: '2 à 12 personnes',
     thematique: 'culture',
+    themes: ['culture-traditions', 'saveurs-artisanat'],
     saison: 'toute-saison',
     teaser: 'Rizières en terrasses, cuisine Betsileo et art du tissage au cœur des Hautes Terres.',
     description:
@@ -830,6 +840,7 @@
     reviews: 12,
     groupSize: '4 à 8 personnes',
     thematique: 'aventure',
+    themes: ['expedition-integrale', 'aventure-sommets'],
     saison: 'seche',
     teaser: "L'odyssée ultime : traverser Madagascar de Diego Suarez à Tuléar en 21 à 28 jours.",
     description:

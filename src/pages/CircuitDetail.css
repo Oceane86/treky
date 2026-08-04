@@ -865,6 +865,12 @@
   line-height: 1.6;
 }
 
+.cd__climat-note--closed {
+  background: rgba(194, 70, 46, 0.1);
+  color: var(--mojo);
+  font-weight: 500;
+}
+
 /* ── SECTION · AVIS VOYAGEURS ── */
 .cd__reviews-summary {
   display: flex;

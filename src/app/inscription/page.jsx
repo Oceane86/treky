@@ -109,7 +109,7 @@ export default function RegisterPage() {
   const validate = () => {
     const e = {}
     if (!form.name.trim()) e.name = 'Le nom est requis.'
-    if (!/\S+@\S+\.\S+/.test(form.email)) e.email = 'Adresse e-mail invalide.'
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(form.email.trim())) e.email = 'Adresse e-mail invalide.'
     if (form.password.length < 8) e.password = 'Minimum 8 caractères.'
     if (!/[A-Z]/.test(form.password)) e.password = (e.password || '') + ' Une majuscule requise.'
     if (!/\d/.test(form.password)) e.password = (e.password || '') + ' Un chiffre requis.'

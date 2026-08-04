@@ -10,21 +10,11 @@ import { useCurrency } from '../../../context/CurrencyContext'
 import { useAuth } from '../../../context/AuthContext'
 import { useFavorites } from '../../../context/FavoritesContext'
 import { readJSON } from '../../../utils/storage'
+import { MONTHS, CLIMAT_MAP, CLIMAT_ICON, CLIMAT_LABEL, getClimatKey, getClosure, formatMonthRange } from '../../../utils/climate'
 import BookingModal from '../../../components/BookingModal'
 import '../../../pages/CircuitDetail.css'
 
 const CircuitMap = dynamic(() => import('../../../components/CircuitMap'), { ssr: false })
-
-const MONTHS = ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jun', 'Jul', 'Aoû', 'Sep', 'Oct', 'Nov', 'Déc']
-
-const CLIMAT_MAP = {
-  seche:        ['avoid','avoid','avoid','ok','ideal','ideal','ideal','ideal','ideal','ideal','ok','avoid'],
-  'toute-saison':['ok','ok','ideal','ideal','ideal','ideal','ideal','ideal','ideal','ideal','ideal','ok'],
-  baleines:     ['ok','ok','ideal','ideal','ideal','ideal','ideal','ideal','ideal','ideal','ideal','ok'],
-}
-
-const CLIMAT_ICON = { ideal: '☀️', ok: '⛅', avoid: '🌧️' }
-const CLIMAT_LABEL = { ideal: 'Idéal', ok: 'Correct', avoid: 'Déconseillé' }
 
 const SAMPLE_REVIEWS = [
   { id: 1, name: 'Jean Dupont',   avatar: '/images/avatar1.jpg', stars: 5, date: 'Mars 2026',    text: 'Une expérience absolument inoubliable. Le guide était exceptionnel, les paysages à couper le souffle.', tag: 'Randonneur passionné' },
@@ -47,11 +37,6 @@ function infoIcon(text) {
   if (t.includes('accessible') || t.includes('famille')) return '✅'
   if (t.includes('eau') || t.includes('hydratation')) return '💧'
   return 'ℹ️'
-}
-
-function getClimatKey(circuit) {
-  if (circuit.slug === 'sainte-marie-pirates-baleines') return 'baleines'
-  return circuit.saison || 'seche'
 }
 
 export default function CircuitDetailPage() {
@@ -399,6 +384,11 @@ export default function CircuitDetailPage() {
             {circuit.slug === 'sainte-marie-pirates-baleines' && (
               <p className="cd__climat-note">
                 🐋 L'observation des baleines à bosse est possible de <strong>juillet à septembre</strong>. En dehors de cette période, toutes les autres activités restent accessibles dans d'excellentes conditions.
+              </p>
+            )}
+            {getClosure(circuit) && (
+              <p className="cd__climat-note cd__climat-note--closed">
+                🚫 <strong>Site fermé de {formatMonthRange(getClosure(circuit).months)}.</strong> {getClosure(circuit).note}
               </p>
             )}
           </section>

@@ -85,7 +85,7 @@ export default function ConnexionClient() {
 
   const validate = () => {
     const e = {}
-    if (!/\S+@\S+\.\S+/.test(form.email)) e.email = 'Adresse e-mail invalide.'
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(form.email.trim())) e.email = 'Adresse e-mail invalide.'
     if (form.password.length < 6) e.password = 'Mot de passe trop court.'
     setErrors(e)
     return Object.keys(e).length === 0
