@@ -1,7 +1,10 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { circuits } from '../../data/circuits'
+import { THEMES, scoreCircuit, getMatchedThemes } from '../../utils/matching'
+import { readJSON } from '../../utils/storage'
 import CircuitCard from '../../components/CircuitCard'
 import '../../components/Circuits.css'
 import '../../pages/CircuitsPage.css'
@@ -26,9 +29,10 @@ const THEME_OPTIONS = [
 ]
 
 const NIVEAU_OPTIONS = [
-  { label: 'Débutant', value: 'Débutant' },
-  { label: 'Intermédiaire', value: 'Intermédiaire' },
-  { label: 'Difficile', value: 'Difficile' },
+  { label: 'Facile', value: 'Facile' },
+  { label: 'Modéré', value: 'Modéré' },
+  { label: 'Sportif', value: 'Sportif' },
+  { label: 'Engagé', value: 'Engagé' },
 ]
 
 const SAISON_OPTIONS = [
@@ -37,9 +41,9 @@ const SAISON_OPTIONS = [
 ]
 
 const NIVEAU_FROM_PARAM = {
-  debutant: 'Débutant',
-  modere: 'Intermédiaire',
-  difficile: 'Difficile',
+  debutant: 'Facile',
+  modere: 'Modéré',
+  difficile: 'Sportif',
 }
 
 function inDureeRange(days, range) {
@@ -91,6 +95,12 @@ export default function CircuitsPage() {
   }))
 
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [wishes, setWishes] = useState(null)
+  const [wishesActive, setWishesActive] = useState(true)
+
+  useEffect(() => {
+    setWishes(readJSON('treky_wishes', null))
+  }, [])
 
   function toggle(category, value) {
     setFilters((prev) => {
@@ -109,15 +119,29 @@ export default function CircuitsPage() {
   }
 
   const hasActiveFilters = Object.values(filters).some((arr) => arr.length > 0)
+  const useWishes = wishesActive && !!wishes
 
-  const visible = circuits.filter((c) => {
+  let visible = circuits.filter((c) => {
     if (filters.duree.length && !filters.duree.some((r) => inDureeRange(c.recommendedDays, r))) return false
     if (filters.budget.length && !filters.budget.some((r) => inBudgetRange(c.priceAr, r))) return false
     if (filters.theme.length && !filters.theme.includes(c.thematique)) return false
     if (filters.niveau.length && !filters.niveau.includes(c.level)) return false
     if (filters.saison.length && c.saison !== 'toute-saison' && !filters.saison.includes(c.saison)) return false
+    if (useWishes) {
+      if (wishes.budget && c.priceEurMin > wishes.budget) return false
+      if (wishes.duree) {
+        const max = c.maxDays ?? c.recommendedDays
+        if (wishes.duree < c.minDays || wishes.duree > max) return false
+      }
+    }
     return true
   })
+
+  if (useWishes) {
+    visible = [...visible].sort((a, b) => scoreCircuit(b, wishes).score - scoreCircuit(a, wishes).score)
+  }
+
+  const selectedThemeLabels = THEMES.filter((t) => wishes?.themes?.includes(t.id)).map((t) => t.label)
 
   return (
     <div className="page">
@@ -133,6 +157,28 @@ export default function CircuitsPage() {
 
       <section className="section-padding" style={{ paddingTop: '56px' }}>
         <div className="container">
+
+          {wishes && (
+            <div className={`circuits-wishes-banner ${useWishes ? '' : 'circuits-wishes-banner--off'}`}>
+              <div>
+                <strong>{useWishes ? '🎯 Adapté à votre recherche' : 'Recherche ignorée'}</strong>
+                <span>
+                  {' '}Budget {wishes.budget.toLocaleString('fr-FR')} € · {wishes.duree} jours
+                  {selectedThemeLabels.length > 0 && ` · toutes thématiques affichées, ${selectedThemeLabels.join(', ')} en tête`}
+                </span>
+              </div>
+              <div className="circuits-wishes-banner__actions">
+                <Link href="/composer" className="circuits-wishes-banner__link">Modifier ma recherche</Link>
+                <button
+                  className="circuits-wishes-banner__link"
+                  onClick={() => setWishesActive((v) => !v)}
+                >
+                  {useWishes ? 'Ignorer' : 'Réactiver'}
+                </button>
+              </div>
+            </div>
+          )}
+
           <button
             className="circuits-layout__filter-toggle"
             onClick={() => setSidebarOpen(!sidebarOpen)}
@@ -175,7 +221,11 @@ export default function CircuitsPage() {
               {visible.length > 0 ? (
                 <div className="circuits__grid">
                   {visible.map((circuit) => (
-                    <CircuitCard key={circuit.id} circuit={circuit} />
+                    <CircuitCard
+                      key={circuit.id}
+                      circuit={circuit}
+                      matchBadge={useWishes && getMatchedThemes(circuit, wishes.themes).length > 0}
+                    />
                   ))}
                 </div>
               ) : (

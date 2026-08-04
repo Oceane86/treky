@@ -1,6 +1,7 @@
 // Formulaire d'envies : taxonomie et algorithme de matching voyageur → circuits/guides.
 // Les 8 thématiques sont des points de départ pour le matching, pas des forfaits figés.
 
+import { guides } from '../data/circuits'
 import { getClimatForMonth, isClosedInMonth, getIdealMonths } from './climate'
 
 export const THEMES = [
@@ -24,8 +25,21 @@ export const HEBERGEMENT_OPTIONS = [
 
 export const NIVEAU_OPTIONS = ['Facile', 'Modéré', 'Sportif', 'Engagé']
 
+export const LANGUE_OPTIONS = [...new Set(guides.flatMap((g) => g.langues))]
+
 export function getHebergementTypes(circuit) {
   return [...new Set((circuit.steps ?? []).map((s) => s.typeHebergement).filter(Boolean))]
+}
+
+export function getCircuitGuides(circuit) {
+  return (circuit.guideIds ?? []).map((id) => guides.find((g) => g.id === id)).filter(Boolean)
+}
+
+// Extrait la fourchette d'un texte type "2 à 15 personnes" → [2, 15].
+export function parseGroupSize(text) {
+  const nums = (text ?? '').match(/\d+/g)
+  if (!nums || nums.length < 2) return [1, 99]
+  return [Number(nums[0]), Number(nums[1])]
 }
 
 function hebergementScore(circuit, wishedIds) {
@@ -57,9 +71,26 @@ function niveauScore(circuit, niveau) {
   return 0
 }
 
-function themeScore(circuit, themeId) {
-  if (!themeId) return 0
-  return (circuit.themes ?? []).includes(themeId) ? 40 : 0
+function themeScore(circuit, themeIds) {
+  if (!themeIds?.length) return 0
+  const matched = (circuit.themes ?? []).filter((t) => themeIds.includes(t)).length
+  if (!matched) return 0
+  return Math.min(40 + (matched - 1) * 10, 60)
+}
+
+function langueScore(circuit, langue) {
+  if (!langue) return 5
+  return getCircuitGuides(circuit).some((g) => g.langues.includes(langue)) ? 15 : 0
+}
+
+function groupeScore(circuit, nbPersonnes) {
+  if (!nbPersonnes) return 5
+  const [min, max] = parseGroupSize(circuit.groupSize)
+  return nbPersonnes >= min && nbPersonnes <= max ? 10 : 0
+}
+
+export function getMatchedThemes(circuit, themeIds) {
+  return (circuit.themes ?? []).filter((t) => themeIds?.includes(t))
 }
 
 export function getSeasonStatus(circuit, monthIndex) {
@@ -69,13 +100,15 @@ export function getSeasonStatus(circuit, monthIndex) {
 }
 
 export function scoreCircuit(circuit, wishes) {
-  const { theme, hebergement, duree, budget, niveau, month } = wishes
+  const { themes, hebergement, duree, budget, niveau, month, nbPersonnes, langue } = wishes
   let score =
-    themeScore(circuit, theme) +
+    themeScore(circuit, themes) +
     hebergementScore(circuit, hebergement) +
     dureeScore(circuit, duree) +
     budgetScore(circuit, budget) +
-    niveauScore(circuit, niveau)
+    niveauScore(circuit, niveau) +
+    langueScore(circuit, langue) +
+    groupeScore(circuit, nbPersonnes)
 
   const seasonStatus = getSeasonStatus(circuit, month)
   if (seasonStatus === 'closed') score -= 25

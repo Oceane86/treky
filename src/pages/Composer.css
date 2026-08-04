@@ -30,6 +30,45 @@
   color: var(--log-cabin);
 }
 
+.composer__block-hint {
+  font-size: 0.8rem;
+  color: #aaa;
+  margin-top: -10px;
+}
+
+.composer__counter {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  border: 1.5px solid #e0e0e0;
+  border-radius: 10px;
+  overflow: hidden;
+  width: fit-content;
+}
+
+.composer__counter-btn {
+  width: 40px;
+  height: 40px;
+  background: #f8f8f8;
+  border: none;
+  font-size: 1.2rem;
+  color: var(--log-cabin);
+  cursor: pointer;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.composer__counter-btn:hover { background: #efefef; }
+
+.composer__counter-val {
+  padding: 0 16px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--log-cabin);
+}
+
 .composer__optional {
   font-weight: 400;
   font-size: 0.78rem;

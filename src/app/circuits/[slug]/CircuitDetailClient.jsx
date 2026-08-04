@@ -67,7 +67,14 @@ export default function CircuitDetailPage() {
   function lightboxNext() { setLightboxIdx((i) => (i + 1) % photos.length) }
 
   useEffect(() => {
-    if (circuit) setSelectedDays(circuit.recommendedDays)
+    if (!circuit) return
+    const wishes = readJSON('treky_wishes', null)
+    if (wishes?.duree) {
+      const max = circuit.maxDays ?? circuit.recommendedDays
+      setSelectedDays(Math.min(Math.max(wishes.duree, circuit.minDays), max))
+    } else {
+      setSelectedDays(circuit.recommendedDays)
+    }
   }, [circuit])
 
   useEffect(() => {

@@ -1,3 +1,40 @@
+/* Bannière "formulaire d'envies" */
+.circuits-wishes-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  background: rgba(91, 140, 26, 0.1);
+  border: 1px solid rgba(91, 140, 26, 0.25);
+  border-radius: 14px;
+  padding: 14px 20px;
+  margin-bottom: 20px;
+  font-size: 0.85rem;
+  color: var(--log-cabin);
+}
+
+.circuits-wishes-banner--off {
+  background: #f4f2ec;
+  border-color: #e2ddd0;
+  color: #888;
+}
+
+.circuits-wishes-banner__actions {
+  display: flex;
+  gap: 16px;
+  flex-shrink: 0;
+}
+
+.circuits-wishes-banner__link {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--fern-frond);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
 /* Mobile filter toggle — hidden on desktop */
 .circuits-layout__filter-toggle {
   display: none;

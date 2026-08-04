@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation'
 import { useAuth } from '../context/AuthContext'
 import { useBooking } from '../context/BookingContext'
 import { INSTALLMENT_THRESHOLD_AR, buildInstallments } from '../utils/pricing'
+import { readJSON } from '../utils/storage'
 import PriceBreakdown from './PriceBreakdown'
 import RefundPolicy from './RefundPolicy'
 import './BookingModal.css'
@@ -56,10 +57,13 @@ export default function BookingModal({ circuit, selectedDays, priceAr, onClose }
   const { setBooking } = useBooking()
 
   const today = new Date().toISOString().split('T')[0]
+  const wishes = readJSON('treky_wishes', null)
   const [step, setStep] = useState(1)
-  const [date, setDate] = useState('')
+  const [date, setDate] = useState(() => (wishes?.checkin && wishes.checkin >= today ? wishes.checkin : ''))
   const [dateError, setDateError] = useState('')
-  const [nbPersonnes, setNbPersonnes] = useState(1)
+  const [nbPersonnes, setNbPersonnes] = useState(() =>
+    wishes?.nbPersonnes ? Math.min(Math.max(wishes.nbPersonnes, 1), 8) : 1
+  )
   const [promoInput, setPromoInput] = useState('')
   const [promoApplied, setPromoApplied] = useState(false)
   const [promoError, setPromoError] = useState('')

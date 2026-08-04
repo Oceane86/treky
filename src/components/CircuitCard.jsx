@@ -15,7 +15,7 @@ const LEVEL_MAP = {
   'Engagé':        { label: 'Marcheur engagé',     cls: 'hard' },
 }
 
-export default function CircuitCard({ circuit }) {
+export default function CircuitCard({ circuit, matchBadge = false }) {
   const { format } = useCurrency()
   const { isFavorite, toggleFavorite } = useFavorites()
   const { isLoggedIn } = useAuth()
@@ -33,6 +33,7 @@ export default function CircuitCard({ circuit }) {
       <Link href={`/circuits/${circuit.slug}`} className="circuit-card circuit-card--link">
         <div className="circuit-card__image-wrap">
           <span className={`circuit-card__badge circuit-card__badge--${circuit.badge.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/\s+/g,'-')}`}>{circuit.badge}</span>
+          {matchBadge && <span className="circuit-card__match-badge">✓ Pour vous</span>}
           <img src={circuit.image} alt={circuit.name} className="circuit-card__image" />
           <button
             className={`circuit-card__fav${fav ? ' active' : ''}`}

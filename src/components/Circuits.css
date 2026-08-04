@@ -116,6 +116,19 @@
   letter-spacing: 0.05em;
 }
 
+.circuit-card__match-badge {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  z-index: 2;
+  background-color: var(--fern-frond);
+  color: #fff;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
 .circuit-card__badge--aventure        { background-color: #d4a600; color: #fff; }
 .circuit-card__badge--expedition      { background-color: #e07020; color: #fff; }
 .circuit-card__badge--grande-traversee{ background-color: #e07020; color: #fff; }

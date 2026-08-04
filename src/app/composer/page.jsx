@@ -1,30 +1,58 @@
 'use client'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { THEMES, HEBERGEMENT_OPTIONS, NIVEAU_OPTIONS } from '../../utils/matching'
+import { THEMES, HEBERGEMENT_OPTIONS, NIVEAU_OPTIONS, LANGUE_OPTIONS } from '../../utils/matching'
 import { writeJSON } from '../../utils/storage'
 import '../../pages/Page.css'
 import '../../pages/Composer.css'
 
 export default function ComposerPage() {
   const router = useRouter()
-  const [theme, setTheme] = useState(null)
+  const [themes, setThemes] = useState([])
   const [hebergement, setHebergement] = useState([])
   const [duree, setDuree] = useState(5)
   const [budget, setBudget] = useState(1200)
-  const [date, setDate] = useState('')
+  const [checkin, setCheckin] = useState('')
+  const [checkout, setCheckout] = useState('')
   const [niveau, setNiveau] = useState('Modéré')
+  const [groupe, setGroupe] = useState(false)
+  const [nbPersonnes, setNbPersonnes] = useState(2)
+  const [langue, setLangue] = useState(null)
 
   const today = new Date().toISOString().split('T')[0]
+
+  function toggleTheme(id) {
+    setThemes((prev) => (prev.includes(id) ? prev.filter((t) => t !== id) : [...prev, id]))
+  }
 
   function toggleHebergement(id) {
     setHebergement((prev) => (prev.includes(id) ? prev.filter((h) => h !== id) : [...prev, id]))
   }
 
+  function handleCheckout(value) {
+    setCheckout(value)
+    if (checkin && value) {
+      const days = Math.round((new Date(value) - new Date(checkin)) / 86_400_000)
+      if (days > 0) setDuree(Math.min(Math.max(days, 2), 28))
+    }
+  }
+
   function handleSubmit() {
-    if (!theme) return
-    const month = date ? new Date(date).getMonth() : null
-    writeJSON('treky_wishes', { theme, hebergement, duree, budget, niveau, date, month })
+    if (!themes.length) return
+    const month = checkin ? new Date(checkin).getMonth() : null
+    writeJSON('treky_wishes', {
+      themes,
+      hebergement,
+      duree,
+      budget,
+      niveau,
+      checkin,
+      checkout,
+      month,
+      groupe,
+      nbPersonnes: groupe ? nbPersonnes : 1,
+      langue,
+    })
     router.push('/composer/resultats')
   }
 
@@ -45,14 +73,15 @@ export default function ComposerPage() {
         <div className="container composer__body">
 
           <div className="composer__block">
-            <h2 className="composer__block-title">Quelle thématique vous fait rêver ?</h2>
+            <h2 className="composer__block-title">Quelles thématiques vous font rêver ?</h2>
+            <p className="composer__block-hint">Sélectionnez-en une ou plusieurs.</p>
             <div className="composer__themes">
               {THEMES.map((t) => (
                 <button
                   key={t.id}
                   type="button"
-                  className={`composer__theme-card ${theme === t.id ? 'composer__theme-card--active' : ''}`}
-                  onClick={() => setTheme(t.id)}
+                  className={`composer__theme-card ${themes.includes(t.id) ? 'composer__theme-card--active' : ''}`}
+                  onClick={() => toggleTheme(t.id)}
                 >
                   <span className="composer__theme-icon">{t.icon}</span>
                   <span className="composer__theme-label">{t.label}</span>
@@ -76,6 +105,30 @@ export default function ComposerPage() {
                   <span>{h.icon}</span> {h.label}
                 </button>
               ))}
+            </div>
+          </div>
+
+          <div className="composer__grid">
+            <div className="composer__block">
+              <h2 className="composer__block-title">Date d'arrivée <span className="composer__optional">(optionnel)</span></h2>
+              <input
+                type="date"
+                className="composer__date-input"
+                value={checkin}
+                min={today}
+                onChange={(e) => setCheckin(e.target.value)}
+              />
+            </div>
+
+            <div className="composer__block">
+              <h2 className="composer__block-title">Date de départ <span className="composer__optional">(optionnel)</span></h2>
+              <input
+                type="date"
+                className="composer__date-input"
+                value={checkout}
+                min={checkin || today}
+                onChange={(e) => handleCheckout(e.target.value)}
+              />
             </div>
           </div>
 
@@ -110,14 +163,38 @@ export default function ComposerPage() {
 
           <div className="composer__grid">
             <div className="composer__block">
-              <h2 className="composer__block-title">Dates envisagées <span className="composer__optional">(optionnel)</span></h2>
-              <input
-                type="date"
-                className="composer__date-input"
-                value={date}
-                min={today}
-                onChange={(e) => setDate(e.target.value)}
-              />
+              <h2 className="composer__block-title">Vous voyagez…</h2>
+              <div className="composer__chips">
+                <button
+                  type="button"
+                  className={`composer__chip ${!groupe ? 'composer__chip--active' : ''}`}
+                  onClick={() => setGroupe(false)}
+                >
+                  🧍 Solo
+                </button>
+                <button
+                  type="button"
+                  className={`composer__chip ${groupe ? 'composer__chip--active' : ''}`}
+                  onClick={() => setGroupe(true)}
+                >
+                  👥 En groupe
+                </button>
+              </div>
+              {groupe && (
+                <div className="composer__counter">
+                  <button
+                    type="button"
+                    className="composer__counter-btn"
+                    onClick={() => setNbPersonnes((n) => Math.max(2, n - 1))}
+                  >−</button>
+                  <span className="composer__counter-val">{nbPersonnes} personnes</span>
+                  <button
+                    type="button"
+                    className="composer__counter-btn"
+                    onClick={() => setNbPersonnes((n) => Math.min(15, n + 1))}
+                  >+</button>
+                </div>
+              )}
             </div>
 
             <div className="composer__block">
@@ -137,15 +214,33 @@ export default function ComposerPage() {
             </div>
           </div>
 
+          <div className="composer__block">
+            <h2 className="composer__block-title">
+              Langue parlée par le guide <span className="composer__optional">(optionnel)</span>
+            </h2>
+            <div className="composer__chips">
+              {LANGUE_OPTIONS.map((l) => (
+                <button
+                  key={l}
+                  type="button"
+                  className={`composer__chip ${langue === l ? 'composer__chip--active' : ''}`}
+                  onClick={() => setLangue(langue === l ? null : l)}
+                >
+                  {l}
+                </button>
+              ))}
+            </div>
+          </div>
+
           <button
             type="button"
             className="btn-primary composer__submit"
-            disabled={!theme}
+            disabled={!themes.length}
             onClick={handleSubmit}
           >
             Voir mes recommandations →
           </button>
-          {!theme && <p className="composer__hint">Choisissez une thématique pour continuer.</p>}
+          {!themes.length && <p className="composer__hint">Choisissez au moins une thématique pour continuer.</p>}
         </div>
       </section>
     </div>

@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { circuits, getGuideById } from '../../../data/circuits'
-import { THEMES, HEBERGEMENT_OPTIONS, matchCircuits } from '../../../utils/matching'
+import { THEMES, HEBERGEMENT_OPTIONS, matchCircuits, getMatchedThemes } from '../../../utils/matching'
 import { MONTHS, getClosure } from '../../../utils/climate'
 import { readJSON } from '../../../utils/storage'
 import '../../../pages/Page.css'
@@ -36,10 +36,10 @@ export default function ComposerResultatsPage() {
 
   if (!wishes) return null
 
-  const theme = THEMES.find((t) => t.id === wishes.theme)
+  const selectedThemes = THEMES.filter((t) => wishes.themes?.includes(t.id))
   const hebergementLabels = HEBERGEMENT_OPTIONS.filter((h) => wishes.hebergement?.includes(h.id)).map((h) => h.label)
   const matches = matchCircuits(circuits, wishes, 3)
-  const maxScore = 105
+  const maxScore = 150
 
   return (
     <div className="page composer">
@@ -47,10 +47,12 @@ export default function ComposerResultatsPage() {
         <div className="container page-hero__inner">
           <p className="page-hero__eyebrow">Vos recommandations</p>
           <h1 className="page-hero__title">
-            {theme?.icon} {theme?.label}
+            {selectedThemes.map((t) => t.icon).join(' ')} {selectedThemes.map((t) => t.label).join(' · ')}
           </h1>
           <p className="page-hero__subtitle">
             {wishes.duree} jours · budget {wishes.budget.toLocaleString('fr-FR')} € · niveau {wishes.niveau}
+            {wishes.groupe && ` · ${wishes.nbPersonnes} personnes`}
+            {wishes.langue && ` · guide ${wishes.langue}`}
             {hebergementLabels.length > 0 && ` · ${hebergementLabels.join(', ')}`}
           </p>
         </div>
@@ -66,7 +68,7 @@ export default function ComposerResultatsPage() {
               const guides = (circuit.guideIds ?? []).map(getGuideById).filter(Boolean).slice(0, 2)
               const season = seasonStatus ? SEASON_COPY[seasonStatus] : null
               const closure = getClosure(circuit)
-              const themeMatch = circuit.themes?.includes(wishes.theme)
+              const matchedThemes = getMatchedThemes(circuit, wishes.themes)
 
               return (
                 <div key={circuit.id} className="resultats__card">
@@ -84,8 +86,10 @@ export default function ComposerResultatsPage() {
                     </div>
 
                     <div className="resultats__tags">
-                      <span className={`resultats__tag ${themeMatch ? 'resultats__tag--match' : ''}`}>
-                        {themeMatch ? '✓ Thématique correspondante' : 'Thématique proche'}
+                      <span className={`resultats__tag ${matchedThemes.length ? 'resultats__tag--match' : ''}`}>
+                        {matchedThemes.length
+                          ? `✓ ${THEMES.filter((t) => matchedThemes.includes(t.id)).map((t) => t.label).join(', ')}`
+                          : 'Thématique proche'}
                       </span>
                       <span className="resultats__tag">{circuit.level}</span>
                       <span className="resultats__tag">{circuit.minDays}–{circuit.maxDays ?? circuit.recommendedDays} jours</span>
