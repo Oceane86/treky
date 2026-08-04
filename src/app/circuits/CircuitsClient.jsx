@@ -127,13 +127,6 @@ export default function CircuitsPage() {
     if (filters.theme.length && !filters.theme.includes(c.thematique)) return false
     if (filters.niveau.length && !filters.niveau.includes(c.level)) return false
     if (filters.saison.length && c.saison !== 'toute-saison' && !filters.saison.includes(c.saison)) return false
-    if (useWishes) {
-      if (wishes.budget && c.priceEurMin > wishes.budget) return false
-      if (wishes.duree) {
-        const max = c.maxDays ?? c.recommendedDays
-        if (wishes.duree < c.minDays || wishes.duree > max) return false
-      }
-    }
     return true
   })
 
@@ -161,10 +154,10 @@ export default function CircuitsPage() {
           {wishes && (
             <div className={`circuits-wishes-banner ${useWishes ? '' : 'circuits-wishes-banner--off'}`}>
               <div>
-                <strong>{useWishes ? '🎯 Adapté à votre recherche' : 'Recherche ignorée'}</strong>
+                <strong>{useWishes ? '🎯 Trié selon votre recherche' : 'Recherche ignorée'}</strong>
                 <span>
-                  {' '}Budget {wishes.budget.toLocaleString('fr-FR')} € · {wishes.duree} jours
-                  {selectedThemeLabels.length > 0 && ` · toutes thématiques affichées, ${selectedThemeLabels.join(', ')} en tête`}
+                  {' '}Budget {wishes.budget.toLocaleString('fr-FR')} € · {wishes.duree} jours — tous les circuits restent affichés,
+                  {selectedThemeLabels.length > 0 ? ` ${selectedThemeLabels.join(', ')} en tête` : ' les plus compatibles en tête'}
                 </span>
               </div>
               <div className="circuits-wishes-banner__actions">

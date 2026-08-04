@@ -11,29 +11,55 @@
 }
 
 .composer__body {
-  max-width: 760px;
+  max-width: 720px;
   display: flex;
   flex-direction: column;
-  gap: 36px;
+  gap: 20px;
+  counter-reset: composer-step;
 }
 
 .composer__block {
   display: flex;
   flex-direction: column;
   gap: 14px;
+  background: #fff;
+  border: 1px solid #eeebe3;
+  border-radius: 18px;
+  padding: 26px 28px;
+  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.04);
 }
 
 .composer__block-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   font-family: var(--font-primary);
   font-size: 1.05rem;
   font-weight: 700;
   color: var(--log-cabin);
+  counter-increment: composer-step;
+}
+
+.composer__block-title::before {
+  content: counter(composer-step);
+  flex-shrink: 0;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--fern-frond);
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .composer__block-hint {
   font-size: 0.8rem;
   color: #aaa;
-  margin-top: -10px;
+  margin-left: 38px;
+  margin-top: -8px;
 }
 
 .composer__counter {
@@ -44,6 +70,7 @@
   border-radius: 10px;
   overflow: hidden;
   width: fit-content;
+  margin-left: 38px;
 }
 
 .composer__counter-btn {
@@ -78,7 +105,11 @@
 .composer__grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 32px;
+  gap: 20px;
+}
+
+.composer__grid .composer__block {
+  margin: 0;
 }
 
 /* ── Cartes thématiques ── */
@@ -86,6 +117,7 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 12px;
+  margin-left: 38px;
 }
 
 .composer__theme-card {
@@ -93,11 +125,11 @@
   flex-direction: column;
   align-items: center;
   gap: 8px;
-  padding: 20px 12px;
+  padding: 18px 10px;
   border: 2px solid #eeebe3;
-  border-radius: 16px;
-  background: #fff;
-  font-size: 0.82rem;
+  border-radius: 14px;
+  background: var(--velvety-cream);
+  font-size: 0.8rem;
   font-weight: 600;
   color: var(--log-cabin);
   text-align: center;
@@ -106,15 +138,17 @@
 
 .composer__theme-card:hover {
   border-color: var(--fern-frond);
+  transform: translateY(-2px);
 }
 
 .composer__theme-card--active {
   border-color: var(--fern-frond);
-  background: rgba(91, 140, 26, 0.08);
+  background: rgba(91, 140, 26, 0.1);
+  box-shadow: 0 4px 14px rgba(91, 140, 26, 0.18);
 }
 
 .composer__theme-icon {
-  font-size: 1.8rem;
+  font-size: 1.7rem;
 }
 
 /* ── Chips ── */
@@ -122,6 +156,7 @@
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
+  margin-left: 38px;
 }
 
 .composer__chip {
@@ -147,14 +182,47 @@
 
 /* ── Sliders ── */
 .composer__slider {
-  width: 100%;
+  width: calc(100% - 38px);
+  margin-left: 38px;
   accent-color: var(--fern-frond);
+  height: 6px;
 }
 
 .composer__slider-val {
+  margin-left: 38px;
   font-family: var(--font-primary);
   font-weight: 700;
   color: var(--fern-frond);
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.composer__slider-val-secondary {
+  font-family: var(--font-secondary);
+  font-weight: 400;
+  font-size: 0.8rem;
+  color: #999;
+}
+
+/* ── Dates ── */
+.composer__date-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-left: 38px;
+}
+
+.composer__date-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.composer__date-field label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #999;
 }
 
 .composer__date-input {
@@ -166,9 +234,15 @@
   width: 100%;
 }
 
+.composer__date-input:focus {
+  outline: none;
+  border-color: var(--fern-frond);
+}
+
 .composer__submit {
   align-self: center;
   padding: 14px 40px;
+  margin-top: 4px;
 }
 
 .composer__submit:disabled {
@@ -180,7 +254,7 @@
   text-align: center;
   font-size: 0.8rem;
   color: #aaa;
-  margin-top: -20px;
+  margin-top: -8px;
 }
 
 /* ── Lien retour (résultats) ── */
@@ -346,8 +420,26 @@
 }
 
 @media (max-width: 700px) {
+  .composer__block {
+    padding: 20px;
+  }
   .composer__themes {
     grid-template-columns: repeat(2, 1fr);
+    margin-left: 0;
+  }
+  .composer__block-hint,
+  .composer__counter,
+  .composer__chips,
+  .composer__slider,
+  .composer__slider-val,
+  .composer__date-row {
+    margin-left: 0;
+  }
+  .composer__slider {
+    width: 100%;
+  }
+  .composer__date-row {
+    grid-template-columns: 1fr;
   }
   .composer__grid {
     grid-template-columns: 1fr;

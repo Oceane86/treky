@@ -1,7 +1,7 @@
 'use client'
 import { createContext, useContext, useState } from 'react'
 
-const RATE_EUR_TO_AR = 5000 // 1 € ≈ 5 000 Ar
+export const RATE_EUR_TO_AR = 5000 // 1 € ≈ 5 000 Ar
 
 const CurrencyContext = createContext(null)
 

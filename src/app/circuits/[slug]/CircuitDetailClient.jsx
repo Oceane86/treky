@@ -108,6 +108,14 @@ export default function CircuitDetailPage() {
     }
   }
 
+  function handleBack() {
+    if (typeof window !== 'undefined' && window.history.length > 2) {
+      router.back()
+    } else {
+      router.push('/circuits')
+    }
+  }
+
   function handleFav() {
     if (!isLoggedIn) { setShowLoginGate(true); return }
     toggleFavorite(circuit.id)
@@ -155,7 +163,7 @@ export default function CircuitDetailPage() {
       {/* ── SECTION 1 · EN-TÊTE ── */}
       <div className="cd__header-wrap">
         <div className="container cd__header">
-          <Link href="/circuits" className="cd__back">← Tous les circuits</Link>
+          <button type="button" className="cd__back" onClick={handleBack}>← Retour</button>
           <div className="cd__header-row">
             <div className="cd__header-info">
               <h1 className="cd__title">{circuit.name}</h1>

@@ -3,8 +3,19 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { THEMES, HEBERGEMENT_OPTIONS, NIVEAU_OPTIONS, LANGUE_OPTIONS } from '../../utils/matching'
 import { writeJSON } from '../../utils/storage'
+import { RATE_EUR_TO_AR } from '../../context/CurrencyContext'
 import '../../pages/Page.css'
 import '../../pages/Composer.css'
+
+function addDays(dateStr, days) {
+  const d = new Date(dateStr)
+  d.setDate(d.getDate() + days)
+  return d.toISOString().split('T')[0]
+}
+
+function diffDays(fromStr, toStr) {
+  return Math.round((new Date(toStr) - new Date(fromStr)) / 86_400_000)
+}
 
 export default function ComposerPage() {
   const router = useRouter()
@@ -29,12 +40,28 @@ export default function ComposerPage() {
     setHebergement((prev) => (prev.includes(id) ? prev.filter((h) => h !== id) : [...prev, id]))
   }
 
+  function handleCheckin(value) {
+    setCheckin(value)
+    if (checkout) {
+      const days = diffDays(value, checkout)
+      if (days > 0) setDuree(Math.min(Math.max(days, 2), 28))
+      else setCheckout(addDays(value, duree))
+    } else {
+      setCheckout(addDays(value, duree))
+    }
+  }
+
   function handleCheckout(value) {
     setCheckout(value)
-    if (checkin && value) {
-      const days = Math.round((new Date(value) - new Date(checkin)) / 86_400_000)
+    if (checkin) {
+      const days = diffDays(checkin, value)
       if (days > 0) setDuree(Math.min(Math.max(days, 2), 28))
     }
+  }
+
+  function handleDuree(value) {
+    setDuree(value)
+    if (checkin) setCheckout(addDays(checkin, value))
   }
 
   function handleSubmit() {
@@ -108,56 +135,62 @@ export default function ComposerPage() {
             </div>
           </div>
 
-          <div className="composer__grid">
-            <div className="composer__block">
-              <h2 className="composer__block-title">Date d'arrivée <span className="composer__optional">(optionnel)</span></h2>
-              <input
-                type="date"
-                className="composer__date-input"
-                value={checkin}
-                min={today}
-                onChange={(e) => setCheckin(e.target.value)}
-              />
-            </div>
-
-            <div className="composer__block">
-              <h2 className="composer__block-title">Date de départ <span className="composer__optional">(optionnel)</span></h2>
-              <input
-                type="date"
-                className="composer__date-input"
-                value={checkout}
-                min={checkin || today}
-                onChange={(e) => handleCheckout(e.target.value)}
-              />
+          <div className="composer__block">
+            <h2 className="composer__block-title">Dates envisagées <span className="composer__optional">(optionnel)</span></h2>
+            <p className="composer__block-hint">Renseignez une date, l'autre et la durée s'ajustent automatiquement.</p>
+            <div className="composer__date-row">
+              <div className="composer__date-field">
+                <label>Date d'arrivée</label>
+                <input
+                  type="date"
+                  className="composer__date-input"
+                  value={checkin}
+                  min={today}
+                  onChange={(e) => handleCheckin(e.target.value)}
+                />
+              </div>
+              <div className="composer__date-field">
+                <label>Date de départ</label>
+                <input
+                  type="date"
+                  className="composer__date-input"
+                  value={checkout}
+                  min={checkin || today}
+                  onChange={(e) => handleCheckout(e.target.value)}
+                />
+              </div>
             </div>
           </div>
 
-          <div className="composer__grid">
-            <div className="composer__block">
-              <h2 className="composer__block-title">Durée souhaitée</h2>
-              <input
-                type="range"
-                min={2}
-                max={28}
-                value={duree}
-                onChange={(e) => setDuree(Number(e.target.value))}
-                className="composer__slider"
-              />
-              <div className="composer__slider-val">{duree} jour{duree > 1 ? 's' : ''}</div>
-            </div>
+          <div className="composer__block">
+            <h2 className="composer__block-title">Durée souhaitée</h2>
+            <input
+              type="range"
+              min={2}
+              max={28}
+              value={duree}
+              onChange={(e) => handleDuree(Number(e.target.value))}
+              className="composer__slider"
+            />
+            <div className="composer__slider-val">{duree} jour{duree > 1 ? 's' : ''}</div>
+          </div>
 
-            <div className="composer__block">
-              <h2 className="composer__block-title">Budget maximum</h2>
-              <input
-                type="range"
-                min={300}
-                max={4500}
-                step={100}
-                value={budget}
-                onChange={(e) => setBudget(Number(e.target.value))}
-                className="composer__slider"
-              />
-              <div className="composer__slider-val">{budget.toLocaleString('fr-FR')} €</div>
+          <div className="composer__block">
+            <h2 className="composer__block-title">Budget maximum</h2>
+            <input
+              type="range"
+              min={300}
+              max={4500}
+              step={100}
+              value={budget}
+              onChange={(e) => setBudget(Number(e.target.value))}
+              className="composer__slider"
+            />
+            <div className="composer__slider-val">
+              {budget.toLocaleString('fr-FR')} €
+              <span className="composer__slider-val-secondary">
+                ≈ {(budget * RATE_EUR_TO_AR).toLocaleString('fr-FR')} Ar
+              </span>
             </div>
           </div>
 
