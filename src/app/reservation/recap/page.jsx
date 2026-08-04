@@ -3,6 +3,8 @@ import { useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useBooking } from '../../../context/BookingContext'
+import PriceBreakdown from '../../../components/PriceBreakdown'
+import RefundPolicy from '../../../components/RefundPolicy'
 import '../../../pages/BookingRecap.css'
 
 function formatDate(dateStr) {
@@ -89,10 +91,32 @@ export default function BookingRecapPage() {
               <span>+{formatAr(b.frais_service)}</span>
             </div>
             <div className="recap__price-row recap__price-row--total">
-              <span>Total payé</span>
-              <span className="recap__total">{formatAr(b.prix_total)}</span>
+              <span>{b.payment_plan === 'fractionne' ? 'Total (acompte versé)' : 'Total payé'}</span>
+              <span className="recap__total">
+                {b.payment_plan === 'fractionne' && b.installments
+                  ? formatAr(b.installments[0].amount)
+                  : formatAr(b.prix_total)}
+              </span>
             </div>
           </div>
+
+          <PriceBreakdown amount={b.prix_total - b.frais_service} />
+
+          {b.payment_plan === 'fractionne' && b.installments && (
+            <>
+              <h2 className="recap__section-title">Échéancier</h2>
+              <div className="recap__pricing">
+                {b.installments.map((inst) => (
+                  <div key={inst.label} className="recap__price-row">
+                    <span>{inst.label} · {formatDate(inst.date)}</span>
+                    <span>{formatAr(inst.amount)}</span>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
+
+          <RefundPolicy />
 
           <div className="recap__next-step">
             <div className="recap__next-icon">🧭</div>

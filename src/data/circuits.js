@@ -925,6 +925,9 @@ export const guides = [
     nb_avis: 87,
     langues: ['Français', 'Malgache', 'Anglais'],
     specialites: ['Aventure extrême', 'Faune endémique'],
+    bio: "Guide certifié depuis 12 ans, spécialiste des ascensions du Pic Boby et des traversées du massif du Makay.",
+    certifications: ['Guide de haute montagne FFME', 'Premiers secours en milieu isolé'],
+    video_url: null,
   },
   {
     id: 2,
@@ -934,6 +937,9 @@ export const guides = [
     nb_avis: 64,
     langues: ['Français', 'Malgache'],
     specialites: ['Nature', 'Photographie naturaliste'],
+    bio: "Naturaliste passionné, je fais découvrir la biodiversité malgache à travers l'objectif d'un appareil photo.",
+    certifications: ['Guide naturaliste ANGAP', 'Premiers secours en milieu isolé'],
+    video_url: null,
   },
   {
     id: 3,
@@ -943,6 +949,9 @@ export const guides = [
     nb_avis: 42,
     langues: ['Français', 'Malgache', 'Italien'],
     specialites: ['Culture Betsileo', 'Villages locaux'],
+    bio: "Originaire de Fianarantsoa, je partage l'histoire et les traditions des Hautes Terres avec mes voyageurs.",
+    certifications: ['Guide culturel certifié Office du Tourisme'],
+    video_url: null,
   },
 ]
 

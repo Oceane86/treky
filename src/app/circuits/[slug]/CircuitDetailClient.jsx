@@ -9,6 +9,7 @@ import { adaptItinerary, adaptPrice } from '../../../utils/adaptItinerary'
 import { useCurrency } from '../../../context/CurrencyContext'
 import { useAuth } from '../../../context/AuthContext'
 import { useFavorites } from '../../../context/FavoritesContext'
+import { readJSON } from '../../../utils/storage'
 import BookingModal from '../../../components/BookingModal'
 import '../../../pages/CircuitDetail.css'
 
@@ -82,6 +83,12 @@ export default function CircuitDetailPage() {
 
   useEffect(() => {
     if (circuit) setSelectedDays(circuit.recommendedDays)
+  }, [circuit])
+
+  useEffect(() => {
+    if (!circuit) return
+    const stored = readJSON(`treky_circuit_reviews_${circuit.slug}`, [])
+    if (stored.length) setReviews((prev) => [...stored, ...prev])
   }, [circuit])
 
   if (!circuit) notFound()

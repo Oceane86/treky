@@ -89,6 +89,12 @@ export default function ReservationsPage() {
                 <Link href="/chat/1" className="btn-primary">
                   💬 Contacter mon guide
                 </Link>
+                <Link href="/compte/carnet" className="btn-secondary">
+                  📔 Mon carnet de trek
+                </Link>
+                <Link href="/compte/avis" className="btn-secondary">
+                  ⭐ Laisser un avis
+                </Link>
               </div>
             </div>
           </div>

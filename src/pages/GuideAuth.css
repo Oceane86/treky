@@ -1,0 +1,74 @@
+.guide-auth {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--english-holly);
+  padding: 24px;
+}
+
+.guide-auth__panel {
+  width: 100%;
+  max-width: 400px;
+  background: var(--velvety-cream);
+  border-radius: 20px;
+  padding: 40px 32px;
+}
+
+.guide-auth__brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+
+.guide-auth__brand img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.guide-auth__brand span {
+  font-family: var(--font-primary);
+  font-weight: 700;
+  color: var(--log-cabin);
+}
+
+.guide-auth__brand small {
+  display: block;
+  font-family: var(--font-secondary);
+  font-weight: 400;
+  font-size: 0.7rem;
+  color: #888;
+}
+
+.guide-auth__form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.guide-auth__form h1 {
+  font-family: var(--font-primary);
+  font-size: 1.5rem;
+  color: var(--log-cabin);
+}
+
+.guide-auth__hint {
+  font-size: 0.85rem;
+  color: #888;
+  margin-bottom: 8px;
+  line-height: 1.6;
+}
+
+.guide-auth__hint a {
+  color: var(--fern-frond);
+  font-weight: 600;
+}
+
+.guide-auth__demo {
+  text-align: center;
+  font-size: 0.75rem;
+  color: #aaa;
+  margin-top: 4px;
+}

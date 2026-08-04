@@ -85,6 +85,7 @@ export default function Navbar() {
               <li><Link href="/compte/reservations" className="navbar__link">Mes réservations</Link></li>
               <li><Link href="/compte/favoris" className="navbar__link">Mes favoris</Link></li>
               <li><Link href="/chat/1" className="navbar__link">Messages guide</Link></li>
+              <li><Link href="/compte/carnet" className="navbar__link">Carnet de trek</Link></li>
               <li>
                 <button className="navbar__link navbar__link--logout" onClick={handleLogout}>
                   Déconnexion
@@ -144,6 +145,11 @@ export default function Navbar() {
                   <Link href="/chat/1" className="navbar__dropdown-item">
                     <span className="navbar__dropdown-icon">💬</span>
                     Messages guide
+                  </Link>
+
+                  <Link href="/compte/carnet" className="navbar__dropdown-item">
+                    <span className="navbar__dropdown-icon">📔</span>
+                    Carnet de trek
                   </Link>
 
                   <div className="navbar__dropdown-sep" />

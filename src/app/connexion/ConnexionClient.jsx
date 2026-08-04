@@ -208,6 +208,10 @@ export default function ConnexionClient() {
             Pas encore inscrit ?{' '}
             <Link href="/inscription" className="auth__switch-link">S'inscrire</Link>
           </p>
+          <p className="auth__switch">
+            Vous êtes guide ?{' '}
+            <Link href="/guide/connexion" className="auth__switch-link">Connexion guide</Link>
+          </p>
         </div>
       </div>
     </div>

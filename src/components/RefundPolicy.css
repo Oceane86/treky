@@ -1,0 +1,62 @@
+.rfp {
+  background: #fff;
+  border: 1px solid #eeebe3;
+  border-radius: 14px;
+  padding: 20px 22px;
+  margin: 16px 0;
+}
+
+.rfp--compact {
+  padding: 14px 16px;
+  margin: 12px 0;
+}
+
+.rfp__title {
+  font-family: var(--font-primary);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--log-cabin);
+  margin-bottom: 12px;
+}
+
+.rfp__list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.rfp__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.rfp__taux {
+  flex-shrink: 0;
+  min-width: 52px;
+  text-align: center;
+  font-family: var(--font-primary);
+  font-weight: 800;
+  font-size: 0.85rem;
+  color: var(--fern-frond);
+  background: rgba(91,140,26,0.1);
+  border-radius: 20px;
+  padding: 3px 8px;
+}
+
+.rfp__item-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.rfp__seuil {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--log-cabin);
+}
+
+.rfp__desc {
+  font-size: 0.8rem;
+  color: #888;
+}

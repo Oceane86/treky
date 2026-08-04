@@ -35,6 +35,7 @@ export default function Footer() {
               <li><Link href="/confidentialite">Confidentialité</Link></li>
               <li><Link href="/cgv">CGV</Link></li>
               <li><Link href="/cookies">Cookies</Link></li>
+              <li><Link href="/guide/connexion">Espace guides</Link></li>
             </ul>
           </div>
 
