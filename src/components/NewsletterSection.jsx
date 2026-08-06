@@ -1,5 +1,6 @@
 'use client'
 import { useState } from 'react'
+import Image from 'next/image'
 import './NewsletterSection.css'
 
 export default function NewsletterSection() {
@@ -54,12 +55,20 @@ export default function NewsletterSection() {
         <div className="newsletter__photos" aria-hidden="true">
           <div className="newsletter__grid">
             <div className="newsletter__col newsletter__col--a">
-              <img className="newsletter__photo" src="/images/about1.jpg" alt="" />
-              <img className="newsletter__photo" src="/images/canyon-couleurs.jpg" alt="" />
+              <div className="newsletter__photo">
+                <Image src="/images/about1.jpg" alt="" fill sizes="25vw" style={{ objectFit: 'cover' }} />
+              </div>
+              <div className="newsletter__photo">
+                <Image src="/images/canyon-couleurs.jpg" alt="" fill sizes="25vw" style={{ objectFit: 'cover' }} />
+              </div>
             </div>
             <div className="newsletter__col newsletter__col--b">
-              <img className="newsletter__photo" src="/images/tsaratanana.jpg" alt="" />
-              <img className="newsletter__photo" src="/images/isalo.jpg" alt="" />
+              <div className="newsletter__photo">
+                <Image src="/images/tsaratanana.jpg" alt="" fill sizes="25vw" style={{ objectFit: 'cover' }} />
+              </div>
+              <div className="newsletter__photo">
+                <Image src="/images/isalo.jpg" alt="" fill sizes="25vw" style={{ objectFit: 'cover' }} />
+              </div>
             </div>
           </div>
 

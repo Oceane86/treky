@@ -144,6 +144,7 @@
 }
 
 .cd__gallery-thumb {
+  position: relative;
   overflow: hidden;
 }
 

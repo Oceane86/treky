@@ -1,5 +1,6 @@
 'use client'
 import { useState } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useAuth } from '../../context/AuthContext'
@@ -136,7 +137,7 @@ export default function ConnexionClient() {
       )}
 
       <div className="auth__panel auth__panel--image">
-        <img src="/images/auth-bg.jpg" alt="Madagascar" className="auth__bg" />
+        <Image src="/images/auth-bg.jpg" alt="Madagascar" fill sizes="(max-width: 900px) 100vw, 50vw" priority className="auth__bg" />
         <div className="auth__panel-overlay" />
         <Link href="/" className="auth__brand">
           <img src="/logo.png" alt="Treky" className="auth__brand-logo" />

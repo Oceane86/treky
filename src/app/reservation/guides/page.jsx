@@ -1,5 +1,6 @@
 'use client'
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { guides as baseGuides } from '../../../data/circuits'
 import { useBooking } from '../../../context/BookingContext'
@@ -49,7 +50,14 @@ export default function GuideSelectionPage() {
           {availableGuides.map((guide) => (
             <div key={guide.id} className="guide-sel__card">
               <div className="guide-sel__card-top">
-                <img src={guide.photo} alt={guide.nom} className="guide-sel__avatar" />
+                <Image
+                  src={guide.photo}
+                  alt={guide.nom}
+                  width={60}
+                  height={60}
+                  unoptimized={guide.photo?.startsWith('data:')}
+                  className="guide-sel__avatar"
+                />
                 <div className="guide-sel__info">
                   <h3 className="guide-sel__name">{guide.nom}</h3>
                   <div className="guide-sel__rating">

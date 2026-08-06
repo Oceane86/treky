@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import AboutTeamSection from '../../components/AboutTeamSection'
 
@@ -158,7 +159,9 @@ export default function AboutPage() {
           {/* Paysages + Culture */}
           <div className="about-page__values page-grid-2">
             <div className="about-page__value">
-              <img src="/images/about2.jpg" alt="Paysages Madagascar" />
+              <div className="about-page__value-img">
+                <Image src="/images/about2.jpg" alt="Paysages Madagascar" fill sizes="(max-width: 900px) 100vw, 50vw" style={{ objectFit: 'cover' }} />
+              </div>
               <div>
                 <h3>Des paysages uniques</h3>
                 <p>
@@ -169,7 +172,9 @@ export default function AboutPage() {
               </div>
             </div>
             <div className="about-page__value">
-              <img src="/images/about3.jpg" alt="Culture malgache" />
+              <div className="about-page__value-img">
+                <Image src="/images/about3.jpg" alt="Culture malgache" fill sizes="(max-width: 900px) 100vw, 50vw" style={{ objectFit: 'cover' }} />
+              </div>
               <div>
                 <h3>Une culture vivante</h3>
                 <p>

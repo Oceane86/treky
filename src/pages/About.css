@@ -37,11 +37,12 @@
   gap: 20px;
 }
 
-.about-page__value img {
+.about-page__value-img {
+  position: relative;
   width: 100%;
   height: 220px;
-  object-fit: cover;
   border-radius: 12px;
+  overflow: hidden;
 }
 
 .about-page__value h3 {

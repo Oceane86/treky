@@ -1,5 +1,6 @@
 'use client'
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useAuth } from '../../../context/AuthContext'
 import { readJSON } from '../../../utils/storage'
@@ -57,7 +58,9 @@ export default function ReservationsPage() {
 
           {reservations.map((r) => (
             <div key={r.id} className="resa-card">
-              <img src={r.image} alt={r.circuit} className="resa-card__img" />
+              <div className="resa-card__img">
+                <Image src={r.image} alt={r.circuit} fill sizes="(max-width: 700px) 100vw, 240px" style={{ objectFit: 'cover' }} />
+              </div>
               <div className="resa-card__body">
                 <div className="resa-card__top">
                   <div>

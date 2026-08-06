@@ -1,5 +1,6 @@
 'use client'
 import { useState } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { blogPosts } from '../../data/circuits'
 import '../../pages/Page.css'
@@ -60,7 +61,7 @@ export default function BlogPage() {
             {visible.map((post) => (
               <article key={post.id} className="blog-card">
                 <div className="blog-card__image-wrap">
-                  <img src={post.image} alt={post.title} />
+                  <Image src={post.image} alt={post.title} fill sizes="(max-width: 700px) 100vw, (max-width: 1100px) 50vw, 33vw" />
                   <span
                     className="blog-card__category"
                     style={{ background: CATEGORY_COLOR[post.category] || 'var(--fern-frond)' }}

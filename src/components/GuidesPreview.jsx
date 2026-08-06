@@ -1,5 +1,6 @@
 'use client'
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { guides as baseGuides } from '../data/circuits'
 import { applyGuideOverrides } from '../utils/guideProfile'
@@ -27,7 +28,14 @@ export default function GuidesPreview() {
           {guides.map((guide) => (
             <div key={guide.id} className="guide-preview-card">
               <div className="guide-preview-card__image-wrap">
-                <img src={guide.photo} alt={guide.nom} className="guide-preview-card__image" />
+                <Image
+                  src={guide.photo}
+                  alt={guide.nom}
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1100px) 50vw, 33vw"
+                  unoptimized={guide.photo?.startsWith('data:')}
+                  className="guide-preview-card__image"
+                />
               </div>
               <div className="guide-preview-card__body">
                 <div className="guide-preview-card__top">

@@ -1,5 +1,6 @@
 'use client'
 import { useState } from 'react'
+import Image from 'next/image'
 import './VideoSection.css'
 
 export default function VideoSection() {
@@ -21,9 +22,11 @@ export default function VideoSection() {
 
       {/* Image pleine largeur avec bouton play */}
       <div className="video-section__media">
-        <img
+        <Image
           src="/images/video-thumb.jpg"
           alt="Explorer Madagascar - Baobabs"
+          fill
+          sizes="100vw"
           className="video-section__bg"
         />
         <div className="video-section__overlay"></div>

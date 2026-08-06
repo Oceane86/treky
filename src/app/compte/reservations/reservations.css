@@ -31,10 +31,11 @@
 }
 
 .resa-card__img {
+  position: relative;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  display: block;
+  min-height: 220px;
+  overflow: hidden;
 }
 
 .resa-card__body {

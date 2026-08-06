@@ -1,5 +1,6 @@
 'use client'
 import { useState, useEffect, useRef } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { guides } from '../../../data/circuits'
@@ -74,7 +75,7 @@ export default function ChatPage() {
         <Link href={booking?.circuit ? `/circuits/${booking.circuit.slug}` : '/circuits'} className="chat__back">
           ←
         </Link>
-        <img src={guide.photo} alt={guide.nom} className="chat__header-avatar" />
+        <Image src={guide.photo} alt={guide.nom} width={44} height={44} className="chat__header-avatar" />
         <div className="chat__header-info">
           <h2 className="chat__header-name">{guide.nom}</h2>
           <span className="chat__header-status">
@@ -105,7 +106,7 @@ export default function ChatPage() {
           return (
             <div key={msg.id} className={`chat__bubble-wrap ${isUser ? 'chat__bubble-wrap--user' : ''}`}>
               {!isUser && (
-                <img src={guide.photo} alt={guide.nom} className="chat__bubble-avatar" />
+                <Image src={guide.photo} alt={guide.nom} width={32} height={32} className="chat__bubble-avatar" />
               )}
               <div className={`chat__bubble ${isUser ? 'chat__bubble--user' : 'chat__bubble--guide'}`}>
                 <p>{msg.text}</p>

@@ -1,5 +1,6 @@
 'use client'
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 import { readJSON } from '../utils/storage'
 
 function mergeTeamMember(member) {
@@ -28,7 +29,14 @@ export default function AboutTeamSection({ team }) {
     <div className="about-team__grid">
       {members.map((g) => (
         <div key={g.id} className="about-guide-card">
-          <img src={g.photo} alt={g.nom} className="about-guide-card__photo" />
+          <Image
+            src={g.photo}
+            alt={g.nom}
+            width={100}
+            height={100}
+            unoptimized={g.photo?.startsWith('data:')}
+            className="about-guide-card__photo"
+          />
           <div className="about-guide-card__body">
             <div className="about-guide-card__header">
               <div>

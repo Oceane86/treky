@@ -1,5 +1,6 @@
 'use client'
 import { useState } from 'react'
+import Image from 'next/image'
 import './Testimonials.css'
 
 const testimonials = [
@@ -48,9 +49,11 @@ export default function Testimonials() {
             <div className="testimonials__card" key={active}>
               <span className="testimonials__quote-icon">"</span>
               <div className="testimonials__card-header">
-                <img
+                <Image
                   src={testimonials[active].avatar}
                   alt={testimonials[active].name}
+                  width={52}
+                  height={52}
                   className="testimonials__card-avatar"
                 />
                 <div className="testimonials__card-info">
@@ -73,7 +76,7 @@ export default function Testimonials() {
               className={`testimonials__avatar-item ${active === i ? 'active' : ''}`}
               onClick={() => setActive(i)}
             >
-              <img src={t.avatar} alt={t.name} className="testimonials__avatar-img" />
+              <Image src={t.avatar} alt={t.name} width={44} height={44} className="testimonials__avatar-img" />
               <div className="testimonials__avatar-info">
                 <span className="testimonials__avatar-name">{t.name}</span>
                 <span className="testimonials__avatar-role">{t.role}</span>

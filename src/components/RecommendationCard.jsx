@@ -1,5 +1,6 @@
 'use client'
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { getGuideById } from '../data/circuits'
 import { THEMES, getMatchedThemes } from '../utils/matching'
@@ -36,7 +37,15 @@ export default function RecommendationCard({ circuit, score, seasonStatus, ideal
 
   return (
     <div className="resultats__card">
-      <img src={circuit.image} alt={circuit.name} className="resultats__img" />
+      <div className="resultats__img">
+        <Image
+          src={circuit.image}
+          alt={circuit.name}
+          fill
+          sizes="(max-width: 700px) 100vw, (max-width: 1100px) 50vw, 33vw"
+          style={{ objectFit: 'cover' }}
+        />
+      </div>
       <div className="resultats__body">
         <div className="resultats__top">
           <div>
@@ -84,7 +93,14 @@ export default function RecommendationCard({ circuit, score, seasonStatus, ideal
             <div className="resultats__guides-list">
               {guides.map((g) => (
                 <div key={g.id} className="resultats__guide">
-                  <img src={g.photo} alt={g.nom} />
+                  <Image
+                    src={g.photo}
+                    alt={g.nom}
+                    width={28}
+                    height={28}
+                    unoptimized={g.photo?.startsWith('data:')}
+                    style={{ objectFit: 'cover' }}
+                  />
                   <div>
                     <span className="resultats__guide-name">{g.nom}</span>
                     <span className="resultats__guide-meta">★ {g.note} · {g.langues.join(', ')}</span>

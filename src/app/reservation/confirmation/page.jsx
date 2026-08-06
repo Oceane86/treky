@@ -1,5 +1,6 @@
 'use client'
 import { useEffect, useRef } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useBooking } from '../../../context/BookingContext'
@@ -72,9 +73,12 @@ export default function BookingConfirmationPage() {
 
           {booking.guide && (
             <div className="booking-confirm__guide">
-              <img
+              <Image
                 src={booking.guide.photo}
                 alt={booking.guide.nom}
+                width={52}
+                height={52}
+                unoptimized={booking.guide.photo?.startsWith('data:')}
                 className="booking-confirm__guide-avatar"
               />
               <div className="booking-confirm__guide-info">

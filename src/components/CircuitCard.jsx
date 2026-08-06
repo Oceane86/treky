@@ -1,5 +1,6 @@
 'use client'
 import { useState } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useCurrency } from '../context/CurrencyContext'
@@ -34,7 +35,13 @@ export default function CircuitCard({ circuit, matchBadge = false }) {
         <div className="circuit-card__image-wrap">
           <span className={`circuit-card__badge circuit-card__badge--${circuit.badge.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/\s+/g,'-')}`}>{circuit.badge}</span>
           {matchBadge && <span className="circuit-card__match-badge">✓ Pour vous</span>}
-          <img src={circuit.image} alt={circuit.name} className="circuit-card__image" />
+          <Image
+            src={circuit.image}
+            alt={circuit.name}
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1100px) 50vw, 33vw"
+            className="circuit-card__image"
+          />
           <button
             className={`circuit-card__fav${fav ? ' active' : ''}`}
             onClick={(e) => {

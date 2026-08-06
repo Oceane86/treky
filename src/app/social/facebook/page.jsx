@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import { circuits } from '../../../data/circuits'
 import '../../../pages/Social.css'
@@ -38,7 +39,7 @@ export default function FacebookPreviewPage() {
       </header>
 
       <div className="fb-cover">
-        <img src="/images/hero-bg.jpg" alt="Couverture Treky" className="fb-cover__img" />
+        <Image src="/images/hero-bg.jpg" alt="Couverture Treky" fill sizes="(max-width: 940px) 100vw, 940px" priority style={{ objectFit: 'cover' }} />
       </div>
 
       <div className="fb-header">
@@ -102,7 +103,9 @@ export default function FacebookPreviewPage() {
                 </div>
               </div>
               <p className="fb-post__text">{c.teaser}</p>
-              <img src={c.image} alt={c.name} className="fb-post__img" />
+              <div className="fb-post__img-wrap">
+                <Image src={c.image} alt={c.name} fill sizes="(max-width: 700px) 100vw, 700px" style={{ objectFit: 'cover' }} />
+              </div>
               <div className="fb-post__stats">
                 <span>👍❤️ {120 + i * 43}</span>
                 <span>{8 + i * 5} commentaires · {3 + i} partages</span>

@@ -1,4 +1,5 @@
 'use client'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useCurrency } from '../context/CurrencyContext'
 import './OffreMoment.css'
@@ -19,9 +20,12 @@ export default function OffreMoment() {
         <div className="offre__card" data-reveal>
           <Link href={`/circuits/${SLUG}`} className="offre__image-wrap offre__image-link">
             <span className="badge badge-offer offre__badge">Offre spéciale</span>
-            <img
+            <Image
               src="/images/sainte_marie.jpg"
               alt="Sainte-Marie : Pirates & Baleines"
+              fill
+              sizes="(max-width: 900px) 100vw, 50vw"
+              style={{ objectFit: 'cover' }}
               className="offre__image"
             />
           </Link>

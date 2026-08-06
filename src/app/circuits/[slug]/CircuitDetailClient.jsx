@@ -1,5 +1,6 @@
 'use client'
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useParams, useRouter } from 'next/navigation'
 import { notFound } from 'next/navigation'
@@ -195,13 +196,13 @@ export default function CircuitDetailPage() {
       {/* ── SECTION 2 · GALERIE ── */}
       <div className="container cd__gallery">
         <div className="cd__gallery-main" onClick={() => openLightbox(0)} style={{ cursor: 'pointer' }}>
-          <img src={photos[0]} alt={circuit.name} className="cd__gallery-big" />
+          <Image src={photos[0]} alt={circuit.name} fill sizes="(max-width: 900px) 100vw, 60vw" priority className="cd__gallery-big" />
           <button className="cd__gallery-all-btn" onClick={(e) => { e.stopPropagation(); openLightbox(0) }}>📷 Voir tout</button>
         </div>
         <div className="cd__gallery-grid">
           {photos.slice(1, 5).map((src, i) => (
             <div key={i} className="cd__gallery-thumb" onClick={() => openLightbox(i + 1)} style={{ cursor: 'pointer' }}>
-              <img src={src} alt={`${circuit.name} photo ${i + 2}`} />
+              <Image src={src} alt={`${circuit.name} photo ${i + 2}`} fill sizes="(max-width: 900px) 50vw, 20vw" />
             </div>
           ))}
         </div>
@@ -439,7 +440,7 @@ export default function CircuitDetailPage() {
                   <div className="cd__review-header">
                     <div className="cd__review-author">
                       {r.avatar
-                        ? <img src={r.avatar} alt={r.name} className="cd__review-avatar" />
+                        ? <Image src={r.avatar} alt={r.name} width={40} height={40} className="cd__review-avatar" />
                         : <div className="cd__review-avatar-placeholder">{r.name[0]}</div>
                       }
                       <div>

@@ -1,5 +1,6 @@
 'use client'
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '../../../context/AuthContext'
 import { guides as guidesData } from '../../../data/circuits'
@@ -145,7 +146,14 @@ export default function GuideDashboardPage() {
           {tab === 'profil' && (
             <form className="guide-dash__profile-form" onSubmit={saveProfile}>
               <div className="guide-dash__profile-top">
-                <img src={profile.photo} alt={profile.nom} className="guide-dash__avatar" />
+                <Image
+                  src={profile.photo}
+                  alt={profile.nom}
+                  width={72}
+                  height={72}
+                  unoptimized={profile.photo?.startsWith('data:')}
+                  className="guide-dash__avatar"
+                />
                 <label className="guide-dash__photo-btn">
                   Changer la photo
                   <input type="file" accept="image/*" onChange={handlePhoto} hidden />

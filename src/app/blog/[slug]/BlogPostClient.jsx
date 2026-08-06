@@ -1,6 +1,7 @@
 'use client'
 import { useParams } from 'next/navigation'
 import { notFound } from 'next/navigation'
+import Image from 'next/image'
 import Link from 'next/link'
 import { blogPosts } from '../../../data/circuits'
 import '../../../pages/Page.css'
@@ -28,7 +29,9 @@ export default function BlogPostPage() {
 
       <article className="page-content">
         <div className="container blog-post__content">
-          <img src={post.image} alt={post.title} className="blog-post__cover" />
+          <div className="blog-post__cover-wrap">
+            <Image src={post.image} alt={post.title} fill sizes="(max-width: 800px) 100vw, 800px" priority style={{ objectFit: 'cover' }} />
+          </div>
           <p>{post.excerpt}</p>
           <p>
             Cet article sera bientôt disponible en intégralité. En attendant,

@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import Link from 'next/link'
 import './Hero.css'
 
@@ -5,9 +6,12 @@ export default function Hero() {
   return (
     <section className="hero">
       <div className="hero__bg">
-        <img
+        <Image
           src="/images/hero-bg.jpg"
           alt="Paysage de Madagascar"
+          fill
+          sizes="100vw"
+          priority
           className="hero__bg-img"
         />
         <div className="hero__overlay"></div>
