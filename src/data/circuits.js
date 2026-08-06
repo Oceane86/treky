@@ -278,13 +278,15 @@
     saison: 'seche',
     teaser: "Gorges sauvages, forêt fossile et bivouacs au cœur du massif le plus isolé de Madagascar.",
     description:
-      "La Grande Traversée du Makay est une expédition dans l'un des derniers territoires vierges de Madagascar. Canyons labyrinthiques, forêts fossiles et rivières encaissées composent un itinéraire réservé aux aventuriers aguerris, loin de toute infrastructure.",
+      "La Grande Traversée du Makay est une expédition dans l'un des derniers territoires vierges de Madagascar. Canyons labyrinthiques, forêts fossiles et rivières encaissées composent un itinéraire réservé aux aventuriers aguerris, loin de toute infrastructure. Le massif n'est desservi par aucune route : il se mérite, et c'est aussi ce qui en fait l'un des derniers sanctuaires vraiment sauvages de Madagascar.",
     highlights: ['Canyons labyrinthiques', 'Forêt fossile', 'Bivouac rivière', 'Territoire sauvage préservé'],
     included: ['Équipement bivouac complet', 'Pension complète terrain', 'Guide expédition certifié', 'Porteurs et mules'],
     non_inclus: ['Vols vers Tuléar', 'Assurance expédition obligatoire', 'Équipement personnel technique'],
     infos_pratiques: [
+      'Accès uniquement par piste en 4x4 depuis Tuléar (1 à 2 jours de route selon météo), aucune route goudronnée ne dessert le massif',
+      'Aucun réseau téléphonique ni évacuation rapide possible une fois dans le massif : bonne condition physique et autonomie mentale requises',
       'Expérience de bivouac en autonomie requise',
-      'Saison sèche strictement obligatoire (juin à septembre)',
+      'Saison sèche strictement obligatoire (juin à septembre) : rivières en crue et pistes impraticables le reste de l\'année',
       'Groupe limité à 8 personnes maximum',
     ],
     coordonnees_gps: { lat: -22.0, lng: 44.5 },
@@ -302,10 +304,10 @@
     steps: [
       {
         title: 'Tuléar · Départ',
-        description: 'Briefing expédition, vérification du matériel et route vers le Makay.',
+        description: "Briefing expédition, vérification du matériel, puis départ en 4x4 vers le massif : 1 à 2 jours de piste selon la météo, aucune route goudronnée ne s'en approchant.",
         lodge: "Hôtel de la Plage Tuléar",
         typeHebergement: 'Hôtel',
-        activities: ['Briefing expédition et protocole sécurité', 'Vérification matériel bivouac', 'Présentation équipe porteurs et mules'],
+        activities: ['Briefing expédition et protocole sécurité', 'Vérification matériel bivouac', 'Présentation équipe porteurs et mules', 'Transfert 4x4 vers le point d\'entrée du massif'],
       },
       {
         title: 'Entrée canyon Makay J2-3',
