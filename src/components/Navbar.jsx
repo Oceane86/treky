@@ -75,10 +75,10 @@ export default function Navbar() {
           ))}
           {/* Mobile-only auth links */}
           {menuOpen && !isLoggedIn && (
-            <>
-              <li><Link href="/inscription" className="navbar__link">S'inscrire</Link></li>
-              <li><Link href="/connexion" className="navbar__link">Connexion</Link></li>
-            </>
+            <li className="navbar__mobile-auth">
+              <Link href="/inscription" className="navbar__link navbar__link--register">S'inscrire</Link>
+              <Link href="/connexion" className="navbar__link navbar__link--cta">Connexion</Link>
+            </li>
           )}
           {menuOpen && isLoggedIn && (
             <>
