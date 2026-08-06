@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { circuits } from '../../data/circuits'
-import { THEMES, scoreCircuit, matchCircuits } from '../../utils/matching'
+import { THEMES, scoreCircuit, matchCircuitsByTheme } from '../../utils/matching'
 import { readJSON, removeJSON } from '../../utils/storage'
 import CircuitCard from '../../components/CircuitCard'
 import RecommendationCard from '../../components/RecommendationCard'
@@ -35,8 +35,9 @@ export default function CircuitsPage() {
 
   const selectedThemeLabels = THEMES.filter((t) => wishes.themes?.includes(t.id)).map((t) => t.label)
 
-  // Vos recommandations : mêmes 3 circuits, dans le même ordre, que la page /composer/resultats.
-  const recommended = matchCircuits(circuits, wishes, 3)
+  // Vos recommandations : mêmes circuits, dans le même ordre, que la page /composer/resultats.
+  // Chaque thématique choisie est garantie d'avoir au moins un représentant.
+  const recommended = matchCircuitsByTheme(circuits, wishes, 3)
 
   // Autres thématiques : la meilleure proposition pour chaque thématique non choisie,
   // sans forcer la durée souhaitée (des circuits plus courts ou plus longs peuvent apparaître).

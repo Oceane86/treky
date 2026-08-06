@@ -124,3 +124,33 @@ export function matchCircuits(circuits, wishes, limit = 3) {
     .sort((a, b) => b.score - a.score)
     .slice(0, limit)
 }
+
+// Comme matchCircuits, mais garantit qu'aucune thématique sélectionnée ne soit
+// absente du résultat : sans ça, un circuit moins bien noté que le meilleur match
+// d'une autre thématique pouvait disparaître entièrement de la page (il n'apparaît
+// ni ici ni dans les "autres thématiques", qui ne couvre que les thématiques non
+// choisies).
+export function matchCircuitsByTheme(circuits, wishes, limit = 3) {
+  const scored = circuits.map((circuit) => ({ circuit, ...scoreCircuit(circuit, wishes) }))
+  const usedIds = new Set()
+  const result = []
+
+  for (const themeId of wishes.themes ?? []) {
+    const best = scored
+      .filter((r) => !usedIds.has(r.circuit.id) && (r.circuit.themes ?? []).includes(themeId))
+      .sort((a, b) => b.score - a.score)[0]
+    if (!best) continue
+    usedIds.add(best.circuit.id)
+    result.push(best)
+  }
+
+  const bestOverall = [...scored].sort((a, b) => b.score - a.score)
+  for (const r of bestOverall) {
+    if (result.length >= limit) break
+    if (usedIds.has(r.circuit.id)) continue
+    usedIds.add(r.circuit.id)
+    result.push(r)
+  }
+
+  return result.sort((a, b) => b.score - a.score)
+}

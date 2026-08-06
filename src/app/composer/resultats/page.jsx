@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { circuits } from '../../../data/circuits'
-import { THEMES, HEBERGEMENT_OPTIONS, matchCircuits } from '../../../utils/matching'
+import { THEMES, HEBERGEMENT_OPTIONS, matchCircuitsByTheme } from '../../../utils/matching'
 import { readJSON, removeJSON } from '../../../utils/storage'
 import RecommendationCard from '../../../components/RecommendationCard'
 import '../../../pages/Page.css'
@@ -30,7 +30,8 @@ export default function ComposerResultatsPage() {
 
   const selectedThemes = THEMES.filter((t) => wishes.themes?.includes(t.id))
   const hebergementLabels = HEBERGEMENT_OPTIONS.filter((h) => wishes.hebergement?.includes(h.id)).map((h) => h.label)
-  const matches = matchCircuits(circuits, wishes, 3)
+  // Chaque thématique choisie est garantie d'avoir au moins un représentant.
+  const matches = matchCircuitsByTheme(circuits, wishes, 3)
 
   return (
     <div className="page composer">
