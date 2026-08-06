@@ -22,7 +22,7 @@ export default function Navbar() {
   const pathname = usePathname()
   const router = useRouter()
   const { currency, toggle } = useCurrency()
-  const { user, isLoggedIn, logout } = useAuth()
+  const { user, isLoggedIn, isGuide, logout } = useAuth()
   const { favorites } = useFavorites()
   const { booking } = useBooking()
   const dropdownRef = useRef(null)
@@ -86,7 +86,17 @@ export default function Navbar() {
               <Link href="/connexion" className="navbar__link navbar__link--cta">Connexion</Link>
             </li>
           )}
-          {menuOpen && isLoggedIn && (
+          {menuOpen && isLoggedIn && isGuide && (
+            <>
+              <li><Link href="/guide/tableau-de-bord" className="navbar__link">Espace guides</Link></li>
+              <li>
+                <button className="navbar__link navbar__link--logout" onClick={handleLogout}>
+                  Déconnexion
+                </button>
+              </li>
+            </>
+          )}
+          {menuOpen && isLoggedIn && !isGuide && (
             <>
               <li><Link href="/compte/reservations" className="navbar__link">Mes réservations</Link></li>
               <li><Link href="/compte/favoris" className="navbar__link">Mes favoris</Link></li>
@@ -135,28 +145,37 @@ export default function Navbar() {
                     <span className="navbar__dropdown-email">{user?.email}</span>
                   </div>
 
-                  <Link href="/compte/reservations" className="navbar__dropdown-item">
-                    <span className="navbar__dropdown-icon">📋</span>
-                    Mes réservations
-                  </Link>
+                  {isGuide ? (
+                    <Link href="/guide/tableau-de-bord" className="navbar__dropdown-item">
+                      <span className="navbar__dropdown-icon">🧭</span>
+                      Espace guides
+                    </Link>
+                  ) : (
+                    <>
+                      <Link href="/compte/reservations" className="navbar__dropdown-item">
+                        <span className="navbar__dropdown-icon">📋</span>
+                        Mes réservations
+                      </Link>
 
-                  <Link href="/compte/favoris" className="navbar__dropdown-item">
-                    <span className="navbar__dropdown-icon">♡</span>
-                    Mes favoris
-                    {favorites.length > 0 && (
-                      <span className="navbar__dropdown-badge">{favorites.length}</span>
-                    )}
-                  </Link>
+                      <Link href="/compte/favoris" className="navbar__dropdown-item">
+                        <span className="navbar__dropdown-icon">♡</span>
+                        Mes favoris
+                        {favorites.length > 0 && (
+                          <span className="navbar__dropdown-badge">{favorites.length}</span>
+                        )}
+                      </Link>
 
-                  <Link href={chatHref} className="navbar__dropdown-item">
-                    <span className="navbar__dropdown-icon">💬</span>
-                    Messages guide
-                  </Link>
+                      <Link href={chatHref} className="navbar__dropdown-item">
+                        <span className="navbar__dropdown-icon">💬</span>
+                        Messages guide
+                      </Link>
 
-                  <Link href="/compte/carnet" className="navbar__dropdown-item">
-                    <span className="navbar__dropdown-icon">📔</span>
-                    Carnet de trek
-                  </Link>
+                      <Link href="/compte/carnet" className="navbar__dropdown-item">
+                        <span className="navbar__dropdown-icon">📔</span>
+                        Carnet de trek
+                      </Link>
+                    </>
+                  )}
 
                   <div className="navbar__dropdown-sep" />
 
