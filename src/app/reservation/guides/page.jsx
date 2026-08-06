@@ -1,8 +1,9 @@
 'use client'
-import { useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { guides } from '../../../data/circuits'
+import { guides as baseGuides } from '../../../data/circuits'
 import { useBooking } from '../../../context/BookingContext'
+import { applyGuideOverrides } from '../../../utils/guideProfile'
 import '../../../pages/GuideSelection.css'
 
 function formatDate(dateStr) {
@@ -12,10 +13,15 @@ function formatDate(dateStr) {
 export default function GuideSelectionPage() {
   const { booking, setBooking } = useBooking()
   const router = useRouter()
+  const [guides, setGuides] = useState(baseGuides)
 
   useEffect(() => {
     if (!booking) router.replace('/circuits')
   }, [booking, router])
+
+  useEffect(() => {
+    setGuides(applyGuideOverrides(baseGuides))
+  }, [])
 
   if (!booking) return null
 

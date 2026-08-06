@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import AboutTeamSection from '../../components/AboutTeamSection'
 
 export const metadata = {
   title: 'À propos de Treky',
@@ -200,35 +201,7 @@ export default function AboutPage() {
             <p className="about-section-subtitle">
               Certifiés, passionnés et issus des régions qu'ils vous feront découvrir.
             </p>
-            <div className="about-team__grid">
-              {TEAM.map((g) => (
-                <div key={g.id} className="about-guide-card">
-                  <img src={g.photo} alt={g.nom} className="about-guide-card__photo" />
-                  <div className="about-guide-card__body">
-                    <div className="about-guide-card__header">
-                      <div>
-                        <h3 className="about-guide-card__name">{g.nom}</h3>
-                        <p className="about-guide-card__role">{g.role}</p>
-                        {g.localisation && (
-                          <span className="about-guide-card__lieu">📍 {g.localisation}</span>
-                        )}
-                      </div>
-                      <div className="about-guide-card__note">
-                        <span className="about-guide-card__star">★</span>
-                        <strong>{g.note}</strong>
-                        <span>({g.avis})</span>
-                      </div>
-                    </div>
-                    <p className="about-guide-card__bio">{g.bio}</p>
-                    <div className="about-guide-card__langues">
-                      {g.langues.map((l) => (
-                        <span key={l} className="about-guide-card__langue">{l}</span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
+            <AboutTeamSection team={TEAM} />
           </div>
 
           {/* Associations partenaires */}

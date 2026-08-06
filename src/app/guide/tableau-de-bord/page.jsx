@@ -47,6 +47,7 @@ export default function GuideDashboardPage() {
   const [saved, setSaved] = useState(false)
   const [availability, setAvailability] = useState({})
   const [reviews, setReviews] = useState([])
+  const [bookings, setBookings] = useState(DEMO_BOOKINGS)
   const [monthOffset, setMonthOffset] = useState(0)
 
   useEffect(() => {
@@ -63,6 +64,18 @@ export default function GuideDashboardPage() {
     )
     setAvailability(readJSON(`treky_guide_availability_${user.guideId}`, {}))
     setReviews(readJSON('treky_reviews', []).filter((r) => r.guide_id === user.guideId))
+
+    const realBookings = readJSON('treky_reservations', [])
+      .filter((r) => r.guideId === user.guideId)
+      .map((r) => ({
+        id: r.id,
+        circuit: r.circuit,
+        traveler: r.traveler ?? 'Voyageur',
+        dates: r.dateDepart,
+        statut: r.statut,
+        prix: r.prix,
+      }))
+    setBookings([...realBookings, ...DEMO_BOOKINGS])
   }, [isGuide, user])
 
   useEffect(() => {
@@ -252,7 +265,7 @@ export default function GuideDashboardPage() {
 
           {tab === 'reservations' && (
             <div className="guide-dash__bookings">
-              {DEMO_BOOKINGS.map((b) => (
+              {bookings.map((b) => (
                 <div key={b.id} className="guide-dash__booking-card">
                   <div>
                     <p className="guide-dash__booking-circuit">{b.circuit}</p>

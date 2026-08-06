@@ -1,6 +1,8 @@
 'use client'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useAuth } from '../../../context/AuthContext'
+import { readJSON } from '../../../utils/storage'
 import '../../../pages/Page.css'
 import './reservations.css'
 
@@ -11,7 +13,8 @@ const DEMO_RESERVATION = {
   image: '/images/isalo.jpg',
   dateDepart: '15 juillet 2026',
   duree: '4 jours',
-  guides: 'Rakoto Jean',
+  guideNom: 'Rakoto Jean',
+  guideId: 1,
   statut: 'Confirmée',
   prix: '2 000 000 Ar',
   paiement: 'MVola · Acompte versé',
@@ -19,6 +22,12 @@ const DEMO_RESERVATION = {
 
 export default function ReservationsPage() {
   const { isLoggedIn, user } = useAuth()
+  const [reservations, setReservations] = useState([DEMO_RESERVATION])
+
+  useEffect(() => {
+    const stored = readJSON('treky_reservations', [])
+    setReservations([...stored, DEMO_RESERVATION])
+  }, [])
 
   if (!isLoggedIn) {
     return (
@@ -46,61 +55,63 @@ export default function ReservationsPage() {
       <section className="page-content">
         <div className="container">
 
-          <div className="resa-card">
-            <img src={DEMO_RESERVATION.image} alt={DEMO_RESERVATION.circuit} className="resa-card__img" />
-            <div className="resa-card__body">
-              <div className="resa-card__top">
-                <div>
-                  <h2 className="resa-card__title">{DEMO_RESERVATION.circuit}</h2>
-                  <p className="resa-card__id">Réf. {DEMO_RESERVATION.id}</p>
+          {reservations.map((r) => (
+            <div key={r.id} className="resa-card">
+              <img src={r.image} alt={r.circuit} className="resa-card__img" />
+              <div className="resa-card__body">
+                <div className="resa-card__top">
+                  <div>
+                    <h2 className="resa-card__title">{r.circuit}</h2>
+                    <p className="resa-card__id">Réf. {r.id}</p>
+                  </div>
+                  <span className="resa-card__statut resa-card__statut--confirmed">
+                    ✓ {r.statut}
+                  </span>
                 </div>
-                <span className={`resa-card__statut resa-card__statut--confirmed`}>
-                  ✓ {DEMO_RESERVATION.statut}
-                </span>
-              </div>
 
-              <div className="resa-card__details">
-                <div className="resa-card__detail">
-                  <span className="resa-card__detail-label">Départ</span>
-                  <span className="resa-card__detail-val">{DEMO_RESERVATION.dateDepart}</span>
+                <div className="resa-card__details">
+                  <div className="resa-card__detail">
+                    <span className="resa-card__detail-label">Départ</span>
+                    <span className="resa-card__detail-val">{r.dateDepart}</span>
+                  </div>
+                  <div className="resa-card__detail">
+                    <span className="resa-card__detail-label">Durée</span>
+                    <span className="resa-card__detail-val">{r.duree}</span>
+                  </div>
+                  <div className="resa-card__detail">
+                    <span className="resa-card__detail-label">Guide</span>
+                    <span className="resa-card__detail-val">{r.guideNom}</span>
+                  </div>
+                  <div className="resa-card__detail">
+                    <span className="resa-card__detail-label">Paiement</span>
+                    <span className="resa-card__detail-val">{r.paiement}</span>
+                  </div>
+                  <div className="resa-card__detail">
+                    <span className="resa-card__detail-label">Total</span>
+                    <span className="resa-card__detail-val resa-card__detail-val--price">{r.prix}</span>
+                  </div>
                 </div>
-                <div className="resa-card__detail">
-                  <span className="resa-card__detail-label">Durée</span>
-                  <span className="resa-card__detail-val">{DEMO_RESERVATION.duree}</span>
-                </div>
-                <div className="resa-card__detail">
-                  <span className="resa-card__detail-label">Guide</span>
-                  <span className="resa-card__detail-val">{DEMO_RESERVATION.guides}</span>
-                </div>
-                <div className="resa-card__detail">
-                  <span className="resa-card__detail-label">Paiement</span>
-                  <span className="resa-card__detail-val">{DEMO_RESERVATION.paiement}</span>
-                </div>
-                <div className="resa-card__detail">
-                  <span className="resa-card__detail-label">Total</span>
-                  <span className="resa-card__detail-val resa-card__detail-val--price">{DEMO_RESERVATION.prix}</span>
-                </div>
-              </div>
 
-              <div className="resa-card__actions">
-                <Link href={`/circuits/${DEMO_RESERVATION.slug}`} className="btn-secondary">
-                  Voir le circuit
-                </Link>
-                <Link href="/chat/1" className="btn-primary">
-                  💬 Contacter mon guide
-                </Link>
-                <Link href="/compte/carnet" className="btn-secondary">
-                  📔 Mon carnet de trek
-                </Link>
-                <Link href="/compte/avis" className="btn-secondary">
-                  ⭐ Laisser un avis
-                </Link>
+                <div className="resa-card__actions">
+                  <Link href={`/circuits/${r.slug}`} className="btn-secondary">
+                    Voir le circuit
+                  </Link>
+                  <Link href={`/chat/${r.guideId}`} className="btn-primary">
+                    💬 Contacter mon guide
+                  </Link>
+                  <Link href="/compte/carnet" className="btn-secondary">
+                    📔 Mon carnet de trek
+                  </Link>
+                  <Link href="/compte/avis" className="btn-secondary">
+                    ⭐ Laisser un avis
+                  </Link>
+                </div>
               </div>
             </div>
-          </div>
+          ))}
 
           <div className="resa-empty-hint">
-            <p>Vous n'avez pas d'autre réservation en cours.</p>
+            <p>Envie d'une nouvelle aventure ?</p>
             <Link href="/circuits" className="btn-secondary">Réserver un nouveau trek</Link>
           </div>
         </div>

@@ -1,8 +1,10 @@
 'use client'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { getGuideById } from '../data/circuits'
 import { THEMES, getMatchedThemes } from '../utils/matching'
 import { MONTHS, getClosure } from '../utils/climate'
+import { applyGuideOverrides } from '../utils/guideProfile'
 import './RecommendationCard.css'
 
 const SEASON_COPY = {
@@ -20,7 +22,14 @@ function formatMonthsFr(monthIndexes) {
 
 export default function RecommendationCard({ circuit, score, seasonStatus, idealMonths, themeIds, maxScore = 150 }) {
   const pct = Math.max(8, Math.round((score / maxScore) * 100))
-  const guides = (circuit.guideIds ?? []).map(getGuideById).filter(Boolean).slice(0, 2)
+  const baseGuides = (circuit.guideIds ?? []).map(getGuideById).filter(Boolean).slice(0, 2)
+  const [guides, setGuides] = useState(baseGuides)
+
+  useEffect(() => {
+    setGuides(applyGuideOverrides(baseGuides))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [circuit.id])
+
   const season = seasonStatus ? SEASON_COPY[seasonStatus] : null
   const closure = getClosure(circuit)
   const matchedThemes = getMatchedThemes(circuit, themeIds)

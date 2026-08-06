@@ -1,9 +1,17 @@
 'use client'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { guides } from '../data/circuits'
+import { guides as baseGuides } from '../data/circuits'
+import { applyGuideOverrides } from '../utils/guideProfile'
 import './GuidesPreview.css'
 
 export default function GuidesPreview() {
+  const [guides, setGuides] = useState(baseGuides)
+
+  useEffect(() => {
+    setGuides(applyGuideOverrides(baseGuides))
+  }, [])
+
   return (
     <section className="guides-preview section-padding" id="guides">
       <div className="container">

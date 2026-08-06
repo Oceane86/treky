@@ -1,8 +1,11 @@
 'use client'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useBooking } from '../../../context/BookingContext'
+import { useAuth } from '../../../context/AuthContext'
+import { circuits } from '../../../data/circuits'
+import { readJSON, writeJSON } from '../../../utils/storage'
 import '../../../pages/BookingConfirmation.css'
 
 function formatDate(dateStr) {
@@ -19,11 +22,39 @@ function formatAr(amount) {
 
 export default function BookingConfirmationPage() {
   const { booking } = useBooking()
+  const { user } = useAuth()
   const router = useRouter()
+  const saved = useRef(false)
 
   useEffect(() => {
     if (!booking) router.replace('/circuits')
   }, [booking, router])
+
+  // Enregistre la reservation dans "Mes reservations" (une seule fois par confirmation).
+  useEffect(() => {
+    if (!booking || saved.current) return
+    saved.current = true
+    const fullCircuit = circuits.find((c) => c.slug === booking.circuit.slug)
+    const days = Math.max(1, Math.round((new Date(booking.checkout) - new Date(booking.checkin)) / 86_400_000))
+    const record = {
+      id: `TRK-${new Date().getFullYear()}-${String(Date.now()).slice(-4)}`,
+      circuit: booking.circuit.name,
+      slug: booking.circuit.slug,
+      image: fullCircuit?.image ?? '/images/hero-bg.jpg',
+      dateDepart: formatDate(booking.checkin),
+      duree: `${days} jour${days > 1 ? 's' : ''}`,
+      guideNom: booking.guide?.nom ?? 'À définir',
+      guideId: booking.guide?.id ?? 1,
+      traveler: user?.name ?? 'Voyageur',
+      statut: 'Confirmée',
+      prix: formatAr(booking.prix_total),
+      paiement: `${booking.payment_method === 'carte' ? 'Carte bancaire' : 'MVola'} · ${
+        booking.payment_plan === 'fractionne' ? 'Acompte versé' : 'Payé'
+      }`,
+    }
+    const existing = readJSON('treky_reservations', [])
+    writeJSON('treky_reservations', [record, ...existing])
+  }, [booking])
 
   if (!booking) return null
 

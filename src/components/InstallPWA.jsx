@@ -1,6 +1,9 @@
 'use client'
 import { useState, useEffect } from 'react'
+import { readJSON, writeJSON } from '../utils/storage'
 import './InstallPWA.css'
+
+const DISMISS_KEY = 'treky_pwa_dismissed'
 
 export default function InstallPWA() {
   const [prompt, setPrompt] = useState(null)
@@ -12,6 +15,8 @@ export default function InstallPWA() {
       setInstalled(true)
       return
     }
+
+    if (readJSON(DISMISS_KEY, false)) return
 
     const handler = (e) => {
       e.preventDefault()
@@ -55,7 +60,13 @@ export default function InstallPWA() {
         <button className="install-pwa__btn install-pwa__btn--install" onClick={handleInstall}>
           Installer
         </button>
-        <button className="install-pwa__btn install-pwa__btn--dismiss" onClick={() => setVisible(false)}>
+        <button
+          className="install-pwa__btn install-pwa__btn--dismiss"
+          onClick={() => {
+            setVisible(false)
+            writeJSON(DISMISS_KEY, true)
+          }}
+        >
           ✕
         </button>
       </div>
