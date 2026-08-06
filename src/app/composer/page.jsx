@@ -17,6 +17,33 @@ function diffDays(fromStr, toStr) {
   return Math.round((new Date(toStr) - new Date(fromStr)) / 86_400_000)
 }
 
+function formatDateFr(dateStr) {
+  return new Date(dateStr).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short' })
+}
+
+function Step({ id, title, optional, openStep, onToggle, summary, children }) {
+  const open = openStep === id
+  return (
+    <div className={`composer__step ${open ? 'composer__step--open' : ''}`}>
+      <button
+        type="button"
+        className="composer__step-header"
+        onClick={() => onToggle(id)}
+        aria-expanded={open}
+      >
+        <h2 className="composer__block-title">
+          {title} {optional && <span className="composer__optional">(optionnel)</span>}
+        </h2>
+        <span className="composer__step-right">
+          {!open && summary && <span className="composer__step-summary">{summary}</span>}
+          <span className="composer__step-chevron">{open ? '−' : '+'}</span>
+        </span>
+      </button>
+      {open && <div className="composer__step-body">{children}</div>}
+    </div>
+  )
+}
+
 export default function ComposerPage() {
   const router = useRouter()
   const [themes, setThemes] = useState([])
@@ -29,8 +56,13 @@ export default function ComposerPage() {
   const [groupe, setGroupe] = useState(false)
   const [nbPersonnes, setNbPersonnes] = useState(2)
   const [langue, setLangue] = useState(null)
+  const [openStep, setOpenStep] = useState('themes')
 
   const today = new Date().toISOString().split('T')[0]
+
+  function toggleStep(id) {
+    setOpenStep((prev) => (prev === id ? null : id))
+  }
 
   function toggleTheme(id) {
     setThemes((prev) => (prev.includes(id) ? prev.filter((t) => t !== id) : [...prev, id]))
@@ -83,6 +115,37 @@ export default function ComposerPage() {
     router.push('/composer/resultats')
   }
 
+  const summaries = {
+    themes: themes.length
+      ? THEMES.filter((t) => themes.includes(t.id)).map((t) => t.label).join(', ')
+      : 'À choisir',
+    hebergement: hebergement.length
+      ? HEBERGEMENT_OPTIONS.filter((h) => hebergement.includes(h.id)).map((h) => h.label).join(', ')
+      : 'Indifférent',
+    dates: checkin && checkout ? `${formatDateFr(checkin)} → ${formatDateFr(checkout)}` : 'Non renseignées',
+    duree: `${duree} jour${duree > 1 ? 's' : ''}`,
+    budget: `${budget.toLocaleString('fr-FR')} €`,
+    voyage: groupe ? `En groupe · ${nbPersonnes} pers.` : 'Solo',
+    niveau,
+    langue: langue ?? 'Indifférente',
+  }
+
+  const submitDisabled = !themes.length
+
+  const submitBlock = (
+    <>
+      <button
+        type="button"
+        className="btn-primary composer__submit"
+        disabled={submitDisabled}
+        onClick={handleSubmit}
+      >
+        Voir mes recommandations →
+      </button>
+      {submitDisabled && <p className="composer__hint">Choisissez au moins une thématique pour continuer.</p>}
+    </>
+  )
+
   return (
     <div className="page composer">
       <header className="page-hero page-hero--compact">
@@ -97,106 +160,99 @@ export default function ComposerPage() {
       </header>
 
       <section className="page-content">
-        <div className="container composer__body">
+        <div className="container composer__layout">
+          <div className="composer__form">
 
-          <div className="composer__block">
-            <h2 className="composer__block-title">Quelles thématiques vous font rêver ?</h2>
-            <p className="composer__block-hint">Sélectionnez-en une ou plusieurs.</p>
-            <div className="composer__themes">
-              {THEMES.map((t) => (
-                <button
-                  key={t.id}
-                  type="button"
-                  className={`composer__theme-card ${themes.includes(t.id) ? 'composer__theme-card--active' : ''}`}
-                  onClick={() => toggleTheme(t.id)}
-                >
-                  <span className="composer__theme-icon">{t.icon}</span>
-                  <span className="composer__theme-label">{t.label}</span>
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className="composer__block">
-            <h2 className="composer__block-title">
-              Type d'hébergement <span className="composer__optional">(indépendant de la thématique, optionnel)</span>
-            </h2>
-            <div className="composer__chips">
-              {HEBERGEMENT_OPTIONS.map((h) => (
-                <button
-                  key={h.id}
-                  type="button"
-                  className={`composer__chip ${hebergement.includes(h.id) ? 'composer__chip--active' : ''}`}
-                  onClick={() => toggleHebergement(h.id)}
-                >
-                  <span>{h.icon}</span> {h.label}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className="composer__block">
-            <h2 className="composer__block-title">Dates envisagées <span className="composer__optional">(optionnel)</span></h2>
-            <p className="composer__block-hint">Renseignez une date, l'autre et la durée s'ajustent automatiquement.</p>
-            <div className="composer__date-row">
-              <div className="composer__date-field">
-                <label>Date d'arrivée</label>
-                <input
-                  type="date"
-                  className="composer__date-input"
-                  value={checkin}
-                  min={today}
-                  onChange={(e) => handleCheckin(e.target.value)}
-                />
+            <Step id="themes" title="Quelles thématiques vous font rêver ?" openStep={openStep} onToggle={toggleStep} summary={summaries.themes}>
+              <p className="composer__block-hint">Sélectionnez-en une ou plusieurs.</p>
+              <div className="composer__themes">
+                {THEMES.map((t) => (
+                  <button
+                    key={t.id}
+                    type="button"
+                    className={`composer__theme-card ${themes.includes(t.id) ? 'composer__theme-card--active' : ''}`}
+                    onClick={() => toggleTheme(t.id)}
+                  >
+                    <span className="composer__theme-icon">{t.icon}</span>
+                    <span className="composer__theme-label">{t.label}</span>
+                  </button>
+                ))}
               </div>
-              <div className="composer__date-field">
-                <label>Date de départ</label>
-                <input
-                  type="date"
-                  className="composer__date-input"
-                  value={checkout}
-                  min={checkin || today}
-                  onChange={(e) => handleCheckout(e.target.value)}
-                />
+            </Step>
+
+            <Step id="hebergement" title="Type d'hébergement" optional openStep={openStep} onToggle={toggleStep} summary={summaries.hebergement}>
+              <p className="composer__block-hint">Indépendant de la thématique.</p>
+              <div className="composer__chips">
+                {HEBERGEMENT_OPTIONS.map((h) => (
+                  <button
+                    key={h.id}
+                    type="button"
+                    className={`composer__chip ${hebergement.includes(h.id) ? 'composer__chip--active' : ''}`}
+                    onClick={() => toggleHebergement(h.id)}
+                  >
+                    <span>{h.icon}</span> {h.label}
+                  </button>
+                ))}
               </div>
-            </div>
-          </div>
+            </Step>
 
-          <div className="composer__block">
-            <h2 className="composer__block-title">Durée souhaitée</h2>
-            <input
-              type="range"
-              min={2}
-              max={28}
-              value={duree}
-              onChange={(e) => handleDuree(Number(e.target.value))}
-              className="composer__slider"
-            />
-            <div className="composer__slider-val">{duree} jour{duree > 1 ? 's' : ''}</div>
-          </div>
+            <Step id="dates" title="Dates envisagées" optional openStep={openStep} onToggle={toggleStep} summary={summaries.dates}>
+              <p className="composer__block-hint">Renseignez une date, l'autre et la durée s'ajustent automatiquement.</p>
+              <div className="composer__date-row">
+                <div className="composer__date-field">
+                  <label>Date d'arrivée</label>
+                  <input
+                    type="date"
+                    className="composer__date-input"
+                    value={checkin}
+                    min={today}
+                    onChange={(e) => handleCheckin(e.target.value)}
+                  />
+                </div>
+                <div className="composer__date-field">
+                  <label>Date de départ</label>
+                  <input
+                    type="date"
+                    className="composer__date-input"
+                    value={checkout}
+                    min={checkin || today}
+                    onChange={(e) => handleCheckout(e.target.value)}
+                  />
+                </div>
+              </div>
+            </Step>
 
-          <div className="composer__block">
-            <h2 className="composer__block-title">Budget maximum</h2>
-            <input
-              type="range"
-              min={300}
-              max={4500}
-              step={100}
-              value={budget}
-              onChange={(e) => setBudget(Number(e.target.value))}
-              className="composer__slider"
-            />
-            <div className="composer__slider-val">
-              {budget.toLocaleString('fr-FR')} €
-              <span className="composer__slider-val-secondary">
-                ≈ {(budget * RATE_EUR_TO_AR).toLocaleString('fr-FR')} Ar
-              </span>
-            </div>
-          </div>
+            <Step id="duree" title="Durée souhaitée" openStep={openStep} onToggle={toggleStep} summary={summaries.duree}>
+              <input
+                type="range"
+                min={2}
+                max={28}
+                value={duree}
+                onChange={(e) => handleDuree(Number(e.target.value))}
+                className="composer__slider"
+              />
+              <div className="composer__slider-val">{duree} jour{duree > 1 ? 's' : ''}</div>
+            </Step>
 
-          <div className="composer__grid">
-            <div className="composer__block">
-              <h2 className="composer__block-title">Vous voyagez…</h2>
+            <Step id="budget" title="Budget maximum" openStep={openStep} onToggle={toggleStep} summary={summaries.budget}>
+              <input
+                type="range"
+                min={300}
+                max={4500}
+                step={100}
+                value={budget}
+                onChange={(e) => setBudget(Number(e.target.value))}
+                className="composer__slider"
+              />
+              <div className="composer__slider-val">
+                {budget.toLocaleString('fr-FR')} €
+                <span className="composer__slider-val-secondary">
+                  ≈ {(budget * RATE_EUR_TO_AR).toLocaleString('fr-FR')} Ar
+                </span>
+              </div>
+            </Step>
+
+            <Step id="voyage" title="Vous voyagez…" openStep={openStep} onToggle={toggleStep} summary={summaries.voyage}>
               <div className="composer__chips">
                 <button
                   type="button"
@@ -228,10 +284,9 @@ export default function ComposerPage() {
                   >+</button>
                 </div>
               )}
-            </div>
+            </Step>
 
-            <div className="composer__block">
-              <h2 className="composer__block-title">Niveau physique</h2>
+            <Step id="niveau" title="Niveau physique" openStep={openStep} onToggle={toggleStep} summary={summaries.niveau}>
               <div className="composer__chips">
                 {NIVEAU_OPTIONS.map((n) => (
                   <button
@@ -244,36 +299,43 @@ export default function ComposerPage() {
                   </button>
                 ))}
               </div>
+            </Step>
+
+            <Step id="langue" title="Langue parlée par le guide" optional openStep={openStep} onToggle={toggleStep} summary={summaries.langue}>
+              <div className="composer__chips">
+                {LANGUE_OPTIONS.map((l) => (
+                  <button
+                    key={l}
+                    type="button"
+                    className={`composer__chip ${langue === l ? 'composer__chip--active' : ''}`}
+                    onClick={() => setLangue(langue === l ? null : l)}
+                  >
+                    {l}
+                  </button>
+                ))}
+              </div>
+            </Step>
+
+            <div className="composer__mobile-submit">
+              {submitBlock}
             </div>
           </div>
 
-          <div className="composer__block">
-            <h2 className="composer__block-title">
-              Langue parlée par le guide <span className="composer__optional">(optionnel)</span>
-            </h2>
-            <div className="composer__chips">
-              {LANGUE_OPTIONS.map((l) => (
-                <button
-                  key={l}
-                  type="button"
-                  className={`composer__chip ${langue === l ? 'composer__chip--active' : ''}`}
-                  onClick={() => setLangue(langue === l ? null : l)}
-                >
-                  {l}
-                </button>
-              ))}
-            </div>
-          </div>
+          <aside className="composer__recap">
+            <h3 className="composer__recap-title">Votre recherche</h3>
+            <ul className="composer__recap-list">
+              <li><span>Thématiques</span><strong>{summaries.themes}</strong></li>
+              <li><span>Hébergement</span><strong>{summaries.hebergement}</strong></li>
+              <li><span>Dates</span><strong>{summaries.dates}</strong></li>
+              <li><span>Durée</span><strong>{summaries.duree}</strong></li>
+              <li><span>Budget</span><strong>{summaries.budget}</strong></li>
+              <li><span>Voyageurs</span><strong>{summaries.voyage}</strong></li>
+              <li><span>Niveau</span><strong>{summaries.niveau}</strong></li>
+              <li><span>Langue guide</span><strong>{summaries.langue}</strong></li>
+            </ul>
+            {submitBlock}
+          </aside>
 
-          <button
-            type="button"
-            className="btn-primary composer__submit"
-            disabled={!themes.length}
-            onClick={handleSubmit}
-          >
-            Voir mes recommandations →
-          </button>
-          {!themes.length && <p className="composer__hint">Choisissez au moins une thématique pour continuer.</p>}
         </div>
       </section>
     </div>
