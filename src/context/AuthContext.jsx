@@ -76,6 +76,8 @@ export function AuthProvider({ children }) {
   function logout() {
     setUser(null)
     localStorage.removeItem(LS_KEY)
+    // Le formulaire d'envies est personnel : on ne le laisse pas fuiter au prochain visiteur.
+    localStorage.removeItem('treky_wishes')
   }
 
   return (

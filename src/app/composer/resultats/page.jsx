@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import { circuits, getGuideById } from '../../../data/circuits'
 import { THEMES, HEBERGEMENT_OPTIONS, matchCircuits, getMatchedThemes } from '../../../utils/matching'
 import { MONTHS, getClosure } from '../../../utils/climate'
-import { readJSON } from '../../../utils/storage'
+import { readJSON, removeJSON } from '../../../utils/storage'
 import '../../../pages/Page.css'
 import '../../../pages/Composer.css'
 
@@ -34,6 +34,11 @@ export default function ComposerResultatsPage() {
     if (wishes === null) router.replace('/composer')
   }, [wishes, router])
 
+  function clearWishes() {
+    removeJSON('treky_wishes')
+    setWishes(null)
+  }
+
   if (!wishes) return null
 
   const selectedThemes = THEMES.filter((t) => wishes.themes?.includes(t.id))
@@ -60,7 +65,12 @@ export default function ComposerResultatsPage() {
 
       <section className="page-content">
         <div className="container">
-          <Link href="/composer" className="composer__redo-link">← Modifier ma recherche</Link>
+          <div className="composer__redo-row">
+            <Link href="/composer" className="composer__redo-link">← Modifier ma recherche</Link>
+            <button type="button" className="composer__redo-link composer__redo-link--muted" onClick={clearWishes}>
+              Effacer ma recherche
+            </button>
+          </div>
 
           <div className="resultats__list">
             {matches.map(({ circuit, score, seasonStatus, idealMonths }) => {

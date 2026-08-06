@@ -16,3 +16,10 @@ export function writeJSON(key, value) {
     localStorage.setItem(key, JSON.stringify(value))
   } catch {}
 }
+
+export function removeJSON(key) {
+  if (typeof window === 'undefined') return
+  try {
+    localStorage.removeItem(key)
+  } catch {}
+}

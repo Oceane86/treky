@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { circuits } from '../../data/circuits'
 import { THEMES, scoreCircuit, getMatchedThemes } from '../../utils/matching'
-import { readJSON } from '../../utils/storage'
+import { readJSON, removeJSON } from '../../utils/storage'
 import CircuitCard from '../../components/CircuitCard'
 import '../../components/Circuits.css'
 import '../../pages/CircuitsPage.css'
@@ -24,6 +24,11 @@ export default function CircuitsPage() {
     // Sans formulaire d'envies rempli, pas de recommandations possibles : on renvoie vers le composer.
     if (wishes === null) router.replace('/composer')
   }, [wishes, router])
+
+  function clearWishes() {
+    removeJSON('treky_wishes')
+    setWishes(null)
+  }
 
   if (!wishes) return null
 
@@ -70,14 +75,25 @@ export default function CircuitsPage() {
       <section className="section-padding" style={{ paddingTop: '56px' }}>
         <div className="container">
 
+          <div className="circuits-search-bar">
+            <div>
+              <strong>🎯 Votre recherche</strong>
+              <span>
+                {' '}{selectedThemeLabels.join(', ')} · {wishes.duree} jours · jusqu'à {wishes.budget.toLocaleString('fr-FR')} €
+              </span>
+            </div>
+            <div className="circuits-search-bar__actions">
+              <Link href="/composer" className="circuits-search-bar__link">Modifier ma recherche</Link>
+              <button type="button" className="circuits-search-bar__link circuits-search-bar__link--muted" onClick={clearWishes}>
+                Effacer ma recherche
+              </button>
+            </div>
+          </div>
+
           {recommended.length > 0 && (
             <div className="circuits-reco">
               <div className="circuits-reco__header">
                 <h2 className="circuits-reco__title">🎯 Vos recommandations</h2>
-                <p className="circuits-reco__subtitle">
-                  {selectedThemeLabels.join(', ')} · {wishes.duree} jours · jusqu'à {wishes.budget.toLocaleString('fr-FR')} €
-                </p>
-                <Link href="/composer" className="circuits-reco__edit-link">Modifier ma recherche</Link>
               </div>
               <div className="circuits__grid">
                 {recommended.map((circuit) => (
