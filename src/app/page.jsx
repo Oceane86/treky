@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import Hero from '../components/Hero'
 import OffreMoment from '../components/OffreMoment'
 import CircuitsPreview from '../components/CircuitsPreview'
+import GuidesPreview from '../components/GuidesPreview'
 import AboutMadagascar from '../components/AboutMadagascar'
 import Testimonials from '../components/Testimonials'
 import VideoSection from '../components/VideoSection'
@@ -35,6 +36,7 @@ export default function HomePage() {
       <Hero />
       <OffreMoment />
       <CircuitsPreview />
+      <GuidesPreview />
       <AboutMadagascar />
       <Testimonials />
       <NewsletterSection />

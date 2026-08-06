@@ -1,7 +1,7 @@
 'use client'
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { useSearchParams } from 'next/navigation'
+import { useSearchParams, useRouter } from 'next/navigation'
 import { circuits } from '../../data/circuits'
 import { THEMES, scoreCircuit, getMatchedThemes } from '../../utils/matching'
 import { readJSON } from '../../utils/storage'
@@ -85,6 +85,7 @@ function FilterGroup({ title, options, selected, onToggle }) {
 
 export default function CircuitsPage() {
   const searchParams = useSearchParams()
+  const router = useRouter()
 
   const [filters, setFilters] = useState(() => ({
     duree: searchParams.get('duree') ? [searchParams.get('duree')] : [],
@@ -95,12 +96,18 @@ export default function CircuitsPage() {
   }))
 
   const [sidebarOpen, setSidebarOpen] = useState(false)
-  const [wishes, setWishes] = useState(null)
+  // undefined = pas encore lu depuis le localStorage, null = aucune envie enregistrée
+  const [wishes, setWishes] = useState(undefined)
   const [wishesActive, setWishesActive] = useState(true)
 
   useEffect(() => {
     setWishes(readJSON('treky_wishes', null))
   }, [])
+
+  useEffect(() => {
+    // Sans formulaire d'envies rempli, pas de recommandations possibles : on renvoie vers le composer.
+    if (wishes === null) router.replace('/composer')
+  }, [wishes, router])
 
   function toggle(category, value) {
     setFilters((prev) => {
@@ -118,8 +125,10 @@ export default function CircuitsPage() {
     setFilters({ duree: [], budget: [], theme: [], niveau: [], saison: [] })
   }
 
+  if (!wishes) return null
+
   const hasActiveFilters = Object.values(filters).some((arr) => arr.length > 0)
-  const useWishes = wishesActive && !!wishes
+  const useWishes = wishesActive
 
   let visible = circuits.filter((c) => {
     if (filters.duree.length && !filters.duree.some((r) => inDureeRange(c.recommendedDays, r))) return false
@@ -134,7 +143,30 @@ export default function CircuitsPage() {
     visible = [...visible].sort((a, b) => scoreCircuit(b, wishes).score - scoreCircuit(a, wishes).score)
   }
 
-  const selectedThemeLabels = THEMES.filter((t) => wishes?.themes?.includes(t.id)).map((t) => t.label)
+  const selectedThemeLabels = THEMES.filter((t) => wishes.themes?.includes(t.id)).map((t) => t.label)
+
+  // Vos recommandations : circuits qui matchent une thématique choisie, triés par pertinence.
+  const recommended = circuits
+    .map((circuit) => ({ circuit, ...scoreCircuit(circuit, wishes) }))
+    .filter(({ circuit }) => getMatchedThemes(circuit, wishes.themes).length > 0)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 3)
+    .map((r) => r.circuit)
+
+  // Autres thématiques : la meilleure proposition pour chaque thématique non choisie,
+  // sans forcer la durée souhaitée (des circuits plus courts ou plus longs peuvent apparaître).
+  const usedIds = new Set(recommended.map((c) => c.id))
+  const otherSuggestions = []
+  for (const theme of THEMES.filter((t) => !wishes.themes?.includes(t.id))) {
+    const candidates = circuits.filter((c) => (c.themes ?? []).includes(theme.id) && !usedIds.has(c.id))
+    if (!candidates.length) continue
+    const best = candidates
+      .map((circuit) => ({ circuit, ...scoreCircuit(circuit, wishes) }))
+      .sort((a, b) => b.score - a.score)[0]
+    usedIds.add(best.circuit.id)
+    otherSuggestions.push({ theme, circuit: best.circuit })
+    if (otherSuggestions.length >= 4) break
+  }
 
   return (
     <div className="page">
@@ -143,7 +175,9 @@ export default function CircuitsPage() {
           <p className="page-hero__eyebrow">Nos treks</p>
           <h1 className="page-hero__title">Circuits</h1>
           <p className="page-hero__subtitle">
-            Choisissez votre aventure et personnalisez la durée selon votre disponibilité.
+            {selectedThemeLabels.length > 0
+              ? `Vos recommandations pour ${selectedThemeLabels.join(', ')}, et d'autres idées à explorer.`
+              : "Choisissez votre aventure et personnalisez la durée selon votre disponibilité."}
           </p>
         </div>
       </header>
@@ -151,26 +185,51 @@ export default function CircuitsPage() {
       <section className="section-padding" style={{ paddingTop: '56px' }}>
         <div className="container">
 
-          {wishes && (
-            <div className={`circuits-wishes-banner ${useWishes ? '' : 'circuits-wishes-banner--off'}`}>
-              <div>
-                <strong>{useWishes ? '🎯 Trié selon votre recherche' : 'Recherche ignorée'}</strong>
-                <span>
-                  {' '}Budget {wishes.budget.toLocaleString('fr-FR')} € · {wishes.duree} jours — tous les circuits restent affichés,
-                  {selectedThemeLabels.length > 0 ? ` ${selectedThemeLabels.join(', ')} en tête` : ' les plus compatibles en tête'}
-                </span>
+          {recommended.length > 0 && (
+            <div className="circuits-reco">
+              <div className="circuits-reco__header">
+                <h2 className="circuits-reco__title">🎯 Vos recommandations</h2>
+                <p className="circuits-reco__subtitle">
+                  {selectedThemeLabels.join(', ')} · {wishes.duree} jours · jusqu'à {wishes.budget.toLocaleString('fr-FR')} €
+                </p>
+                <Link href="/composer" className="circuits-reco__edit-link">Modifier ma recherche</Link>
               </div>
-              <div className="circuits-wishes-banner__actions">
-                <Link href="/composer" className="circuits-wishes-banner__link">Modifier ma recherche</Link>
-                <button
-                  className="circuits-wishes-banner__link"
-                  onClick={() => setWishesActive((v) => !v)}
-                >
-                  {useWishes ? 'Ignorer' : 'Réactiver'}
-                </button>
+              <div className="circuits__grid">
+                {recommended.map((circuit) => (
+                  <CircuitCard key={circuit.id} circuit={circuit} matchBadge />
+                ))}
               </div>
             </div>
           )}
+
+          {otherSuggestions.length > 0 && (
+            <div className="circuits-other">
+              <div className="circuits-other__header">
+                <h2 className="circuits-other__title">Envie d'explorer d'autres thématiques ?</h2>
+                <p className="circuits-other__subtitle">
+                  D'autres expériences, parfois plus courtes ou plus longues que les {wishes.duree} jours demandés.
+                </p>
+              </div>
+              <div className="circuits-other__row">
+                {otherSuggestions.map(({ theme, circuit }) => (
+                  <div key={theme.id} className="circuits-other__item">
+                    <span className="circuits-other__theme">{theme.icon} {theme.label}</span>
+                    <CircuitCard circuit={circuit} />
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <div className="circuits-all__header">
+            <h2 className="circuits-all__title">Tous nos circuits</h2>
+            <button
+              className="circuits-wishes-banner__link"
+              onClick={() => setWishesActive((v) => !v)}
+            >
+              {useWishes ? 'Ignorer ma recherche' : 'Trier selon ma recherche'}
+            </button>
+          </div>
 
           <button
             className="circuits-layout__filter-toggle"

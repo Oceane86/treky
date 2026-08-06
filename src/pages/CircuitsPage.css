@@ -35,6 +35,114 @@
   cursor: pointer;
 }
 
+/* ── Vos recommandations ── */
+.circuits-reco {
+  margin-bottom: 48px;
+}
+
+.circuits-reco__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 16px;
+  row-gap: 4px;
+  margin-bottom: 20px;
+}
+
+.circuits-reco__title {
+  font-family: var(--font-primary);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--log-cabin);
+}
+
+.circuits-reco__subtitle {
+  font-size: 0.88rem;
+  color: #888;
+  flex: 1;
+}
+
+.circuits-reco__edit-link {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--fern-frond);
+  flex-shrink: 0;
+}
+
+/* ── Autres thématiques ── */
+.circuits-other {
+  margin-bottom: 56px;
+  padding-bottom: 48px;
+  border-bottom: 1px solid #eee6d8;
+}
+
+.circuits-other__header {
+  margin-bottom: 20px;
+}
+
+.circuits-other__title {
+  font-family: var(--font-primary);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--log-cabin);
+  margin-bottom: 4px;
+}
+
+.circuits-other__subtitle {
+  font-size: 0.85rem;
+  color: #999;
+}
+
+.circuits-other__row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.circuits-other__item {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.circuits-other__theme {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--fern-frond);
+}
+
+/* ── Tous les circuits ── */
+.circuits-all__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.circuits-all__title {
+  font-family: var(--font-primary);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--log-cabin);
+}
+
+@media (max-width: 1100px) {
+  .circuits-other__row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .circuits-reco__edit-link {
+    flex-basis: 100%;
+  }
+
+  .circuits-other__row {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* Mobile filter toggle — hidden on desktop */
 .circuits-layout__filter-toggle {
   display: none;

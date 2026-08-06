@@ -1,0 +1,142 @@
+.guides-preview {
+  background-color: #fff;
+}
+
+.guides-preview__header {
+  margin-bottom: 28px;
+}
+
+.guides-preview__subtitle {
+  margin-top: 12px;
+  max-width: 560px;
+}
+
+.guides-preview__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  align-items: stretch;
+}
+
+.guides-preview__cta-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 48px;
+}
+
+/* ── Card ── */
+.guide-preview-card {
+  background: var(--velvety-cream);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.guide-preview-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.13);
+}
+
+.guide-preview-card__image-wrap {
+  position: relative;
+  height: 220px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.guide-preview-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  transition: transform 0.5s ease;
+}
+
+.guide-preview-card:hover .guide-preview-card__image {
+  transform: scale(1.07);
+}
+
+.guide-preview-card__body {
+  padding: 18px 20px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
+
+.guide-preview-card__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.guide-preview-card__name {
+  font-family: var(--font-primary);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--log-cabin);
+  line-height: 1.3;
+}
+
+.guide-preview-card__rating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.guide-preview-card__star {
+  color: var(--golden-cypress);
+  font-size: 0.9rem;
+  line-height: 1;
+}
+
+.guide-preview-card__rating-value {
+  font-family: var(--font-primary);
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--log-cabin);
+}
+
+.guide-preview-card__reviews {
+  font-size: 0.75rem;
+  color: #aaa;
+}
+
+.guide-preview-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.guide-preview-card__tag {
+  background: rgba(91, 140, 26, 0.1);
+  color: var(--fern-frond);
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+.guide-preview-card__langues {
+  font-size: 0.82rem;
+  color: #888;
+  margin-top: auto;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1100px) {
+  .guides-preview__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .guides-preview__grid {
+    grid-template-columns: 1fr;
+  }
+}
