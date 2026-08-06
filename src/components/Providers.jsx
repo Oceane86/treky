@@ -10,10 +10,10 @@ import InstallPWA from './InstallPWA'
 
 const AUTH_ROUTES = ['/inscription', '/connexion']
 
-// Le chat guide est une vue plein écran autonome (son propre header, sa propre
-// navigation retour) : la navbar/footer du site casseraient son layout en 100vh.
+// Le chat guide et les apercus reseaux sociaux sont des vues autonomes avec
+// leur propre entete stylisee : la navbar/footer du site casseraient l'illusion.
 function hidesChrome(pathname) {
-  return AUTH_ROUTES.includes(pathname) || pathname.startsWith('/chat/')
+  return AUTH_ROUTES.includes(pathname) || pathname.startsWith('/chat/') || pathname.startsWith('/social/')
 }
 
 export default function Providers({ children }) {
