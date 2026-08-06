@@ -3,9 +3,10 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { circuits } from '../../data/circuits'
-import { THEMES, scoreCircuit, getMatchedThemes } from '../../utils/matching'
+import { THEMES, scoreCircuit, matchCircuits } from '../../utils/matching'
 import { readJSON, removeJSON } from '../../utils/storage'
 import CircuitCard from '../../components/CircuitCard'
+import RecommendationCard from '../../components/RecommendationCard'
 import '../../components/Circuits.css'
 import '../../pages/CircuitsPage.css'
 import '../../pages/Page.css'
@@ -34,19 +35,14 @@ export default function CircuitsPage() {
 
   const selectedThemeLabels = THEMES.filter((t) => wishes.themes?.includes(t.id)).map((t) => t.label)
 
-  // Vos recommandations : circuits qui matchent une thématique choisie, triés par pertinence.
-  const recommended = circuits
-    .map((circuit) => ({ circuit, ...scoreCircuit(circuit, wishes) }))
-    .filter(({ circuit }) => getMatchedThemes(circuit, wishes.themes).length > 0)
-    .sort((a, b) => b.score - a.score)
-    .slice(0, 3)
-    .map((r) => r.circuit)
+  // Vos recommandations : mêmes 3 circuits, dans le même ordre, que la page /composer/resultats.
+  const recommended = matchCircuits(circuits, wishes, 3)
 
   // Autres thématiques : la meilleure proposition pour chaque thématique non choisie,
   // sans forcer la durée souhaitée (des circuits plus courts ou plus longs peuvent apparaître).
   // Toutes les thématiques restantes sont couvertes pour que le catalogue reste explorable
   // maintenant que la liste complète avec filtres a été retirée.
-  const usedIds = new Set(recommended.map((c) => c.id))
+  const usedIds = new Set(recommended.map((r) => r.circuit.id))
   const otherSuggestions = []
   for (const theme of THEMES.filter((t) => !wishes.themes?.includes(t.id))) {
     const candidates = circuits.filter((c) => (c.themes ?? []).includes(theme.id) && !usedIds.has(c.id))
@@ -95,9 +91,16 @@ export default function CircuitsPage() {
               <div className="circuits-reco__header">
                 <h2 className="circuits-reco__title">🎯 Vos recommandations</h2>
               </div>
-              <div className="circuits__grid">
-                {recommended.map((circuit) => (
-                  <CircuitCard key={circuit.id} circuit={circuit} matchBadge />
+              <div className="resultats__list">
+                {recommended.map(({ circuit, score, seasonStatus, idealMonths }) => (
+                  <RecommendationCard
+                    key={circuit.id}
+                    circuit={circuit}
+                    score={score}
+                    seasonStatus={seasonStatus}
+                    idealMonths={idealMonths}
+                    themeIds={wishes.themes}
+                  />
                 ))}
               </div>
             </div>

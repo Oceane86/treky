@@ -25,6 +25,7 @@ export default function Footer() {
               <li><Link href="/blog">Blog</Link></li>
               <li><Link href="/a-propos">À propos</Link></li>
               <li><Link href="/contact">Contact</Link></li>
+              <li><Link href="/guide/connexion">Espace guides</Link></li>
             </ul>
           </div>
 
@@ -35,7 +36,6 @@ export default function Footer() {
               <li><Link href="/confidentialite">Confidentialité</Link></li>
               <li><Link href="/cgv">CGV</Link></li>
               <li><Link href="/cookies">Cookies</Link></li>
-              <li><Link href="/guide/connexion">Espace guides</Link></li>
             </ul>
           </div>
 
