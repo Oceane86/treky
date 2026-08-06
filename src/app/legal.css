@@ -1,7 +1,6 @@
 .legal-hero {
   background: var(--velvety-cream);
-  padding: 64px 0 48px;
-  margin-bottom: 56px;
+  padding: 110px 0 40px;
 }
 
 .legal-hero__eyebrow {
@@ -58,7 +57,7 @@
 }
 
 .legal-body {
-  padding-bottom: 100px;
+  padding: 40px 0 100px;
 }
 
 .legal-content {

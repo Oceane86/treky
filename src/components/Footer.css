@@ -44,6 +44,29 @@
   max-width: 240px;
 }
 
+.footer__socials {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.footer__social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--velvety-cream);
+  color: #888;
+  transition: background 0.2s, color 0.2s;
+}
+
+.footer__social-link:hover {
+  background: var(--fern-frond);
+  color: #fff;
+}
+
 /* ─── Labels colonnes ─── */
 .footer__col-label {
   font-family: var(--font-secondary);

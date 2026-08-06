@@ -216,19 +216,21 @@
 }
 
 .about-assoc-card {
-  background: var(--velvety-cream);
+  background: #fff;
   border-radius: 16px;
   padding: 28px 24px;
   border: 1px solid #eeebe3;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
 }
 
 .about-assoc-card__top {
   display: flex;
+  flex-direction: column;
   align-items: flex-start;
-  justify-content: space-between;
-  gap: 12px;
+  gap: 10px;
   margin-bottom: 14px;
-  flex-wrap: wrap;
 }
 
 .about-assoc-card__name {
@@ -251,8 +253,6 @@
   font-weight: 700;
   padding: 4px 10px;
   border-radius: 20px;
-  white-space: nowrap;
-  flex-shrink: 0;
 }
 
 .about-assoc-card__desc {

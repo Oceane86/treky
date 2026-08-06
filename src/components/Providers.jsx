@@ -10,18 +10,24 @@ import InstallPWA from './InstallPWA'
 
 const AUTH_ROUTES = ['/inscription', '/connexion']
 
+// Le chat guide est une vue plein écran autonome (son propre header, sa propre
+// navigation retour) : la navbar/footer du site casseraient son layout en 100vh.
+function hidesChrome(pathname) {
+  return AUTH_ROUTES.includes(pathname) || pathname.startsWith('/chat/')
+}
+
 export default function Providers({ children }) {
   const pathname = usePathname()
-  const isAuth = AUTH_ROUTES.includes(pathname)
+  const hideChrome = hidesChrome(pathname)
 
   return (
     <AuthProvider>
       <CurrencyProvider>
         <FavoritesProvider>
         <BookingProvider>
-          {!isAuth && <Navbar />}
+          {!hideChrome && <Navbar />}
           <main>{children}</main>
-          {!isAuth && <Footer />}
+          {!hideChrome && <Footer />}
           <InstallPWA />
         </BookingProvider>
         </FavoritesProvider>

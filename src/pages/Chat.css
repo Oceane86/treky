@@ -14,7 +14,6 @@
   gap: 12px;
   padding: 16px 20px;
   flex-shrink: 0;
-  padding-top: calc(16px + 64px); /* compense la navbar fixe */
 }
 
 .chat__back {

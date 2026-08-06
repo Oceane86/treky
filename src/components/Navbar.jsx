@@ -5,6 +5,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import { useCurrency } from '../context/CurrencyContext'
 import { useAuth } from '../context/AuthContext'
 import { useFavorites } from '../context/FavoritesContext'
+import { useBooking } from '../context/BookingContext'
 import './Navbar.css'
 
 const navLinks = [
@@ -23,7 +24,9 @@ export default function Navbar() {
   const { currency, toggle } = useCurrency()
   const { user, isLoggedIn, logout } = useAuth()
   const { favorites } = useFavorites()
+  const { booking } = useBooking()
   const dropdownRef = useRef(null)
+  const chatHref = `/chat/${booking?.guide?.id ?? 1}`
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50)
@@ -63,16 +66,19 @@ export default function Navbar() {
         </Link>
 
         <ul className={`navbar__links ${menuOpen ? 'navbar__links--open' : ''}`}>
-          {navLinks.map(({ to, label }) => (
-            <li key={to}>
-              <Link
-                href={to}
-                className={`navbar__link ${pathname === to ? 'navbar__link--active' : ''}`}
-              >
-                {label}
-              </Link>
-            </li>
-          ))}
+          {navLinks.map(({ to, label }) => {
+            const active = pathname === to || pathname.startsWith(`${to}/`)
+            return (
+              <li key={to}>
+                <Link
+                  href={to}
+                  className={`navbar__link ${active ? 'navbar__link--active' : ''}`}
+                >
+                  {label}
+                </Link>
+              </li>
+            )
+          })}
           {/* Mobile-only auth links */}
           {menuOpen && !isLoggedIn && (
             <li className="navbar__mobile-auth">
@@ -84,7 +90,7 @@ export default function Navbar() {
             <>
               <li><Link href="/compte/reservations" className="navbar__link">Mes réservations</Link></li>
               <li><Link href="/compte/favoris" className="navbar__link">Mes favoris</Link></li>
-              <li><Link href="/chat/1" className="navbar__link">Messages guide</Link></li>
+              <li><Link href={chatHref} className="navbar__link">Messages guide</Link></li>
               <li><Link href="/compte/carnet" className="navbar__link">Carnet de trek</Link></li>
               <li>
                 <button className="navbar__link navbar__link--logout" onClick={handleLogout}>
@@ -142,7 +148,7 @@ export default function Navbar() {
                     )}
                   </Link>
 
-                  <Link href="/chat/1" className="navbar__dropdown-item">
+                  <Link href={chatHref} className="navbar__dropdown-item">
                     <span className="navbar__dropdown-icon">💬</span>
                     Messages guide
                   </Link>
