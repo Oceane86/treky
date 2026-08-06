@@ -29,6 +29,7 @@
     included: ['Hébergement en lodge', 'Pension complète', 'Guide local certifié', 'Entrée parc'],
     non_inclus: ['Vols ou transport vers Ranohira', 'Boissons alcoolisées', 'Dépenses personnelles'],
     infos_pratiques: [
+      'Accès par la RN7 depuis Antananarivo (10 à 12h de route) ou vol vers Tuléar/Ihosy puis transfert routier (environ 2h)',
       'Idéal pour familles et premiers randonneurs',
       'Crème solaire et chapeau indispensables',
       'Saison sèche recommandée (avril à novembre)',
@@ -103,6 +104,7 @@
     included: ['Bivouac en altitude', 'Pension complète', 'Guide de montagne certifié', 'Porteurs'],
     non_inclus: ['Vols vers Ambalavao', 'Assurance aventure', 'Équipement personnel'],
     infos_pratiques: [
+      'Accès par la RN7 depuis Antananarivo (environ 7 à 8h de route) ou vol vers Fianarantsoa puis transfert (1h30)',
       'Bonne condition physique requise',
       'Équipement froid indispensable en altitude',
       'Saison sèche obligatoire (mai à octobre)',
@@ -185,6 +187,7 @@
     included: ['Hébergement lodge et bivouac', 'Pension complète', 'Guide spécialisé Tsingy', 'Équipement via ferrata'],
     non_inclus: ['Vols vers Morondava', 'Assurance aventure', 'Dépenses personnelles'],
     infos_pratiques: [
+      'Vol direct Antananarivo → Morondava (1h) recommandé ; la piste RN35 est longue et parfois impraticable en saison des pluies',
       'Absence de vertige recommandée pour les ponts de singe',
       'Saison sèche obligatoire (mai à novembre)',
       'Chaussures de randonnée à semelle rigide indispensables',
@@ -383,6 +386,7 @@
     included: ["Hébergement chez l'habitant", 'Repas traditionnels', 'Guide culturel bilingue', 'Visites ateliers'],
     non_inclus: ['Transport vers Ambositra', 'Achats artisanaux', 'Pourboires'],
     infos_pratiques: [
+      'Accès par la RN7 depuis Antananarivo (environ 5h de route)',
       "Accessible toute l'année, éviter janvier-février (pluies)",
       'Idéal pour familles et amateurs de culture',
       'Apporter des petits cadeaux pour les villageois',
@@ -465,6 +469,7 @@
     included: ['Lodge en lisière de plantation', 'Pension complète', 'Guide naturaliste', 'Visites plantations'],
     non_inclus: ['Vols vers Mananjary', 'Achats épices et huiles', 'Activités optionnelles'],
     infos_pratiques: [
+      'Vol Antananarivo → Mananjary (55 min) ou route par la RN25 (8 à 10h, piste dégradée par endroits)',
       "Saison sèche recommandée pour les sentiers en plantation",
       "Idéal pour les amateurs de gastronomie et de nature",
       'Possibilité de rapporter des épices certifiées bio',
@@ -621,6 +626,7 @@
     included: ['Hébergement hôtel charme', 'Pension complète', 'Guide historien', 'Entrées monuments'],
     non_inclus: ['Vols', 'Achats souvenirs', 'Dépenses personnelles'],
     infos_pratiques: [
+      "Ambohimanga à 1h de route d'Antananarivo ; liaison vers Fianarantsoa par la RN7 (environ 7h de route)",
       "Accessible toute l'année",
       "Idéal pour les passionnés d'histoire et de culture",
       'Prévoir des tenues respectueuses pour les sites sacrés',
@@ -695,6 +701,7 @@
     included: ['Hébergement bungalow bord de mer', 'Pension complète', 'Guide local', 'Excursion baleines en bateau'],
     non_inclus: ['Vol vers Sainte-Marie', 'Dépenses personnelles', 'Activités optionnelles'],
     infos_pratiques: [
+      'Vol Antananarivo → Sainte-Marie (1h10) ou liaison maritime depuis Soanierana-Ivongo (bac ou vedette, environ 1h30, mer parfois agitée)',
       'Baleines à bosse observables de juillet à septembre',
       "Accessible toute l'année pour les autres activités",
       'Idéal pour familles, couples et amateurs de nature marine',
@@ -777,6 +784,7 @@
     included: ["Hébergement chez l'habitant", 'Repas traditionnels Betsileo', 'Guide culturel', 'Cours de cuisine local'],
     non_inclus: ['Transport vers Fianarantsoa', 'Cadeaux artisanaux', 'Boissons'],
     infos_pratiques: [
+      'Accès par la RN7 depuis Antananarivo (7 à 8h de route) ou vol direct vers Fianarantsoa (50 min)',
       "Accessible toute l'année",
       'Respect des coutumes locales requis',
       'Apporter des petits cadeaux pour les familles hôtes',
@@ -851,6 +859,7 @@
     included: ['Hébergement mixte lodge/bivouac', 'Pension complète', '2 guides certifiés', 'Tous les transports inter-étapes'],
     non_inclus: ['Vols internationaux', 'Assurance aventure longue durée', 'Équipement personnel'],
     infos_pratiques: [
+      'Vol Antananarivo → Diego Suarez pour le départ ; retour en vol depuis Tuléar — billets à réserver en complément du circuit',
       'Expérience de trekking multi-jours indispensable',
       'Saison sèche strictement requise (mai à octobre)',
       'Groupe limité à 8 personnes pour préserver les écosystèmes',
