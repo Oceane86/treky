@@ -201,7 +201,7 @@
   border-radius: 24px;
   padding: 10px 18px;
   font-family: var(--font-secondary);
-  font-size: 0.9rem;
+  font-size: 1rem;
   color: var(--log-cabin);
   transition: border-color 0.2s;
   background: #fafafa;

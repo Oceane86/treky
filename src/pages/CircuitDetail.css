@@ -1103,7 +1103,7 @@
   border-radius: 10px;
   padding: 12px 14px;
   font-family: var(--font-secondary);
-  font-size: 0.88rem;
+  font-size: 1rem;
   color: var(--log-cabin);
   background: #fff;
   transition: border-color 0.2s;

@@ -10,7 +10,6 @@
 
 .navbar--scrolled {
   background-color: rgba(0, 39, 26, 0.96);
-  backdrop-filter: blur(12px);
   padding: 10px 0;
   box-shadow: 0 2px 20px rgba(0,0,0,0.2);
 }
@@ -160,6 +159,8 @@
   cursor: pointer;
   padding: 4px;
   margin-left: auto;
+  position: relative;
+  z-index: 1001;
 }
 
 .navbar__burger span {

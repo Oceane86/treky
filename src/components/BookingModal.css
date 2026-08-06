@@ -166,7 +166,7 @@
   border: 1.5px solid #e0e0e0;
   border-radius: 10px;
   font-family: var(--font-secondary);
-  font-size: 0.9rem;
+  font-size: 1rem;
   color: var(--log-cabin);
   transition: border-color 0.2s;
   background: #fff;
