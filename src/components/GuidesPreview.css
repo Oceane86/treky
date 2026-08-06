@@ -82,6 +82,13 @@
   line-height: 1.3;
 }
 
+.guide-preview-card__lieu {
+  display: block;
+  font-size: 0.72rem;
+  color: #aaa;
+  margin-top: 3px;
+}
+
 .guide-preview-card__rating {
   display: flex;
   align-items: center;

@@ -23,7 +23,12 @@ export default function GuidesPreview() {
               </div>
               <div className="guide-preview-card__body">
                 <div className="guide-preview-card__top">
-                  <h3 className="guide-preview-card__name">{guide.nom}</h3>
+                  <div>
+                    <h3 className="guide-preview-card__name">{guide.nom}</h3>
+                    {guide.localisation && (
+                      <span className="guide-preview-card__lieu">📍 {guide.localisation}</span>
+                    )}
+                  </div>
                   <div className="guide-preview-card__rating">
                     <span className="guide-preview-card__star">★</span>
                     <span className="guide-preview-card__rating-value">{guide.note}</span>

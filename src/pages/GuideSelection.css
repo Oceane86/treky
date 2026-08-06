@@ -99,6 +99,13 @@
 .guide-sel__note { font-weight: 700; font-size: 0.88rem; color: var(--log-cabin); }
 .guide-sel__reviews { font-size: 0.78rem; color: #aaa; }
 
+.guide-sel__lieu {
+  display: block;
+  font-size: 0.75rem;
+  color: #aaa;
+  margin-top: 3px;
+}
+
 .guide-sel__available-dot {
   color: var(--fern-frond);
   font-size: 0.7rem;

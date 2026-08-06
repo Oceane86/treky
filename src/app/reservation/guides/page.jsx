@@ -51,6 +51,9 @@ export default function GuideSelectionPage() {
                     <span className="guide-sel__note">{guide.note}</span>
                     <span className="guide-sel__reviews">({guide.nb_avis} avis)</span>
                   </div>
+                  {guide.localisation && (
+                    <span className="guide-sel__lieu">📍 {guide.localisation}</span>
+                  )}
                 </div>
                 <span className="guide-sel__available-dot" title="Disponible">●</span>
               </div>

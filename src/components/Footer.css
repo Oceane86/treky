@@ -58,7 +58,7 @@
   height: 36px;
   border-radius: 50%;
   background: var(--velvety-cream);
-  color: #888;
+  color: var(--fern-frond);
   transition: background 0.2s, color 0.2s;
 }
 

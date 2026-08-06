@@ -19,6 +19,7 @@ const TEAM = [
     id: 1,
     nom: 'Rakoto Jean',
     role: 'Guide aventure & faune endémique',
+    localisation: 'Ambalavao',
     photo: '/images/avatar1.jpg',
     langues: ['Français', 'Malgache', 'Anglais'],
     note: 4.9,
@@ -29,6 +30,7 @@ const TEAM = [
     id: 2,
     nom: 'Solofo Andry',
     role: 'Guide nature & photographie',
+    localisation: 'Andasibe',
     photo: '/images/avatar2.jpg',
     langues: ['Français', 'Malgache'],
     note: 4.8,
@@ -39,6 +41,7 @@ const TEAM = [
     id: 3,
     nom: 'Nirina Mamy',
     role: 'Guide culturel & villages locaux',
+    localisation: 'Fianarantsoa',
     photo: '/images/avatar3.jpg',
     langues: ['Français', 'Malgache', 'Italien'],
     note: 5.0,
@@ -206,6 +209,9 @@ export default function AboutPage() {
                       <div>
                         <h3 className="about-guide-card__name">{g.nom}</h3>
                         <p className="about-guide-card__role">{g.role}</p>
+                        {g.localisation && (
+                          <span className="about-guide-card__lieu">📍 {g.localisation}</span>
+                        )}
                       </div>
                       <div className="about-guide-card__note">
                         <span className="about-guide-card__star">★</span>

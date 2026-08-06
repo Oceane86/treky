@@ -1,0 +1,337 @@
+/* ═══════════ Instagram-style preview ═══════════ */
+.social-ig {
+  background: #fff;
+  padding: 110px 0 80px;
+}
+
+.social-ig__card {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 28px;
+}
+
+.social-ig__avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--velvety-cream);
+  padding: 12px;
+  flex-shrink: 0;
+}
+
+.social-ig__identity {
+  flex: 1;
+  min-width: 0;
+}
+
+.social-ig__handle-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+
+.social-ig__handle {
+  font-family: var(--font-primary);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--log-cabin);
+}
+
+.social-ig__follow-btn {
+  background: var(--fern-frond);
+  color: #fff;
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 7px 20px;
+  border-radius: 8px;
+}
+
+.social-ig__stats {
+  display: flex;
+  gap: 28px;
+  margin-bottom: 14px;
+  font-size: 0.9rem;
+  color: var(--log-cabin);
+  flex-wrap: wrap;
+}
+
+.social-ig__stats strong {
+  font-weight: 700;
+}
+
+.social-ig__name {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--log-cabin);
+  margin-bottom: 4px;
+}
+
+.social-ig__bio {
+  font-size: 0.85rem;
+  color: #555;
+  line-height: 1.6;
+  white-space: pre-line;
+  margin-bottom: 6px;
+}
+
+.social-ig__link {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #3897b8;
+}
+
+.social-ig__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+}
+
+.social-ig__post {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  display: block;
+}
+
+.social-ig__post img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.social-ig__post-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 700;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.social-ig__post:hover img {
+  transform: scale(1.05);
+}
+
+.social-ig__post:hover .social-ig__post-overlay {
+  opacity: 1;
+}
+
+@media (max-width: 640px) {
+  .social-ig__card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    text-align: left;
+  }
+}
+
+/* ═══════════ Facebook-style preview ═══════════ */
+.social-fb {
+  background: var(--velvety-cream);
+  padding-top: 62px;
+}
+
+.social-fb__cover {
+  position: relative;
+  background: var(--english-holly);
+}
+
+.social-fb__cover-img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  opacity: 0.85;
+}
+
+.social-fb__identity {
+  display: flex;
+  align-items: flex-end;
+  gap: 20px;
+  transform: translateY(-40px);
+  margin-bottom: -20px;
+}
+
+.social-fb__avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 5px solid #fff;
+  background: var(--velvety-cream);
+  padding: 10px;
+  flex-shrink: 0;
+}
+
+.social-fb__name {
+  font-family: var(--font-primary);
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #fff;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
+}
+
+.social-fb__meta {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.85);
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.3);
+}
+
+.social-fb__body {
+  padding: 24px 24px 80px;
+}
+
+.social-fb__actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding-bottom: 24px;
+  border-bottom: 1px solid #e5e0d3;
+  margin-bottom: 28px;
+}
+
+.social-fb__like-btn,
+.social-fb__follow-btn {
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 9px 18px;
+  border-radius: 8px;
+}
+
+.social-fb__like-btn {
+  background: var(--fern-frond);
+  color: #fff;
+}
+
+.social-fb__follow-btn {
+  background: #fff;
+  color: var(--log-cabin);
+  border: 1.5px solid #ddd;
+}
+
+.social-fb__likes-count {
+  font-size: 0.8rem;
+  color: #888;
+  margin-left: auto;
+}
+
+.social-fb__layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 28px;
+  align-items: start;
+}
+
+.social-fb__about {
+  background: #fff;
+  border-radius: 14px;
+  padding: 22px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.05);
+}
+
+.social-fb__about h3 {
+  font-family: var(--font-primary);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--log-cabin);
+  margin-bottom: 14px;
+}
+
+.social-fb__about ul {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.social-fb__about li {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.social-fb__feed {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.social-fb__post {
+  background: #fff;
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.05);
+}
+
+.social-fb__post-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.social-fb__post-header img {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--velvety-cream);
+  padding: 4px;
+}
+
+.social-fb__post-header strong {
+  display: block;
+  font-size: 0.88rem;
+  color: var(--log-cabin);
+}
+
+.social-fb__post-header span {
+  display: block;
+  font-size: 0.72rem;
+  color: #aaa;
+}
+
+.social-fb__post-text {
+  font-size: 0.88rem;
+  color: #444;
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.social-fb__post-img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.social-fb__post-stats {
+  font-size: 0.78rem;
+  color: #999;
+}
+
+@media (max-width: 860px) {
+  .social-fb__layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .social-fb__identity {
+    flex-direction: column;
+    align-items: flex-start;
+    transform: translateY(-20px);
+  }
+}

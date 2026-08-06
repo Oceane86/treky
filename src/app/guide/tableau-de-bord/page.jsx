@@ -157,6 +157,16 @@ export default function GuideDashboardPage() {
                 />
               </div>
 
+              <div className="guide-dash__field">
+                <label>Localisation</label>
+                <input
+                  type="text"
+                  value={profile.localisation ?? ''}
+                  onChange={(e) => setProfile((p) => ({ ...p, localisation: e.target.value }))}
+                  placeholder="Ville / région où vous guidez"
+                />
+              </div>
+
               <div className="guide-dash__field-row">
                 <div className="guide-dash__field">
                   <label>Langues parlées</label>
