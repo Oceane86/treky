@@ -1,21 +1,23 @@
 'use client'
 import { useState } from 'react'
 import Image from 'next/image'
+import { useLocale } from '../context/LocaleContext'
+import { getUI } from '../utils/i18n'
 import './VideoSection.css'
 
 export default function VideoSection() {
   const [isPlaying, setIsPlaying] = useState(false)
+  const { locale } = useLocale()
+  const t = getUI(locale).home
 
   return (
     <section className="video-section" id="explorer">
       {/* Banderole titre + bouton */}
       <div className="video-section__strip" data-reveal>
         <div className="container video-section__strip-inner">
-          <h2 className="video-section__title">
-            Explorer vous / Tentez l'aventure
-          </h2>
+          <h2 className="video-section__title">{t.videoTitle}</h2>
           <a href="#circuits" className="btn-primary video-section__cta">
-            Découvrir
+            {t.videoCta}
           </a>
         </div>
       </div>

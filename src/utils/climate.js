@@ -2,10 +2,15 @@
 // fiche circuit et le formulaire d'envies (matching + avertissements de fermeture).
 
 export const MONTHS = ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jun', 'Jul', 'Aoû', 'Sep', 'Oct', 'Nov', 'Déc']
+export const MONTHS_EN = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 export const MONTHS_FULL = [
   'janvier', 'février', 'mars', 'avril', 'mai', 'juin',
   'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre',
 ]
+
+export function getMonths(locale) {
+  return locale === 'en' ? MONTHS_EN : MONTHS
+}
 
 export const CLIMAT_MAP = {
   seche:         ['avoid', 'avoid', 'avoid', 'ok', 'ideal', 'ideal', 'ideal', 'ideal', 'ideal', 'ideal', 'ok', 'avoid'],

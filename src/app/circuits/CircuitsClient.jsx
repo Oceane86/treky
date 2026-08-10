@@ -4,8 +4,10 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import Icon from '../../components/Icon'
 import { circuits } from '../../data/circuits'
-import { THEMES, scoreCircuit, matchCircuitsByTheme } from '../../utils/matching'
+import { THEMES, scoreCircuit, matchCircuitsByTheme, themeLabel } from '../../utils/matching'
 import { readJSON, removeJSON } from '../../utils/storage'
+import { useLocale } from '../../context/LocaleContext'
+import { getUI } from '../../utils/i18n'
 import CircuitCard from '../../components/CircuitCard'
 import RecommendationCard from '../../components/RecommendationCard'
 import '../../components/Circuits.css'
@@ -14,6 +16,8 @@ import '../../pages/Page.css'
 
 export default function CircuitsPage() {
   const router = useRouter()
+  const { locale } = useLocale()
+  const t = getUI(locale).circuitsPage
 
   // undefined = pas encore lu depuis le localStorage, null = aucune envie enregistrée
   const [wishes, setWishes] = useState(undefined)
@@ -34,7 +38,7 @@ export default function CircuitsPage() {
 
   if (!wishes) return null
 
-  const selectedThemeLabels = THEMES.filter((t) => wishes.themes?.includes(t.id)).map((t) => t.label)
+  const selectedThemeLabels = THEMES.filter((th) => wishes.themes?.includes(th.id)).map((th) => themeLabel(th, locale))
 
   // Vos recommandations : mêmes circuits, dans le même ordre, que la page /composer/resultats.
   // Chaque thématique choisie est garantie d'avoir au moins un représentant.
@@ -46,7 +50,7 @@ export default function CircuitsPage() {
   // maintenant que la liste complète avec filtres a été retirée.
   const usedIds = new Set(recommended.map((r) => r.circuit.id))
   const otherSuggestions = []
-  for (const theme of THEMES.filter((t) => !wishes.themes?.includes(t.id))) {
+  for (const theme of THEMES.filter((th) => !wishes.themes?.includes(th.id))) {
     const candidates = circuits.filter((c) => (c.themes ?? []).includes(theme.id) && !usedIds.has(c.id))
     if (!candidates.length) continue
     const best = candidates
@@ -60,12 +64,12 @@ export default function CircuitsPage() {
     <div className="page">
       <header className="page-hero page-hero--compact page-hero--circuits">
         <div className="container page-hero__inner">
-          <p className="page-hero__eyebrow">Nos treks</p>
-          <h1 className="page-hero__title">Circuits</h1>
+          <p className="page-hero__eyebrow">{t.eyebrow}</p>
+          <h1 className="page-hero__title">{t.title}</h1>
           <p className="page-hero__subtitle">
             {selectedThemeLabels.length > 0
-              ? `Vos recommandations pour ${selectedThemeLabels.join(', ')}, et d'autres idées à explorer.`
-              : "Choisissez votre aventure et personnalisez la durée selon votre disponibilité."}
+              ? t.subtitleWithThemes(selectedThemeLabels.join(', '))
+              : t.subtitleGeneric}
           </p>
         </div>
       </header>
@@ -75,15 +79,15 @@ export default function CircuitsPage() {
 
           <div className="circuits-search-bar">
             <div>
-              <strong><Icon name="target" size={15} /> Votre recherche</strong>
+              <strong><Icon name="target" size={15} /> {t.yourSearch}</strong>
               <span>
-                {' '}{selectedThemeLabels.join(', ')} · {wishes.duree} jours · jusqu'à {wishes.budget.toLocaleString('fr-FR')} €
+                {' '}{selectedThemeLabels.join(', ')} · {wishes.duree} {t.days} · {t.upTo} {wishes.budget.toLocaleString('fr-FR')} €
               </span>
             </div>
             <div className="circuits-search-bar__actions">
-              <Link href="/composer" className="circuits-search-bar__link">Modifier ma recherche</Link>
+              <Link href="/composer" className="circuits-search-bar__link">{t.editSearch}</Link>
               <button type="button" className="circuits-search-bar__link circuits-search-bar__link--muted" onClick={clearWishes}>
-                Effacer ma recherche
+                {t.clearSearch}
               </button>
             </div>
           </div>
@@ -91,7 +95,7 @@ export default function CircuitsPage() {
           {recommended.length > 0 && (
             <div className="circuits-reco">
               <div className="circuits-reco__header">
-                <h2 className="circuits-reco__title"><Icon name="target" size={20} /> Vos recommandations</h2>
+                <h2 className="circuits-reco__title"><Icon name="target" size={20} /> {t.yourRecommendations}</h2>
               </div>
               <div className="resultats__list">
                 {recommended.map(({ circuit, score, seasonStatus, idealMonths }) => (
@@ -111,15 +115,13 @@ export default function CircuitsPage() {
           {otherSuggestions.length > 0 && (
             <div className="circuits-other">
               <div className="circuits-other__header">
-                <h2 className="circuits-other__title">Envie d'explorer d'autres thématiques ?</h2>
-                <p className="circuits-other__subtitle">
-                  D'autres expériences, parfois plus courtes ou plus longues que les {wishes.duree} jours demandés.
-                </p>
+                <h2 className="circuits-other__title">{t.otherThemesTitle}</h2>
+                <p className="circuits-other__subtitle">{t.otherThemesSubtitle(wishes.duree)}</p>
               </div>
               <div className="circuits-other__row">
                 {otherSuggestions.map(({ theme, circuit }) => (
                   <div key={theme.id} className="circuits-other__item">
-                    <span className="circuits-other__theme"><Icon name={theme.icon} size={14} /> {theme.label}</span>
+                    <span className="circuits-other__theme"><Icon name={theme.icon} size={14} /> {themeLabel(theme, locale)}</span>
                     <CircuitCard circuit={circuit} />
                   </div>
                 ))}

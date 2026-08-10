@@ -1,4 +1,9 @@
-export function adaptItinerary(steps, targetDays) {
+const FREE_DAY = {
+  fr: { title: 'Journée libre', activities: ['Exploration libre', 'Activité optionnelle au choix', 'Repos et détente'] },
+  en: { title: 'Free day', activities: ['Free exploration', 'Optional activity of your choice', 'Rest and relaxation'] },
+}
+
+export function adaptItinerary(steps, targetDays, locale = 'fr') {
   if (!steps?.length) return []
 
   const n = steps.length
@@ -51,14 +56,15 @@ export function adaptItinerary(steps, targetDays) {
   // Trier décroissant pour éviter le décalage d'index à l'insertion
   positions.sort((a, b) => b - a)
 
+  const freeDay = FREE_DAY[locale] ?? FREE_DAY.fr
   for (const pos of positions) {
     const refStep = base[pos - 1]
     base.splice(pos, 0, {
-      title: 'Journée libre',
+      title: freeDay.title,
       description: '',
       lodge: refStep?.lodge ?? null,
       typeHebergement: refStep?.typeHebergement ?? null,
-      activities: ['Exploration libre', 'Activité optionnelle au choix', 'Repos et détente'],
+      activities: freeDay.activities,
       originalDay: null,
       adapted: true,
       extra: true,

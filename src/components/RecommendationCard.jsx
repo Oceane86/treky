@@ -3,28 +3,41 @@ import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import Icon from './Icon'
-import { getGuideById } from '../data/circuits'
-import { THEMES, getMatchedThemes } from '../utils/matching'
-import { MONTHS, getClosure } from '../utils/climate'
+import { getGuideById, localizeCircuit } from '../data/circuits'
+import { THEMES, getMatchedThemes, themeLabel, NIVEAU_LABEL_EN } from '../utils/matching'
+import { getMonths, getClosure } from '../utils/climate'
 import { applyGuideOverrides } from '../utils/guideProfile'
+import { useLocale } from '../context/LocaleContext'
 import './RecommendationCard.css'
 
 const SEASON_COPY = {
-  closed: { icon: 'lock', tone: 'closed', label: 'Fermé à cette période' },
-  avoid: { icon: 'cloudRain', tone: 'avoid', label: 'Période déconseillée' },
-  ok: { icon: 'cloud', tone: 'ok', label: 'Bonne période' },
-  ideal: { icon: 'sun', tone: 'ideal', label: 'Période idéale' },
+  fr: {
+    closed: { icon: 'lock', tone: 'closed', label: 'Fermé à cette période' },
+    avoid: { icon: 'cloudRain', tone: 'avoid', label: 'Période déconseillée' },
+    ok: { icon: 'cloud', tone: 'ok', label: 'Bonne période' },
+    ideal: { icon: 'sun', tone: 'ideal', label: 'Période idéale' },
+  },
+  en: {
+    closed: { icon: 'lock', tone: 'closed', label: 'Closed during this period' },
+    avoid: { icon: 'cloudRain', tone: 'avoid', label: 'Not recommended' },
+    ok: { icon: 'cloud', tone: 'ok', label: 'Good period' },
+    ideal: { icon: 'sun', tone: 'ideal', label: 'Ideal period' },
+  },
 }
 
-function formatMonthsFr(monthIndexes) {
-  const labels = monthIndexes.map((m) => MONTHS[m])
+function formatMonths(monthIndexes, locale) {
+  const months = getMonths(locale)
+  const labels = monthIndexes.map((m) => months[m])
   if (labels.length <= 1) return labels.join('')
-  return `${labels.slice(0, -1).join(', ')} et ${labels[labels.length - 1]}`
+  const and = locale === 'en' ? 'and' : 'et'
+  return `${labels.slice(0, -1).join(', ')} ${and} ${labels[labels.length - 1]}`
 }
 
-export default function RecommendationCard({ circuit, score, seasonStatus, idealMonths, themeIds, maxScore = 150 }) {
+export default function RecommendationCard({ circuit: baseCircuit, score, seasonStatus, idealMonths, themeIds, maxScore = 150 }) {
+  const { locale } = useLocale()
+  const circuit = localizeCircuit(baseCircuit, locale)
   const pct = Math.max(8, Math.round((score / maxScore) * 100))
-  const baseGuides = (circuit.guideIds ?? []).map(getGuideById).filter(Boolean).slice(0, 2)
+  const baseGuides = (baseCircuit.guideIds ?? []).map(getGuideById).filter(Boolean).slice(0, 2)
   const [guides, setGuides] = useState(baseGuides)
 
   useEffect(() => {
@@ -32,9 +45,15 @@ export default function RecommendationCard({ circuit, score, seasonStatus, ideal
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [circuit.id])
 
-  const season = seasonStatus ? SEASON_COPY[seasonStatus] : null
-  const closure = getClosure(circuit)
-  const matchedThemes = getMatchedThemes(circuit, themeIds)
+  const season = seasonStatus ? SEASON_COPY[locale][seasonStatus] : null
+  const closure = getClosure(baseCircuit)
+  const matchedThemes = getMatchedThemes(baseCircuit, themeIds)
+  const levelLabel = locale === 'en' ? (NIVEAU_LABEL_EN[circuit.level] ?? circuit.level) : circuit.level
+  const daysLabel = locale === 'en' ? 'days' : 'jours'
+
+  const copy = locale === 'en'
+    ? { compatible: 'compatible', closeTheme: 'Related theme', bestPeriod: 'Best period', compatibleGuides: 'Compatible guides', viewCircuit: 'View full trek' }
+    : { compatible: 'compatible', closeTheme: 'Thématique proche', bestPeriod: 'Meilleure période', compatibleGuides: 'Guides compatibles', viewCircuit: 'Voir le circuit complet' }
 
   return (
     <div className="resultats__card">
@@ -55,18 +74,18 @@ export default function RecommendationCard({ circuit, score, seasonStatus, ideal
           </div>
           <div className="resultats__match">
             <span className="resultats__match-val">{pct}%</span>
-            <span className="resultats__match-label">compatible</span>
+            <span className="resultats__match-label">{copy.compatible}</span>
           </div>
         </div>
 
         <div className="resultats__tags">
           <span className={`resultats__tag ${matchedThemes.length ? 'resultats__tag--match' : ''}`}>
             {matchedThemes.length
-              ? `✓ ${THEMES.filter((t) => matchedThemes.includes(t.id)).map((t) => t.label).join(', ')}`
-              : 'Thématique proche'}
+              ? `✓ ${THEMES.filter((t) => matchedThemes.includes(t.id)).map((t) => themeLabel(t, locale)).join(', ')}`
+              : copy.closeTheme}
           </span>
-          <span className="resultats__tag">{circuit.level}</span>
-          <span className="resultats__tag">{circuit.minDays}–{circuit.maxDays ?? circuit.recommendedDays} jours</span>
+          <span className="resultats__tag">{levelLabel}</span>
+          <span className="resultats__tag">{circuit.minDays}–{circuit.maxDays ?? circuit.recommendedDays} {daysLabel}</span>
         </div>
 
         {season && (
@@ -76,7 +95,7 @@ export default function RecommendationCard({ circuit, score, seasonStatus, ideal
               <strong>{season.label}</strong>
               {seasonStatus === 'closed' && closure && ` — ${closure.note}`}
               {seasonStatus !== 'closed' && idealMonths.length > 0 && (
-                <> · Meilleure période : {formatMonthsFr(idealMonths)}</>
+                <> · {copy.bestPeriod} : {formatMonths(idealMonths, locale)}</>
               )}
             </span>
           </div>
@@ -84,13 +103,13 @@ export default function RecommendationCard({ circuit, score, seasonStatus, ideal
         {!season && idealMonths.length > 0 && (
           <div className="resultats__season resultats__season--ideal">
             <Icon name="sun" size={16} />
-            <span><strong>Meilleure période :</strong> {formatMonthsFr(idealMonths)}</span>
+            <span><strong>{copy.bestPeriod} :</strong> {formatMonths(idealMonths, locale)}</span>
           </div>
         )}
 
         {guides.length > 0 && (
           <div className="resultats__guides">
-            <span className="resultats__guides-label">Guides compatibles</span>
+            <span className="resultats__guides-label">{copy.compatibleGuides}</span>
             <div className="resultats__guides-list">
               {guides.map((g) => (
                 <div key={g.id} className="resultats__guide">
@@ -113,7 +132,7 @@ export default function RecommendationCard({ circuit, score, seasonStatus, ideal
         )}
 
         <Link href={`/circuits/${circuit.slug}`} className="btn-primary resultats__cta">
-          Voir le circuit complet →
+          {copy.viewCircuit} →
         </Link>
       </div>
     </div>

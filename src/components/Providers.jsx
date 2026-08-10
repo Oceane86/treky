@@ -4,6 +4,7 @@ import { AuthProvider } from '../context/AuthContext'
 import { CurrencyProvider } from '../context/CurrencyContext'
 import { BookingProvider } from '../context/BookingContext'
 import { FavoritesProvider } from '../context/FavoritesContext'
+import { LocaleProvider } from '../context/LocaleContext'
 import Navbar from './Navbar'
 import Footer from './Footer'
 import InstallPWA from './InstallPWA'
@@ -22,6 +23,7 @@ export default function Providers({ children }) {
 
   return (
     <AuthProvider>
+      <LocaleProvider>
       <CurrencyProvider>
         <FavoritesProvider>
         <BookingProvider>
@@ -32,6 +34,7 @@ export default function Providers({ children }) {
         </BookingProvider>
         </FavoritesProvider>
       </CurrencyProvider>
+      </LocaleProvider>
     </AuthProvider>
   )
 }

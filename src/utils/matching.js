@@ -5,27 +5,37 @@ import { guides } from '../data/circuits'
 import { getClimatForMonth, isClosedInMonth, getIdealMonths } from './climate'
 
 export const THEMES = [
-  { id: 'aventure-sommets', label: 'Aventure & Sommets', icon: 'mountain' },
-  { id: 'paysages-mineraux', label: 'Paysages minéraux', icon: 'gem' },
-  { id: 'faune-biodiversite', label: 'Faune & Biodiversité', icon: 'lizard' },
-  { id: 'culture-traditions', label: 'Culture & Traditions', icon: 'masks' },
-  { id: 'histoire-patrimoine', label: 'Histoire & Patrimoine', icon: 'landmark' },
-  { id: 'saveurs-artisanat', label: 'Saveurs & Artisanat', icon: 'leaf' },
-  { id: 'plages-ocean', label: 'Plages & Océan', icon: 'waves' },
-  { id: 'expedition-integrale', label: 'Expédition intégrale', icon: 'compass' },
+  { id: 'aventure-sommets', label: 'Aventure & Sommets', labelEn: 'Adventure & Summits', icon: 'mountain' },
+  { id: 'paysages-mineraux', label: 'Paysages minéraux', labelEn: 'Mineral Landscapes', icon: 'gem' },
+  { id: 'faune-biodiversite', label: 'Faune & Biodiversité', labelEn: 'Wildlife & Biodiversity', icon: 'lizard' },
+  { id: 'culture-traditions', label: 'Culture & Traditions', labelEn: 'Culture & Traditions', icon: 'masks' },
+  { id: 'histoire-patrimoine', label: 'Histoire & Patrimoine', labelEn: 'History & Heritage', icon: 'landmark' },
+  { id: 'saveurs-artisanat', label: 'Saveurs & Artisanat', labelEn: 'Flavors & Crafts', icon: 'leaf' },
+  { id: 'plages-ocean', label: 'Plages & Océan', labelEn: 'Beaches & Ocean', icon: 'waves' },
+  { id: 'expedition-integrale', label: 'Expédition intégrale', labelEn: 'Full Expedition', icon: 'compass' },
 ]
 
 // "Lodge partenaire" regroupe les hébergements gérés par des partenaires Treky
 // (lodge, hôtel, bungalow), distincts de l'hébergement chez l'habitant et du bivouac.
 export const HEBERGEMENT_OPTIONS = [
-  { id: 'habitant', label: "Chez l'habitant", icon: 'user', types: ["Chez l'habitant"] },
-  { id: 'lodge', label: 'Lodge partenaire', icon: 'landmark', types: ['Lodge', 'Hôtel', 'Bungalow'] },
-  { id: 'bivouac', label: 'Bivouac', icon: 'mountain', types: ['Bivouac'] },
+  { id: 'habitant', label: "Chez l'habitant", labelEn: 'With locals', icon: 'user', types: ["Chez l'habitant"] },
+  { id: 'lodge', label: 'Lodge partenaire', labelEn: 'Partner lodge', icon: 'landmark', types: ['Lodge', 'Hôtel', 'Bungalow'] },
+  { id: 'bivouac', label: 'Bivouac', labelEn: 'Bivouac', icon: 'mountain', types: ['Bivouac'] },
 ]
 
 export const NIVEAU_OPTIONS = ['Facile', 'Modéré', 'Sportif', 'Engagé']
+export const NIVEAU_LABEL_EN = { Facile: 'Easy', 'Modéré': 'Moderate', Sportif: 'Challenging', 'Engagé': 'Demanding' }
 
 export const LANGUE_OPTIONS = [...new Set(guides.flatMap((g) => g.langues))]
+export const LANGUE_LABEL_EN = { Français: 'French', Malgache: 'Malagasy', Anglais: 'English', Italien: 'Italian' }
+
+export function themeLabel(theme, locale) {
+  return locale === 'en' ? theme.labelEn : theme.label
+}
+
+export function hebergementLabel(option, locale) {
+  return locale === 'en' ? option.labelEn : option.label
+}
 
 export function getHebergementTypes(circuit) {
   return [...new Set((circuit.steps ?? []).map((s) => s.typeHebergement).filter(Boolean))]

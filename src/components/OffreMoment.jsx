@@ -2,6 +2,8 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useCurrency } from '../context/CurrencyContext'
+import { useLocale } from '../context/LocaleContext'
+import { getUI } from '../utils/i18n'
 import Icon from './Icon'
 import './OffreMoment.css'
 
@@ -10,20 +12,22 @@ const PRICE_AR = 4_000_000
 
 export default function OffreMoment() {
   const { format } = useCurrency()
+  const { locale } = useLocale()
+  const t = getUI(locale).home
 
   return (
     <section className="offre section-padding" id="offre">
       <div className="container">
         <div className="offre__header" data-reveal>
-          <h2 className="section-title">Notre offre du moment</h2>
+          <h2 className="section-title">{t.offreTitle}</h2>
         </div>
 
         <div className="offre__card" data-reveal>
           <Link href={`/circuits/${SLUG}`} className="offre__image-wrap offre__image-link">
-            <span className="badge badge-offer offre__badge">Offre spéciale</span>
+            <span className="badge badge-offer offre__badge">{t.offreBadge}</span>
             <Image
               src="/images/sainte_marie.jpg"
-              alt="Sainte-Marie : Pirates & Baleines"
+              alt={t.offreCircuitTitle}
               fill
               sizes="(max-width: 900px) 100vw, 50vw"
               style={{ objectFit: 'cover' }}
@@ -32,36 +36,32 @@ export default function OffreMoment() {
           </Link>
 
           <div className="offre__content">
-            <h3 className="offre__title">Sainte-Marie : Pirates &amp; Baleines</h3>
-            <p className="offre__description">
-              Découvrez l'île Sainte-Marie et son cimetière pirate unique au monde, puis partez en
-              mer observer les baleines à bosse. Plages sauvages, villages de pêcheurs et forêts
-              côtières font de ce circuit une escapade inoubliable.
-            </p>
+            <h3 className="offre__title">{t.offreCircuitTitle}</h3>
+            <p className="offre__description">{t.offreDescription}</p>
             <ul className="offre__details">
               <li>
                 <span className="offre__detail-icon"><Icon name="pin" size={16} /></span>
-                <span>Île Sainte-Marie, côte est de Madagascar</span>
+                <span>{t.offreLocation}</span>
               </li>
               <li>
                 <span className="offre__detail-icon"><Icon name="clock" size={16} /></span>
-                <span>4 à 5 jours</span>
+                <span>{t.offreDuration}</span>
               </li>
               <li>
                 <span className="offre__detail-icon"><Icon name="users" size={16} /></span>
-                <span>Groupe de 2 à 12 personnes</span>
+                <span>{t.offreGroup}</span>
               </li>
               <li>
                 <span className="offre__detail-icon"><Icon name="star" size={16} /></span>
-                <span>Niveau facile</span>
+                <span>{t.offreLevel}</span>
               </li>
             </ul>
             <div className="offre__price-row">
               <div className="offre__price">
-                <span className="offre__price-label">À partir de</span>
+                <span className="offre__price-label">{t.offreFrom}</span>
                 <span className="offre__price-amount">{format(PRICE_AR)}</span>
               </div>
-              <Link href={`/circuits/${SLUG}`} className="btn-primary">Voir le circuit</Link>
+              <Link href={`/circuits/${SLUG}`} className="btn-primary">{t.offreViewCircuit}</Link>
             </div>
           </div>
         </div>

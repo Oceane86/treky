@@ -1,8 +1,14 @@
+'use client'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useLocale } from '../context/LocaleContext'
+import { getUI } from '../utils/i18n'
 import './Hero.css'
 
 export default function Hero() {
+  const { locale } = useLocale()
+  const t = getUI(locale).home
+
   return (
     <section className="hero">
       <div className="hero__bg">
@@ -18,21 +24,18 @@ export default function Hero() {
       </div>
 
       <div className="hero__content container">
-        <span className="hero__eyebrow">Agence de trekking à Madagascar</span>
+        <span className="hero__eyebrow">{t.heroEyebrow}</span>
         <h1 className="hero__title">
-          Le trek qui vous connecte<br />
-          à <em>l'essentiel.</em>
+          {t.heroTitleLine1}<br />
+          <em>{t.heroTitleEm}</em>
         </h1>
-        <p className="hero__subtitle">
-          Partez à l'aventure avec nos guides experts au cœur des paysages
-          sauvages et préservés de Madagascar.
-        </p>
+        <p className="hero__subtitle">{t.heroSubtitle}</p>
         <div className="hero__actions">
           <Link href="/composer" className="btn-primary hero__cta">
-            Composer mon trek sur-mesure
+            {t.heroCta}
           </Link>
           <a href="#circuits" className="btn-outline-white">
-            Découvrir nos circuits
+            {t.heroSecondary}
           </a>
         </div>
       </div>

@@ -1,6 +1,8 @@
 'use client'
 import { useState } from 'react'
 import Image from 'next/image'
+import { useLocale } from '../context/LocaleContext'
+import { getUI } from '../utils/i18n'
 import './Testimonials.css'
 
 const testimonials = [
@@ -32,6 +34,8 @@ const testimonials = [
 
 export default function Testimonials() {
   const [active, setActive] = useState(0)
+  const { locale } = useLocale()
+  const t = getUI(locale).home
 
   return (
     <section className="testimonials section-padding" id="avis">
@@ -40,9 +44,9 @@ export default function Testimonials() {
         <div className="testimonials__main" data-reveal>
           <div className="testimonials__left">
             <h2 className="section-title testimonials__title">
-              Leurs pas,<br />leurs mots
+              {t.testimonialsTitle}<br />{t.testimonialsTitle2}
             </h2>
-            <a href="#avis" className="btn-primary testimonials__btn">Voir plus</a>
+            <a href="#avis" className="btn-primary testimonials__btn">{t.testimonialsCta}</a>
           </div>
 
           <div className="testimonials__right">

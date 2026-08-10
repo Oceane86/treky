@@ -34,6 +34,45 @@
       'Crème solaire et chapeau indispensables',
       'Saison sèche recommandée (avril à novembre)',
     ],
+    en: {
+      name: 'Isalo Discovery Trek',
+      region: 'Southern Madagascar',
+      location: "Isalo National Park, Ranohira",
+      teaser: 'Canyon des Makis, natural pools and Monkey Ridge: the best of Isalo in 3-4 days.',
+      description:
+        "The Isalo Discovery Trek is the ideal introduction to Malagasy trekking. Over 3 to 4 days, explore the finest sites of Isalo National Park: Canyon des Makis and its lemurs, the natural sandstone pools, and the panorama from Isalo Window. Short distances, gentle elevation gain: the perfect format to discover trekking without complexity, while keeping that sense of adventure unique to the pink sandstone of southern Madagascar.",
+      highlights: ['Canyon des Makis', 'Natural pool', 'Isalo Window', 'Beginner-friendly'],
+      included: ['Lodge accommodation', 'Full board', 'Certified local guide', 'Park entry fee'],
+      non_inclus: ['Flights or transport to Ranohira', 'Alcoholic beverages', 'Personal expenses'],
+      infos_pratiques: [
+        'Access via RN7 from Antananarivo (10 to 12h drive) or flight to Tuléar/Ihosy then road transfer (about 2h)',
+        'Ideal for families and first-time hikers',
+        'Sunscreen and a hat are essential',
+        'Dry season recommended (April to November)',
+      ],
+      steps: [
+        {
+          title: 'Ranohira · Welcome',
+          description: 'Check in at the lodge, circuit briefing and introduction to the park.',
+          activities: ['Circuit and safety briefing', 'Introduction to the park\'s flora & fauna', 'Sunset over the pink sandstone'],
+        },
+        {
+          title: 'Canyon des Makis + Natural Pool',
+          description: 'Hike through the canyon in search of lemurs, then a swim in the natural sandstone pools.',
+          activities: ['Canyon des Makis hike (4 km)', 'Brown lemur and sifaka spotting', 'Swim in the natural sandstone pool'],
+        },
+        {
+          title: 'Monkey Ridge',
+          description: 'Panoramic view over the southern savanna from the emblematic ridge.',
+          activities: ['Ascent of Monkey Ridge', '360° panorama over the savanna', 'Nocturnal wildlife spotting'],
+        },
+        {
+          title: 'Isalo Window + Return',
+          description: 'Pass by the natural arch of Isalo Window and closing ceremony in Ranohira.',
+          activities: ['Isalo Window natural arch', 'Sunset photography', 'Closing ceremony with your guide'],
+        },
+      ],
+    },
     coordonnees_gps: { lat: -22.5, lng: 45.4 },
     guideIds: [1, 2],
     waypoints: [
@@ -109,6 +148,50 @@
       'Équipement froid indispensable en altitude',
       'Saison sèche obligatoire (mai à octobre)',
     ],
+    en: {
+      name: 'Andringitra Immersion Trek',
+      region: 'Southern Madagascar',
+      location: 'Andringitra National Park, Ambalavao',
+      teaser: 'Ascent of Pic Boby (2,876 m), the highest accessible summit in Madagascar.',
+      description:
+        "The Andringitra Immersion Trek takes hikers to the summit of Pic Boby (2,876 m), the highest accessible point in Madagascar. Between the steep Tsaranoro valley, the high-altitude base camp and the final ascent, every stage rewards the effort with unforgettable panoramas. The Moderate level comes from the altitude and the nighttime cold at the bivouac, not from technicality: no mountaineering experience is required, just good fitness and the will to get up before dawn.",
+      highlights: ['Pic Boby 2,876 m', 'Tsaranoro Valley', 'High-altitude base camp', 'Panoramic views'],
+      included: ['High-altitude bivouac', 'Full board', 'Certified mountain guide', 'Porters'],
+      non_inclus: ['Flights to Ambalavao', 'Adventure insurance', 'Personal gear'],
+      infos_pratiques: [
+        'Access via RN7 from Antananarivo (about 7 to 8h drive) or flight to Fianarantsoa then transfer (1h30)',
+        'Good physical condition required',
+        'Cold-weather gear essential at altitude',
+        'Dry season mandatory (May to October)',
+      ],
+      steps: [
+        {
+          title: 'Ambalavao · Departure',
+          description: 'Welcome and drive to Andringitra National Park.',
+          activities: ['Mountain and safety briefing', 'Visit to the Antaimoro paper market', 'High-altitude gear preparation'],
+        },
+        {
+          title: 'Tsaranoro Valley',
+          description: 'First day of walking through the steep valley with its granite walls.',
+          activities: ['Tsaranoro Valley hike (6 km)', 'Introduction to climbing on granite walls', 'Highland wildlife spotting'],
+        },
+        {
+          title: 'Pic Boby Base Camp',
+          description: "Settling in at altitude, preparing for the next day's ascent.",
+          activities: ['Ascent to base camp', 'Altitude acclimatization', 'Stargazing with zero light pollution'],
+        },
+        {
+          title: 'Pic Boby Summit · 2,876 m',
+          description: "Morning ascent to Madagascar's highest accessible point, 360° view.",
+          activities: ['Pic Boby ascent (5am departure)', '360° view over all the massifs', 'Descent and rest at camp'],
+        },
+        {
+          title: 'Descent + Return',
+          description: 'Gradual descent back to Ambalavao and end of the trek.',
+          activities: ['Gradual descent', 'Hot bath after the bivouac', 'Closing meal with the team'],
+        },
+      ],
+    },
     coordonnees_gps: { lat: -22.2, lng: 46.9 },
     guideIds: [1, 3],
     waypoints: [
@@ -192,6 +275,60 @@
       'Saison sèche obligatoire (mai à novembre)',
       'Chaussures de randonnée à semelle rigide indispensables',
     ],
+    en: {
+      name: 'Tsingy Maze Trek',
+      region: 'Western Madagascar',
+      location: 'Tsingy de Bemaraha, Morondava',
+      teaser: 'UNESCO-listed limestone forest, monkey bridges and dugout canoe on the Manambolo river.',
+      description:
+        "The Tsingy Maze plunges you into the heart of Madagascar's most spectacular natural site. The Tsingy de Bemaraha, a jagged limestone forest listed as a UNESCO World Heritage site, is crossed via monkey bridges and via ferrata. The dugout canoe descent on the Manambolo river completes an extraordinary experience. The Challenging level comes from the physical and mental demands of the suspended passages, not from any particular technicality: no climbing experience is needed, the equipment and guiding take care of the rest.",
+      highlights: ['Tsingy de Bemaraha UNESCO', 'Monkey bridges', 'Avenue of the Baobabs', 'Manambolo dugout canoe'],
+      included: ['Lodge and bivouac accommodation', 'Full board', 'Specialized Tsingy guide', 'Via ferrata equipment'],
+      non_inclus: ['Flights to Morondava', 'Adventure insurance', 'Personal expenses'],
+      infos_pratiques: [
+        'Direct flight Antananarivo → Morondava (1h) recommended; the RN35 track is long and sometimes impassable in the rainy season',
+        'No fear of heights recommended for the monkey bridges',
+        'Dry season mandatory (May to November)',
+        'Stiff-soled hiking boots essential',
+      ],
+      steps: [
+        {
+          title: 'Morondava · Departure',
+          description: 'Welcome, via ferrata safety briefing and drive to Bemaraha.',
+          activities: ['Via ferrata safety briefing', 'Introduction to your specialized Tsingy guide', 'Sunset over giant baobabs'],
+        },
+        {
+          title: 'Avenue of the Baobabs',
+          description: 'Sunset visit to the avenue of giant baobabs.',
+          activities: ['Avenue of the Baobabs at sunrise', 'Visit to a Sakalava village', 'Via ferrata gear preparation'],
+        },
+        {
+          title: 'Tsingy · Monkey Bridges',
+          description: 'Crossing the Grand Tsingy via monkey bridges and elevated walkways.',
+          activities: ['Crossing via suspended monkey bridges', 'Exploring the limestone labyrinth', 'Sifaka and lemur spotting'],
+        },
+        {
+          title: 'Small Tsingy + Cave',
+          description: 'Exploring the Small Tsingy and visiting the limestone caves.',
+          activities: ['Small Tsingy exploration', 'Limestone caves with bats', 'Mineral landscape photography'],
+        },
+        {
+          title: 'Manambolo River · Dugout Canoe',
+          description: 'Traditional dugout canoe descent on the Manambolo river.',
+          activities: ['Traditional dugout canoe descent', 'Fishing with local canoeists', 'Riverside camp'],
+        },
+        {
+          title: 'Wild Coast',
+          description: 'Free day on the wild beaches of the west coast.',
+          activities: ['Wild west coast beach', 'Snorkeling in turquoise waters', 'Meeting Vezo fishermen'],
+        },
+        {
+          title: 'Return to Morondava',
+          description: 'Drive back and end of the circuit.',
+          activities: ['Drive back to Morondava', 'Local craft market', 'End-of-circuit celebration'],
+        },
+      ],
+    },
     coordonnees_gps: { lat: -18.5, lng: 44.7 },
     guideIds: [1, 2],
     waypoints: [
@@ -292,6 +429,61 @@
       'Saison sèche strictement obligatoire (juin à septembre) : rivières en crue et pistes impraticables le reste de l\'année',
       'Groupe limité à 8 personnes maximum',
     ],
+    en: {
+      name: 'Grand Makay Traverse',
+      region: 'South-West Madagascar',
+      location: 'Makay Massif, Atsimo-Andrefana region',
+      teaser: 'Wild gorges, fossil forest and bivouacs at the heart of Madagascar\'s most remote massif.',
+      description:
+        "The Grand Makay Traverse is an expedition into one of Madagascar's last untouched territories. Labyrinthine canyons, fossil forests and steep rivers make up an itinerary reserved for seasoned adventurers, far from any infrastructure. The massif is served by no road: it has to be earned, and that's also what makes it one of the last truly wild sanctuaries in Madagascar.",
+      highlights: ['Labyrinthine canyons', 'Fossil forest', 'River bivouac', 'Preserved wilderness'],
+      included: ['Full bivouac equipment', 'Full board in the field', 'Certified expedition guide', 'Porters and mules'],
+      non_inclus: ['Flights to Tuléar', 'Mandatory expedition insurance', 'Personal technical gear'],
+      infos_pratiques: [
+        'Access only by 4x4 track from Tuléar (1 to 2 days depending on weather); no paved road serves the massif',
+        'No phone network or fast evacuation once inside the massif: good physical condition and mental self-reliance required',
+        'Prior self-sufficient bivouac experience required',
+        'Dry season strictly mandatory (June to September): rivers in flood and impassable tracks the rest of the year',
+        'Group limited to 8 people maximum',
+      ],
+      steps: [
+        {
+          title: 'Tuléar · Departure',
+          description: "Expedition briefing, gear check, then departure by 4x4 towards the massif: 1 to 2 days of track depending on weather, no paved road approaching it.",
+          activities: ['Expedition briefing and safety protocol', 'Bivouac gear check', 'Introduction to the porter and mule team', 'Transfer by 4x4 to the massif\'s entry point'],
+        },
+        {
+          title: 'Makay Canyon Entry D2-3',
+          description: 'Entering the gorges, striking mineral landscape and first bivouacs.',
+          activities: ['Entering the labyrinthine gorges', 'First riverside bivouacs', 'Wildlife spotting in the Makay'],
+        },
+        {
+          title: 'Gorges + River Bivouac D4-5',
+          description: 'Crossing the narrow gorges and setting up camp by the river.',
+          activities: ['Crossing narrow gorges', 'Swimming in a clear natural river', 'Exploring caverns and rock shelters'],
+        },
+        {
+          title: 'Fossil Forest D6',
+          description: 'Discovering the Makay fossil forest, a unique geological heritage.',
+          activities: ['Discovering a petrified forest unique in the world', 'Identifying fossil trees with a geologist-guide', 'Stargazing in isolated terrain'],
+        },
+        {
+          title: 'Plateau Traverse D7-8',
+          description: 'Ascent and crossing of the central plateau with panoramic views.',
+          activities: ['Ascent of the central plateau', '360° panoramic views', 'Volcanic sunset'],
+        },
+        {
+          title: 'Canyon Exit D9',
+          description: 'Reaching the canyon exit, end of the wild immersion.',
+          activities: ['Last night in wild terrain', 'Expedition debrief with guides', 'Campfire and travel stories'],
+        },
+        {
+          title: 'Return to Tuléar D10',
+          description: 'Drive back and end-of-expedition celebration.',
+          activities: ['Drive back to Tuléar', 'Shower, rest and a gourmet meal', 'End-of-expedition celebration'],
+        },
+      ],
+    },
     coordonnees_gps: { lat: -22.0, lng: 44.5 },
     guideIds: [1, 3],
     waypoints: [
@@ -391,6 +583,50 @@
       'Idéal pour familles et amateurs de culture',
       'Apporter des petits cadeaux pour les villageois',
     ],
+    en: {
+      name: 'Zafimaniry Culture Trek',
+      region: 'Madagascar Highlands',
+      location: "Ambositra, Amoron'i Mania region",
+      teaser: 'Zafimaniry villages, UNESCO-listed wood carving and paths between hills.',
+      description:
+        "Meet the Zafimaniry people, whose wood-carving art is listed as UNESCO Intangible Cultural Heritage. Between Ambositra and the hilltop villages of Antoetra, this cultural trek reveals ancestral craftsmanship and an authentic way of life in the Highlands. The walks between villages are short and the pace is set by the encounters: here, the Easy level isn't a compromise, it's a deliberate choice to leave all the room for exchange.",
+      highlights: ['UNESCO wood carving', 'Antoetra Village', 'Craft workshops', 'Inter-village paths'],
+      included: ['Homestay accommodation', 'Traditional meals', 'Bilingual cultural guide', 'Workshop visits'],
+      non_inclus: ['Transport to Ambositra', 'Craft purchases', 'Tips'],
+      infos_pratiques: [
+        'Access via RN7 from Antananarivo (about 5h drive)',
+        'Accessible year-round, avoid January-February (rains)',
+        'Ideal for families and culture enthusiasts',
+        'Bring small gifts for villagers',
+      ],
+      steps: [
+        {
+          title: 'Ambositra · Arrival',
+          description: 'Welcome and introduction to Zafimaniry art by your cultural guide.',
+          activities: ['Introduction to Zafimaniry art with a cultural guide', 'Ambositra craft market', 'Traditional family Malagasy meal'],
+        },
+        {
+          title: 'Antoetra Village · Wood Carving',
+          description: 'Visit to the emblematic village, demonstration of ancestral carving techniques.',
+          activities: ['Visit to wood carving workshops', 'Demonstration of ancestral techniques', 'Community meal in the village'],
+        },
+        {
+          title: 'Walk Between Villages',
+          description: 'Hike on inter-village trails through hills and pine forests.',
+          activities: ['Inter-village trail hike (8 km)', 'Highland bird spotting', 'Meeting local families'],
+        },
+        {
+          title: 'Craft Workshop',
+          description: 'Taking part in a carving workshop and meeting master craftsmen.',
+          activities: ['Personal wood carving workshop', 'Meeting UNESCO master craftsmen', 'Sharing a meal and stories'],
+        },
+        {
+          title: 'Return to Ambositra',
+          description: 'Local craft market and departure with your souvenirs.',
+          activities: ['Morning craft market', 'Ethically certified craft purchases', 'Drive back with your souvenirs'],
+        },
+      ],
+    },
     coordonnees_gps: { lat: -20.5, lng: 47.2 },
     guideIds: [2, 3],
     waypoints: [
@@ -474,6 +710,55 @@
       "Idéal pour les amateurs de gastronomie et de nature",
       'Possibilité de rapporter des épices certifiées bio',
     ],
+    en: {
+      name: 'Scents & Spices Trek',
+      region: 'Eastern Madagascar',
+      location: 'Mananjary, Vatovavy-Fitovinany region',
+      teaser: "Vanilla, clove, ylang-ylang: an olfactory odyssey through Eastern Madagascar's plantations.",
+      description:
+        "The Scents & Spices Trek takes you into the heart of the plantations that made Madagascar world-famous. From SAVA vanilla to ylang-ylang blossoms, by way of clove forests, live a unique sensory experience blending culture, nature and the local economy. The pace is deliberately slow, designed to take the time to smell, taste and talk with producers rather than rack up kilometers.",
+      highlights: ['SAVA vanilla plantation', 'Clove forest', 'Ylang-ylang distillery', 'Spice market'],
+      included: ['Lodge on the edge of the plantation', 'Full board', 'Naturalist guide', 'Plantation visits'],
+      non_inclus: ['Flights to Mananjary', 'Spice and oil purchases', 'Optional activities'],
+      infos_pratiques: [
+        'Flight Antananarivo → Mananjary (55 min) or road via RN25 (8 to 10h, track degraded in places)',
+        'Dry season recommended for plantation trails',
+        'Ideal for food and nature lovers',
+        'Option to bring back certified organic spices',
+      ],
+      steps: [
+        {
+          title: 'Mananjary · Departure',
+          description: "Welcome and introduction to the history of Malagasy spices.",
+          activities: ["Introduction to the history of Malagasy spices", 'Tour of the estate and aromatic gardens', 'Gourmet meal with local spices'],
+        },
+        {
+          title: 'SAVA Vanilla Plantation',
+          description: 'Visit to the vanilla plantations, hand pollination and pod drying.',
+          activities: ['Visit to Bourbon vanilla plantations', 'Hand pollination demonstration', 'Pod drying and preparation workshop'],
+        },
+        {
+          title: 'Clove Forest',
+          description: 'Hike through clove tree forests, traditional harvesting and processing.',
+          activities: ['Clove forest hike (5 km)', 'Traditional clove harvesting', 'Artisanal processing and distillation'],
+        },
+        {
+          title: 'Ylang-Ylang Distillery',
+          description: "Visit to an artisanal distillery, extracting ylang-ylang essential oil.",
+          activities: ["Visit to an artisanal ylang-ylang distillery", "Essential oil extraction", 'DIY natural cosmetics workshop'],
+        },
+        {
+          title: 'Spice Market',
+          description: 'Immersion in the local market, meeting producers and cooperatives.',
+          activities: ['Spice market immersion', 'Meeting local cooperatives', 'Traditional spiced Malagasy cuisine'],
+        },
+        {
+          title: 'Return to Mananjary',
+          description: "Final tasting and departure with your spices from the East.",
+          activities: ['Final tasting of local produce', 'Building a certified organic spice box', "Drive back with your olfactory souvenirs"],
+        },
+      ],
+    },
     coordonnees_gps: { lat: -20.6, lng: 48.3 },
     guideIds: [2, 3],
     waypoints: [
@@ -564,6 +849,39 @@
       'Meilleure observation des Indris le matin',
       "Accessible toute l'année, éviter janvier-février (pluies fortes)",
     ],
+    en: {
+      name: 'Andasibe Biodiversity Trek',
+      region: 'Eastern Madagascar',
+      location: 'Andasibe-Mantadia National Park',
+      teaser: "Indris, nocturnal lemurs and primary forest 3h from Antananarivo.",
+      description:
+        "The Andasibe Biodiversity Trek is the ideal gateway to Madagascar's unique wildlife. Just 3h from Antananarivo, the park is home to the famous Indri — the largest lemur in the world — as well as exceptional biodiversity in primary forest, observable by day and by night. Its proximity to the capital and short format make it an excellent introduction to Malagasy primary forest, with no particular physical preparation required.",
+      highlights: ['Giant Indri', 'Nocturnal lemurs', 'Mantadia primary forest', 'Accessible year-round'],
+      included: ['Lodge on the forest edge', 'Full board', 'Naturalist guide', 'Park entry fees'],
+      non_inclus: ['Transport from Antananarivo', 'Free evenings', 'Optional activities'],
+      infos_pratiques: [
+        'Departure possible from Antananarivo (3h drive)',
+        'Best Indri sightings in the morning',
+        'Accessible year-round, avoid January-February (heavy rain)',
+      ],
+      steps: [
+        {
+          title: 'Andasibe · Indri + Nocturnal Lemurs',
+          description: 'Discovering the park, morning Indri observation and headlamp night walk.',
+          activities: ['Morning Indri observation (calls at sunrise)', 'Night walk with headlamps to spot lemurs', "Introduction to the Indri's territorial calls"],
+        },
+        {
+          title: 'Mantadia · Primary Forest',
+          description: "Hiking in Mantadia's primary forest, rich in orchids, chameleons and endemic birds.",
+          activities: ['Mantadia primary forest hike (6 km)', 'Identifying orchids, chameleons and frogs', 'Endemic bird spotting (vasa parrot, coua)'],
+        },
+        {
+          title: 'Community Reserve + Return',
+          description: 'Visiting the community reserve, meeting local associations and drive back to Antananarivo.',
+          activities: ['Visit to the Mitsinjo community reserve', 'Meeting conservation associations', 'Drive back to Antananarivo'],
+        },
+      ],
+    },
     coordonnees_gps: { lat: -18.9, lng: 48.4 },
     guideIds: [1, 2],
     waypoints: [
@@ -631,6 +949,45 @@
       "Idéal pour les passionnés d'histoire et de culture",
       'Prévoir des tenues respectueuses pour les sites sacrés',
     ],
+    en: {
+      name: 'Ambohimanga History Trek',
+      region: 'Madagascar Highlands',
+      location: 'Antananarivo · Ambohimanga · Fianarantsoa',
+      teaser: "Royal palaces, a UNESCO sacred hill and the old town of Fianarantsoa: Madagascar's historical soul.",
+      description:
+        "The Ambohimanga History Trek retraces the noblest pages of Malagasy history. From the Rova of Antananarivo to the UNESCO-listed royal hill of Ambohimanga, by way of the old town streets of Fianarantsoa, this cultural circuit is an immersion in the heritage of the highlands. The deliberately contemplative pace leaves time to soak in the history of these places rather than rushing through them.",
+      highlights: ['Rova of Antananarivo', 'Ambohimanga UNESCO royal hill', 'Fianarantsoa old town', 'Merina heritage'],
+      included: ['Boutique hotel accommodation', 'Full board', 'Historian guide', 'Monument entry fees'],
+      non_inclus: ['Flights', 'Souvenir purchases', 'Personal expenses'],
+      infos_pratiques: [
+        "Ambohimanga is 1h from Antananarivo; link to Fianarantsoa via RN7 (about 7h drive)",
+        'Accessible year-round',
+        'Ideal for history and culture enthusiasts',
+        'Bring respectful clothing for sacred sites',
+      ],
+      steps: [
+        {
+          title: 'Antananarivo · Rova',
+          description: "Visit to the Queen's Palace and a panorama over the capital from the sacred hill.",
+          activities: ["Visit to the Rova and the Queen's Palace", 'Panorama over the capital from the hill', 'Museum of Merina civilization'],
+        },
+        {
+          title: 'Ambohimanga Royal Hill · UNESCO',
+          description: "Discovering the royal hill of the Merina, a UNESCO World Heritage site.",
+          activities: ["Visit to the UNESCO Ambohimanga royal hill", 'Ancestral Merina ceremonies and rituals', "Historical accounts of the Imerina kings"],
+        },
+        {
+          title: 'Fianarantsoa Old Town',
+          description: "Exploring the cobbled streets of Fianarantsoa's Upper Town and its century-old churches.",
+          activities: ['Exploring the 18th-century Upper Town streets', "Visit to an active Benedictine monastery", 'Wine tasting from the Fianarantsoa vineyard'],
+        },
+        {
+          title: 'Return',
+          description: 'Craft market and drive back to Antananarivo.',
+          activities: ["Morning craft market", 'Heritage souvenir shopping', 'Drive back to the capital'],
+        },
+      ],
+    },
     coordonnees_gps: { lat: -18.9, lng: 47.5 },
     guideIds: [2, 3],
     waypoints: [
@@ -706,6 +1063,50 @@
       "Accessible toute l'année pour les autres activités",
       'Idéal pour familles, couples et amateurs de nature marine',
     ],
+    en: {
+      name: 'Sainte-Marie: Pirates & Whales',
+      region: 'Eastern Madagascar',
+      location: 'Sainte-Marie Island, east coast',
+      teaser: "Pirate cemetery, humpback whale watching and wild beaches on the island of scents.",
+      description:
+        "Sainte-Marie island packs, within a few kilometers, everything Madagascar has that is most captivating: the memory of 17th-century pirates in its pirate cemetery unique in the world, the grand spectacle of humpback whales between July and September, and white sand beaches lined with coconut trees. Between beach, sea and coastal forest, this circuit favors relaxation as much as discovery — a format accessible to everyone, including families.",
+      highlights: ['Historic pirate cemetery', 'Humpback whale watching (Jul-Sep)', 'Wild beaches', 'Fishing villages'],
+      included: ['Beachfront bungalow accommodation', 'Full board', 'Local guide', 'Boat whale-watching excursion'],
+      non_inclus: ['Flight to Sainte-Marie', 'Personal expenses', 'Optional activities'],
+      infos_pratiques: [
+        'Flight Antananarivo → Sainte-Marie (1h10) or sea link from Soanierana-Ivongo (ferry or speedboat, about 1h30, sea sometimes rough)',
+        'Humpback whales observable from July to September',
+        'Accessible year-round for other activities',
+        'Ideal for families, couples and marine nature lovers',
+      ],
+      steps: [
+        {
+          title: 'Sainte-Marie Island · Arrival',
+          description: 'Settling into the bungalow, discovering the island and its people.',
+          activities: ['Ocean-facing bungalow check-in', 'Coastal walk discovering the island', 'Sunset over the bay'],
+        },
+        {
+          title: 'Pirate Cemetery + Forest',
+          description: "Visit to the famous 17th-century pirate cemetery and a hike through the coastal forest.",
+          activities: ['Visit to the 17th-century pirate cemetery', 'Endemic coastal forest hike', 'Meeting the Betsimisaraka community'],
+        },
+        {
+          title: 'Humpback Whale Watching',
+          description: "Boat excursion to observe humpback whales in their natural habitat (July to September).",
+          activities: ['Boat excursion for humpback whale watching', 'Snorkeling on the coral reef', 'Dolphin and sea turtle spotting'],
+        },
+        {
+          title: 'Beaches + Fishing Village',
+          description: 'Relaxing day on the wild beaches and meeting Betsimisaraka fishermen.',
+          activities: ["Relaxing on the island's northern wild beaches", 'Meeting and living with Betsimisaraka fishermen', 'Local cuisine with fresh fish and seafood'],
+        },
+        {
+          title: 'Return',
+          description: "Local market, souvenirs and departure from the island.",
+          activities: ["Local market with crafts and spices", "Souvenir shopping", 'Departure and airport transfer'],
+        },
+      ],
+    },
     coordonnees_gps: { lat: -17.0, lng: 49.8 },
     guideIds: [2, 3],
     waypoints: [
@@ -789,6 +1190,45 @@
       'Respect des coutumes locales requis',
       'Apporter des petits cadeaux pour les familles hôtes',
     ],
+    en: {
+      name: 'Betsileo Rice Terraces Trek',
+      region: 'Madagascar Highlands',
+      location: 'Fianarantsoa, Haute Matsiatra region',
+      teaser: 'Terraced rice fields, Betsileo cuisine and the art of weaving in the heart of the Highlands.',
+      description:
+        "The Betsileo Rice Terraces Trek immerses you in the farming culture of the Malagasy Highlands. Between rice terraces carved over centuries, authentic villages and traditional weaving workshops, this circuit offers a complete immersion into the daily life of the Betsileo people. The walks are short and the heart of the trek is really lived at the stops: workshops, shared meals, evening gatherings — immersion takes priority over distance covered.",
+      highlights: ['Terraced rice fields', 'Betsileo cuisine', 'Weaving workshop', 'Authentic villages'],
+      included: ['Homestay accommodation', 'Traditional Betsileo meals', 'Cultural guide', 'Local cooking class'],
+      non_inclus: ['Transport to Fianarantsoa', 'Craft gifts', 'Beverages'],
+      infos_pratiques: [
+        'Access via RN7 from Antananarivo (7 to 8h drive) or direct flight to Fianarantsoa (50 min)',
+        'Accessible year-round',
+        'Respect for local customs required',
+        'Bring small gifts for host families',
+      ],
+      steps: [
+        {
+          title: 'Fianarantsoa · Arrival',
+          description: 'Welcome by your cultural guide and introduction to Betsileo culture.',
+          activities: ['Welcome by a Betsileo family', 'Introduction to rice-growing culture (vary)', 'Traditional tsimoka meal (local rice spirit)'],
+        },
+        {
+          title: 'Terraced Rice Fields',
+          description: 'Hike through the agricultural landscape, meeting farmers and learning about the rice cycle.',
+          activities: ['Terraced rice field hike (7 km)', 'Meeting farmers and learning the rice cycle', 'Taking part in farm work depending on season'],
+        },
+        {
+          title: 'Betsileo Village · Cuisine + Weaving',
+          description: 'Immersion in a village, a traditional cooking workshop and a demonstration of weaving on an ancestral loom.',
+          activities: ['Traditional Betsileo cooking class', 'Weaving workshop on an ancestral loom (lamba)', 'Evening of traditional music and dance'],
+        },
+        {
+          title: 'Return to Fianarantsoa',
+          description: 'Morning craft market and departure.',
+          activities: ['Morning craft market', 'Weaving and local craft purchases', 'Drive back with your souvenirs'],
+        },
+      ],
+    },
     coordonnees_gps: { lat: -21.4, lng: 47.1 },
     guideIds: [2, 3],
     waypoints: [
@@ -864,6 +1304,65 @@
       'Saison sèche strictement requise (mai à octobre)',
       'Groupe limité à 8 personnes pour préserver les écosystèmes',
     ],
+    en: {
+      name: 'Grand North-South Traverse',
+      region: 'All of Madagascar',
+      location: 'Diego Suarez → Tuléar',
+      teaser: 'The ultimate odyssey: crossing Madagascar from Diego Suarez to Tuléar in 21 to 28 days.',
+      description:
+        "The Grand North-South Traverse is Treky's flagship circuit — an odyssey that crosses Madagascar from end to end. From the volcanic Montagne d'Ambre park to the red Tsingy of Ankarana, from the summits of Andringitra to the Isalo desert and on to the beaches of Tuléar, every stage reveals a unique face of the Great Island. The Demanding level comes above all from the duration and mental endurance a month of continuous trekking requires, far more than from any isolated technical difficulty: this is a journey in its own right, not simply an extended hike.",
+      highlights: ["Montagne d'Ambre", 'Ankarana red Tsingy', 'Pic Boby 2,876 m', 'Full crossing of Madagascar'],
+      included: ['Mixed lodge/bivouac accommodation', 'Full board', '2 certified guides', 'All inter-stage transport'],
+      non_inclus: ['International flights', 'Long-duration adventure insurance', 'Personal gear'],
+      infos_pratiques: [
+        'Flight Antananarivo → Diego Suarez for departure; return flight from Tuléar — tickets to be booked in addition to the circuit',
+        'Multi-day trekking experience essential',
+        'Dry season strictly required (May to October)',
+        'Group limited to 8 people to preserve the ecosystems',
+      ],
+      steps: [
+        {
+          title: "Diego Suarez + Montagne d'Ambre D1-3",
+          description: "Discovering the volcanic north, waterfalls and tropical forests of Montagne d'Ambre park.",
+          activities: ["Waterfalls and tropical rainforest at Montagne d'Ambre", 'Northern lemur and chameleon spotting', 'Swim in a volcanic natural pool'],
+        },
+        {
+          title: 'Ankarana · Red Tsingy D4-6',
+          description: 'Crossing the red Tsingy and exploring the caves and underground rivers of the Ankarana massif.',
+          activities: ['Crossing the Ankarana red Tsingy', 'Exploring caves and underground rivers', 'Bat and cave-dwelling reptile spotting'],
+        },
+        {
+          title: 'Descent to the Highlands D7-9',
+          description: 'Spectacular landscape transition from the tropical north to the Highlands rice fields.',
+          activities: ['Transition from tropical north to Highlands', 'Panoramic highland rice terraces', 'Meeting Merina and Betsileo culture'],
+        },
+        {
+          title: 'Antsirabe + Lake Tritriva D10-12',
+          description: "Discovering the volcanic Lake Tritriva and immersing in Antsirabe's craft life.",
+          activities: ['Volcanic Lake Tritriva (legends and landscapes)', "Antsirabe crafts (gemstones, brass)", 'Rickshaw ride through the thermal town'],
+        },
+        {
+          title: 'Andringitra + Pic Boby D13-16',
+          description: "Ascent of Pic Boby (2,876 m), Madagascar's highest accessible point, and a stay at altitude.",
+          activities: ['Ascent of Pic Boby 2,876 m', 'Tsaranoro Valley and granite walls', 'High-altitude bivouac nights'],
+        },
+        {
+          title: 'Isalo D17-20',
+          description: "Crossing the Isalo massif, between sandstone canyons, natural pools and Monkey Ridge.",
+          activities: ["Canyon des Makis and Isalo's natural pools", "Monkey Ridge and Isalo Window", 'Sunsets over pink sandstone'],
+        },
+        {
+          title: 'South Coast D21-24',
+          description: 'Descending to the south coast, giant baobabs and Vezo fishing villages.',
+          activities: ['Giant baobabs on the south coast (Avenue de Morombe)', 'Traditional Vezo fishing villages', 'Ifaty coral reef and diving (optional)'],
+        },
+        {
+          title: 'Tuléar D25-28',
+          description: "Arrival in Tuléar, exploring the coral reef and closing ceremony of the full traverse.",
+          activities: ['Exploring the Tuléar coral reef', 'Zoma market and crafts of the deep south', "Closing ceremony of the full crossing of Madagascar"],
+        },
+      ],
+    },
     coordonnees_gps: { lat: -18.0, lng: 46.0 },
     guideIds: [1, 2, 3],
     waypoints: [
@@ -1122,6 +1621,18 @@ export const blogPosts = [
 
 export function getCircuitBySlug(slug) {
   return circuits.find((c) => c.slug === slug) ?? null
+}
+
+// Applique la traduction anglaise d'un circuit (champ `en`) quand elle existe.
+// Les champs non traduits (avis, coordonnées, guides…) restent inchangés.
+export function localizeCircuit(circuit, locale) {
+  if (!circuit || locale !== 'en' || !circuit.en) return circuit
+  const { steps, ...rest } = circuit.en
+  return {
+    ...circuit,
+    ...rest,
+    steps: steps ? circuit.steps.map((step, i) => ({ ...step, ...steps[i] })) : circuit.steps,
+  }
 }
 
 export function getGuideById(id) {

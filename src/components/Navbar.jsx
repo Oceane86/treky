@@ -6,15 +6,10 @@ import { useCurrency } from '../context/CurrencyContext'
 import { useAuth } from '../context/AuthContext'
 import { useFavorites } from '../context/FavoritesContext'
 import { useBooking } from '../context/BookingContext'
+import { useLocale } from '../context/LocaleContext'
+import { getUI } from '../utils/i18n'
 import Icon from './Icon'
 import './Navbar.css'
-
-const navLinks = [
-  { to: '/circuits', label: 'Circuits' },
-  { to: '/blog', label: 'Blog' },
-  { to: '/a-propos', label: 'À propos' },
-  { to: '/contact', label: 'Contact' },
-]
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -26,6 +21,15 @@ export default function Navbar() {
   const { user, isLoggedIn, isGuide, logout } = useAuth()
   const { favorites } = useFavorites()
   const { booking } = useBooking()
+  const { locale, toggle: toggleLocale } = useLocale()
+  const t = getUI(locale).nav
+
+  const navLinks = [
+    { to: '/circuits', label: t.circuits },
+    { to: '/blog', label: t.blog },
+    { to: '/a-propos', label: t.about },
+    { to: '/contact', label: t.contact },
+  ]
   const dropdownRef = useRef(null)
   const chatHref = `/chat/${booking?.guide?.id ?? 1}`
 
@@ -83,8 +87,8 @@ export default function Navbar() {
           {/* Mobile-only auth links */}
           {menuOpen && !isLoggedIn && (
             <li className="navbar__mobile-auth">
-              <Link href="/inscription" className="navbar__link navbar__link--register">S'inscrire</Link>
-              <Link href="/connexion" className="navbar__link navbar__link--cta">Connexion</Link>
+              <Link href="/inscription" className="navbar__link navbar__link--register">{t.register}</Link>
+              <Link href="/connexion" className="navbar__link navbar__link--cta">{t.login}</Link>
             </li>
           )}
           {menuOpen && isLoggedIn && isGuide && (
@@ -113,6 +117,17 @@ export default function Navbar() {
         </ul>
 
         <div className="navbar__actions">
+          <button
+            className="navbar__currency-toggle navbar__locale-toggle"
+            onClick={toggleLocale}
+            aria-label="Switch language"
+            title={locale === 'fr' ? 'Switch to English' : 'Passer en français'}
+          >
+            <span className={`navbar__currency-opt ${locale === 'fr' ? 'active' : ''}`}>FR</span>
+            <span className="navbar__currency-sep">|</span>
+            <span className={`navbar__currency-opt ${locale === 'en' ? 'active' : ''}`}>EN</span>
+          </button>
+
           <button
             className="navbar__currency-toggle"
             onClick={toggle}
@@ -190,10 +205,10 @@ export default function Navbar() {
           ) : (
             <>
               <button className="navbar__btn-login" onClick={() => router.push('/inscription')}>
-                S'inscrire
+                {t.register}
               </button>
               <button className="navbar__btn-cta" onClick={() => router.push('/connexion')}>
-                Connexion
+                {t.login}
               </button>
             </>
           )}

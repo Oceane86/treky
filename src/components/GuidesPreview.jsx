@@ -4,11 +4,15 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { guides as baseGuides } from '../data/circuits'
 import { applyGuideOverrides } from '../utils/guideProfile'
+import { useLocale } from '../context/LocaleContext'
+import { getUI } from '../utils/i18n'
 import Icon from './Icon'
 import './GuidesPreview.css'
 
 export default function GuidesPreview() {
   const [guides, setGuides] = useState(baseGuides)
+  const { locale } = useLocale()
+  const t = getUI(locale).home
 
   useEffect(() => {
     setGuides(applyGuideOverrides(baseGuides))
@@ -18,11 +22,8 @@ export default function GuidesPreview() {
     <section className="guides-preview section-padding" id="guides">
       <div className="container">
         <div className="guides-preview__header" data-reveal>
-          <h2 className="section-title">Des guides qui font la différence</h2>
-          <p className="section-subtitle guides-preview__subtitle">
-            Chaque trek est mené par un guide certifié, natif de la région, qui connaît ses
-            sentiers, sa faune et ses habitants mieux que quiconque.
-          </p>
+          <h2 className="section-title">{t.guidesTitle}</h2>
+          <p className="section-subtitle guides-preview__subtitle">{t.guidesSubtitle}</p>
         </div>
 
         <div className="guides-preview__grid" data-reveal data-reveal-delay="1">
@@ -66,7 +67,7 @@ export default function GuidesPreview() {
         </div>
 
         <div className="guides-preview__cta-wrap" data-reveal data-reveal-delay="2">
-          <Link href="/composer" className="btn-secondary">Trouver mon guide idéal</Link>
+          <Link href="/composer" className="btn-secondary">{t.guidesCta}</Link>
         </div>
       </div>
     </section>

@@ -5,13 +5,15 @@ import Link from 'next/link'
 import { useParams, useRouter } from 'next/navigation'
 import { notFound } from 'next/navigation'
 import dynamic from 'next/dynamic'
-import { getCircuitBySlug } from '../../../data/circuits'
+import { getCircuitBySlug, localizeCircuit } from '../../../data/circuits'
 import { adaptItinerary, adaptPrice } from '../../../utils/adaptItinerary'
 import { useCurrency } from '../../../context/CurrencyContext'
 import { useAuth } from '../../../context/AuthContext'
 import { useFavorites } from '../../../context/FavoritesContext'
+import { useLocale } from '../../../context/LocaleContext'
 import { readJSON } from '../../../utils/storage'
-import { MONTHS, CLIMAT_MAP, CLIMAT_ICON, CLIMAT_LABEL, getClimatKey, getClosure, formatMonthRange } from '../../../utils/climate'
+import { getMonths, CLIMAT_MAP, CLIMAT_ICON, CLIMAT_LABEL, getClimatKey, getClosure, formatMonthRange } from '../../../utils/climate'
+import { getUI } from '../../../utils/i18n'
 import BookingModal from '../../../components/BookingModal'
 import Icon from '../../../components/Icon'
 import '../../../pages/CircuitDetail.css'
@@ -19,6 +21,7 @@ import '../../../pages/CircuitDetail.css'
 const CircuitMap = dynamic(() => import('../../../components/CircuitMap'), { ssr: false })
 
 // Avis génériques utilisés uniquement si un circuit n'a pas d'entrée dans REVIEWS_BY_SLUG.
+// Les avis restent en français (contenu voyageur), y compris en version anglaise du site.
 const DEFAULT_REVIEWS = [
   { id: 1, name: 'Jean Dupont',   avatar: '/images/avatar1.jpg', stars: 5, date: 'Mars 2026',    text: 'Une expérience absolument inoubliable. Le guide était exceptionnel, les paysages à couper le souffle.', tag: 'Randonneur passionné' },
   { id: 2, name: 'Marie Martin',  avatar: '/images/avatar2.jpg', stars: 5, date: 'Février 2026', text: 'Voyage en solo et je me suis sentie en sécurité à chaque instant. Organisation irréprochable.', tag: 'Voyageuse solo' },
@@ -91,22 +94,26 @@ const RATING_BARS = [
 
 function infoIcon(text) {
   const t = text.toLowerCase()
-  if (t.includes('chaussure') || t.includes('équipement') || t.includes('materiel')) return 'boot'
-  if (t.includes('saison') || t.includes('période') || t.includes('recommandée')) return 'calendar'
-  if (t.includes('physique') || t.includes('condition') || t.includes('expérience')) return 'strength'
-  if (t.includes('solaire') || t.includes('chapeau') || t.includes('soleil')) return 'sun'
-  if (t.includes('groupe') || t.includes('personnes') || t.includes('limité')) return 'users'
-  if (t.includes('accessible') || t.includes('famille')) return 'check'
-  if (t.includes('eau') || t.includes('hydratation')) return 'droplet'
-  if (t.includes('accès') || t.includes('route') || t.includes('piste') || t.includes('vol')) return 'map'
+  if (t.includes('chaussure') || t.includes('équipement') || t.includes('materiel') || t.includes('shoe') || t.includes('gear') || t.includes('equipment')) return 'boot'
+  if (t.includes('saison') || t.includes('période') || t.includes('recommandée') || t.includes('season') || t.includes('period') || t.includes('recommended')) return 'calendar'
+  if (t.includes('physique') || t.includes('condition') || t.includes('expérience') || t.includes('physical') || t.includes('experience')) return 'strength'
+  if (t.includes('solaire') || t.includes('chapeau') || t.includes('soleil') || t.includes('sun') || t.includes('hat')) return 'sun'
+  if (t.includes('groupe') || t.includes('personnes') || t.includes('limité') || t.includes('group') || t.includes('people') || t.includes('limited')) return 'users'
+  if (t.includes('accessible') || t.includes('famille') || t.includes('family')) return 'check'
+  if (t.includes('eau') || t.includes('hydratation') || t.includes('water') || t.includes('hydration')) return 'droplet'
+  if (t.includes('accès') || t.includes('route') || t.includes('piste') || t.includes('vol') || t.includes('access') || t.includes('flight') || t.includes('road') || t.includes('track')) return 'map'
   return 'info'
 }
 
 export default function CircuitDetailPage() {
   const { slug } = useParams()
   const router = useRouter()
-  const circuit = getCircuitBySlug(slug)
-  const baseReviews = REVIEWS_BY_SLUG[circuit?.slug] ?? DEFAULT_REVIEWS
+  const { locale } = useLocale()
+  const baseCircuit = getCircuitBySlug(slug)
+  const circuit = localizeCircuit(baseCircuit, locale)
+  const t = getUI(locale).circuitDetail
+  const levelLabelMap = getUI(locale).levels
+  const baseReviews = REVIEWS_BY_SLUG[baseCircuit?.slug] ?? DEFAULT_REVIEWS
   const { format } = useCurrency()
   const { isLoggedIn } = useAuth()
   const { isFavorite, toggleFavorite } = useFavorites()
@@ -149,7 +156,7 @@ export default function CircuitDetailPage() {
 
   if (!circuit) notFound()
 
-  const itinerary = adaptItinerary(circuit.steps, selectedDays)
+  const itinerary = adaptItinerary(circuit.steps, selectedDays, locale)
   const price = adaptPrice(circuit.priceAr, circuit.recommendedDays, selectedDays)
   const priceAr = Math.round(circuit.priceAr * selectedDays / circuit.recommendedDays)
   const isCondensed = selectedDays < circuit.recommendedDays
@@ -158,6 +165,8 @@ export default function CircuitDetailPage() {
   const photos = circuit.photos?.length >= 1 ? circuit.photos : [circuit.image]
 
   const fav = isFavorite(circuit.id)
+  const levelLabel = levelLabelMap[baseCircuit.level] ?? circuit.level
+  const months = getMonths(locale)
 
   function showToast(msg) {
     setToast(msg)
@@ -183,7 +192,7 @@ export default function CircuitDetailPage() {
   function handleFav() {
     if (!isLoggedIn) { setShowLoginGate(true); return }
     toggleFavorite(circuit.id)
-    showToast(fav ? 'Retiré des favoris' : 'Ajouté aux favoris ♥')
+    showToast(fav ? t.removedFromFavorites : `${t.addedToFavorites} ♥`)
   }
 
   function handleShare() {
@@ -191,12 +200,12 @@ export default function CircuitDetailPage() {
     if (navigator.share) {
       navigator.share({ title: circuit.name, text: circuit.teaser, url })
     } else {
-      navigator.clipboard.writeText(url).then(() => showToast('Lien copié dans le presse-papier'))
+      navigator.clipboard.writeText(url).then(() => showToast(t.linkCopied))
     }
   }
 
   function handleCompare() {
-    showToast('Comparateur bientôt disponible')
+    showToast(t.compareSoon)
   }
 
   function handleReviewSubmit(e) {
@@ -227,29 +236,29 @@ export default function CircuitDetailPage() {
       {/* ── SECTION 1 · EN-TÊTE ── */}
       <div className="cd__header-wrap">
         <div className="container cd__header">
-          <button type="button" className="cd__back" onClick={handleBack}>← Retour</button>
+          <button type="button" className="cd__back" onClick={handleBack}>← {t.back}</button>
           <div className="cd__header-row">
             <div className="cd__header-info">
               <h1 className="cd__title">{circuit.name}</h1>
               <div className="cd__meta-row">
                 <span className="cd__stars">{'★'.repeat(stars)}{'☆'.repeat(5 - stars)}</span>
                 <span className="cd__rating-val">{circuit.rating}</span>
-                <span className="cd__reviews">({circuit.reviews} avis)</span>
-                <span className="cd__safe-badge">✓ Solo Sécurisé</span>
+                <span className="cd__reviews">({circuit.reviews} {t.reviews})</span>
+                <span className="cd__safe-badge">✓ {t.safeBadge}</span>
               </div>
             </div>
             <div className="cd__actions">
               <button className={`cd__action-btn${fav ? ' cd__action-btn--active' : ''}`} onClick={handleFav} title={fav ? 'Retirer des favoris' : 'Ajouter aux favoris'}>
                 <Icon name={fav ? 'heart' : 'heartOutline'} size={18} />
-                <small>Favoris</small>
+                <small>{t.favorites}</small>
               </button>
               <button className="cd__action-btn" onClick={handleShare} title="Partager">
                 <Icon name="share" size={18} />
-                <small>Partager</small>
+                <small>{t.share}</small>
               </button>
               <button className="cd__action-btn" onClick={handleCompare} title="Comparer">
                 <Icon name="compare" size={18} />
-                <small>Comparer</small>
+                <small>{t.compare}</small>
               </button>
             </div>
           </div>
@@ -261,7 +270,7 @@ export default function CircuitDetailPage() {
         <div className="cd__gallery-main" onClick={() => openLightbox(0)} style={{ cursor: 'pointer' }}>
           <Image src={photos[0]} alt={circuit.name} fill sizes="(max-width: 900px) 100vw, 60vw" priority className="cd__gallery-big" />
           <button className="cd__gallery-all-btn" onClick={(e) => { e.stopPropagation(); openLightbox(0) }}>
-            <Icon name="camera" size={14} /> Voir tout
+            <Icon name="camera" size={14} /> {t.seeAll}
           </button>
         </div>
         <div className="cd__gallery-grid">
@@ -280,26 +289,26 @@ export default function CircuitDetailPage() {
         <div className="cd__main">
 
           <section className="cd__section">
-            <h2 className="cd__section-title">Présentation</h2>
+            <h2 className="cd__section-title">{t.presentation}</h2>
             <div className={`cd__desc-wrap${descExpanded ? '' : ' cd__desc-wrap--clamped'}`}>
               <p className="cd__desc">{circuit.description}</p>
             </div>
             <button className="cd__expand-btn" onClick={() => setDescExpanded((v) => !v)}>
-              {descExpanded ? 'Réduire ▲' : 'En savoir plus ▼'}
+              {descExpanded ? t.readLess : t.readMore}
             </button>
           </section>
 
           <section className="cd__section">
-            <h2 className="cd__section-title">Inclus dans le trek</h2>
+            <h2 className="cd__section-title">{t.includedTitle}</h2>
             <div className="cd__inc-grid">
               <ul className="cd__inc-list">
-                <li className="cd__inc-header">Inclus</li>
+                <li className="cd__inc-header">{t.included}</li>
                 {circuit.included.map((item) => (
                   <li key={item}><span className="cd__check">✓</span>{item}</li>
                 ))}
               </ul>
               <ul className="cd__exc-list">
-                <li className="cd__exc-header">Non inclus</li>
+                <li className="cd__exc-header">{t.notIncluded}</li>
                 {circuit.non_inclus.map((item) => (
                   <li key={item}><span className="cd__cross">✗</span>{item}</li>
                 ))}
@@ -308,19 +317,19 @@ export default function CircuitDetailPage() {
           </section>
 
           <section className="cd__section">
-            <h2 className="cd__section-title">Plan du trek</h2>
+            <h2 className="cd__section-title">{t.planTitle}</h2>
             <div className="cd__tabs">
               <button
                 className={`cd__tab${activeTab === 'jour' ? ' cd__tab--active' : ''}`}
                 onClick={() => setActiveTab('jour')}
               >
-                Jour par jour
+                {t.dayByDay}
               </button>
               <button
                 className={`cd__tab${activeTab === 'depart' ? ' cd__tab--active' : ''}`}
                 onClick={() => setActiveTab('depart')}
               >
-                Dates de départ
+                {t.departureDates}
               </button>
             </div>
 
@@ -343,7 +352,7 @@ export default function CircuitDetailPage() {
                     </button>
                     <div className="cd__accordion-body">
                       {step.extra ? (
-                        <p className="cd__libre-desc">Journée à votre rythme — exploration libre, activité optionnelle ou repos.</p>
+                        <p className="cd__libre-desc">{t.freeDayText}</p>
                       ) : (
                         <>
                           <p>{step.description}</p>
@@ -382,9 +391,9 @@ export default function CircuitDetailPage() {
                           {circuit.waypoints?.[idx] && (
                             <div className="cd__step-coords">
                               <Icon name="map" size={14} />
-                              <span>Point {idx + 1} sur le tracé</span>
-                              {idx === 0 && <span className="cd__step-badge cd__step-badge--start">Départ</span>}
-                              {idx === itinerary.length - 1 && <span className="cd__step-badge cd__step-badge--end">Arrivée</span>}
+                              <span>{t.pointOnRoute} {idx + 1} {t.onRoute}</span>
+                              {idx === 0 && <span className="cd__step-badge cd__step-badge--start">{t.start}</span>}
+                              {idx === itinerary.length - 1 && <span className="cd__step-badge cd__step-badge--end">{t.arrival}</span>}
                             </div>
                           )}
                         </>
@@ -395,12 +404,9 @@ export default function CircuitDetailPage() {
               </div>
             ) : (
               <div className="cd__depart-block">
-                <p>
-                  Les dates de départ sont disponibles sur demande. Contactez-nous pour
-                  connaître les prochains départs groupés ou organiser un départ privé.
-                </p>
+                <p>{t.departureBlockText}</p>
                 <Link href="/contact" className="btn-primary cd__depart-btn">
-                  Demander les dates de départ
+                  {t.requestDates}
                 </Link>
               </div>
             )}
@@ -408,23 +414,21 @@ export default function CircuitDetailPage() {
             {circuit.waypoints?.length > 0 && (
               <div className="cd__plan-map">
                 <div className="cd__plan-map-header">
-                  <span className="cd__plan-map-title">Tracé du circuit</span>
+                  <span className="cd__plan-map-title">{t.routeTitle}</span>
                   <div className="cd__plan-map-legend">
-                    <span className="cd__legend-item cd__legend-item--start">① Départ</span>
-                    <span className="cd__legend-item cd__legend-item--end">② Arrivée</span>
-                    <span className="cd__legend-item cd__legend-item--route">— Tracé</span>
+                    <span className="cd__legend-item cd__legend-item--start">① {t.start}</span>
+                    <span className="cd__legend-item cd__legend-item--end">② {t.arrival}</span>
+                    <span className="cd__legend-item cd__legend-item--route">— {t.routeTitle}</span>
                   </div>
                 </div>
                 <CircuitMap waypoints={circuit.waypoints} circuitName={circuit.name} />
-                <p className="cd__plan-map-hint">
-                  Cliquez sur un point pour voir le détail de l'étape · Molette pour zoomer
-                </p>
+                <p className="cd__plan-map-hint">{t.routeHint}</p>
               </div>
             )}
           </section>
 
           <section className="cd__section">
-            <h2 className="cd__section-title">Infos pratiques</h2>
+            <h2 className="cd__section-title">{t.practicalInfo}</h2>
             <div className="cd__infos-grid">
               {circuit.infos_pratiques.map((info, i) => (
                 <div key={i} className="cd__info-item">
@@ -437,10 +441,10 @@ export default function CircuitDetailPage() {
 
           {/* ── CLIMAT & MÉTÉO ── */}
           <section className="cd__section">
-            <h2 className="cd__section-title">Climat & Météo</h2>
+            <h2 className="cd__section-title">{t.climateTitle}</h2>
             <div className="cd__climat-grid">
-              {MONTHS.map((m, i) => {
-                const key = getClimatKey(circuit)
+              {months.map((m, i) => {
+                const key = getClimatKey(baseCircuit)
                 const cond = (CLIMAT_MAP[key] || CLIMAT_MAP.seche)[i]
                 return (
                   <div key={m} className="cd__climat-month">
@@ -460,31 +464,31 @@ export default function CircuitDetailPage() {
                 </div>
               ))}
             </div>
-            {circuit.saison === 'seche' && (
+            {baseCircuit.saison === 'seche' && (
               <p className="cd__climat-note">
-                <Icon name="calendar" size={15} /> Meilleure période : <strong>avril à novembre</strong> (saison sèche). Décembre à mars correspond à la saison des pluies — les sentiers peuvent être glissants et certains accès fermés.
+                <Icon name="calendar" size={15} /> {t.bestPeriod} : <strong>{locale === 'en' ? 'April to November' : 'avril à novembre'}</strong> {t.dry}
               </p>
             )}
-            {circuit.saison === 'toute-saison' && (
+            {baseCircuit.saison === 'toute-saison' && (
               <p className="cd__climat-note">
-                <Icon name="calendar" size={15} /> Ce circuit est praticable toute l'année. Évitez de préférence <strong>janvier et février</strong> (fortes pluies sur les hautes terres).
+                <Icon name="calendar" size={15} /> {t.allYear} <strong>{locale === 'en' ? 'January and February' : 'janvier et février'}</strong> {t.allYearEnd}
               </p>
             )}
-            {circuit.slug === 'sainte-marie-pirates-baleines' && (
+            {baseCircuit.slug === 'sainte-marie-pirates-baleines' && (
               <p className="cd__climat-note">
-                <Icon name="waves" size={15} /> L'observation des baleines à bosse est possible de <strong>juillet à septembre</strong>. En dehors de cette période, toutes les autres activités restent accessibles dans d'excellentes conditions.
+                <Icon name="waves" size={15} /> {t.whales} <strong>{locale === 'en' ? 'July to September' : 'juillet à septembre'}</strong>. {t.whalesEnd}
               </p>
             )}
-            {getClosure(circuit) && (
+            {getClosure(baseCircuit) && (
               <p className="cd__climat-note cd__climat-note--closed">
-                <Icon name="lock" size={15} /> <strong>Site fermé de {formatMonthRange(getClosure(circuit).months)}.</strong> {getClosure(circuit).note}
+                <Icon name="lock" size={15} /> <strong>{t.siteClosed} {formatMonthRange(getClosure(baseCircuit).months)}.</strong> {getClosure(baseCircuit).note}
               </p>
             )}
           </section>
 
           {/* ── AVIS VOYAGEURS ── */}
           <section className="cd__section">
-            <h2 className="cd__section-title">Avis voyageurs</h2>
+            <h2 className="cd__section-title">{t.reviewsTitle}</h2>
 
             <div className="cd__reviews-summary">
               <div className="cd__reviews-score">
@@ -492,12 +496,12 @@ export default function CircuitDetailPage() {
                 <span className="cd__reviews-score-stars">
                   {'★'.repeat(Math.round(circuit.rating))}{'☆'.repeat(5 - Math.round(circuit.rating))}
                 </span>
-                <span className="cd__reviews-score-count">{circuit.reviews + reviews.length - baseReviews.length} avis</span>
+                <span className="cd__reviews-score-count">{circuit.reviews + reviews.length - baseReviews.length} {t.reviews}</span>
               </div>
               <div className="cd__reviews-bars">
-                {RATING_BARS.map(({ stars, pct }) => (
-                  <div key={stars} className="cd__reviews-bar-row">
-                    <span className="cd__reviews-bar-label">{stars}★</span>
+                {RATING_BARS.map(({ stars: barStars, pct }) => (
+                  <div key={barStars} className="cd__reviews-bar-row">
+                    <span className="cd__reviews-bar-label">{barStars}★</span>
                     <div className="cd__reviews-bar-track">
                       <div className="cd__reviews-bar-fill" style={{ width: `${pct}%` }} />
                     </div>
@@ -530,7 +534,7 @@ export default function CircuitDetailPage() {
             </div>
 
             <form className="cd__review-form" onSubmit={handleReviewSubmit}>
-              <h3 className="cd__review-form-title">Laisser un avis</h3>
+              <h3 className="cd__review-form-title">{t.leaveReview}</h3>
 
               <div className="cd__review-form-stars">
                 {[1, 2, 3, 4, 5].map((n) => (
@@ -550,7 +554,7 @@ export default function CircuitDetailPage() {
 
               <div className="cd__review-form-grid">
                 <div className="cd__review-form-field">
-                  <label>Votre nom</label>
+                  <label>{t.yourName}</label>
                   <input
                     type="text"
                     placeholder="Ex. Marie M."
@@ -560,14 +564,14 @@ export default function CircuitDetailPage() {
                   />
                 </div>
                 <div className="cd__review-form-field">
-                  <label>Circuit effectué</label>
+                  <label>{t.circuitDone}</label>
                   <input type="text" value={circuit.name} readOnly style={{ opacity: 0.6 }} />
                 </div>
                 <div className="cd__review-form-field cd__review-form-field--full">
-                  <label>Votre avis</label>
+                  <label>{t.yourReview}</label>
                   <textarea
                     rows={4}
-                    placeholder="Partagez votre expérience avec les futurs voyageurs…"
+                    placeholder={t.reviewPlaceholder}
                     value={reviewText}
                     onChange={(e) => setReviewText(e.target.value)}
                     required
@@ -580,12 +584,12 @@ export default function CircuitDetailPage() {
                 className="btn-primary cd__review-form-submit"
                 disabled={!reviewStars || !reviewName.trim() || !reviewText.trim()}
               >
-                Publier mon avis
+                {t.publish}
               </button>
 
               {reviewSuccess && (
                 <div className="cd__review-success">
-                  ✓ Merci ! Votre avis a été publié.
+                  ✓ {t.reviewSuccess}
                 </div>
               )}
             </form>
@@ -597,41 +601,41 @@ export default function CircuitDetailPage() {
           <div className="cd__book-card">
             <div className="cd__book-price-block">
               <span className="cd__book-price-label">
-                {isCondensed ? 'Prix condensé' : isExtended ? 'Prix étendu' : 'À partir de'}
+                {isCondensed ? t.priceCondensed : isExtended ? t.priceExtended : t.priceFrom}
               </span>
               <span className="cd__book-price-value">{format(price)}</span>
               {circuit.prix_reduit && (
-                <span className="cd__book-price-original">au lieu de {format(circuit.prix_original)}</span>
+                <span className="cd__book-price-original">{t.instead} {format(circuit.prix_original)}</span>
               )}
             </div>
 
             <div className="cd__book-metas">
               <div className="cd__book-meta-item">
-                <span className="cd__book-meta-label">Niveau</span>
-                <span className="cd__book-meta-val">{circuit.level}</span>
+                <span className="cd__book-meta-label">{t.level}</span>
+                <span className="cd__book-meta-val">{levelLabel}</span>
               </div>
               <div className="cd__book-meta-item">
-                <span className="cd__book-meta-label">Groupe</span>
+                <span className="cd__book-meta-label">{t.group}</span>
                 <span className="cd__book-meta-val">{circuit.groupSize}</span>
               </div>
               <div className="cd__book-meta-item">
-                <span className="cd__book-meta-label">Note</span>
-                <span className="cd__book-meta-val">★ {circuit.rating} · {circuit.reviews} avis</span>
+                <span className="cd__book-meta-label">{t.rating}</span>
+                <span className="cd__book-meta-val">★ {circuit.rating} · {circuit.reviews} {t.reviews}</span>
               </div>
               <div className="cd__book-meta-item">
-                <span className="cd__book-meta-label">Région</span>
+                <span className="cd__book-meta-label">{t.region}</span>
                 <span className="cd__book-meta-val">{circuit.region}</span>
               </div>
             </div>
 
             <div className="cd__slider-block">
               <div className="cd__slider-header">
-                <span className="cd__slider-label">Durée souhaitée</span>
+                <span className="cd__slider-label">{t.desiredDuration}</span>
                 <div className="cd__slider-val">
-                  <strong>{selectedDays} jour{selectedDays > 1 ? 's' : ''}</strong>
-                  {isCondensed && <span className="cd__adapted-tag--condensed">Condensé</span>}
-                  {isExtended  && <span className="cd__adapted-tag--extended">Étendu</span>}
-                  {!isAdapted  && <span className="cd__adapted-tag--reco">Recommandé</span>}
+                  <strong>{selectedDays} {t.day}{selectedDays > 1 ? 's' : ''}</strong>
+                  {isCondensed && <span className="cd__adapted-tag--condensed">{t.condensed}</span>}
+                  {isExtended  && <span className="cd__adapted-tag--extended">{t.extended}</span>}
+                  {!isAdapted  && <span className="cd__adapted-tag--reco">{t.recommended}</span>}
                 </div>
               </div>
               <input
@@ -643,18 +647,18 @@ export default function CircuitDetailPage() {
                 className="cd__slider"
               />
               <div className="cd__slider-limits">
-                <span>{circuit.minDays} j min.</span>
-                <span>{circuit.recommendedDays} j reco.</span>
-                <span>{circuit.maxDays ?? circuit.recommendedDays} j max.</span>
+                <span>{circuit.minDays} {t.min}</span>
+                <span>{circuit.recommendedDays} {t.reco}</span>
+                <span>{circuit.maxDays ?? circuit.recommendedDays} {t.max}</span>
               </div>
-              {isCondensed && <p className="cd__adapt-notice">Itinéraire condensé sur les étapes essentielles.</p>}
-              {isExtended  && <p className="cd__adapt-notice cd__adapt-notice--extended">Journées libres ajoutées pour explorer à votre rythme.</p>}
+              {isCondensed && <p className="cd__adapt-notice">{t.condensedNotice}</p>}
+              {isExtended  && <p className="cd__adapt-notice cd__adapt-notice--extended">{t.extendedNotice}</p>}
             </div>
 
             <button className="btn-primary cd__book-btn" onClick={handleReserve}>
-              Réserver ce trek
+              {t.reserve}
             </button>
-            <p className="cd__book-note">Paiement MVola accepté · Annulation flexible</p>
+            <p className="cd__book-note">{t.paymentNote}</p>
           </div>
         </aside>
       </div>
@@ -673,12 +677,10 @@ export default function CircuitDetailPage() {
           <div className="cd__gate-card">
             <button className="cd__gate-close" onClick={() => setShowLoginGate(false)}>✕</button>
             <div className="cd__gate-icon"><Icon name="lock" size={32} /></div>
-            <h3 className="cd__gate-title">Connexion requise</h3>
-            <p className="cd__gate-text">
-              Pour réserver ce trek, vous devez être connecté à votre compte Treky.
-            </p>
+            <h3 className="cd__gate-title">{t.loginRequired}</h3>
+            <p className="cd__gate-text">{t.loginRequiredText}</p>
             <div className="cd__gate-hint">
-              <span className="cd__gate-hint-label">Compte démo</span>
+              <span className="cd__gate-hint-label">{t.demoAccount}</span>
               <code>oceane@treky.mg</code>
               <code>treky2026</code>
             </div>
@@ -686,10 +688,10 @@ export default function CircuitDetailPage() {
               className="btn-primary cd__gate-btn"
               onClick={() => router.push(`/connexion?return=/circuits/${circuit.slug}`)}
             >
-              Se connecter
+              {t.login}
             </button>
             <Link href="/inscription" className="cd__gate-register">
-              Pas encore inscrit ? Créer un compte
+              {t.noAccount}
             </Link>
           </div>
         </div>

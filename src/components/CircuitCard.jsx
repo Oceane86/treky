@@ -6,36 +6,61 @@ import { useRouter } from 'next/navigation'
 import { useCurrency } from '../context/CurrencyContext'
 import { useFavorites } from '../context/FavoritesContext'
 import { useAuth } from '../context/AuthContext'
+import { useLocale } from '../context/LocaleContext'
+import { localizeCircuit } from '../data/circuits'
+import { getUI } from '../utils/i18n'
 import Icon from './Icon'
 import './CircuitCard.css'
 
 const LEVEL_MAP = {
-  'Facile':        { label: 'Explorateur curieux', cls: 'easy' },
-  'Intermédiaire': { label: 'Aventurier confirmé', cls: 'medium' },
-  'Modéré':        { label: 'Aventurier confirmé', cls: 'medium' },
-  'Sportif':       { label: 'Marcheur engagé',     cls: 'hard' },
-  'Engagé':        { label: 'Marcheur engagé',     cls: 'hard' },
+  fr: {
+    'Facile':        { label: 'Explorateur curieux', cls: 'easy' },
+    'Intermédiaire': { label: 'Aventurier confirmé', cls: 'medium' },
+    'Modéré':        { label: 'Aventurier confirmé', cls: 'medium' },
+    'Sportif':       { label: 'Marcheur engagé',     cls: 'hard' },
+    'Engagé':        { label: 'Marcheur engagé',     cls: 'hard' },
+  },
+  en: {
+    'Facile':        { label: 'Curious explorer', cls: 'easy' },
+    'Intermédiaire': { label: 'Seasoned adventurer', cls: 'medium' },
+    'Modéré':        { label: 'Seasoned adventurer', cls: 'medium' },
+    'Sportif':       { label: 'Committed hiker',     cls: 'hard' },
+    'Engagé':        { label: 'Committed hiker',     cls: 'hard' },
+  },
 }
 
-export default function CircuitCard({ circuit, matchBadge = false }) {
+const BADGE_LABEL_EN = {
+  'Populaire': 'Popular',
+  'Aventure': 'Adventure',
+  'Expédition': 'Expedition',
+  'Culture': 'Culture',
+  'Nature': 'Nature',
+  'Grande Traversée': 'Grand Traverse',
+}
+
+export default function CircuitCard({ circuit: baseCircuit, matchBadge = false }) {
   const { format } = useCurrency()
   const { isFavorite, toggleFavorite } = useFavorites()
   const { isLoggedIn } = useAuth()
+  const { locale } = useLocale()
   const router = useRouter()
   const [showGate, setShowGate] = useState(false)
+  const circuit = localizeCircuit(baseCircuit, locale)
+  const t = getUI(locale).circuitCard
   const fav = isFavorite(circuit.id)
-  const level = LEVEL_MAP[circuit.level] ?? { label: circuit.level, cls: 'easy' }
+  const level = LEVEL_MAP[locale][circuit.level] ?? { label: circuit.level, cls: 'easy' }
+  const badgeLabel = locale === 'en' ? (BADGE_LABEL_EN[baseCircuit.badge] ?? baseCircuit.badge) : baseCircuit.badge
   const minDays = circuit.minDays ?? circuit.recommendedDays
   const durationLabel = minDays < circuit.recommendedDays
-    ? `${minDays}–${circuit.recommendedDays} jours`
-    : `${circuit.recommendedDays} jours`
+    ? `${minDays}–${circuit.recommendedDays} ${t.days}`
+    : `${circuit.recommendedDays} ${t.days}`
 
   return (
     <div className="circuit-card__wrap">
       <Link href={`/circuits/${circuit.slug}`} className="circuit-card circuit-card--link">
         <div className="circuit-card__image-wrap">
-          <span className={`circuit-card__badge circuit-card__badge--${circuit.badge.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/\s+/g,'-')}`}>{circuit.badge}</span>
-          {matchBadge && <span className="circuit-card__match-badge">✓ Pour vous</span>}
+          <span className={`circuit-card__badge circuit-card__badge--${baseCircuit.badge.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/\s+/g,'-')}`}>{badgeLabel}</span>
+          {matchBadge && <span className="circuit-card__match-badge">✓ {t.forYou}</span>}
           <Image
             src={circuit.image}
             alt={circuit.name}
@@ -56,7 +81,7 @@ export default function CircuitCard({ circuit, matchBadge = false }) {
             {fav ? '♥' : '♡'}
           </button>
           <div className="circuit-card__image-overlay">
-            <span className="circuit-card__overlay-btn">Voir le circuit →</span>
+            <span className="circuit-card__overlay-btn">{t.viewCircuit} →</span>
           </div>
         </div>
 

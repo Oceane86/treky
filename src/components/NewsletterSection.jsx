@@ -1,11 +1,15 @@
 'use client'
 import { useState } from 'react'
 import Image from 'next/image'
+import { useLocale } from '../context/LocaleContext'
+import { getUI } from '../utils/i18n'
 import './NewsletterSection.css'
 
 export default function NewsletterSection() {
   const [email, setEmail] = useState('')
   const [submitted, setSubmitted] = useState(false)
+  const { locale } = useLocale()
+  const t = getUI(locale).home
 
   function handleSubmit(e) {
     e.preventDefault()
@@ -20,24 +24,19 @@ export default function NewsletterSection() {
 
         <div className="newsletter__content">
           <h2 className="newsletter__title">
-            S'inscrire à<br />notre<br />newsletter
+            {t.newsletterTitle1}<br />{t.newsletterTitle2}<br />{t.newsletterTitle3}
           </h2>
-          <p className="newsletter__subtitle">
-            Inspirations de treks, conseils terrain, offres exclusives et récits de voyageurs
-            — restez connectés à Madagascar.
-          </p>
+          <p className="newsletter__subtitle">{t.newsletterSubtitle}</p>
 
           {submitted ? (
-            <div className="newsletter__success">
-              Bienvenue dans la communauté Treky ! Vous recevrez bientôt nos meilleures aventures.
-            </div>
+            <div className="newsletter__success">{t.newsletterSuccess}</div>
           ) : (
             <form className="newsletter__form" onSubmit={handleSubmit}>
               <div className="newsletter__input-wrap">
                 <input
                   type="email"
                   className="newsletter__input"
-                  placeholder="Entrer votre email"
+                  placeholder={t.newsletterPlaceholder}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
