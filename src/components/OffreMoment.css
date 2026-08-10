@@ -75,7 +75,8 @@
 }
 
 .offre__detail-icon {
-  font-size: 1rem;
+  display: flex;
+  color: var(--fern-frond);
   flex-shrink: 0;
 }
 

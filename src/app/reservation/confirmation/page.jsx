@@ -7,6 +7,7 @@ import { useBooking } from '../../../context/BookingContext'
 import { useAuth } from '../../../context/AuthContext'
 import { circuits } from '../../../data/circuits'
 import { readJSON, writeJSON } from '../../../utils/storage'
+import Icon from '../../../components/Icon'
 import '../../../pages/BookingConfirmation.css'
 
 function formatDate(dateStr) {
@@ -62,7 +63,7 @@ export default function BookingConfirmationPage() {
   return (
     <div className="booking-confirm">
       <div className="booking-confirm__hero">
-        <div className="booking-confirm__emoji">🎉</div>
+        <div className="booking-confirm__emoji"><Icon name="sparkles" size={40} /></div>
         <h1 className="booking-confirm__title">Merci !</h1>
         <p className="booking-confirm__subtitle">Votre réservation a bien été enregistrée</p>
       </div>

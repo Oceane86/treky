@@ -6,6 +6,7 @@ import { useCurrency } from '../context/CurrencyContext'
 import { useAuth } from '../context/AuthContext'
 import { useFavorites } from '../context/FavoritesContext'
 import { useBooking } from '../context/BookingContext'
+import Icon from './Icon'
 import './Navbar.css'
 
 const navLinks = [
@@ -147,13 +148,13 @@ export default function Navbar() {
 
                   {isGuide ? (
                     <Link href="/guide/tableau-de-bord" className="navbar__dropdown-item">
-                      <span className="navbar__dropdown-icon">🧭</span>
+                      <span className="navbar__dropdown-icon"><Icon name="compass" size={15} /></span>
                       Espace guides
                     </Link>
                   ) : (
                     <>
                       <Link href="/compte/reservations" className="navbar__dropdown-item">
-                        <span className="navbar__dropdown-icon">📋</span>
+                        <span className="navbar__dropdown-icon"><Icon name="route" size={15} /></span>
                         Mes réservations
                       </Link>
 
@@ -166,12 +167,12 @@ export default function Navbar() {
                       </Link>
 
                       <Link href={chatHref} className="navbar__dropdown-item">
-                        <span className="navbar__dropdown-icon">💬</span>
+                        <span className="navbar__dropdown-icon"><Icon name="chat" size={15} /></span>
                         Messages guide
                       </Link>
 
                       <Link href="/compte/carnet" className="navbar__dropdown-item">
-                        <span className="navbar__dropdown-icon">📔</span>
+                        <span className="navbar__dropdown-icon"><Icon name="journal" size={15} /></span>
                         Carnet de trek
                       </Link>
                     </>

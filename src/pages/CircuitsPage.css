@@ -14,6 +14,17 @@
   color: var(--log-cabin);
 }
 
+.circuits-search-bar strong {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--fern-frond);
+}
+
+.circuits-search-bar strong svg {
+  flex-shrink: 0;
+}
+
 .circuits-search-bar__actions {
   display: flex;
   gap: 20px;
@@ -49,6 +60,14 @@
   font-size: 1.4rem;
   font-weight: 700;
   color: var(--log-cabin);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.circuits-reco__title svg {
+  color: var(--fern-frond);
+  flex-shrink: 0;
 }
 
 /* ── Autres thématiques ── */
@@ -87,6 +106,9 @@
 }
 
 .circuits-other__theme {
+  display: flex;
+  align-items: center;
+  gap: 6px;
   font-size: 0.78rem;
   font-weight: 700;
   color: var(--fern-frond);

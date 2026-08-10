@@ -3,6 +3,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { useAuth } from '../../../context/AuthContext'
 import { readJSON, writeJSON } from '../../../utils/storage'
+import Icon from '../../../components/Icon'
 import '../../../pages/Page.css'
 import '../../../pages/Avis.css'
 
@@ -30,7 +31,7 @@ export default function AvisPage() {
     return (
       <div className="page">
         <div className="resa-gate">
-          <div className="resa-gate__icon">🔒</div>
+          <div className="resa-gate__icon"><Icon name="lock" size={40} /></div>
           <h2>Connexion requise</h2>
           <p>Connectez-vous pour laisser un avis.</p>
           <Link href="/connexion" className="btn-primary">Se connecter</Link>
@@ -176,7 +177,7 @@ export default function AvisPage() {
             <div className="avis__block">
               <label className="avis__label">Témoignage vidéo <span className="avis__optional">(optionnel)</span></label>
               <label className="avis__video-btn">
-                🎥 {videoName ? videoName : 'Ajouter une vidéo'}
+                <Icon name="camera" size={16} /> {videoName ? videoName : 'Ajouter une vidéo'}
                 <input type="file" accept="video/*" onChange={handleVideo} hidden />
               </label>
             </div>

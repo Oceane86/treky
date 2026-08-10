@@ -48,7 +48,9 @@
 }
 
 .cc-gate-icon {
-  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  color: var(--fern-frond);
   margin-bottom: 12px;
 }
 

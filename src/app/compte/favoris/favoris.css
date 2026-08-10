@@ -9,7 +9,9 @@
 }
 
 .favoris-gate__icon {
-  font-size: 3rem;
+  display: flex;
+  justify-content: center;
+  color: var(--fern-frond);
 }
 
 .favoris-gate h2 {

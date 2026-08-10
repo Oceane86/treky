@@ -5,14 +5,15 @@ import { useRouter } from 'next/navigation'
 import { useAuth } from '../../../context/AuthContext'
 import { guides as guidesData } from '../../../data/circuits'
 import { readJSON, writeJSON } from '../../../utils/storage'
+import Icon from '../../../components/Icon'
 import '../../../pages/Page.css'
 import '../../../pages/GuideDashboard.css'
 
 const TABS = [
-  { id: 'profil', label: 'Profil', icon: '👤' },
-  { id: 'dispo', label: 'Disponibilités', icon: '📅' },
-  { id: 'reservations', label: 'Réservations', icon: '📋' },
-  { id: 'avis', label: 'Avis reçus', icon: '⭐' },
+  { id: 'profil', label: 'Profil', icon: 'user' },
+  { id: 'dispo', label: 'Disponibilités', icon: 'calendar' },
+  { id: 'reservations', label: 'Réservations', icon: 'route' },
+  { id: 'avis', label: 'Avis reçus', icon: 'star' },
 ]
 
 const DAYS_OF_WEEK = ['Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa', 'Di']
@@ -133,7 +134,7 @@ export default function GuideDashboardPage() {
               className={`guide-dash__tab ${tab === t.id ? 'guide-dash__tab--active' : ''}`}
               onClick={() => setTab(t.id)}
             >
-              <span>{t.icon}</span> {t.label}
+              <span><Icon name={t.icon} size={15} /></span> {t.label}
             </button>
           ))}
           <button className="guide-dash__tab guide-dash__tab--logout" onClick={() => { logout(); router.push('/') }}>

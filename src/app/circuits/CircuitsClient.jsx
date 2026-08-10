@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
+import Icon from '../../components/Icon'
 import { circuits } from '../../data/circuits'
 import { THEMES, scoreCircuit, matchCircuitsByTheme } from '../../utils/matching'
 import { readJSON, removeJSON } from '../../utils/storage'
@@ -74,7 +75,7 @@ export default function CircuitsPage() {
 
           <div className="circuits-search-bar">
             <div>
-              <strong>🎯 Votre recherche</strong>
+              <strong><Icon name="target" size={15} /> Votre recherche</strong>
               <span>
                 {' '}{selectedThemeLabels.join(', ')} · {wishes.duree} jours · jusqu'à {wishes.budget.toLocaleString('fr-FR')} €
               </span>
@@ -90,7 +91,7 @@ export default function CircuitsPage() {
           {recommended.length > 0 && (
             <div className="circuits-reco">
               <div className="circuits-reco__header">
-                <h2 className="circuits-reco__title">🎯 Vos recommandations</h2>
+                <h2 className="circuits-reco__title"><Icon name="target" size={20} /> Vos recommandations</h2>
               </div>
               <div className="resultats__list">
                 {recommended.map(({ circuit, score, seasonStatus, idealMonths }) => (
@@ -118,7 +119,7 @@ export default function CircuitsPage() {
               <div className="circuits-other__row">
                 {otherSuggestions.map(({ theme, circuit }) => (
                   <div key={theme.id} className="circuits-other__item">
-                    <span className="circuits-other__theme">{theme.icon} {theme.label}</span>
+                    <span className="circuits-other__theme"><Icon name={theme.icon} size={14} /> {theme.label}</span>
                     <CircuitCard circuit={circuit} />
                   </div>
                 ))}

@@ -2,6 +2,7 @@ node_modules/
 dist/
 dev-dist/
 screenshots/
+.next/
 .env
 .env.local
 .env.*.local

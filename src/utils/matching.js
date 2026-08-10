@@ -5,22 +5,22 @@ import { guides } from '../data/circuits'
 import { getClimatForMonth, isClosedInMonth, getIdealMonths } from './climate'
 
 export const THEMES = [
-  { id: 'aventure-sommets', label: 'Aventure & Sommets', icon: '🏔️' },
-  { id: 'paysages-mineraux', label: 'Paysages minéraux', icon: '🪨' },
-  { id: 'faune-biodiversite', label: 'Faune & Biodiversité', icon: '🦎' },
-  { id: 'culture-traditions', label: 'Culture & Traditions', icon: '🎭' },
-  { id: 'histoire-patrimoine', label: 'Histoire & Patrimoine', icon: '🏛️' },
-  { id: 'saveurs-artisanat', label: 'Saveurs & Artisanat', icon: '🌿' },
-  { id: 'plages-ocean', label: 'Plages & Océan', icon: '🌊' },
-  { id: 'expedition-integrale', label: 'Expédition intégrale', icon: '🧭' },
+  { id: 'aventure-sommets', label: 'Aventure & Sommets', icon: 'mountain' },
+  { id: 'paysages-mineraux', label: 'Paysages minéraux', icon: 'gem' },
+  { id: 'faune-biodiversite', label: 'Faune & Biodiversité', icon: 'lizard' },
+  { id: 'culture-traditions', label: 'Culture & Traditions', icon: 'masks' },
+  { id: 'histoire-patrimoine', label: 'Histoire & Patrimoine', icon: 'landmark' },
+  { id: 'saveurs-artisanat', label: 'Saveurs & Artisanat', icon: 'leaf' },
+  { id: 'plages-ocean', label: 'Plages & Océan', icon: 'waves' },
+  { id: 'expedition-integrale', label: 'Expédition intégrale', icon: 'compass' },
 ]
 
 // "Lodge partenaire" regroupe les hébergements gérés par des partenaires Treky
 // (lodge, hôtel, bungalow), distincts de l'hébergement chez l'habitant et du bivouac.
 export const HEBERGEMENT_OPTIONS = [
-  { id: 'habitant', label: "Chez l'habitant", icon: '🏡', types: ["Chez l'habitant"] },
-  { id: 'lodge', label: 'Lodge partenaire', icon: '🏨', types: ['Lodge', 'Hôtel', 'Bungalow'] },
-  { id: 'bivouac', label: 'Bivouac', icon: '⛺', types: ['Bivouac'] },
+  { id: 'habitant', label: "Chez l'habitant", icon: 'user', types: ["Chez l'habitant"] },
+  { id: 'lodge', label: 'Lodge partenaire', icon: 'landmark', types: ['Lodge', 'Hôtel', 'Bungalow'] },
+  { id: 'bivouac', label: 'Bivouac', icon: 'mountain', types: ['Bivouac'] },
 ]
 
 export const NIVEAU_OPTIONS = ['Facile', 'Modéré', 'Sportif', 'Engagé']

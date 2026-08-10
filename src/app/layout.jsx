@@ -52,6 +52,29 @@ export function generateViewport() {
   return { themeColor: '#5b8c1a' }
 }
 
+const organizationJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'TravelAgency',
+  name: 'Treky',
+  url: 'https://treky.mg',
+  logo: 'https://treky.mg/logo.png',
+  description:
+    "Treky organise des circuits de trekking à Madagascar avec des guides locaux certifiés.",
+  areaServed: { '@type': 'Country', name: 'Madagascar' },
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Antananarivo',
+    addressCountry: 'MG',
+  },
+  contactPoint: {
+    '@type': 'ContactPoint',
+    contactType: 'customer service',
+    email: 'contact@treky.mg',
+    telephone: '+261000000000',
+    availableLanguage: ['French', 'Malagasy'],
+  },
+}
+
 export default function RootLayout({ children }) {
   return (
     <html lang="fr">
@@ -64,6 +87,10 @@ export default function RootLayout({ children }) {
         <link
           href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400;12..96,75..100,600;12..96,75..100,700&family=Questrial&display=swap"
           rel="stylesheet"
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
       </head>
       <body>

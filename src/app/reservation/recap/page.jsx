@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { useBooking } from '../../../context/BookingContext'
 import PriceBreakdown from '../../../components/PriceBreakdown'
 import RefundPolicy from '../../../components/RefundPolicy'
+import Icon from '../../../components/Icon'
 import '../../../pages/BookingRecap.css'
 
 function formatDate(dateStr) {
@@ -119,7 +120,7 @@ export default function BookingRecapPage() {
           <RefundPolicy />
 
           <div className="recap__next-step">
-            <div className="recap__next-icon">🧭</div>
+            <div className="recap__next-icon"><Icon name="compass" size={22} /></div>
             <div className="recap__next-text">
               <strong>Prochaine étape</strong>
               <p>Choisissez votre guide parmi nos experts disponibles aux dates sélectionnées.</p>

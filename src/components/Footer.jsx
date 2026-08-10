@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Icon from './Icon'
 import './Footer.css'
 
 export default function Footer() {
@@ -57,15 +58,15 @@ export default function Footer() {
             <p className="footer__col-label">Nous contacter</p>
             <ul className="footer__contact-list">
               <li>
-                <span className="footer__contact-icon">✉</span>
+                <span className="footer__contact-icon"><Icon name="mail" size={15} /></span>
                 <a href="mailto:contact@treky.mg">contact@treky.mg</a>
               </li>
               <li>
-                <span className="footer__contact-icon">☎</span>
+                <span className="footer__contact-icon"><Icon name="phone" size={15} /></span>
                 <a href="tel:+261000000000">+261 00 00 000 00</a>
               </li>
               <li>
-                <span className="footer__contact-icon">⌖</span>
+                <span className="footer__contact-icon"><Icon name="pin" size={15} /></span>
                 <span>Antananarivo, Madagascar</span>
               </li>
             </ul>

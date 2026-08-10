@@ -2,6 +2,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useCurrency } from '../context/CurrencyContext'
+import Icon from './Icon'
 import './OffreMoment.css'
 
 const SLUG = 'sainte-marie-pirates-baleines'
@@ -39,19 +40,19 @@ export default function OffreMoment() {
             </p>
             <ul className="offre__details">
               <li>
-                <span className="offre__detail-icon">📍</span>
+                <span className="offre__detail-icon"><Icon name="pin" size={16} /></span>
                 <span>Île Sainte-Marie, côte est de Madagascar</span>
               </li>
               <li>
-                <span className="offre__detail-icon">⏱</span>
+                <span className="offre__detail-icon"><Icon name="clock" size={16} /></span>
                 <span>4 à 5 jours</span>
               </li>
               <li>
-                <span className="offre__detail-icon">👥</span>
+                <span className="offre__detail-icon"><Icon name="users" size={16} /></span>
                 <span>Groupe de 2 à 12 personnes</span>
               </li>
               <li>
-                <span className="offre__detail-icon">⭐</span>
+                <span className="offre__detail-icon"><Icon name="star" size={16} /></span>
                 <span>Niveau facile</span>
               </li>
             </ul>

@@ -7,6 +7,7 @@ import { INSTALLMENT_THRESHOLD_AR, buildInstallments } from '../utils/pricing'
 import { readJSON } from '../utils/storage'
 import PriceBreakdown from './PriceBreakdown'
 import RefundPolicy from './RefundPolicy'
+import Icon from './Icon'
 import './BookingModal.css'
 
 const PROMO_CODE = 'TREKY10'
@@ -166,7 +167,7 @@ export default function BookingModal({ circuit, selectedDays, priceAr, onClose }
             </div>
 
             <div className="bm__info-box">
-              <span>📍</span>
+              <span><Icon name="pin" size={15} /></span>
               <span>{circuit.location}</span>
             </div>
 
@@ -365,7 +366,7 @@ export default function BookingModal({ circuit, selectedDays, priceAr, onClose }
                       checked={paymentMethod === 'carte'}
                       onChange={() => setPaymentMethod('carte')}
                     />
-                    <span className="bm__method-icons">💳</span>
+                    <span className="bm__method-icons"><Icon name="card" size={20} /></span>
                     <span className="bm__method-label">Carte bancaire</span>
                   </label>
                 </div>

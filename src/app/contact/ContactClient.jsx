@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { getCircuitBySlug } from '../../data/circuits'
+import Icon from '../../components/Icon'
 import '../../pages/Page.css'
 import '../../pages/Contact.css'
 
@@ -72,15 +73,15 @@ export default function ContactPage() {
               <h2>Coordonnées</h2>
               <ul className="contact-info__list">
                 <li>
-                  <span>✉</span>
+                  <span><Icon name="mail" size={16} /></span>
                   <a href="mailto:contact@treky.mg">contact@treky.mg</a>
                 </li>
                 <li>
-                  <span>☎</span>
+                  <span><Icon name="phone" size={16} /></span>
                   <a href="tel:+261000000000">+261 00 00 000 00</a>
                 </li>
                 <li>
-                  <span>⌖</span>
+                  <span><Icon name="pin" size={16} /></span>
                   <span>Antananarivo, Madagascar</span>
                 </li>
               </ul>

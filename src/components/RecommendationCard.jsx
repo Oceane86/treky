@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import Icon from './Icon'
 import { getGuideById } from '../data/circuits'
 import { THEMES, getMatchedThemes } from '../utils/matching'
 import { MONTHS, getClosure } from '../utils/climate'
@@ -9,10 +10,10 @@ import { applyGuideOverrides } from '../utils/guideProfile'
 import './RecommendationCard.css'
 
 const SEASON_COPY = {
-  closed: { icon: '🚫', tone: 'closed', label: 'Fermé à cette période' },
-  avoid: { icon: '🌧️', tone: 'avoid', label: 'Période déconseillée' },
-  ok: { icon: '⛅', tone: 'ok', label: 'Bonne période' },
-  ideal: { icon: '☀️', tone: 'ideal', label: 'Période idéale' },
+  closed: { icon: 'lock', tone: 'closed', label: 'Fermé à cette période' },
+  avoid: { icon: 'cloudRain', tone: 'avoid', label: 'Période déconseillée' },
+  ok: { icon: 'cloud', tone: 'ok', label: 'Bonne période' },
+  ideal: { icon: 'sun', tone: 'ideal', label: 'Période idéale' },
 }
 
 function formatMonthsFr(monthIndexes) {
@@ -70,7 +71,7 @@ export default function RecommendationCard({ circuit, score, seasonStatus, ideal
 
         {season && (
           <div className={`resultats__season resultats__season--${season.tone}`}>
-            <span>{season.icon}</span>
+            <Icon name={season.icon} size={16} />
             <span>
               <strong>{season.label}</strong>
               {seasonStatus === 'closed' && closure && ` — ${closure.note}`}
@@ -82,7 +83,7 @@ export default function RecommendationCard({ circuit, score, seasonStatus, ideal
         )}
         {!season && idealMonths.length > 0 && (
           <div className="resultats__season resultats__season--ideal">
-            <span>☀️</span>
+            <Icon name="sun" size={16} />
             <span><strong>Meilleure période :</strong> {formatMonthsFr(idealMonths)}</span>
           </div>
         )}

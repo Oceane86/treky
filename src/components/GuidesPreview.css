@@ -83,7 +83,9 @@
 }
 
 .guide-preview-card__lieu {
-  display: block;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
   font-size: 0.72rem;
   color: #aaa;
   margin-top: 3px;
@@ -130,6 +132,9 @@
 }
 
 .guide-preview-card__langues {
+  display: flex;
+  align-items: center;
+  gap: 5px;
   font-size: 0.82rem;
   color: #888;
   margin-top: auto;

@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { guides as baseGuides } from '../data/circuits'
 import { applyGuideOverrides } from '../utils/guideProfile'
+import Icon from './Icon'
 import './GuidesPreview.css'
 
 export default function GuidesPreview() {
@@ -42,7 +43,7 @@ export default function GuidesPreview() {
                   <div>
                     <h3 className="guide-preview-card__name">{guide.nom}</h3>
                     {guide.localisation && (
-                      <span className="guide-preview-card__lieu">📍 {guide.localisation}</span>
+                      <span className="guide-preview-card__lieu"><Icon name="pin" size={13} /> {guide.localisation}</span>
                     )}
                   </div>
                   <div className="guide-preview-card__rating">
@@ -58,7 +59,7 @@ export default function GuidesPreview() {
                   ))}
                 </div>
 
-                <p className="guide-preview-card__langues">🗣️ {guide.langues.join(' · ')}</p>
+                <p className="guide-preview-card__langues"><Icon name="globe" size={14} /> {guide.langues.join(' · ')}</p>
               </div>
             </div>
           ))}

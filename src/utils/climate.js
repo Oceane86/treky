@@ -13,7 +13,7 @@ export const CLIMAT_MAP = {
   baleines:      ['ok', 'ok', 'ideal', 'ideal', 'ideal', 'ideal', 'ideal', 'ideal', 'ideal', 'ideal', 'ideal', 'ok'],
 }
 
-export const CLIMAT_ICON = { ideal: '☀️', ok: '⛅', avoid: '🌧️' }
+export const CLIMAT_ICON = { ideal: 'sun', ok: 'cloud', avoid: 'cloudRain' }
 export const CLIMAT_LABEL = { ideal: 'Idéal', ok: 'Correct', avoid: 'Déconseillé' }
 
 // Fermetures réelles ou quasi-officielles de sites pendant la saison des pluies —

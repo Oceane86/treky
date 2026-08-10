@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useAuth } from '../../../context/AuthContext'
 import { readJSON, writeJSON } from '../../../utils/storage'
+import Icon from '../../../components/Icon'
 import '../../../pages/Page.css'
 import '../../../pages/Journal.css'
 
@@ -47,7 +48,7 @@ function DayEntryForm({ dayNumber, onSave }) {
       />
       <div className="journal__form-row">
         <label className="journal__photo-btn">
-          📷 {photo ? 'Changer la photo' : 'Ajouter une photo'}
+          <Icon name="camera" size={16} /> {photo ? 'Changer la photo' : 'Ajouter une photo'}
           <input type="file" accept="image/*" onChange={handlePhoto} hidden />
         </label>
         <button type="submit" className="btn-primary journal__save-btn" disabled={!text.trim()}>
@@ -114,7 +115,7 @@ export default function CarnetPage() {
     return (
       <div className="page">
         <div className="resa-gate">
-          <div className="resa-gate__icon">🔒</div>
+          <div className="resa-gate__icon"><Icon name="lock" size={40} /></div>
           <h2>Connexion requise</h2>
           <p>Connectez-vous pour accéder à votre carnet de trek.</p>
           <Link href="/connexion" className="btn-primary">Se connecter</Link>
@@ -143,7 +144,7 @@ export default function CarnetPage() {
 
           {hydrated && !online && (
             <div className="journal__offline-banner">
-              📴 Vous êtes hors ligne — vos entrées restent accessibles et seront synchronisées automatiquement à la reconnexion.
+              <Icon name="wifiOff" size={16} /> Vous êtes hors ligne — vos entrées restent accessibles et seront synchronisées automatiquement à la reconnexion.
             </div>
           )}
           {syncToast && <div className="journal__sync-toast">✓ {syncToast}</div>}
@@ -168,7 +169,11 @@ export default function CarnetPage() {
                           entry.synced ? 'journal__sync-badge--ok' : 'journal__sync-badge--pending'
                         }`}
                       >
-                        {entry.synced ? '✓ Synchronisé' : '⏳ En attente de synchronisation'}
+                        {entry.synced ? (
+                          '✓ Synchronisé'
+                        ) : (
+                          <><Icon name="clock" size={12} /> En attente de synchronisation</>
+                        )}
                       </span>
                     )}
                   </div>
@@ -194,7 +199,7 @@ export default function CarnetPage() {
 
           {completed === TREK_DAYS && (
             <div className="journal__complete-cta">
-              <h3>Votre carnet est complet 🎉</h3>
+              <h3>Votre carnet est complet <Icon name="sparkles" size={18} /></h3>
               <p>Relisez votre cheminement, puis partagez en quoi ce trek vous a changé.</p>
               <Link href="/compte/avis" className="btn-primary">Laisser mon avis final →</Link>
             </div>

@@ -4,6 +4,7 @@ import { useFavorites } from '../../../context/FavoritesContext'
 import { useAuth } from '../../../context/AuthContext'
 import { circuits } from '../../../data/circuits'
 import CircuitCard from '../../../components/CircuitCard'
+import Icon from '../../../components/Icon'
 import '../../../pages/Page.css'
 import './favoris.css'
 
@@ -17,7 +18,7 @@ export default function FavorisPage() {
     return (
       <div className="page">
         <div className="favoris-gate">
-          <div className="favoris-gate__icon">🔒</div>
+          <div className="favoris-gate__icon"><Icon name="lock" size={40} /></div>
           <h2>Connexion requise</h2>
           <p>Connectez-vous pour retrouver vos circuits favoris.</p>
           <Link href="/connexion" className="btn-primary">Se connecter</Link>

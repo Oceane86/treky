@@ -96,8 +96,8 @@
 }
 
 .about-engagement-card__icon {
-  font-size: 2rem;
-  display: block;
+  display: flex;
+  color: var(--fern-frond);
   margin-bottom: 16px;
 }
 
@@ -170,7 +170,9 @@
 }
 
 .about-guide-card__lieu {
-  display: block;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
   font-size: 0.75rem;
   color: #aaa;
   margin-top: 3px;
@@ -250,6 +252,9 @@
 }
 
 .about-assoc-card__lieu {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
   font-size: 0.78rem;
   color: #aaa;
 }

@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { readJSON } from '../utils/storage'
+import Icon from './Icon'
 
 function mergeTeamMember(member) {
   const saved = readJSON(`treky_guide_profile_${member.id}`, null)
@@ -43,7 +44,7 @@ export default function AboutTeamSection({ team }) {
                 <h3 className="about-guide-card__name">{g.nom}</h3>
                 <p className="about-guide-card__role">{g.role}</p>
                 {g.localisation && (
-                  <span className="about-guide-card__lieu">📍 {g.localisation}</span>
+                  <span className="about-guide-card__lieu"><Icon name="pin" size={13} /> {g.localisation}</span>
                 )}
               </div>
               <div className="about-guide-card__note">

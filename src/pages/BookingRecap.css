@@ -174,7 +174,7 @@
   margin-bottom: 24px;
 }
 
-.recap__next-icon { font-size: 1.6rem; flex-shrink: 0; }
+.recap__next-icon { display: flex; color: var(--fern-frond); flex-shrink: 0; }
 
 .recap__next-text strong {
   display: block;

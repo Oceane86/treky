@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { guides as baseGuides } from '../../../data/circuits'
 import { useBooking } from '../../../context/BookingContext'
 import { applyGuideOverrides } from '../../../utils/guideProfile'
+import Icon from '../../../components/Icon'
 import '../../../pages/GuideSelection.css'
 
 function formatDate(dateStr) {
@@ -66,7 +67,7 @@ export default function GuideSelectionPage() {
                     <span className="guide-sel__reviews">({guide.nb_avis} avis)</span>
                   </div>
                   {guide.localisation && (
-                    <span className="guide-sel__lieu">📍 {guide.localisation}</span>
+                    <span className="guide-sel__lieu"><Icon name="pin" size={13} /> {guide.localisation}</span>
                   )}
                 </div>
                 <span className="guide-sel__available-dot" title="Disponible">●</span>

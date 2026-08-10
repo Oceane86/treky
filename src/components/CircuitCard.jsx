@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 import { useCurrency } from '../context/CurrencyContext'
 import { useFavorites } from '../context/FavoritesContext'
 import { useAuth } from '../context/AuthContext'
+import Icon from './Icon'
 import './CircuitCard.css'
 
 const LEVEL_MAP = {
@@ -60,7 +61,7 @@ export default function CircuitCard({ circuit, matchBadge = false }) {
         </div>
 
         <div className="circuit-card__body">
-          <span className="circuit-card__region">📍 {circuit.region}</span>
+          <span className="circuit-card__region"><Icon name="pin" size={13} /> {circuit.region}</span>
 
           <h3 className="circuit-card__name">{circuit.name}</h3>
 
@@ -74,7 +75,7 @@ export default function CircuitCard({ circuit, matchBadge = false }) {
 
           <div className="circuit-card__footer">
             <span className="circuit-card__duration">
-              <span className="circuit-card__duration-pill">⏱ {durationLabel}</span>
+              <span className="circuit-card__duration-pill"><Icon name="clock" size={13} /> {durationLabel}</span>
             </span>
             <span className="circuit-card__price">{format(circuit.priceAr)}</span>
           </div>
@@ -85,7 +86,7 @@ export default function CircuitCard({ circuit, matchBadge = false }) {
         <div className="cc-gate-overlay" onClick={(e) => e.target === e.currentTarget && setShowGate(false)}>
           <div className="cc-gate-card">
             <button className="cc-gate-close" onClick={() => setShowGate(false)}>✕</button>
-            <div className="cc-gate-icon">🔒</div>
+            <div className="cc-gate-icon"><Icon name="lock" size={32} /></div>
             <h3 className="cc-gate-title">Connexion requise</h3>
             <p className="cc-gate-text">Connectez-vous pour ajouter ce circuit à vos favoris.</p>
             <div className="cc-gate-hint">

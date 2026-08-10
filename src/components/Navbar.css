@@ -303,8 +303,8 @@
 }
 
 .navbar__dropdown-icon {
-  font-size: 1rem;
-  line-height: 1;
+  display: flex;
+  color: var(--fern-frond);
   flex-shrink: 0;
 }
 

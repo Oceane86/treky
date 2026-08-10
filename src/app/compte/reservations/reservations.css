@@ -8,7 +8,7 @@
   text-align: center;
 }
 
-.resa-gate__icon { font-size: 3rem; }
+.resa-gate__icon { display: flex; color: var(--fern-frond); }
 
 .resa-gate h2 {
   font-family: var(--font-primary);

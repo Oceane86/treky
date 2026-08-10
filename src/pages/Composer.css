@@ -1,5 +1,7 @@
 .composer__badge {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   margin-top: 16px;
   background: rgba(255, 255, 255, 0.12);
   border: 1px solid rgba(255, 255, 255, 0.22);
@@ -198,7 +200,8 @@
 }
 
 .composer__theme-icon {
-  font-size: 1.7rem;
+  display: flex;
+  color: var(--fern-frond);
 }
 
 /* ── Chips ── */
@@ -209,6 +212,9 @@
 }
 
 .composer__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   padding: 10px 18px;
   border-radius: 24px;
   border: 2px solid #eeebe3;

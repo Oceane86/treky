@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import AboutTeamSection from '../../components/AboutTeamSection'
+import Icon from '../../components/Icon'
 
 export const metadata = {
   title: 'À propos de Treky',
@@ -54,22 +55,22 @@ const TEAM = [
 
 const ENGAGEMENTS = [
   {
-    icon: '🌿',
+    icon: 'leaf',
     titre: 'Écotourisme responsable',
     texte: "Chaque circuit est conçu pour minimiser l'impact sur les écosystèmes : groupes limités, bivouacs zéro déchet, sentiers balisés avec les parcs nationaux.",
   },
   {
-    icon: '🤝',
+    icon: 'users',
     titre: "Économie locale d'abord",
     texte: "Guides, porteurs, cuisiniers, hébergeurs — 100% de nos prestataires sont issus des régions traversées. Votre voyage crée des emplois durables sur place.",
   },
   {
-    icon: '🏡',
+    icon: 'building',
     titre: 'Immersion authentique',
     texte: "Nuits chez l'habitant, repas familiaux, ateliers artisanaux : nous privilégions les rencontres réelles aux expériences standardisées.",
   },
   {
-    icon: '🌍',
+    icon: 'gem',
     titre: 'Contribution conservation',
     texte: "Une partie de chaque réservation est reversée aux associations de protection de la biodiversité malgache avec lesquelles nous travaillons.",
   },
@@ -192,7 +193,7 @@ export default function AboutPage() {
             <div className="about-engagements__grid">
               {ENGAGEMENTS.map((e) => (
                 <div key={e.titre} className="about-engagement-card">
-                  <span className="about-engagement-card__icon">{e.icon}</span>
+                  <span className="about-engagement-card__icon"><Icon name={e.icon} size={26} /></span>
                   <h3>{e.titre}</h3>
                   <p>{e.texte}</p>
                 </div>
@@ -222,7 +223,7 @@ export default function AboutPage() {
                   <div className="about-assoc-card__top">
                     <div>
                       <h3 className="about-assoc-card__name">{a.nom}</h3>
-                      <span className="about-assoc-card__lieu">📍 {a.lieu}</span>
+                      <span className="about-assoc-card__lieu"><Icon name="pin" size={13} /> {a.lieu}</span>
                     </div>
                     <span className="about-assoc-card__role-tag">{a.role}</span>
                   </div>

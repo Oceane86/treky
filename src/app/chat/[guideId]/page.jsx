@@ -6,6 +6,7 @@ import { useParams } from 'next/navigation'
 import { guides } from '../../../data/circuits'
 import { useAuth } from '../../../context/AuthContext'
 import { useBooking } from '../../../context/BookingContext'
+import Icon from '../../../components/Icon'
 import '../../../pages/Chat.css'
 
 function now() {
@@ -90,7 +91,7 @@ export default function ChatPage() {
 
       {booking?.circuit && (
         <div className="chat__context-bar">
-          <span>📋</span>
+          <span><Icon name="route" size={16} /></span>
           <span>
             <strong>{booking.circuit.name}</strong>
             {booking.checkin && ` · Départ le ${new Date(booking.checkin).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' })}`}

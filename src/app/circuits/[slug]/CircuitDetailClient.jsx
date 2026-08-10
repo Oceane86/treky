@@ -13,6 +13,7 @@ import { useFavorites } from '../../../context/FavoritesContext'
 import { readJSON } from '../../../utils/storage'
 import { MONTHS, CLIMAT_MAP, CLIMAT_ICON, CLIMAT_LABEL, getClimatKey, getClosure, formatMonthRange } from '../../../utils/climate'
 import BookingModal from '../../../components/BookingModal'
+import Icon from '../../../components/Icon'
 import '../../../pages/CircuitDetail.css'
 
 const CircuitMap = dynamic(() => import('../../../components/CircuitMap'), { ssr: false })
@@ -90,14 +91,15 @@ const RATING_BARS = [
 
 function infoIcon(text) {
   const t = text.toLowerCase()
-  if (t.includes('chaussure') || t.includes('équipement') || t.includes('materiel')) return '🥾'
-  if (t.includes('saison') || t.includes('période') || t.includes('recommandée')) return '📅'
-  if (t.includes('physique') || t.includes('condition') || t.includes('expérience')) return '💪'
-  if (t.includes('solaire') || t.includes('chapeau') || t.includes('soleil')) return '☀️'
-  if (t.includes('groupe') || t.includes('personnes') || t.includes('limité')) return '👥'
-  if (t.includes('accessible') || t.includes('famille')) return '✅'
-  if (t.includes('eau') || t.includes('hydratation')) return '💧'
-  return 'ℹ️'
+  if (t.includes('chaussure') || t.includes('équipement') || t.includes('materiel')) return 'boot'
+  if (t.includes('saison') || t.includes('période') || t.includes('recommandée')) return 'calendar'
+  if (t.includes('physique') || t.includes('condition') || t.includes('expérience')) return 'strength'
+  if (t.includes('solaire') || t.includes('chapeau') || t.includes('soleil')) return 'sun'
+  if (t.includes('groupe') || t.includes('personnes') || t.includes('limité')) return 'users'
+  if (t.includes('accessible') || t.includes('famille')) return 'check'
+  if (t.includes('eau') || t.includes('hydratation')) return 'droplet'
+  if (t.includes('accès') || t.includes('route') || t.includes('piste') || t.includes('vol')) return 'map'
+  return 'info'
 }
 
 export default function CircuitDetailPage() {
@@ -238,15 +240,15 @@ export default function CircuitDetailPage() {
             </div>
             <div className="cd__actions">
               <button className={`cd__action-btn${fav ? ' cd__action-btn--active' : ''}`} onClick={handleFav} title={fav ? 'Retirer des favoris' : 'Ajouter aux favoris'}>
-                <span>{fav ? '♥' : '♡'}</span>
+                <Icon name={fav ? 'heart' : 'heartOutline'} size={18} />
                 <small>Favoris</small>
               </button>
               <button className="cd__action-btn" onClick={handleShare} title="Partager">
-                <span>⤴</span>
+                <Icon name="share" size={18} />
                 <small>Partager</small>
               </button>
               <button className="cd__action-btn" onClick={handleCompare} title="Comparer">
-                <span>⊞</span>
+                <Icon name="compare" size={18} />
                 <small>Comparer</small>
               </button>
             </div>
@@ -258,7 +260,9 @@ export default function CircuitDetailPage() {
       <div className="container cd__gallery">
         <div className="cd__gallery-main" onClick={() => openLightbox(0)} style={{ cursor: 'pointer' }}>
           <Image src={photos[0]} alt={circuit.name} fill sizes="(max-width: 900px) 100vw, 60vw" priority className="cd__gallery-big" />
-          <button className="cd__gallery-all-btn" onClick={(e) => { e.stopPropagation(); openLightbox(0) }}>📷 Voir tout</button>
+          <button className="cd__gallery-all-btn" onClick={(e) => { e.stopPropagation(); openLightbox(0) }}>
+            <Icon name="camera" size={14} /> Voir tout
+          </button>
         </div>
         <div className="cd__gallery-grid">
           {photos.slice(1, 5).map((src, i) => (
@@ -347,7 +351,15 @@ export default function CircuitDetailPage() {
                           {step.lodge && (
                             <div className="cd__step-lodge">
                               <span className="cd__step-lodge-icon">
-                                {step.typeHebergement === 'Bivouac' ? '⛺' : step.typeHebergement === 'Bungalow' ? '🏝' : step.typeHebergement === "Chez l'habitant" ? '🏡' : '🏨'}
+                                <Icon
+                                  name={
+                                    step.typeHebergement === 'Bivouac' ? 'tent'
+                                      : step.typeHebergement === 'Bungalow' ? 'waves'
+                                      : step.typeHebergement === "Chez l'habitant" ? 'user'
+                                      : 'building'
+                                  }
+                                  size={16}
+                                />
                               </span>
                               <div>
                                 <span className="cd__step-lodge-name">{step.lodge}</span>
@@ -369,7 +381,7 @@ export default function CircuitDetailPage() {
 
                           {circuit.waypoints?.[idx] && (
                             <div className="cd__step-coords">
-                              <span>🗺️</span>
+                              <Icon name="map" size={14} />
                               <span>Point {idx + 1} sur le tracé</span>
                               {idx === 0 && <span className="cd__step-badge cd__step-badge--start">Départ</span>}
                               {idx === itinerary.length - 1 && <span className="cd__step-badge cd__step-badge--end">Arrivée</span>}
@@ -416,7 +428,7 @@ export default function CircuitDetailPage() {
             <div className="cd__infos-grid">
               {circuit.infos_pratiques.map((info, i) => (
                 <div key={i} className="cd__info-item">
-                  <span className="cd__info-icon">{infoIcon(info)}</span>
+                  <span className="cd__info-icon"><Icon name={infoIcon(info)} size={16} /></span>
                   <span className="cd__info-text">{info}</span>
                 </div>
               ))}
@@ -434,7 +446,7 @@ export default function CircuitDetailPage() {
                   <div key={m} className="cd__climat-month">
                     <span className="cd__climat-month-label">{m}</span>
                     <div className={`cd__climat-bar cd__climat-bar--${cond}`} title={CLIMAT_LABEL[cond]}>
-                      {CLIMAT_ICON[cond]}
+                      <Icon name={CLIMAT_ICON[cond]} size={14} />
                     </div>
                   </div>
                 )
@@ -450,22 +462,22 @@ export default function CircuitDetailPage() {
             </div>
             {circuit.saison === 'seche' && (
               <p className="cd__climat-note">
-                📅 Meilleure période : <strong>avril à novembre</strong> (saison sèche). Décembre à mars correspond à la saison des pluies — les sentiers peuvent être glissants et certains accès fermés.
+                <Icon name="calendar" size={15} /> Meilleure période : <strong>avril à novembre</strong> (saison sèche). Décembre à mars correspond à la saison des pluies — les sentiers peuvent être glissants et certains accès fermés.
               </p>
             )}
             {circuit.saison === 'toute-saison' && (
               <p className="cd__climat-note">
-                📅 Ce circuit est praticable toute l'année. Évitez de préférence <strong>janvier et février</strong> (fortes pluies sur les hautes terres).
+                <Icon name="calendar" size={15} /> Ce circuit est praticable toute l'année. Évitez de préférence <strong>janvier et février</strong> (fortes pluies sur les hautes terres).
               </p>
             )}
             {circuit.slug === 'sainte-marie-pirates-baleines' && (
               <p className="cd__climat-note">
-                🐋 L'observation des baleines à bosse est possible de <strong>juillet à septembre</strong>. En dehors de cette période, toutes les autres activités restent accessibles dans d'excellentes conditions.
+                <Icon name="waves" size={15} /> L'observation des baleines à bosse est possible de <strong>juillet à septembre</strong>. En dehors de cette période, toutes les autres activités restent accessibles dans d'excellentes conditions.
               </p>
             )}
             {getClosure(circuit) && (
               <p className="cd__climat-note cd__climat-note--closed">
-                🚫 <strong>Site fermé de {formatMonthRange(getClosure(circuit).months)}.</strong> {getClosure(circuit).note}
+                <Icon name="lock" size={15} /> <strong>Site fermé de {formatMonthRange(getClosure(circuit).months)}.</strong> {getClosure(circuit).note}
               </p>
             )}
           </section>
@@ -660,7 +672,7 @@ export default function CircuitDetailPage() {
         <div className="cd__gate-overlay" onClick={(e) => e.target === e.currentTarget && setShowLoginGate(false)}>
           <div className="cd__gate-card">
             <button className="cd__gate-close" onClick={() => setShowLoginGate(false)}>✕</button>
-            <div className="cd__gate-icon">🔒</div>
+            <div className="cd__gate-icon"><Icon name="lock" size={32} /></div>
             <h3 className="cd__gate-title">Connexion requise</h3>
             <p className="cd__gate-text">
               Pour réserver ce trek, vous devez être connecté à votre compte Treky.

@@ -461,7 +461,7 @@
 }
 
 .bm__method-logo { height: 24px; object-fit: contain; }
-.bm__method-icons { font-size: 1.2rem; }
+.bm__method-icons { display: flex; color: var(--fern-frond); }
 .bm__method-label { font-size: 0.85rem; font-weight: 600; color: var(--log-cabin); }
 
 /* ── Card block ── */

@@ -123,6 +123,9 @@
   position: absolute;
   bottom: 16px;
   right: 16px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
   background: rgba(255, 255, 255, 0.92);
   border: none;
   border-radius: 8px;
@@ -730,7 +733,9 @@
 .cd__gate-close:hover { background: #e0e0e0; }
 
 .cd__gate-icon {
-  font-size: 2.5rem;
+  display: flex;
+  justify-content: center;
+  color: var(--fern-frond);
   margin-bottom: 16px;
   line-height: 1;
 }
@@ -864,6 +869,14 @@
   font-size: 0.82rem;
   color: #666;
   line-height: 1.6;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.cd__climat-note svg {
+  flex-shrink: 0;
+  margin-top: 3px;
 }
 
 .cd__climat-note--closed {
@@ -1420,6 +1433,6 @@
 .cd__lightbox-next:hover { background: rgba(255,255,255,0.25); }
 
 /* ── Bouton favoris actif ── */
-.cd__action-btn--active span {
+.cd__action-btn--active svg {
   color: #e03a3a;
 }

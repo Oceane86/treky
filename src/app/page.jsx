@@ -1,46 +1,12 @@
-'use client'
-import { useEffect } from 'react'
-import Hero from '../components/Hero'
-import OffreMoment from '../components/OffreMoment'
-import CircuitsPreview from '../components/CircuitsPreview'
-import GuidesPreview from '../components/GuidesPreview'
-import AboutMadagascar from '../components/AboutMadagascar'
-import Testimonials from '../components/Testimonials'
-import VideoSection from '../components/VideoSection'
-import NewsletterSection from '../components/NewsletterSection'
-import '../pages/Home.css'
+import HomeClient from './HomeClient'
+
+export const metadata = {
+  title: 'Treky – Trek Madagascar avec guides locaux certifiés',
+  description:
+    "Treky organise des circuits de trekking à Madagascar avec des guides locaux certifiés. Isalo, Tsingy de Bemaraha, Tsaratanana — vivez l'aventure malgache en toute sécurité.",
+  alternates: { canonical: 'https://treky.mg' },
+}
 
 export default function HomePage() {
-  useEffect(() => {
-    const elements = document.querySelectorAll('[data-reveal]')
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const delay = entry.target.dataset.revealDelay ?? 0
-            setTimeout(() => {
-              entry.target.dataset.visible = 'true'
-            }, Number(delay) * 120)
-            observer.unobserve(entry.target)
-          }
-        })
-      },
-      { threshold: 0.1 }
-    )
-    elements.forEach((el) => observer.observe(el))
-    return () => observer.disconnect()
-  }, [])
-
-  return (
-    <>
-      <Hero />
-      <OffreMoment />
-      <CircuitsPreview />
-      <GuidesPreview />
-      <AboutMadagascar />
-      <Testimonials />
-      <NewsletterSection />
-      <VideoSection />
-    </>
-  )
+  return <HomeClient />
 }

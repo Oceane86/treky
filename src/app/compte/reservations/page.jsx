@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useAuth } from '../../../context/AuthContext'
 import { readJSON } from '../../../utils/storage'
+import Icon from '../../../components/Icon'
 import '../../../pages/Page.css'
 import './reservations.css'
 
@@ -34,7 +35,7 @@ export default function ReservationsPage() {
     return (
       <div className="page">
         <div className="resa-gate">
-          <div className="resa-gate__icon">🔒</div>
+          <div className="resa-gate__icon"><Icon name="lock" size={40} /></div>
           <h2>Connexion requise</h2>
           <p>Connectez-vous pour voir vos réservations.</p>
           <Link href="/connexion" className="btn-primary">Se connecter</Link>
@@ -100,13 +101,13 @@ export default function ReservationsPage() {
                     Voir le circuit
                   </Link>
                   <Link href={`/chat/${r.guideId}`} className="btn-primary">
-                    💬 Contacter mon guide
+                    <Icon name="chat" size={16} /> Contacter mon guide
                   </Link>
                   <Link href="/compte/carnet" className="btn-secondary">
-                    📔 Mon carnet de trek
+                    <Icon name="journal" size={16} /> Mon carnet de trek
                   </Link>
                   <Link href="/compte/avis" className="btn-secondary">
-                    ⭐ Laisser un avis
+                    <Icon name="star" size={16} /> Laisser un avis
                   </Link>
                 </div>
               </div>
