@@ -27,15 +27,32 @@ const LEVEL_MAP = {
     'Sportif':       { label: 'Committed hiker',     cls: 'hard' },
     'Engagé':        { label: 'Committed hiker',     cls: 'hard' },
   },
+  mg: {
+    'Facile':        { label: 'Mpikaroka liana', cls: 'easy' },
+    'Intermédiaire': { label: 'Mpitety be traikefa', cls: 'medium' },
+    'Modéré':        { label: 'Mpitety be traikefa', cls: 'medium' },
+    'Sportif':       { label: 'Mpandeha mahery',     cls: 'hard' },
+    'Engagé':        { label: 'Mpandeha mahery',     cls: 'hard' },
+  },
 }
 
-const BADGE_LABEL_EN = {
-  'Populaire': 'Popular',
-  'Aventure': 'Adventure',
-  'Expédition': 'Expedition',
-  'Culture': 'Culture',
-  'Nature': 'Nature',
-  'Grande Traversée': 'Grand Traverse',
+const BADGE_LABEL = {
+  en: {
+    'Populaire': 'Popular',
+    'Aventure': 'Adventure',
+    'Expédition': 'Expedition',
+    'Culture': 'Culture',
+    'Nature': 'Nature',
+    'Grande Traversée': 'Grand Traverse',
+  },
+  mg: {
+    'Populaire': 'Malaza',
+    'Aventure': 'Fitetezana',
+    'Expédition': 'Dia',
+    'Culture': 'Kolontsaina',
+    'Nature': 'Natiora',
+    'Grande Traversée': 'Fitetezana lehibe',
+  },
 }
 
 export default function CircuitCard({ circuit: baseCircuit, matchBadge = false }) {
@@ -48,8 +65,8 @@ export default function CircuitCard({ circuit: baseCircuit, matchBadge = false }
   const circuit = localizeCircuit(baseCircuit, locale)
   const t = getUI(locale).circuitCard
   const fav = isFavorite(circuit.id)
-  const level = LEVEL_MAP[locale][circuit.level] ?? { label: circuit.level, cls: 'easy' }
-  const badgeLabel = locale === 'en' ? (BADGE_LABEL_EN[baseCircuit.badge] ?? baseCircuit.badge) : baseCircuit.badge
+  const level = (LEVEL_MAP[locale] ?? LEVEL_MAP.fr)[circuit.level] ?? { label: circuit.level, cls: 'easy' }
+  const badgeLabel = BADGE_LABEL[locale]?.[baseCircuit.badge] ?? baseCircuit.badge
   const minDays = circuit.minDays ?? circuit.recommendedDays
   const durationLabel = minDays < circuit.recommendedDays
     ? `${minDays}–${circuit.recommendedDays} ${t.days}`

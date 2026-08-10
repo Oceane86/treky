@@ -73,6 +73,45 @@
         },
       ],
     },
+    mg: {
+      name: 'Fitetezana fikarohana an\'i Isalo',
+      region: 'Atsimon\'i Madagasikara',
+      location: "Valanjavaboaran'i Isalo, Ranohira",
+      teaser: "Canyon des Makis, dobo voajanahary ary Monkey Ridge: ny tsara indrindra an'i Isalo ao anatin'ny 3-4 andro.",
+      description:
+        "Ny Fitetezana fikarohana an'i Isalo dia fanombohana tsara indrindra amin'ny fitetezana malagasy. Ao anatin'ny 3 ka hatramin'ny 4 andro, tsidiho ireo toerana tsara indrindra ao amin'ny Valanjavaboaran'i Isalo: ny Canyon des Makis sy ireo gidrony, ny dobo voajanahary vato fasika ary ny fahitana avy any amin'ny Varavarankelin'i Isalo. Elanelana fohy, fisondrotana malefaka: ny endrika mendrika indrindra hikarohana ny fitetezana tsy misy sarotra, nefa mitazona ilay fihetseham-po fitetezana miavaka amin'ny vato fasika mena any atsimon'i Madagasikara.",
+      highlights: ['Canyon des Makis', 'Dobo voajanahary', "Varavarankelin'i Isalo", "Mety ho an'ny mpiantomboka"],
+      included: ['Fandriana ao amin\'ny lojy', 'Sakafo feno', 'Mpitarika eny an-toerana manam-pahaizana', 'Sara fidirana ny valanjavaboary'],
+      non_inclus: ['Sidina na fitaterana mankany Ranohira', 'Zava-pisotro misy alikaola', 'Fandaniana manokana'],
+      infos_pratiques: [
+        "Fidirana amin'ny alalan'ny RN7 avy any Antananarivo (10 ka hatramin'ny 12 ora ny dia) na sidina mankany Toliara/Ihosy avy eo fitaterana amin'ny lalambe (2 ora eo ho eo)",
+        'Mendrika ho an\'ny fianakaviana sy ny mpandeha an-tongotra vaovao',
+        'Tena ilaina ny menaka masoandro sy satroka',
+        "Vanim-potoana maina no soso-kevitra (Aprily ka hatramin'ny Novambra)",
+      ],
+      steps: [
+        {
+          title: 'Ranohira · Fandraisana',
+          description: "Fidirana ao amin'ny lojy, famelabelarana ny sirkoity ary fampahafantarana ny valanjavaboary.",
+          activities: ['Famelabelarana sirkoity sy fiarovana', "Fampahafantarana ny biby sy zava-maniry ao amin'ny valanjavaboary", 'Filentehan\'ny masoandro amin\'ny vato fasika mena'],
+        },
+        {
+          title: 'Canyon des Makis + Dobo voajanahary',
+          description: "Fitetezana ao anatin'ny hantsana mikaroka gidro, avy eo milomano ao amin'ireo dobo voajanahary vato fasika.",
+          activities: ['Fitetezana Canyon des Makis (4 km)', "Fahitana gidro volontany sy sifaka", 'Filomanosana ao amin\'ny dobo voajanahary vato fasika'],
+        },
+        {
+          title: 'Monkey Ridge',
+          description: "Fahitana malalaka manerana ny savoka atsimo avy any amin'ny havoana malaza.",
+          activities: ["Fiakarana ny Monkey Ridge", 'Fahitana 360° manerana ny savoka', 'Fikarohana biby amin\'ny alina'],
+        },
+        {
+          title: "Varavarankelin'i Isalo + Fiverenana",
+          description: "Fandalovana amin'ny lakandava voajanahary an'ny Varavarankelin'i Isalo ary lanonana famaranana any Ranohira.",
+          activities: ["Lakandava voajanahary Varavarankelin'i Isalo", "Fakan-tsary amin'ny filentehan'ny masoandro", 'Lanonana famaranana miaraka amin\'ny mpitarikanao'],
+        },
+      ],
+    },
     coordonnees_gps: { lat: -22.5, lng: 45.4 },
     guideIds: [1, 2],
     waypoints: [
@@ -189,6 +228,50 @@
           title: 'Descent + Return',
           description: 'Gradual descent back to Ambalavao and end of the trek.',
           activities: ['Gradual descent', 'Hot bath after the bivouac', 'Closing meal with the team'],
+        },
+      ],
+    },
+    mg: {
+      name: "Fitetezana fidirana lalina an'i Andringitra",
+      region: "Atsimon'i Madagasikara",
+      location: "Valanjavaboaran'i Andringitra, Ambalavao",
+      teaser: "Fiakarana ny Pic Boby (2 876 m), tampony azo idirana avo indrindra any Madagasikara.",
+      description:
+        "Ny Fitetezana fidirana lalina an'i Andringitra dia mitondra ny mpandeha an-tongotra ho any an-tampon'ny Pic Boby (2 876 m), teboka avo indrindra azo idirana any Madagasikara. Eo anelanelan'ny lohasahan'i Tsaranoro, ny toby fototra any amin'ny haavo ary ny fiakarana farany, ny dingana tsirairay dia mamaly ny ezaka amin'ny fahitana tsy hay hadinoina. Ny haavo Antonony dia miankina amin'ny haavony sy ny hatsiaka amin'ny alina eo amin'ny toby, fa tsy amin'ny teknika manokana: tsy ilaina ny traikefa fiakarana tendrombohitra, fahasalamana tsara sy ny faniriana hifoha alohan'ny maraina fotsiny no ilaina.",
+      highlights: ['Pic Boby 2 876 m', 'Lohasaha Tsaranoro', 'Toby fototra any amin\'ny haavo', 'Fahitana malalaka'],
+      included: ['Toby any amin\'ny haavo', 'Sakafo feno', 'Mpitarika tendrombohitra manam-pahaizana', 'Mpitondra entana'],
+      non_inclus: ['Sidina mankany Ambalavao', 'Fiantohana fitetezana', 'Fitaovana manokana'],
+      infos_pratiques: [
+        "Fidirana amin'ny alalan'ny RN7 avy any Antananarivo (7 ka hatramin'ny 8 ora eo ho eo ny dia) na sidina mankany Fianarantsoa avy eo fitaterana (1 ora sy sasany)",
+        'Ilaina ny fahasalamana ara-batana tsara',
+        "Tena ilaina ny fitaovana miaro amin'ny hatsiaka any amin'ny haavo",
+        "Tsy maintsy vanim-potoana maina (Mey ka hatramin'ny Oktobra)",
+      ],
+      steps: [
+        {
+          title: 'Ambalavao · Fiaingana',
+          description: "Fandraisana ary dia mankany amin'ny valanjavaboaran'i Andringitra.",
+          activities: ['Famelabelarana tendrombohitra sy fiarovana', "Fitsidihana ny tsenan'ny taratasy Antaimoro", "Fanomanana fitaovana any amin'ny haavo"],
+        },
+        {
+          title: 'Lohasaha Tsaranoro',
+          description: "Andro voalohan'ny fitetezana ao anatin'ny lohasaha lalina misy rindrina granita.",
+          activities: ['Fitetezana lohasaha Tsaranoro (6 km)', 'Fampidirana amin\'ny fiakarana rindrina granita', "Fikarohana biby any amin'ny tany avo"],
+        },
+        {
+          title: 'Toby fototra Pic Boby',
+          description: "Fipetrahana any amin'ny haavo, fanomanana ny fiakarana ny ampitso.",
+          activities: ['Fiakarana any amin\'ny toby fototra', "Fampifanarahana amin'ny haavo", 'Fijerena lanitra feno kintana tsy misy fanelezan-tara'],
+        },
+        {
+          title: 'Tampon\'ny Pic Boby · 2 876 m',
+          description: "Fiakarana maraina ho any amin'ny teboka avo indrindra azo idirana any Madagasikara, fahitana 360°.",
+          activities: ['Fiakarana Pic Boby (fiaingana amin\'ny 5 ora)', 'Fahitana 360° manerana ny havoana rehetra', 'Fidinana sy fialan-tsasatra any amin\'ny toby'],
+        },
+        {
+          title: 'Fidinana + Fiverenana',
+          description: 'Fidinana tsikelikely mankany Ambalavao ary famaranana ny fitetezana.',
+          activities: ['Fidinana tsikelikely', 'Fandroana mafana aorian\'ny toby', 'Sakafo famaranana miaraka amin\'ny ekipa'],
         },
       ],
     },
@@ -326,6 +409,60 @@
           title: 'Return to Morondava',
           description: 'Drive back and end of the circuit.',
           activities: ['Drive back to Morondava', 'Local craft market', 'End-of-circuit celebration'],
+        },
+      ],
+    },
+    mg: {
+      name: 'Fitetezana labyrinthe Tsingy',
+      region: "Andrefan'i Madagasikara",
+      location: 'Tsingy de Bemaraha, Morondava',
+      teaser: "Ala vato sokay voasoratra ao amin'ny UNESCO, tetezana mihantona ary lakana amin'ny reniranon'i Manambolo.",
+      description:
+        "Ny Fitetezana labyrinthe Tsingy dia mampiditra anao ao amin'ny foiben'ny toerana voajanahary tena mahatalanjona indrindra any Madagasikara. Ny Tsingy de Bemaraha, ala vato sokay maranitra voasoratra ho lova iraisam-pirenena an'ny UNESCO, dia aleha amin'ny alalan'ny tetezana mihantona sy ny via ferrata. Ny fidinana an-dakana amin'ny renirano Manambolo dia mameno traikefa tsy mahazatra. Ny haavo Mafy dia miankina amin'ny fitakiana ara-batana sy ara-tsaina amin'ireo dingana mihantona, fa tsy amin'ny teknika manokana: tsy ilaina ny traikefa fiakarana vato, ny fitaovana sy ny fitarihana no manao ny sisa.",
+      highlights: ['Tsingy de Bemaraha UNESCO', 'Tetezana mihantona', 'Lalan\'ny baobab', 'Lakana Manambolo'],
+      included: ['Fandriana lojy sy toby', 'Sakafo feno', 'Mpitarika manokana Tsingy', 'Fitaovana via ferrata'],
+      non_inclus: ['Sidina mankany Morondava', 'Fiantohana fitetezana', 'Fandaniana manokana'],
+      infos_pratiques: [
+        "Sidina mivantana Antananarivo → Morondava (1 ora) no soso-kevitra; lava ny lalana RN35 ary indraindray tsy azo aleha amin'ny vanim-potoana orana",
+        'Soso-kevitra ny tsy fahatahorana ny haavo ho an\'ireo tetezana mihantona',
+        "Tsy maintsy vanim-potoana maina (Mey ka hatramin'ny Novambra)",
+        "Kiraro fitetezana misy fototra mafy tena ilaina",
+      ],
+      steps: [
+        {
+          title: 'Morondava · Fiaingana',
+          description: 'Fandraisana, famelabelarana fiarovana via ferrata ary dia mankany Bemaraha.',
+          activities: ['Famelabelarana fiarovana via ferrata', 'Fampahafantarana ny mpitarika manokana Tsingy', 'Filentehan\'ny masoandro amin\'ny baobab lehibe'],
+        },
+        {
+          title: "Lalan'ny baobab",
+          description: "Fandalovana amin'ny filentehan'ny masoandro amin'ny làlan'ny baobab lehibe.",
+          activities: ["Lalan'ny baobab amin'ny fiposahan'ny masoandro", 'Fitsidihana tanàna Sakalava', 'Fanomanana fitaovana via ferrata'],
+        },
+        {
+          title: 'Tsingy · Tetezana mihantona',
+          description: "Fitetezana ny Grand Tsingy amin'ny alalan'ny tetezana mihantona sy làlana amin'ny haavo.",
+          activities: ['Fitetezana amin\'ny tetezana mihantona', 'Fikarohana ny labyrinthe vato sokay', 'Fahitana propithèque sy gidro'],
+        },
+        {
+          title: 'Petits Tsingy + Lava-bato',
+          description: "Fikarohana ny Petits Tsingy ary fitsidihana ny lava-bato sokay.",
+          activities: ['Fikarohana Petits Tsingy', 'Fitsidihana lava-bato misy manavy', "Fakan-tsary toe-tany vato"],
+        },
+        {
+          title: 'Renirano Manambolo · Lakana',
+          description: 'Fidinana an-dakana nentim-paharazana amin\'ny renirano Manambolo.',
+          activities: ['Fidinana an-dakana nentim-paharazana', 'Fanjonoana miaraka amin\'ny mpandaka eny an-toerana', 'Toby eo amoron\'ny renirano'],
+        },
+        {
+          title: 'Morontsiraka tsy voavoatra',
+          description: "Andro malalaka eny amin'ny morontsiraka tsy voavoatra any andrefana.",
+          activities: ["Morontsiraka tsy voavoatra any andrefana", "Filomanosana amin'ny rano manga", 'Fihaonana amin\'ny mpanjono Vezo'],
+        },
+        {
+          title: 'Fiverenana Morondava',
+          description: 'Dia fiverenana ary famaranana ny sirkoity.',
+          activities: ['Dia fiverenana Morondava', 'Tsena asa tanana eny an-toerana', 'Lanonana famaranana sirkoity'],
         },
       ],
     },
@@ -484,6 +621,61 @@
         },
       ],
     },
+    mg: {
+      name: 'Fitetezana lehibe Makay',
+      region: "Atsimo-andrefan'i Madagasikara",
+      location: 'Havoana Makay, faritra Atsimo-Andrefana',
+      teaser: "Hantsana tsy voavoatra, ala fôsily ary toby eo afovoan'ny havoana lavitra indrindra any Madagasikara.",
+      description:
+        "Ny Fitetezana lehibe Makay dia dia any amin'ny iray amin'ireo faritany mbola virjiny farany any Madagasikara. Hantsana labyrinthe, ala fôsily ary renirano lalina no mamorona lalana natokana ho an'ireo mpitety be traikefa, lavitry ny fotodrafitrasa rehetra. Tsy misy lalambe mankany amin'ny havoana: tokony ho tratrarina izy io, ary izany koa no mahatonga azy ho iray amin'ireo toerana masina farany tena tsy voavoatra any Madagasikara.",
+      highlights: ['Hantsana labyrinthe', 'Ala fôsily', 'Toby renirano', 'Faritany tsy voavoatra'],
+      included: ['Fitaovana toby feno', 'Sakafo feno any an-tsaha', 'Mpitarika dia manam-pahaizana', 'Mpitondra entana sy mole'],
+      non_inclus: ['Sidina mankany Toliara', "Fiantohana dia tsy maintsy atao", 'Fitaovana manokana ara-teknika'],
+      infos_pratiques: [
+        'Fidirana amin\'ny alalan\'ny lalana 4x4 avy any Toliara ihany (1 ka hatramin\'ny 2 andro ny dia arakaraka ny toetr\'andro), tsy misy lalambe mankany amin\'ny havoana',
+        "Tsy misy réseau telefaonina na fanavotana haingana rehefa ao anaty havoana: ilaina ny fahasalamana ara-batana tsara sy ny fahaleovan-tena ara-tsaina",
+        'Ilaina ny traikefa toby mahaleo tena',
+        "Tsy maintsy vanim-potoana maina (Jona ka hatramin'ny Septambra): mifofofofo ny renirano ary tsy azo aleha ny lalana amin'ny andro sisa",
+        "Voafetra ho 8 olona farafahabetsany ny vondrona",
+      ],
+      steps: [
+        {
+          title: 'Toliara · Fiaingana',
+          description: "Famelabelarana dia, fanamarinana ny fitaovana, avy eo fiaingana amin'ny 4x4 mankany amin'ny havoana: 1 ka hatramin'ny 2 andro ny dia arakaraka ny toetr'andro, tsy misy lalambe manakaiky azy.",
+          activities: ['Famelabelarana dia sy fombafomba fiarovana', 'Fanamarinana fitaovana toby', "Fampahafantarana ny ekipa mpitondra entana sy mole", "Fitaterana amin'ny 4x4 mankany amin'ny teboka fidirana amin'ny havoana"],
+        },
+        {
+          title: 'Fidirana hantsana Makay A2-3',
+          description: 'Fidirana ao anaty hantsana, toe-tany vato mahatalanjona ary toby voalohany.',
+          activities: ['Fidirana hantsana labyrinthe', 'Toby voalohany eo amoron\'ny renirano', 'Fikarohana biby dia any Makay'],
+        },
+        {
+          title: 'Hantsana + Toby renirano A4-5',
+          description: 'Fandalovana amin\'ny hantsana tery ary fipetrahana eo amoron\'ny renirano.',
+          activities: ['Fitetezana hantsana tery', 'Filomanosana renirano voajanahary madio', 'Fikarohana zohy sy fialofana ambanin\'ny vato'],
+        },
+        {
+          title: 'Ala fôsily A6',
+          description: "Fahitana ny ala fôsily an'i Makay, lova ara-jeolojika tsy manam-paharoa.",
+          activities: ['Fahitana ala fôsily tsy manam-paharoa eto amin\'izao tontolo izao', 'Famantarana hazo fôsily miaraka amin\'ny mpitarika-jeologa', "Fandinihana kintana any amin'ny faritra mitokana"],
+        },
+        {
+          title: 'Fitetezana lemaka A7-8',
+          description: 'Fiakarana sy fitetezana ny lemaka afovoany misy fahitana malalaka.',
+          activities: ['Fiakarana ny lemaka afovoany', 'Fahitana malalaka 360°', 'Filentehan\'ny masoandro volkanika'],
+        },
+        {
+          title: 'Fivoahana hantsana A9',
+          description: "Fandalovana amin'ny fivoahan'ny hantsana, famaranana ny fidirana lalina any anaty tany dia.",
+          activities: ["Alina farany any amin'ny faritra dia", 'Famintinana dia miaraka amin\'ireo mpitarika', 'Afo lehibe sy tantara amin\'ny dia'],
+        },
+        {
+          title: 'Fiverenana Toliara A10',
+          description: 'Dia fiverenana ary lanonana famaranan\'ny dia.',
+          activities: ['Dia fiverenana mankany Toliara', 'Fandroana, fialan-tsasatra ary sakafo tsara', 'Lanonana famaranana ny dia'],
+        },
+      ],
+    },
     coordonnees_gps: { lat: -22.0, lng: 44.5 },
     guideIds: [1, 3],
     waypoints: [
@@ -627,6 +819,50 @@
         },
       ],
     },
+    mg: {
+      name: 'Fitetezana kolontsaina Zafimaniry',
+      region: 'Tany Avon\'i Madagasikara',
+      location: "Ambositra, faritra Amoron'i Mania",
+      teaser: "Tanàna Zafimaniry, fandrafetana hazo voasoratra ao amin'ny UNESCO ary lalana eo anelanelan'ny havoana.",
+      description:
+        "Mankanesa hifankahalala amin'ny vahoaka Zafimaniry, izay ny zavakantiny fandrafetana hazo voasoratra ho lova tsy hita maso an'ny UNESCO. Eo anelanelan'i Ambositra sy ireo tanàna eny amin'ny havoana Antoetra, ity fitetezana ara-kolontsaina ity dia maneho fahaiza-manao nentim-paharazana sy fomba fiaina marina any amin'ny Tany Avo. Fohy ny dia eo anelanelan'ny tanàna ary ny fihaonana no manoritra ny hantitrany: eto, ny haavo Mora tsy fanekena, fa safidy niniana natao mba hamela toerana ho an'ny fifanakalozana.",
+      highlights: ['Fandrafetana hazo UNESCO', 'Tanàna Antoetra', 'Atelie asa tanana', "Lalana eo anelanelan'ny tanàna"],
+      included: ["Fandriana any amin'ny mponina", 'Sakafo nentim-paharazana', 'Mpitarika ara-kolontsaina miteny roa', 'Fitsidihana atelie'],
+      non_inclus: ['Fitaterana mankany Ambositra', 'Fividianana asa tanana', 'Vola tsotra'],
+      infos_pratiques: [
+        "Fidirana amin'ny alalan'ny RN7 avy any Antananarivo (5 ora eo ho eo ny dia)",
+        "Azo aleha mandritra ny taona manontolo, aleo hisorohana ny Janoary-Febroary (orana)",
+        "Mendrika ho an'ny fianakaviana sy ny tia kolontsaina",
+        "Mitondrà fanomezana kely ho an'ny mponina",
+      ],
+      steps: [
+        {
+          title: 'Ambositra · Fahatongavana',
+          description: "Fandraisana ary famelabelarana ny zavakanto Zafimaniry ataon'ny mpitarikanao ara-kolontsaina.",
+          activities: ["Famelabelarana ny zavakanto Zafimaniry miaraka amin'ny mpitarika ara-kolontsaina", 'Tsena asa tanana Ambositra', 'Sakafo nentim-paharazana miaraka amin\'ny fianakaviana'],
+        },
+        {
+          title: 'Tanàna Antoetra · Fandrafetana hazo',
+          description: 'Fitsidihana ny tanàna malaza, fampisehoana ny teknika fandrafetana nentim-paharazana.',
+          activities: ['Fitsidihana atelie fandrafetana hazo', 'Fampisehoana teknika nentim-paharazana', 'Sakafo iombonana any an-tanàna'],
+        },
+        {
+          title: "Fandehanana eo anelanelan'ny tanàna",
+          description: "Fitetezana amin'ny lalana eo anelanelan'ny tanàna manerana ny havoana sy ala pinus.",
+          activities: ["Fitetezana lalana eo anelanelan'ny tanàna (8 km)", "Fahitana vorona any amin'ny Tany Avo", 'Fihaonana amin\'ny fianakaviana eny an-toerana'],
+        },
+        {
+          title: 'Atelie asa tanana',
+          description: "Fandraisana anjara amin'ny atelie fandrafetana ary fihaonana amin'ireo mpampianatra manam-pahaizana.",
+          activities: ['Atelie fandrafetana hazo manokana', 'Fihaonana amin\'ny mpampianatra manam-pahaizana UNESCO', 'Fizarana sakafo sy tantara'],
+        },
+        {
+          title: 'Fiverenana Ambositra',
+          description: 'Tsena asa tanana eny an-toerana ary fiaingana miaraka amin\'ny fahatsiarovana.',
+          activities: ['Tsena asa tanana amin\'ny maraina', 'Fividianana asa tanana voamarina araka ny fitsipika', 'Dia fiverenana sy fahatsiarovana'],
+        },
+      ],
+    },
     coordonnees_gps: { lat: -20.5, lng: 47.2 },
     guideIds: [2, 3],
     waypoints: [
@@ -759,6 +995,55 @@
         },
       ],
     },
+    mg: {
+      name: 'Fitetezana fofona sy zava-manitra',
+      region: "Atsinanan'i Madagasikara",
+      location: 'Mananjary, faritra Vatovavy-Fitovinany',
+      teaser: "Voanila, jirofo, ylang-ylang: dia mifototra amin'ny fofona ao anaty fambolena atsinanan'i Madagasikara.",
+      description:
+        "Ny Fitetezana fofona sy zava-manitra dia mitondra anao any afovoan'ireo fambolena mahatonga an'i Madagasikara ho malaza eran-tany. Manomboka amin'ny voanila SAVA ka hatramin'ny voninkazon'ny ylang-ylang, mandalo ny ala jirofo, iainao ny traikefa mahatsiaro tokana miaraka amin'ny kolontsaina, natiora ary toe-karena eny an-toerana. Malefaka niniana natao ny hantitra, natao mba hakana fotoana hifofoana, hitsapana ary hifanakalozana amin'ireo mpamboly fa tsy hikatsaka lavitr'elanelana.",
+      highlights: ['Fambolena voanila SAVA', 'Ala jirofo', 'Toeram-panamboarana ylang-ylang', 'Tsena zava-manitra'],
+      included: ["Lojy eo amin'ny sisin'ny fambolena", 'Sakafo feno', 'Mpitarika manam-pahaizana natiora', 'Fitsidihana fambolena'],
+      non_inclus: ['Sidina mankany Mananjary', 'Fividianana zava-manitra sy menaka', 'Hetsika safidy'],
+      infos_pratiques: [
+        "Sidina Antananarivo → Mananjary (55 minitra) na lalana amin'ny alalan'ny RN25 (8 ka hatramin'ny 10 ora, ratsy amin'ny toerana sasany)",
+        'Vanim-potoana maina no soso-kevitra ho an\'ny lalana ao amin\'ny fambolena',
+        "Mendrika ho an'ny tia sakafo sy natiora",
+        'Azo entina ny zava-manitra voamarina biolojika',
+      ],
+      steps: [
+        {
+          title: 'Mananjary · Fiaingana',
+          description: "Fandraisana sy fampidirana ny tantaran'ny zava-manitra malagasy.",
+          activities: ["Fampidirana ny tantaran'ny zava-manitra malagasy", 'Fitsidihana ny tany sy zaridaina manitra', 'Sakafo tsara miaraka amin\'ny zava-manitra eny an-toerana'],
+        },
+        {
+          title: 'Fambolena voanila SAVA',
+          description: 'Fitsidihana ny fambolena voanila, fampamokarana amin\'ny tanana ary fanamainana ny lakan-boanila.',
+          activities: ['Fitsidihana fambolena voanila Bourbon', "Fampisehoana fampamokarana amin'ny tanana", 'Atelie fanamainana sy fanomanana lakan-boanila'],
+        },
+        {
+          title: 'Ala jirofo',
+          description: 'Fitetezana ao anaty ala jirofo, fijinjana sy fanovana nentim-paharazana.',
+          activities: ['Fitetezana ala jirofo (5 km)', 'Fijinjana nentim-paharazana jirofo', "Fanovana sy fanamboarana araka ny fomba nentim-paharazana"],
+        },
+        {
+          title: 'Toeram-panamboarana ylang-ylang',
+          description: "Fitsidihana toeram-panamboarana nentim-paharazana, fangalana menaka ylang-ylang.",
+          activities: ['Fitsidihana toeram-panamboarana ylang-ylang', 'Fangalana menaka manitra', 'Atelie fanamboarana zavatra fandravaka natiora'],
+        },
+        {
+          title: 'Tsena zava-manitra',
+          description: 'Fidirana lalina ao amin\'ny tsena eny an-toerana, fihaonana amin\'ny mpamboly sy kaoperativa.',
+          activities: ['Fidirana lalina tsena zava-manitra', 'Fihaonana amin\'ny kaoperativa eny an-toerana', 'Sakafo nentim-paharazana misy zava-manitra'],
+        },
+        {
+          title: 'Fiverenana Mananjary',
+          description: "Fitsapana farany ary fiverenana miaraka amin'ireo zava-manitra avy atsinanana.",
+          activities: ['Fitsapana farany vokatra eny an-toerana', 'Fanaovana boaty zava-manitra voamarina biolojika', "Dia fiverenana miaraka amin'ny fahatsiarovana fofona"],
+        },
+      ],
+    },
     coordonnees_gps: { lat: -20.6, lng: 48.3 },
     guideIds: [2, 3],
     waypoints: [
@@ -882,6 +1167,39 @@
         },
       ],
     },
+    mg: {
+      name: 'Fitetezana harena biolojika Andasibe',
+      region: "Atsinanan'i Madagasikara",
+      location: 'Valanjavaboaran\'i Andasibe-Mantadia',
+      teaser: "Indry, gidro amin'ny alina ary ala voajanahary 3 ora avy any Antananarivo.",
+      description:
+        "Ny Fitetezana harena biolojika Andasibe no vavahady mendrika indrindra ho amin'ny biby miavaka any Madagasikara. 3 ora fotsiny avy any Antananarivo, ny valanjavaboary dia mitoetra ny Indry malaza — gidro lehibe indrindra eto amin'izao tontolo izao — ary koa harena biolojika miavaka ao anaty ala voajanahary, azo hita amin'ny andro sy amin'ny alina. Ny hakaikin'ny renivohitra sy ny endriny fohy dia mahatonga azy ho fampidirana tsara indrindra amin'ny ala voajanahary malagasy, tsy mila fanomanana ara-batana manokana.",
+      highlights: ['Indry lehibe', "Gidro amin'ny alina", 'Ala voajanahary Mantadia', "Azo aleha mandritra ny taona manontolo"],
+      included: ["Lojy eo amin'ny sisin'ny ala", 'Sakafo feno', 'Mpitarika manam-pahaizana natiora', 'Sara fidirana valanjavaboary'],
+      non_inclus: ['Fitaterana avy any Antananarivo', 'Hariva malalaka', 'Hetsika safidy'],
+      infos_pratiques: [
+        "Fiaingana azo atao avy any Antananarivo (3 ora ny dia)",
+        "Amin'ny maraina no tsara indrindra hijerena ny Indry",
+        "Azo aleha mandritra ny taona manontolo, aleo hisorohana ny Janoary-Febroary (orana be)",
+      ],
+      steps: [
+        {
+          title: "Andasibe · Indry + Gidro amin'ny alina",
+          description: "Fahafantarana ny valanjavaboary, fahitana ny Indry amin'ny maraina ary fivoahana amin'ny alina misy jiro.",
+          activities: ["Fahitana ny Indry amin'ny maraina (hira amin'ny fiposahan'ny masoandro)", "Fivoahana amin'ny alina hikaroka gidro misy jiro", "Fampidirana amin'ny antson'ny Indry"],
+        },
+        {
+          title: 'Mantadia · Ala voajanahary',
+          description: "Fitetezana ao anaty ala voajanahary Mantadia, be orkidea, tanalahy ary vorona manokana.",
+          activities: ["Fitetezana ala voajanahary Mantadia (6 km)", 'Famantarana orkidea, tanalahy ary sahona', 'Fahitana vorona manokana (vasa, coua)'],
+        },
+        {
+          title: 'Toby vondrom-piarahamonina + Fiverenana',
+          description: "Fitsidihana ny toby vondrom-piarahamonina, fihaonana amin'ireo fikambanana eny an-toerana ary fiverenana any Antananarivo.",
+          activities: ['Fitsidihana toby vondrom-piarahamonina Mitsinjo', 'Fihaonana amin\'ny fikambanana fiarovana', 'Dia fiverenana mankany Antananarivo'],
+        },
+      ],
+    },
     coordonnees_gps: { lat: -18.9, lng: 48.4 },
     guideIds: [1, 2],
     waypoints: [
@@ -985,6 +1303,45 @@
           title: 'Return',
           description: 'Craft market and drive back to Antananarivo.',
           activities: ["Morning craft market", 'Heritage souvenir shopping', 'Drive back to the capital'],
+        },
+      ],
+    },
+    mg: {
+      name: 'Fitetezana tantara Ambohimanga',
+      region: "Tany Avon'i Madagasikara",
+      location: 'Antananarivo · Ambohimanga · Fianarantsoa',
+      teaser: "Lapan'ny mpanjaka, havoana masina UNESCO ary tanàna taloha any Fianarantsoa: ny fanahin'ny tantara malagasy.",
+      description:
+        "Ny Fitetezana tantara Ambohimanga dia mamerina ny pejy be voninahitra indrindra amin'ny tantara malagasy. Manomboka amin'ny Rova Antananarivo ka hatramin'ny havoana mpanjaka Ambohimanga voasoratra ao amin'ny UNESCO, mandalo ny arabe an'ny tanàna taloha any Fianarantsoa, ity sirkoity ara-kolontsaina ity dia fidirana lalina amin'ny lova an'ny Tany Avo. Ny hantitra, niniana natao ho mandinika, dia mamela fotoana hitsapana ny tantaran'ny toerana fa tsy handalo haingana.",
+      highlights: ['Rova Antananarivo', 'Havoana mpanjaka Ambohimanga UNESCO', 'Tanàna taloha Fianarantsoa', 'Lova merina'],
+      included: ['Fandriana hotely misy toetra', 'Sakafo feno', 'Mpitarika manam-pahaizana tantara', 'Sara fidirana tsangambato'],
+      non_inclus: ['Sidina', 'Fividianana fahatsiarovana', 'Fandaniana manokana'],
+      infos_pratiques: [
+        "1 ora avy any Antananarivo i Ambohimanga; fifandraisana mankany Fianarantsoa amin'ny alalan'ny RN7 (7 ora eo ho eo)",
+        "Azo aleha mandritra ny taona manontolo",
+        "Mendrika ho an'ny tia tantara sy kolontsaina",
+        'Mitondrà fitafiana manaja ho an\'ny toerana masina',
+      ],
+      steps: [
+        {
+          title: 'Antananarivo · Rova',
+          description: "Fitsidihana ny Lapan'ny Mpanjakavavy sy fahitana malalaka manerana ny renivohitra avy amin'ny havoana masina.",
+          activities: ["Fitsidihana ny Rova sy ny Lapan'ny Mpanjakavavy", 'Fahitana malalaka manerana ny renivohitra avy amin\'ny havoana', "Tranombakoka momba ny sivilizasiona merina"],
+        },
+        {
+          title: 'Havoana mpanjaka Ambohimanga · UNESCO',
+          description: "Fahafantarana ny havoana mpanjakan'ny Merina, toerana voasoratra ho lova iraisam-pirenena an'ny UNESCO.",
+          activities: ["Fitsidihana havoana mpanjaka Ambohimanga UNESCO", "Lanonana sy fombafomba nentin-drazana Merina", "Tantara momba ireo mpanjakan'Imerina"],
+        },
+        {
+          title: 'Tanàna taloha Fianarantsoa',
+          description: "Fikarohana ny arabe vato an'ny Tanàna Ambony any Fianarantsoa sy ny fiangonana efa an-jato taona.",
+          activities: ["Fikarohana arabe vato ny taonjato faha-18", "Fitsidihana monastera benedictin miasa", 'Fitsapana divay avy amin\'ny tanimboaloboka Fianarantsoa'],
+        },
+        {
+          title: 'Fiverenana',
+          description: 'Tsena asa tanana ary dia fiverenana mankany Antananarivo.',
+          activities: ["Tsena asa tanana amin'ny maraina", 'Fividianana fahatsiarovana ara-kolontsaina', 'Dia fiverenana mankany renivohitra'],
         },
       ],
     },
@@ -1107,6 +1464,50 @@
         },
       ],
     },
+    mg: {
+      name: "Sainte-Marie: Jiolahy an-dranomasina & Trozona",
+      region: "Atsinanan'i Madagasikara",
+      location: 'Nosy Sainte-Marie, morontsiraka atsinanana',
+      teaser: "Fasan'ny jiolahy an-dranomasina, fahitana trozona ary morontsiraka tsy voavoatra amin'ny nosin'ny fofona.",
+      description:
+        "Ny nosy Sainte-Marie dia manangona ao anaty kilaometatra vitsivitsy izay rehetra mahatalanjona indrindra an'i Madagasikara: ny fahatsiarovana ireo jiolahy an-dranomasina tamin'ny taonjato faha-17 ao amin'ny fasany tsy manam-paharoa eto amin'izao tontolo izao, ny fizahana lehibe ny trozona eo anelanelan'ny Jolay sy Septambra, ary morontsiraka fasika fotsy voararaka amin'ny voanio. Eo anelanelan'ny morontsiraka, ny ranomasina ary ny ala amoron-dranomasina, ity sirkoity ity dia manome lanja ny fialan-tsasatra toy ny fikarohana koa — endrika mety ho an'ny rehetra, anisan'izany ny fianakaviana.",
+      highlights: ["Fasan'ny jiolahy an-dranomasina", 'Fahitana trozona (Jol-Sep)', 'Morontsiraka tsy voavoatra', 'Tanàna mpanjono'],
+      included: ["Fandriana bungalow eo amoron-dranomasina", 'Sakafo feno', 'Mpitarika eny an-toerana', "Fivezivezena an-tsambo hijerena trozona"],
+      non_inclus: ['Sidina mankany Sainte-Marie', 'Fandaniana manokana', 'Hetsika safidy'],
+      infos_pratiques: [
+        'Sidina Antananarivo → Sainte-Marie (1 ora sy 10 minitra) na fifandraisana an-dranomasina avy any Soanierana-Ivongo (sambo na vedette, 1 ora sy sasany eo ho eo, indraindray misamboaravoara ny ranomasina)',
+        "Azo hijerena ny trozona manomboka ny Jolay ka hatramin'ny Septambra",
+        "Azo aleha mandritra ny taona manontolo ho an'ny hetsika hafa",
+        "Mendrika ho an'ny fianakaviana, mpivady ary tia natiora an-dranomasina",
+      ],
+      steps: [
+        {
+          title: "Nosy Sainte-Marie · Fahatongavana",
+          description: "Fipetrahana ao amin'ny bungalow, fahafantarana ny nosy sy ny mponina.",
+          activities: ["Fipetrahana bungalow manatrika ny ranomasina", "Fitetezana amoron-tsiraka mikaroka ny nosy", "Filentehan'ny masoandro eo amin'ny helodrano"],
+        },
+        {
+          title: "Fasan'ny jiolahy an-dranomasina + Ala",
+          description: "Fitsidihana ny fasan'ny jiolahy an-dranomasina malaza tamin'ny taonjato faha-17 ary fitetezana ao anaty ala amoron-dranomasina.",
+          activities: ["Fitsidihana fasan'ny jiolahy an-dranomasina taonjato faha-17", 'Fitetezana ala amoron-dranomasina manokana', 'Fihaonana amin\'ny vondrom-piarahamonina Betsimisaraka'],
+        },
+        {
+          title: 'Fahitana trozona',
+          description: "Fivezivezena an-tsambo hijerena trozona ao amin'ny tontolo iainany voajanahary (Jolay ka hatramin'ny Septambra).",
+          activities: ['Fivezivezena an-tsambo hijerena trozona', "Filomanosana amin'ny haran-dranomasina", 'Fahitana fesoivoana sy fanihy an-dranomasina'],
+        },
+        {
+          title: 'Morontsiraka + Tanàna mpanjono',
+          description: 'Andro fialan-tsasatra eo amin\'ny morontsiraka tsy voavoatra ary fihaonana amin\'ny mpanjono Betsimisaraka.',
+          activities: ["Fialan-tsasatra any amin'ny morontsiraka tsy voavoatra avaratry ny nosy", 'Fihaonana sy fiarahana amin\'ny mpanjono Betsimisaraka', 'Sakafo eny an-toerana misy trondro sy laoka an-dranomasina vaovao'],
+        },
+        {
+          title: 'Fiverenana',
+          description: "Tsena eny an-toerana, fahatsiarovana ary fialana amin'ny nosy.",
+          activities: ["Tsena eny an-toerana misy asa tanana sy zava-manitra", "Fividianana fahatsiarovan'ny nosy", 'Fialana sy fitaterana mankany seranam-piaramanidina'],
+        },
+      ],
+    },
     coordonnees_gps: { lat: -17.0, lng: 49.8 },
     guideIds: [2, 3],
     waypoints: [
@@ -1226,6 +1627,45 @@
           title: 'Return to Fianarantsoa',
           description: 'Morning craft market and departure.',
           activities: ['Morning craft market', 'Weaving and local craft purchases', 'Drive back with your souvenirs'],
+        },
+      ],
+    },
+    mg: {
+      name: 'Fitetezana tanimbary an-tehezana Betsileo',
+      region: "Tany Avon'i Madagasikara",
+      location: 'Fianarantsoa, faritra Haute Matsiatra',
+      teaser: "Tanimbary an-tehezana, sakafo Betsileo ary fanenomana eo afovoan'ny Tany Avo.",
+      description:
+        "Ny Fitetezana tanimbary an-tehezana Betsileo dia mampiditra anao afovoan'ny kolontsainan'ny tantsaha any amin'ny Tany Avo malagasy. Eo anelanelan'ny tanimbary an-tehezana nosokafana nandritra ny taonjato maro, tanàna marina ary atelie fanenomana nentim-paharazana, ity sirkoity ity dia manolotra fidirana feno amin'ny fiainan'ny vahoaka Betsileo. Fohy ny fandehanana ary ny hantitry ny fitetezana dia iainana indrindra amin'ny fijanonana: atelie, sakafo iombonana, fihainoana any an-tanàna — ny fidirana no maka lanja mihoatra noho ny halavan-dalana.",
+      highlights: ['Tanimbary an-tehezana', 'Sakafo Betsileo', 'Atelie fanenomana', 'Tanàna marina'],
+      included: ["Fandriana any amin'ny mponina", 'Sakafo nentim-paharazana Betsileo', 'Mpitarika ara-kolontsaina', 'Fampianarana fahandroana eny an-toerana'],
+      non_inclus: ['Fitaterana mankany Fianarantsoa', 'Fanomezana asa tanana', 'Zava-pisotro'],
+      infos_pratiques: [
+        "Fidirana amin'ny alalan'ny RN7 avy any Antananarivo (7 ka hatramin'ny 8 ora ny dia) na sidina mivantana mankany Fianarantsoa (50 minitra)",
+        "Azo aleha mandritra ny taona manontolo",
+        'Ilaina ny fanajana ny fomba amam-panao eny an-toerana',
+        "Mitondrà fanomezana kely ho an'ny fianakaviana mampiantrano",
+      ],
+      steps: [
+        {
+          title: 'Fianarantsoa · Fahatongavana',
+          description: 'Fandraisana ataon\'ny mpitarikanao ara-kolontsaina ary fampidirana ny kolontsaina Betsileo.',
+          activities: ['Fandraisana fianakaviana Betsileo', 'Fampidirana ny kolontsainan\'ny vary', 'Sakafo nentim-paharazana tsimoka (toaka vary eny an-toerana)'],
+        },
+        {
+          title: 'Tanimbary an-tehezana',
+          description: 'Fitetezana manerana ny toe-tany fambolena, fihaonana amin\'ny tantsaha ary fanazavana ny fihodinan\'ny vary.',
+          activities: ['Fitetezana tanimbary an-tehezana (7 km)', 'Fihaonana amin\'ny tantsaha sy fanazavana fihodinan\'ny vary', 'Fandraisana anjara amin\'ny asa fambolena araka ny vanim-potoana'],
+        },
+        {
+          title: 'Tanàna Betsileo · Sakafo + Fanenomana',
+          description: 'Fidirana lalina ao an-tanàna, atelie fahandroana nentim-paharazana ary fampisehoana fanenomana amin\'ny fitaovana nentim-paharazana.',
+          activities: ['Fampianarana fahandroana nentim-paharazana Betsileo', 'Atelie fanenomana amin\'ny fitaovana nentim-paharazana (lamba)', 'Hariva miaraka amin\'ny mozika sy dihy nentim-paharazana'],
+        },
+        {
+          title: 'Fiverenana Fianarantsoa',
+          description: "Tsena asa tanana amin'ny maraina ary fiaingana.",
+          activities: ["Tsena asa tanana amin'ny maraina", 'Fividianana lamba sy asa tanana eny an-toerana', 'Dia fiverenana miaraka amin\'ny fahatsiarovana'],
         },
       ],
     },
@@ -1363,6 +1803,65 @@
         },
       ],
     },
+    mg: {
+      name: 'Fitetezana lehibe Avaratra-Atsimo',
+      region: 'Madagasikara manontolo',
+      location: 'Diego Suarez → Toliara',
+      teaser: "Ny dia farany: fitetezana an'i Madagasikara avy any Diego Suarez ka hatrany Toliara ao anatin'ny 21 ka hatramin'ny 28 andro.",
+      description:
+        "Ny Fitetezana lehibe Avaratra-Atsimo no sirkoity malaza indrindra an'i Treky — dia mitety an'i Madagasikara manontolo. Manomboka amin'ny valanjavaboary volkanika Montagne d'Ambre ka hatramin'ny Tsingy mena Ankarana, ny tampon'i Andringitra ka hatramin'ny efitra Isalo ka hatramin'ny morontsiraka Toliara, ny dingana tsirairay dia maneho endrika miavaka an'ny Nosy Lehibe. Ny haavo Sarotra be dia miankina amin'ny halavan-potoana sy ny faharetana ara-tsaina ilaina amin'ny fitetezana tsy an-kijanona nandritra ny volana iray, mihoatra lavitra noho ny sarotra ara-teknika: tetikasa dia manontolo io, fa tsy fitetezana lava fotsiny.",
+      highlights: ["Montagne d'Ambre", 'Tsingy mena Ankarana', 'Pic Boby 2 876 m', "Fitetezana feno an'i Madagasikara"],
+      included: ['Fandriana lojy/toby', 'Sakafo feno', 'Mpitarika manam-pahaizana 2', 'Fitaterana rehetra eo anelanelan\'ny dingana'],
+      non_inclus: ['Sidina iraisam-pirenena', 'Fiantohana dia lava', 'Fitaovana manokana'],
+      infos_pratiques: [
+        'Sidina Antananarivo → Diego Suarez ho an\'ny fiaingana; fiverenana amin\'ny sidina avy any Toliara — takariva homanina fanampiny amin\'ny sirkoity',
+        'Tsy maintsy manana traikefa fitetezana andro maro',
+        "Tsy maintsy vanim-potoana maina (Mey ka hatramin'ny Oktobra)",
+        'Voafetra ho 8 olona ny vondrona mba hikajiana ny tontolo iainana',
+      ],
+      steps: [
+        {
+          title: "Diego Suarez + Montagne d'Ambre A1-3",
+          description: "Fahafantarana ny avaratra volkanika, riandrano ary ala mando an'ny valanjavaboaran'i Montagne d'Ambre.",
+          activities: ["Riandrano sy ala mando Montagne d'Ambre", 'Fahitana gidro sy tanalahy avaratra', 'Filomanosana dobo voajanahary volkanika'],
+        },
+        {
+          title: 'Ankarana · Tsingy mena A4-6',
+          description: 'Fitetezana ny Tsingy mena ary fikarohana ny zohy sy renirano ambanin\'ny tany an\'ny havoana Ankarana.',
+          activities: ['Fitetezana Tsingy mena Ankarana', 'Fikarohana zohy sy renirano ambanin\'ny tany', 'Fahitana manavy sy biboka mpipetraka anaty zohy'],
+        },
+        {
+          title: 'Fidinana Tany Avo A7-9',
+          description: "Fivan-toetany mahatalanjona avy any avaratra tropikaly ka hatramin'ny tanimbary any amin'ny Tany Avo.",
+          activities: ["Fivan-toetany avaratra tropikaly → Tany Avo", 'Tanimbary malalaka any amin\'ny havoana avo', 'Fihaonana amin\'ny kolontsaina Merina sy Betsileo'],
+        },
+        {
+          title: 'Antsirabe + Farihy Tritriva A10-12',
+          description: "Fahafantarana ny farihy volkanika Tritriva ary fidirana lalina amin'ny fiainana asa tanana any Antsirabe.",
+          activities: ['Farihy volkanika Tritriva (angano sy toe-tany)', 'Asa tanana any Antsirabe (vato sarobidy, varahina)', 'Fitetezana amin\'ny pouss-pouss ao an-tanàna misy rano mafana'],
+        },
+        {
+          title: 'Andringitra + Pic Boby A13-16',
+          description: "Fiakarana ny Pic Boby (2 876 m), teboka avo indrindra azo idirana any Madagasikara ary fitoerana any amin'ny haavo.",
+          activities: ['Fiakarana Pic Boby 2 876 m', 'Lohasaha Tsaranoro sy rindrina granita', "Alina any amin'ny toby avo be"],
+        },
+        {
+          title: 'Isalo A17-20',
+          description: "Fitetezana ny havoana Isalo, eo anelanelan'ny hantsana vato fasika, dobo voajanahary ary Monkey Ridge.",
+          activities: ["Canyon des Makis sy dobo voajanahary Isalo", "Monkey Ridge sy Varavarankelin'i Isalo", 'Filentehan\'ny masoandro amin\'ny vato fasika mena'],
+        },
+        {
+          title: 'Morontsiraka atsimo A21-24',
+          description: 'Fidinana mankany amin\'ny morontsiraka atsimo, baobab lehibe ary tanàna mpanjono Vezo.',
+          activities: ['Baobab lehibe amin\'ny morontsiraka atsimo (Avenue de Morombe)', 'Tanàna mpanjono Vezo nentim-paharazana', 'Haran-dranomasina Ifaty sy filomanosana (safidy)'],
+        },
+        {
+          title: 'Toliara A25-28',
+          description: "Fahatongavana any Toliara, fikarohana ny haran-dranomasina ary lanonana famaranan'ny fitetezana feno.",
+          activities: ['Fikarohana haran-dranomasin\'i Toliara', "Tsena Zoma sy asa tanana any amin'ny faritra atsimo lavitra", "Lanonana famaranan'ny fitetezana feno an'i Madagasikara"],
+        },
+      ],
+    },
     coordonnees_gps: { lat: -18.0, lng: 46.0 },
     guideIds: [1, 2, 3],
     waypoints: [
@@ -1450,6 +1949,14 @@ export const guides = [
     bio: "Guide certifié depuis 12 ans, spécialiste des ascensions du Pic Boby et des traversées du massif du Makay.",
     certifications: ['Guide de haute montagne FFME', 'Premiers secours en milieu isolé'],
     video_url: null,
+    en: {
+      specialites: ['Extreme adventure', 'Endemic wildlife'],
+      bio: "Certified guide for 12 years, specialized in Pic Boby ascents and Makay massif traverses.",
+    },
+    mg: {
+      specialites: ['Fitetezana sarotra', 'Biby manokana'],
+      bio: "Mpitarika manam-pahaizana nandritra ny 12 taona, manam-pahaizana amin'ny fiakarana ny Pic Boby sy ny fitetezana ny havoana Makay.",
+    },
   },
   {
     id: 2,
@@ -1463,6 +1970,14 @@ export const guides = [
     bio: "Naturaliste passionné, je fais découvrir la biodiversité malgache à travers l'objectif d'un appareil photo.",
     certifications: ['Guide naturaliste ANGAP', 'Premiers secours en milieu isolé'],
     video_url: null,
+    en: {
+      specialites: ['Nature', 'Wildlife photography'],
+      bio: "Passionate naturalist, I introduce travelers to Malagasy biodiversity through a camera lens.",
+    },
+    mg: {
+      specialites: ['Natiora', 'Fakan-tsary biby'],
+      bio: "Mpankafy ny natiora, mampahafantatra ny harena biolojika malagasy amin'ny alalan'ny fakan-tsary aho.",
+    },
   },
   {
     id: 3,
@@ -1476,6 +1991,14 @@ export const guides = [
     bio: "Originaire de Fianarantsoa, je partage l'histoire et les traditions des Hautes Terres avec mes voyageurs.",
     certifications: ['Guide culturel certifié Office du Tourisme'],
     video_url: null,
+    en: {
+      specialites: ['Betsileo culture', 'Local villages'],
+      bio: "Originally from Fianarantsoa, I share the history and traditions of the Highlands with my travelers.",
+    },
+    mg: {
+      specialites: ['Kolontsaina Betsileo', 'Tanàna eny an-toerana'],
+      bio: "Avy any Fianarantsoa, mizara ny tantara sy ny fomban-drazan'ny Tany Avo amin'ireo mpizahatany aho.",
+    },
   },
 ]
 
@@ -1623,16 +2146,24 @@ export function getCircuitBySlug(slug) {
   return circuits.find((c) => c.slug === slug) ?? null
 }
 
-// Applique la traduction anglaise d'un circuit (champ `en`) quand elle existe.
+// Applique la traduction d'un circuit (champ `en` ou `mg`) quand elle existe.
 // Les champs non traduits (avis, coordonnées, guides…) restent inchangés.
 export function localizeCircuit(circuit, locale) {
-  if (!circuit || locale !== 'en' || !circuit.en) return circuit
-  const { steps, ...rest } = circuit.en
+  const translation = circuit?.[locale]
+  if (!circuit || !translation) return circuit
+  const { steps, ...rest } = translation
   return {
     ...circuit,
     ...rest,
     steps: steps ? circuit.steps.map((step, i) => ({ ...step, ...steps[i] })) : circuit.steps,
   }
+}
+
+// Applique la traduction d'un guide (bio, spécialités) quand elle existe.
+export function localizeGuide(guide, locale) {
+  const translation = guide?.[locale]
+  if (!guide || !translation) return guide
+  return { ...guide, ...translation }
 }
 
 export function getGuideById(id) {

@@ -5,36 +5,52 @@ import { guides } from '../data/circuits'
 import { getClimatForMonth, isClosedInMonth, getIdealMonths } from './climate'
 
 export const THEMES = [
-  { id: 'aventure-sommets', label: 'Aventure & Sommets', labelEn: 'Adventure & Summits', icon: 'mountain' },
-  { id: 'paysages-mineraux', label: 'Paysages minéraux', labelEn: 'Mineral Landscapes', icon: 'gem' },
-  { id: 'faune-biodiversite', label: 'Faune & Biodiversité', labelEn: 'Wildlife & Biodiversity', icon: 'lizard' },
-  { id: 'culture-traditions', label: 'Culture & Traditions', labelEn: 'Culture & Traditions', icon: 'masks' },
-  { id: 'histoire-patrimoine', label: 'Histoire & Patrimoine', labelEn: 'History & Heritage', icon: 'landmark' },
-  { id: 'saveurs-artisanat', label: 'Saveurs & Artisanat', labelEn: 'Flavors & Crafts', icon: 'leaf' },
-  { id: 'plages-ocean', label: 'Plages & Océan', labelEn: 'Beaches & Ocean', icon: 'waves' },
-  { id: 'expedition-integrale', label: 'Expédition intégrale', labelEn: 'Full Expedition', icon: 'compass' },
+  { id: 'aventure-sommets', label: 'Aventure & Sommets', labelEn: 'Adventure & Summits', labelMg: 'Fitetezana sarotra sy Tampony', icon: 'mountain' },
+  { id: 'paysages-mineraux', label: 'Paysages minéraux', labelEn: 'Mineral Landscapes', labelMg: 'Toe-tany vato', icon: 'gem' },
+  { id: 'faune-biodiversite', label: 'Faune & Biodiversité', labelEn: 'Wildlife & Biodiversity', labelMg: 'Biby sy Harena voajanahary', icon: 'lizard' },
+  { id: 'culture-traditions', label: 'Culture & Traditions', labelEn: 'Culture & Traditions', labelMg: 'Kolontsaina sy Fomban-drazana', icon: 'masks' },
+  { id: 'histoire-patrimoine', label: 'Histoire & Patrimoine', labelEn: 'History & Heritage', labelMg: 'Tantara sy Lova', icon: 'landmark' },
+  { id: 'saveurs-artisanat', label: 'Saveurs & Artisanat', labelEn: 'Flavors & Crafts', labelMg: 'Tsiro sy Asa tanana', icon: 'leaf' },
+  { id: 'plages-ocean', label: 'Plages & Océan', labelEn: 'Beaches & Ocean', labelMg: 'Morontsiraka sy Ranomasina', icon: 'waves' },
+  { id: 'expedition-integrale', label: 'Expédition intégrale', labelEn: 'Full Expedition', labelMg: 'Dia feno', icon: 'compass' },
 ]
 
 // "Lodge partenaire" regroupe les hébergements gérés par des partenaires Treky
 // (lodge, hôtel, bungalow), distincts de l'hébergement chez l'habitant et du bivouac.
 export const HEBERGEMENT_OPTIONS = [
-  { id: 'habitant', label: "Chez l'habitant", labelEn: 'With locals', icon: 'user', types: ["Chez l'habitant"] },
-  { id: 'lodge', label: 'Lodge partenaire', labelEn: 'Partner lodge', icon: 'landmark', types: ['Lodge', 'Hôtel', 'Bungalow'] },
-  { id: 'bivouac', label: 'Bivouac', labelEn: 'Bivouac', icon: 'mountain', types: ['Bivouac'] },
+  { id: 'habitant', label: "Chez l'habitant", labelEn: 'With locals', labelMg: "Any amin'ny mponina", icon: 'user', types: ["Chez l'habitant"] },
+  { id: 'lodge', label: 'Lodge partenaire', labelEn: 'Partner lodge', labelMg: "Lojy mpiara-miombon'antoka", icon: 'landmark', types: ['Lodge', 'Hôtel', 'Bungalow'] },
+  { id: 'bivouac', label: 'Bivouac', labelEn: 'Bivouac', labelMg: 'Toby', icon: 'mountain', types: ['Bivouac'] },
 ]
 
 export const NIVEAU_OPTIONS = ['Facile', 'Modéré', 'Sportif', 'Engagé']
 export const NIVEAU_LABEL_EN = { Facile: 'Easy', 'Modéré': 'Moderate', Sportif: 'Challenging', 'Engagé': 'Demanding' }
+export const NIVEAU_LABEL_MG = { Facile: 'Mora', 'Modéré': 'Antonony', Sportif: 'Mafy', 'Engagé': 'Sarotra be' }
 
 export const LANGUE_OPTIONS = [...new Set(guides.flatMap((g) => g.langues))]
 export const LANGUE_LABEL_EN = { Français: 'French', Malgache: 'Malagasy', Anglais: 'English', Italien: 'Italian' }
+export const LANGUE_LABEL_MG = { Français: 'Frantsay', Malgache: 'Malagasy', Anglais: 'Anglisy', Italien: 'Italianina' }
+
+export function localeLabel(fr, en, mg, locale) {
+  if (locale === 'en') return en ?? fr
+  if (locale === 'mg') return mg ?? fr
+  return fr
+}
 
 export function themeLabel(theme, locale) {
-  return locale === 'en' ? theme.labelEn : theme.label
+  return localeLabel(theme.label, theme.labelEn, theme.labelMg, locale)
 }
 
 export function hebergementLabel(option, locale) {
-  return locale === 'en' ? option.labelEn : option.label
+  return localeLabel(option.label, option.labelEn, option.labelMg, locale)
+}
+
+export function niveauLabel(niveau, locale) {
+  return localeLabel(niveau, NIVEAU_LABEL_EN[niveau], NIVEAU_LABEL_MG[niveau], locale)
+}
+
+export function langueLabel(langue, locale) {
+  return localeLabel(langue, LANGUE_LABEL_EN[langue], LANGUE_LABEL_MG[langue], locale)
 }
 
 export function getHebergementTypes(circuit) {
@@ -50,6 +66,19 @@ export function parseGroupSize(text) {
   const nums = (text ?? '').match(/\d+/g)
   if (!nums || nums.length < 2) return [1, 99]
   return [Number(nums[0]), Number(nums[1])]
+}
+
+const GROUP_SIZE_WORDS = {
+  fr: (min, max) => `${min} à ${max} personnes`,
+  en: (min, max) => `${min} to ${max} people`,
+  mg: (min, max) => `${min} ka hatramin'ny ${max} olona`,
+}
+
+// Reformate "2 à 15 personnes" dans la langue active plutôt que de traduire
+// ce texte gabarit circuit par circuit.
+export function formatGroupSize(text, locale) {
+  const [min, max] = parseGroupSize(text)
+  return (GROUP_SIZE_WORDS[locale] ?? GROUP_SIZE_WORDS.fr)(min, max)
 }
 
 function hebergementScore(circuit, wishedIds) {

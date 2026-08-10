@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Icon from '../../components/Icon'
-import { THEMES, HEBERGEMENT_OPTIONS, NIVEAU_OPTIONS, LANGUE_OPTIONS, themeLabel, hebergementLabel, NIVEAU_LABEL_EN, LANGUE_LABEL_EN } from '../../utils/matching'
+import { THEMES, HEBERGEMENT_OPTIONS, NIVEAU_OPTIONS, LANGUE_OPTIONS, themeLabel, hebergementLabel, niveauLabel, langueLabel } from '../../utils/matching'
 import { writeJSON } from '../../utils/storage'
 import { RATE_EUR_TO_AR } from '../../context/CurrencyContext'
 import { useLocale } from '../../context/LocaleContext'
@@ -20,8 +20,10 @@ function diffDays(fromStr, toStr) {
   return Math.round((new Date(toStr) - new Date(fromStr)) / 86_400_000)
 }
 
+const DATE_LOCALE = { fr: 'fr-FR', en: 'en-GB', mg: 'fr-FR' }
+
 function formatDate(dateStr, locale) {
-  return new Date(dateStr).toLocaleDateString(locale === 'en' ? 'en-GB' : 'fr-FR', { day: 'numeric', month: 'short' })
+  return new Date(dateStr).toLocaleDateString(DATE_LOCALE[locale] ?? 'fr-FR', { day: 'numeric', month: 'short' })
 }
 
 function Step({ id, title, optional, optionalLabel, openStep, onToggle, summary, children }) {
@@ -124,7 +126,7 @@ export default function ComposerClient() {
   const summaries = {
     themes: themes.length
       ? THEMES.filter((th) => themes.includes(th.id)).map((th) => themeLabel(th, locale)).join(', ')
-      : (locale === 'en' ? 'To choose' : 'À choisir'),
+      : t.toChoose,
     hebergement: hebergement.length
       ? HEBERGEMENT_OPTIONS.filter((h) => hebergement.includes(h.id)).map((h) => hebergementLabel(h, locale)).join(', ')
       : t.indifferent,
@@ -132,8 +134,8 @@ export default function ComposerClient() {
     duree: `${duree} ${daysWord}`,
     budget: `${budget.toLocaleString('fr-FR')} €`,
     voyage: groupe ? `${t.group} · ${nbPersonnes} ${t.people}` : t.solo,
-    niveau: locale === 'en' ? (NIVEAU_LABEL_EN[niveau] ?? niveau) : niveau,
-    langue: langue ? (locale === 'en' ? (LANGUE_LABEL_EN[langue] ?? langue) : langue) : t.indifferentF,
+    niveau: niveauLabel(niveau, locale),
+    langue: langue ? langueLabel(langue, locale) : t.indifferentF,
   }
 
   const submitDisabled = !themes.length
@@ -299,7 +301,7 @@ export default function ComposerClient() {
                     className={`composer__chip ${niveau === n ? 'composer__chip--active' : ''}`}
                     onClick={() => setNiveau(n)}
                   >
-                    {locale === 'en' ? (NIVEAU_LABEL_EN[n] ?? n) : n}
+                    {niveauLabel(n, locale)}
                   </button>
                 ))}
               </div>
@@ -314,7 +316,7 @@ export default function ComposerClient() {
                     className={`composer__chip ${langue === l ? 'composer__chip--active' : ''}`}
                     onClick={() => setLangue(langue === l ? null : l)}
                   >
-                    {locale === 'en' ? (LANGUE_LABEL_EN[l] ?? l) : l}
+                    {langueLabel(l, locale)}
                   </button>
                 ))}
               </div>

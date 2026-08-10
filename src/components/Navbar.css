@@ -117,6 +117,14 @@
   line-height: 1;
 }
 
+.navbar__locale-toggle button.navbar__currency-opt {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
+}
+
 .navbar__btn-login {
   font-family: var(--font-secondary);
   font-size: 0.9rem;
@@ -366,8 +374,9 @@
   }
 }
 
-/* Responsive */
-@media (max-width: 768px) {
+/* Responsive — 900px et non 768px : au-delà de 3 langues, le pavé FR|EN|MG
+   + Ar|€ + boutons de compte ne tient plus sur un écran tablette portrait. */
+@media (max-width: 900px) {
   .navbar__burger {
     display: flex;
   }
@@ -402,6 +411,28 @@
     align-items: center;
     gap: 16px;
     margin-top: 8px;
+  }
+
+  .navbar__mobile-locale {
+    display: flex;
+    gap: 10px;
+  }
+
+  .navbar__mobile-locale-opt {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 20px;
+    padding: 8px 18px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+  }
+
+  .navbar__mobile-locale-opt.active {
+    background: var(--fern-frond);
+    border-color: var(--fern-frond);
+    color: #fff;
   }
 
   .navbar__link--register,

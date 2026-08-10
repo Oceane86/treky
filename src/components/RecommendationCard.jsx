@@ -4,8 +4,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import Icon from './Icon'
 import { getGuideById, localizeCircuit } from '../data/circuits'
-import { THEMES, getMatchedThemes, themeLabel, NIVEAU_LABEL_EN } from '../utils/matching'
-import { getMonths, getClosure } from '../utils/climate'
+import { THEMES, getMatchedThemes, themeLabel, niveauLabel } from '../utils/matching'
+import { getMonths, getClosure, getClosureNote } from '../utils/climate'
 import { applyGuideOverrides } from '../utils/guideProfile'
 import { useLocale } from '../context/LocaleContext'
 import './RecommendationCard.css'
@@ -23,13 +23,25 @@ const SEASON_COPY = {
     ok: { icon: 'cloud', tone: 'ok', label: 'Good period' },
     ideal: { icon: 'sun', tone: 'ideal', label: 'Ideal period' },
   },
+  mg: {
+    closed: { icon: 'lock', tone: 'closed', label: 'Mikatona amin\'ity vanim-potoana ity' },
+    avoid: { icon: 'cloudRain', tone: 'avoid', label: 'Vanim-potoana tsy tokony' },
+    ok: { icon: 'cloud', tone: 'ok', label: 'Vanim-potoana mety' },
+    ideal: { icon: 'sun', tone: 'ideal', label: 'Vanim-potoana tsara indrindra' },
+  },
+}
+
+const COPY = {
+  fr: { compatible: 'compatible', closeTheme: 'Thématique proche', bestPeriod: 'Meilleure période', compatibleGuides: 'Guides compatibles', viewCircuit: 'Voir le circuit complet', days: 'jours', and: 'et' },
+  en: { compatible: 'compatible', closeTheme: 'Related theme', bestPeriod: 'Best period', compatibleGuides: 'Compatible guides', viewCircuit: 'View full trek', days: 'days', and: 'and' },
+  mg: { compatible: 'mifanaraka', closeTheme: 'Lohahevitra mifandraika', bestPeriod: 'Vanim-potoana tsara indrindra', compatibleGuides: 'Mpitarika mifanaraka', viewCircuit: 'Jereo ny sirkoity feno', days: 'andro', and: 'sy' },
 }
 
 function formatMonths(monthIndexes, locale) {
   const months = getMonths(locale)
   const labels = monthIndexes.map((m) => months[m])
   if (labels.length <= 1) return labels.join('')
-  const and = locale === 'en' ? 'and' : 'et'
+  const and = (COPY[locale] ?? COPY.fr).and
   return `${labels.slice(0, -1).join(', ')} ${and} ${labels[labels.length - 1]}`
 }
 
@@ -45,15 +57,11 @@ export default function RecommendationCard({ circuit: baseCircuit, score, season
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [circuit.id])
 
-  const season = seasonStatus ? SEASON_COPY[locale][seasonStatus] : null
+  const season = seasonStatus ? (SEASON_COPY[locale] ?? SEASON_COPY.fr)[seasonStatus] : null
   const closure = getClosure(baseCircuit)
   const matchedThemes = getMatchedThemes(baseCircuit, themeIds)
-  const levelLabel = locale === 'en' ? (NIVEAU_LABEL_EN[circuit.level] ?? circuit.level) : circuit.level
-  const daysLabel = locale === 'en' ? 'days' : 'jours'
-
-  const copy = locale === 'en'
-    ? { compatible: 'compatible', closeTheme: 'Related theme', bestPeriod: 'Best period', compatibleGuides: 'Compatible guides', viewCircuit: 'View full trek' }
-    : { compatible: 'compatible', closeTheme: 'Thématique proche', bestPeriod: 'Meilleure période', compatibleGuides: 'Guides compatibles', viewCircuit: 'Voir le circuit complet' }
+  const levelLabel = niveauLabel(circuit.level, locale)
+  const copy = COPY[locale] ?? COPY.fr
 
   return (
     <div className="resultats__card">
@@ -85,7 +93,7 @@ export default function RecommendationCard({ circuit: baseCircuit, score, season
               : copy.closeTheme}
           </span>
           <span className="resultats__tag">{levelLabel}</span>
-          <span className="resultats__tag">{circuit.minDays}–{circuit.maxDays ?? circuit.recommendedDays} {daysLabel}</span>
+          <span className="resultats__tag">{circuit.minDays}–{circuit.maxDays ?? circuit.recommendedDays} {copy.days}</span>
         </div>
 
         {season && (
@@ -93,7 +101,7 @@ export default function RecommendationCard({ circuit: baseCircuit, score, season
             <Icon name={season.icon} size={16} />
             <span>
               <strong>{season.label}</strong>
-              {seasonStatus === 'closed' && closure && ` — ${closure.note}`}
+              {seasonStatus === 'closed' && closure && ` — ${getClosureNote(closure, locale)}`}
               {seasonStatus !== 'closed' && idealMonths.length > 0 && (
                 <> · {copy.bestPeriod} : {formatMonths(idealMonths, locale)}</>
               )}

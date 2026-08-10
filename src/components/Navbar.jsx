@@ -21,7 +21,7 @@ export default function Navbar() {
   const { user, isLoggedIn, isGuide, logout } = useAuth()
   const { favorites } = useFavorites()
   const { booking } = useBooking()
-  const { locale, toggle: toggleLocale } = useLocale()
+  const { locale, setLocale } = useLocale()
   const t = getUI(locale).nav
 
   const navLinks = [
@@ -84,6 +84,14 @@ export default function Navbar() {
               </li>
             )
           })}
+          {/* Mobile-only language switcher */}
+          {menuOpen && (
+            <li className="navbar__mobile-locale" role="group" aria-label="Choisir la langue">
+              <button type="button" className={`navbar__mobile-locale-opt ${locale === 'fr' ? 'active' : ''}`} onClick={() => setLocale('fr')}>FR</button>
+              <button type="button" className={`navbar__mobile-locale-opt ${locale === 'en' ? 'active' : ''}`} onClick={() => setLocale('en')}>EN</button>
+              <button type="button" className={`navbar__mobile-locale-opt ${locale === 'mg' ? 'active' : ''}`} onClick={() => setLocale('mg')}>MG</button>
+            </li>
+          )}
           {/* Mobile-only auth links */}
           {menuOpen && !isLoggedIn && (
             <li className="navbar__mobile-auth">
@@ -117,16 +125,13 @@ export default function Navbar() {
         </ul>
 
         <div className="navbar__actions">
-          <button
-            className="navbar__currency-toggle navbar__locale-toggle"
-            onClick={toggleLocale}
-            aria-label="Switch language"
-            title={locale === 'fr' ? 'Switch to English' : 'Passer en français'}
-          >
-            <span className={`navbar__currency-opt ${locale === 'fr' ? 'active' : ''}`}>FR</span>
+          <div className="navbar__currency-toggle navbar__locale-toggle" role="group" aria-label="Choisir la langue">
+            <button type="button" className={`navbar__currency-opt ${locale === 'fr' ? 'active' : ''}`} onClick={() => setLocale('fr')} title="Français">FR</button>
             <span className="navbar__currency-sep">|</span>
-            <span className={`navbar__currency-opt ${locale === 'en' ? 'active' : ''}`}>EN</span>
-          </button>
+            <button type="button" className={`navbar__currency-opt ${locale === 'en' ? 'active' : ''}`} onClick={() => setLocale('en')} title="English">EN</button>
+            <span className="navbar__currency-sep">|</span>
+            <button type="button" className={`navbar__currency-opt ${locale === 'mg' ? 'active' : ''}`} onClick={() => setLocale('mg')} title="Malagasy">MG</button>
+          </div>
 
           <button
             className="navbar__currency-toggle"

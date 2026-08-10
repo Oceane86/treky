@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { guides as baseGuides } from '../data/circuits'
+import { guides as baseGuides, localizeGuide } from '../data/circuits'
 import { applyGuideOverrides } from '../utils/guideProfile'
 import { useLocale } from '../context/LocaleContext'
 import { getUI } from '../utils/i18n'
@@ -27,7 +27,9 @@ export default function GuidesPreview() {
         </div>
 
         <div className="guides-preview__grid" data-reveal data-reveal-delay="1">
-          {guides.map((guide) => (
+          {guides.map((baseGuide) => {
+            const guide = localizeGuide(baseGuide, locale)
+            return (
             <div key={guide.id} className="guide-preview-card">
               <div className="guide-preview-card__image-wrap">
                 <Image
@@ -63,7 +65,7 @@ export default function GuidesPreview() {
                 <p className="guide-preview-card__langues"><Icon name="globe" size={14} /> {guide.langues.join(' · ')}</p>
               </div>
             </div>
-          ))}
+          )})}
         </div>
 
         <div className="guides-preview__cta-wrap" data-reveal data-reveal-delay="2">

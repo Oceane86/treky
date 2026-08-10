@@ -1,15 +1,17 @@
 'use client'
 import { createContext, useContext, useState } from 'react'
 
+export const LOCALES = ['fr', 'en', 'mg']
+
 const LocaleContext = createContext(null)
 
 export function LocaleProvider({ children }) {
-  const [locale, setLocale] = useState('fr') // 'fr' | 'en'
+  const [locale, setLocale] = useState('fr') // 'fr' | 'en' | 'mg'
 
-  const toggle = () => setLocale((l) => (l === 'fr' ? 'en' : 'fr'))
+  const toggle = () => setLocale((l) => LOCALES[(LOCALES.indexOf(l) + 1) % LOCALES.length])
 
   return (
-    <LocaleContext.Provider value={{ locale, toggle }}>
+    <LocaleContext.Provider value={{ locale, setLocale, toggle }}>
       {children}
     </LocaleContext.Provider>
   )

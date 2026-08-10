@@ -2,7 +2,14 @@
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { readJSON } from '../utils/storage'
+import { useLocale } from '../context/LocaleContext'
+import { getUI } from '../utils/i18n'
 import Icon from './Icon'
+
+function localizeMember(member, locale) {
+  const translation = member[locale]
+  return translation ? { ...member, ...translation } : member
+}
 
 function mergeTeamMember(member) {
   const saved = readJSON(`treky_guide_profile_${member.id}`, null)
@@ -20,6 +27,8 @@ function mergeTeamMember(member) {
 }
 
 export default function AboutTeamSection({ team }) {
+  const { locale } = useLocale()
+  const t = getUI(locale).about
   const [members, setMembers] = useState(team)
 
   useEffect(() => {
@@ -28,7 +37,9 @@ export default function AboutTeamSection({ team }) {
 
   return (
     <div className="about-team__grid">
-      {members.map((g) => (
+      {members.map((base) => {
+        const g = localizeMember(base, locale)
+        return (
         <div key={g.id} className="about-guide-card">
           <Image
             src={g.photo}
@@ -50,7 +61,7 @@ export default function AboutTeamSection({ team }) {
               <div className="about-guide-card__note">
                 <span className="about-guide-card__star">★</span>
                 <strong>{g.note}</strong>
-                <span>({g.avis})</span>
+                <span>({g.avis} {t.reviews})</span>
               </div>
             </div>
             <p className="about-guide-card__bio">{g.bio}</p>
@@ -61,7 +72,8 @@ export default function AboutTeamSection({ team }) {
             </div>
           </div>
         </div>
-      ))}
+        )
+      })}
     </div>
   )
 }
