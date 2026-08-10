@@ -185,6 +185,13 @@
   margin-bottom: 20px;
 }
 
+.blog-post__lead {
+  font-size: 1.1rem !important;
+  font-weight: 600;
+  color: var(--log-cabin) !important;
+  line-height: 1.6 !important;
+}
+
 .blog-post__content .btn-primary {
   margin-top: 12px;
   display: inline-flex;

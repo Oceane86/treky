@@ -32,12 +32,11 @@ export default function BlogPostPage() {
           <div className="blog-post__cover-wrap">
             <Image src={post.image} alt={post.title} fill sizes="(max-width: 800px) 100vw, 800px" priority style={{ objectFit: 'cover' }} />
           </div>
-          <p>{post.excerpt}</p>
-          <p>
-            Cet article sera bientôt disponible en intégralité. En attendant,
-            contactez-nous pour en savoir plus sur nos treks à Madagascar.
-          </p>
-          <Link href="/contact" className="btn-primary">Nous contacter</Link>
+          <p className="blog-post__lead">{post.excerpt}</p>
+          {(post.content ?? []).map((paragraph, i) => (
+            <p key={i}>{paragraph}</p>
+          ))}
+          <Link href="/contact" className="btn-primary">Nous contacter pour réserver</Link>
         </div>
       </article>
     </div>
