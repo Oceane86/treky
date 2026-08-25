@@ -12,7 +12,7 @@ const DEMO_RESERVATION = {
   id: 'TRK-2026-0042',
   circuit: 'Trek Découverte Isalo',
   slug: 'decouverte-isalo',
-  image: '/images/isalo.jpg',
+  image: '/images/isalo.webp',
   dateDepart: '15 juillet 2026',
   duree: '4 jours',
   guideNom: 'Rakoto Jean',

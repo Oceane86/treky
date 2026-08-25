@@ -72,7 +72,7 @@ export default function Footer() {
             </ul>
             <div className="footer__mvola">
               <p className="footer__mvola-label">Paiement mobile</p>
-              <img src="/images/mvola.png" alt="MVola" />
+              <img src="/images/mvola.webp" alt="MVola" />
             </div>
           </div>
 

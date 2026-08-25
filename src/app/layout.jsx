@@ -33,7 +33,7 @@ export const metadata = {
       "Circuits de trekking à Madagascar avec des guides locaux certifiés. Isalo, Tsingy, Tsaratanana.",
     images: [
       {
-        url: '/images/hero-bg.jpg',
+        url: '/images/hero-bg.webp',
         width: 1200,
         height: 630,
         alt: 'Trek Madagascar – Treky',
@@ -44,7 +44,7 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'Treky – Trek Madagascar',
     description: "Circuits de trekking avec guides locaux à Madagascar.",
-    images: ['/images/hero-bg.jpg'],
+    images: ['/images/hero-bg.webp'],
   },
   robots: { index: true, follow: true },
 }

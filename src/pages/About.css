@@ -285,7 +285,7 @@
   overflow: hidden;
   background:
     linear-gradient(rgba(0,39,26,0.62), rgba(0,39,26,0.72)),
-    url('/images/hero-bg.jpg') center/cover no-repeat;
+    url('/images/hero-bg.webp') center/cover no-repeat;
 }
 
 .about-cta h2 {

@@ -26,7 +26,7 @@ export default function OffreMoment() {
           <Link href={`/circuits/${SLUG}`} className="offre__image-wrap offre__image-link">
             <span className="badge badge-offer offre__badge">{t.offreBadge}</span>
             <Image
-              src="/images/sainte_marie.jpg"
+              src="/images/sainte_marie.webp"
               alt={t.offreCircuitTitle}
               fill
               sizes="(max-width: 900px) 100vw, 50vw"

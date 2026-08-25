@@ -9,7 +9,7 @@ export const metadata = {
     title: 'Circuits de trek à Madagascar – Treky',
     description:
       'Tous nos circuits de trekking à Madagascar avec guides locaux certifiés. Durée adaptable, départ sur mesure.',
-    images: [{ url: '/images/isalo.jpg', width: 1200, height: 630 }],
+    images: [{ url: '/images/isalo.webp', width: 1200, height: 630 }],
   },
 }
 

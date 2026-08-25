@@ -25,7 +25,7 @@ export default function VideoSection() {
       {/* Image pleine largeur avec bouton play */}
       <div className="video-section__media">
         <Image
-          src="/images/video-thumb.jpg"
+          src="/images/video-thumb.webp"
           alt="Explorer Madagascar - Baobabs"
           fill
           sizes="100vw"

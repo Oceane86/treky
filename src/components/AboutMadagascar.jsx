@@ -31,10 +31,10 @@ export default function AboutMadagascar() {
           {/* Colonne 3 : images empilées */}
           <div className="about__images-col">
             <div className="about__img-wrap">
-              <Image src="/images/about2.jpg" alt="Coucher de soleil Madagascar" fill sizes="(max-width: 900px) 50vw, 25vw" style={{ objectFit: 'cover' }} />
+              <Image src="/images/about2.webp" alt="Coucher de soleil Madagascar" fill sizes="(max-width: 900px) 50vw, 25vw" style={{ objectFit: 'cover' }} />
             </div>
             <div className="about__img-wrap">
-              <Image src="/images/about3.jpg" alt="Paysage malgache" fill sizes="(max-width: 900px) 50vw, 25vw" style={{ objectFit: 'cover' }} />
+              <Image src="/images/about3.webp" alt="Paysage malgache" fill sizes="(max-width: 900px) 50vw, 25vw" style={{ objectFit: 'cover' }} />
             </div>
           </div>
         </div>

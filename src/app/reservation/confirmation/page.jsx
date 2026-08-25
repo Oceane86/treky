@@ -42,7 +42,7 @@ export default function BookingConfirmationPage() {
       id: `TRK-${new Date().getFullYear()}-${String(Date.now()).slice(-4)}`,
       circuit: booking.circuit.name,
       slug: booking.circuit.slug,
-      image: fullCircuit?.image ?? '/images/hero-bg.jpg',
+      image: fullCircuit?.image ?? '/images/hero-bg.webp',
       dateDepart: formatDate(booking.checkin),
       duree: `${days} jour${days > 1 ? 's' : ''}`,
       guideNom: booking.guide?.nom ?? 'À définir',

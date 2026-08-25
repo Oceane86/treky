@@ -13,7 +13,7 @@ export default function Hero() {
     <section className="hero">
       <div className="hero__bg">
         <Image
-          src="/images/hero-bg.jpg"
+          src="/images/hero-bg.webp"
           alt="Paysage de Madagascar"
           fill
           sizes="100vw"

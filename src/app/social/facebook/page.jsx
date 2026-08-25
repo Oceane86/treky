@@ -39,7 +39,7 @@ export default function FacebookPreviewPage() {
       </header>
 
       <div className="fb-cover">
-        <Image src="/images/hero-bg.jpg" alt="Couverture Treky" fill sizes="(max-width: 940px) 100vw, 940px" priority style={{ objectFit: 'cover' }} />
+        <Image src="/images/hero-bg.webp" alt="Couverture Treky" fill sizes="(max-width: 940px) 100vw, 940px" priority style={{ objectFit: 'cover' }} />
       </div>
 
       <div className="fb-header">

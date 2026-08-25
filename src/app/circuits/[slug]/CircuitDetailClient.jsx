@@ -11,7 +11,7 @@ import { useCurrency } from '../../../context/CurrencyContext'
 import { useAuth } from '../../../context/AuthContext'
 import { useFavorites } from '../../../context/FavoritesContext'
 import { useLocale } from '../../../context/LocaleContext'
-import { readJSON } from '../../../utils/storage'
+import { readJSON, writeJSON } from '../../../utils/storage'
 import { getMonths, CLIMAT_MAP, CLIMAT_ICON, climatLabel, getClimatKey, getClosure, getClosureNote, formatMonthRange } from '../../../utils/climate'
 import { niveauLabel, formatGroupSize } from '../../../utils/matching'
 import { getUI } from '../../../utils/i18n'
@@ -24,15 +24,15 @@ const CircuitMap = dynamic(() => import('../../../components/CircuitMap'), { ssr
 // Avis génériques utilisés uniquement si un circuit n'a pas d'entrée dans REVIEWS_BY_SLUG.
 // text/tag/date sont traduits (fr/en/mg) ; le nom du voyageur reste inchangé.
 const DEFAULT_REVIEWS = [
-  { id: 1, name: 'Jean Dupont',   avatar: '/images/avatar1.jpg', stars: 5,
+  { id: 1, name: 'Jean Dupont',   avatar: '/images/avatar1.webp', stars: 5,
     date: { fr: 'Mars 2026', en: 'March 2026', mg: 'Martsa 2026' },
     text: { fr: 'Une expérience absolument inoubliable. Le guide était exceptionnel, les paysages à couper le souffle.', en: 'An absolutely unforgettable experience. The guide was exceptional, the scenery breathtaking.', mg: 'Traikefa tsy hay hadinoina mihitsy. Nahavariana ilay mpitarika, ary nahatalanjona ny toe-tany.' },
     tag: { fr: 'Randonneur passionné', en: 'Passionate hiker', mg: 'Tia mandeha an-tongotra' } },
-  { id: 2, name: 'Marie Martin',  avatar: '/images/avatar2.jpg', stars: 5,
+  { id: 2, name: 'Marie Martin',  avatar: '/images/avatar2.webp', stars: 5,
     date: { fr: 'Février 2026', en: 'February 2026', mg: 'Febroary 2026' },
     text: { fr: 'Voyage en solo et je me suis sentie en sécurité à chaque instant. Organisation irréprochable.', en: 'Traveled solo and felt safe at every moment. Flawless organization.', mg: 'Nandeha irery aho ary tsy nanana ahiahy ny amin\'ny fiarovana. Tena nikarakara tsara ny fandaminana.' },
     tag: { fr: 'Voyageuse solo', en: 'Solo traveler', mg: 'Mpandeha irery' } },
-  { id: 3, name: 'Thomas Bernard',avatar: '/images/avatar3.jpg', stars: 4,
+  { id: 3, name: 'Thomas Bernard',avatar: '/images/avatar3.webp', stars: 4,
     date: { fr: 'Janvier 2026', en: 'January 2026', mg: 'Janoary 2026' },
     text: { fr: 'Superbes photos ramenées, la nature est époustouflante. Petite déception sur les lodges mais rien de grave.', en: 'Brought back superb photos, the nature is breathtaking. Slightly disappointed by the lodges but nothing serious.', mg: 'Nahazo sary tsara be aho, tena mahatalanjona ny natiora. Kely fahadisoam-panantenana tamin\'ireo lojy fa tsy misy olana lehibe.' },
     tag: { fr: 'Photographe nature', en: 'Nature photographer', mg: 'Mpaka sary natiora' } },
@@ -41,11 +41,11 @@ const DEFAULT_REVIEWS = [
 // Avis propres à chaque circuit, pour ne pas afficher les 3 mêmes voyageurs partout.
 const REVIEWS_BY_SLUG = {
   'decouverte-isalo': [
-    { id: 101, name: 'Camille Dubois', avatar: '/images/avatar1.jpg', stars: 5,
+    { id: 101, name: 'Camille Dubois', avatar: '/images/avatar1.webp', stars: 5,
       date: { fr: 'Juin 2026', en: 'June 2026', mg: 'Jona 2026' },
       text: { fr: 'Parfait pour un premier trek ! Les piscines naturelles du Canyon des Makis sont magiques, et Solofo connaît chaque recoin du parc.', en: 'Perfect for a first trek! The natural pools of Canyon des Makis are magical, and Solofo knows every corner of the park.', mg: 'Tena tsara ho an\'ny fisandratana voalohany! Mahagaga ireo dobo voajanahary ao amin\'ny Canyon des Makis, ary fantatr\'i Solofo tsara avokoa ny zoro rehetra ao amin\'ny valanjavaboary.' },
       tag: { fr: 'Premier trek', en: 'First trek', mg: 'Fisandratana voalohany' } },
-    { id: 102, name: 'Marc Legrand', avatar: '/images/avatar2.jpg', stars: 5,
+    { id: 102, name: 'Marc Legrand', avatar: '/images/avatar2.webp', stars: 5,
       date: { fr: 'Mai 2026', en: 'May 2026', mg: 'Mey 2026' },
       text: { fr: "La Fenêtre de l'Isalo au coucher du soleil restera un des plus beaux souvenirs de ma vie. Guide au top.", en: "Isalo Window at sunset will remain one of the most beautiful memories of my life. Top-notch guide.", mg: 'Ny Varavarankelin\'i Isalo amin\'ny filentehan\'ny masoandro dia hijanona ho iray amin\'ireo fahatsiarovana tsara indrindra amin\'ny fiainako. Mpitarika mendrika.' },
       tag: { fr: 'Photographe amateur', en: 'Amateur photographer', mg: 'Mpaka sary tia zavakanto' } },
@@ -55,11 +55,11 @@ const REVIEWS_BY_SLUG = {
       tag: { fr: 'Voyage en famille', en: 'Family trip', mg: 'Dia miaraka amin\'ny fianakaviana' } },
   ],
   'immersion-andringitra': [
-    { id: 111, name: 'Julien Petit', avatar: '/images/avatar1.jpg', stars: 5,
+    { id: 111, name: 'Julien Petit', avatar: '/images/avatar1.webp', stars: 5,
       date: { fr: 'Juillet 2026', en: 'July 2026', mg: 'Jolay 2026' },
       text: { fr: "L'ascension du Pic Boby au lever du soleil, c'est indescriptible. Jean nous a poussés sans jamais nous mettre en danger.", en: 'Climbing Pic Boby at sunrise is indescribable. Jean pushed us without ever putting us in danger.', mg: 'Tsy hay lazaina ny fiakarana ny Pic Boby amin\'ny fiposahan\'ny masoandro. Nanosika anay i Jean nefa tsy nanisy loza velively.' },
       tag: { fr: 'Sommet conquis', en: 'Summit conquered', mg: 'Tampony resy' } },
-    { id: 112, name: 'Anna Schmidt', avatar: '/images/avatar2.jpg', stars: 5,
+    { id: 112, name: 'Anna Schmidt', avatar: '/images/avatar2.webp', stars: 5,
       date: { fr: 'Juin 2026', en: 'June 2026', mg: 'Jona 2026' },
       text: { fr: 'Le bivouac en altitude était froid mais le ciel étoilé sans aucune pollution lumineuse valait chaque frisson.', en: 'The high-altitude bivouac was cold but the starry sky with zero light pollution was worth every shiver.', mg: 'Mangatsiaka ilay toby avo be fa tena mendrika ilay lanitra feno kintana tsy misy fanelezan-tara.' },
       tag: { fr: 'Amoureuse de montagne', en: 'Mountain lover', mg: 'Tia tendrombohitra' } },
@@ -69,11 +69,11 @@ const REVIEWS_BY_SLUG = {
       tag: { fr: 'Randonneur régulier', en: 'Regular hiker', mg: 'Mpandeha an-tongotra mahazatra' } },
   ],
   'dedale-tsingy': [
-    { id: 121, name: 'Laura Moreau', avatar: '/images/avatar1.jpg', stars: 5,
+    { id: 121, name: 'Laura Moreau', avatar: '/images/avatar1.webp', stars: 5,
       date: { fr: 'Juillet 2026', en: 'July 2026', mg: 'Jolay 2026' },
       text: { fr: 'Traverser les Tsingy sur les ponts de singe suspendus, sensations garanties ! Solofo rassure sans jamais infantiliser.', en: 'Crossing the Tsingy on the suspended monkey bridges, guaranteed thrills! Solofo reassures without ever being condescending.', mg: 'Ny fitsenana ny Tsingy amin\'ireo tetezana mihantona, tena mahavelona fihetseham-po! Manome toky i Solofo nefa tsy manambany.' },
       tag: { fr: 'Sensations fortes', en: 'Thrill seeker', mg: 'Tia fihetseham-po mahery' } },
-    { id: 122, name: 'David Chen', avatar: '/images/avatar3.jpg', stars: 5,
+    { id: 122, name: 'David Chen', avatar: '/images/avatar3.webp', stars: 5,
       date: { fr: 'Juin 2026', en: 'June 2026', mg: 'Jona 2026' },
       text: { fr: "La descente en pirogue sur la Manambolo après trois jours de calcaire acéré, un vrai moment de calme bienvenu.", en: 'The dugout canoe descent on the Manambolo after three days of sharp limestone, a truly welcome moment of calm.', mg: 'Ny fidinana an-dakana amin\'ny Manambolo taorian\'ny telo andro tamin\'ny vato lasarosaro, tena fotoana fiadanana nilaina.' },
       tag: { fr: 'Voyage nature', en: 'Nature trip', mg: 'Dia natiora' } },
@@ -83,11 +83,11 @@ const REVIEWS_BY_SLUG = {
       tag: { fr: 'Aventurière prudente', en: 'Careful adventurer', mg: 'Mpitety malina' } },
   ],
   'makay-traversee': [
-    { id: 131, name: 'Vincent Caron', avatar: '/images/avatar2.jpg', stars: 5,
+    { id: 131, name: 'Vincent Caron', avatar: '/images/avatar2.webp', stars: 5,
       date: { fr: 'Août 2026', en: 'August 2026', mg: 'Aogositra 2026' },
       text: { fr: "L'expédition la plus exigeante que j'ai faite à Madagascar, et de loin la plus belle. Le Makay ne ressemble à rien d'autre.", en: 'The most demanding expedition I\'ve done in Madagascar, and by far the most beautiful. The Makay is unlike anything else.', mg: 'Ny dia sarotra indrindra vitako tany Madagasikara, ary tena tsara tarehy indrindra. Tsy misy mitovy amin\'ny Makay.' },
       tag: { fr: 'Expédition extrême', en: 'Extreme expedition', mg: 'Dia sarotra' } },
-    { id: 132, name: 'Natasha Petrov', avatar: '/images/avatar3.jpg', stars: 5,
+    { id: 132, name: 'Natasha Petrov', avatar: '/images/avatar3.webp', stars: 5,
       date: { fr: 'Juillet 2026', en: 'July 2026', mg: 'Jolay 2026' },
       text: { fr: "Dix jours sans réseau, juste le canyon, la rivière et l'équipe. Jean et les porteurs ont rendu l'impossible confortable.", en: 'Ten days with no signal, just the canyon, the river and the team. Jean and the porters made the impossible comfortable.', mg: 'Folo andro tsy nisy réseau, ny hantsana, ny renirano ary ny ekipa fotsiny. Nataon\'i Jean sy ireo mpitondra entana ho mora ny zavatra sarotra.' },
       tag: { fr: 'Territoire vierge', en: 'Untouched territory', mg: 'Faritany mbola virjiny' } },
@@ -97,11 +97,11 @@ const REVIEWS_BY_SLUG = {
       tag: { fr: 'Grande aventurière', en: 'Seasoned adventurer', mg: 'Mpitety mavitrika' } },
   ],
   'zafimaniry-culture': [
-    { id: 141, name: 'Isabelle Laurent', avatar: '/images/avatar1.jpg', stars: 5,
+    { id: 141, name: 'Isabelle Laurent', avatar: '/images/avatar1.webp', stars: 5,
       date: { fr: 'Mai 2026', en: 'May 2026', mg: 'Mey 2026' },
       text: { fr: "Rencontrer les sculpteurs Zafimaniry dans leur village, un moment d'humanité rare. Nirina traduisait avec beaucoup de tact.", en: 'Meeting the Zafimaniry carvers in their village, a rare moment of humanity. Nirina translated with great tact.', mg: 'Ny fihaonana amin\'ireo mpandrafitra Zafimaniry ao an-tanànany, tena fotoana miavaka. Nandika tamin-kitsimpo be i Nirina.' },
       tag: { fr: 'Immersion culturelle', en: 'Cultural immersion', mg: 'Fidirana lalina amin\'ny kolontsaina' } },
-    { id: 142, name: 'Thomas Weber', avatar: '/images/avatar2.jpg', stars: 4,
+    { id: 142, name: 'Thomas Weber', avatar: '/images/avatar2.webp', stars: 4,
       date: { fr: 'Avril 2026', en: 'April 2026', mg: 'Aprily 2026' },
       text: { fr: 'Artisanat incroyable, on repart avec des trésors. Les chemins entre villages sont un peu longs pour les moins sportifs.', en: 'Incredible craftsmanship, you leave with treasures. The paths between villages are a bit long for the less athletic.', mg: 'Mahagaga ny asa tanana, mitondra harena mianao rehefa miala. Lava kely ny lalana eo anelanelan\'ireo tanàna ho an\'izay tsy dia mahery.' },
       tag: { fr: "Amateur d'artisanat", en: 'Craft enthusiast', mg: 'Tia asa tanana' } },
@@ -111,11 +111,11 @@ const REVIEWS_BY_SLUG = {
       tag: { fr: 'Curieuse de traditions', en: 'Curious about traditions', mg: 'Liana amin\'ny fomban-drazana' } },
   ],
   'parfums-epices': [
-    { id: 151, name: 'Claire Fontaine', avatar: '/images/avatar3.jpg', stars: 5,
+    { id: 151, name: 'Claire Fontaine', avatar: '/images/avatar3.webp', stars: 5,
       date: { fr: 'Juin 2026', en: 'June 2026', mg: 'Jona 2026' },
       text: { fr: "Un trek qui se hume autant qu'il se marche. La plantation de vanille SAVA est un enchantement pour les sens.", en: 'A trek you smell as much as you walk. The SAVA vanilla plantation is a delight for the senses.', mg: 'Fisandratana tsofina fofona toy izay dieana. Mahafinaritra ny fanentsana ho an\'ny fahatsiarovana ilay fambolena voanila SAVA.' },
       tag: { fr: 'Épicurienne', en: 'Epicurean', mg: 'Tia zava-tsoa' } },
-    { id: 152, name: 'Marco Rossi', avatar: '/images/avatar1.jpg', stars: 5,
+    { id: 152, name: 'Marco Rossi', avatar: '/images/avatar1.webp', stars: 5,
       date: { fr: 'Mai 2026', en: 'May 2026', mg: 'Mey 2026' },
       text: { fr: "La distillerie d'ylang-ylang était fascinante, et je suis reparti avec des huiles essentielles incroyables.", en: 'The ylang-ylang distillery was fascinating, and I left with incredible essential oils.', mg: 'Nahavariana ilay toeram-panamboarana ylang-ylang, ary nitondra menaka tena tsara be aho rehefa niala.' },
       tag: { fr: 'Passionné de gastronomie', en: 'Food enthusiast', mg: 'Tia sakafo' } },
@@ -125,11 +125,11 @@ const REVIEWS_BY_SLUG = {
       tag: { fr: 'Gourmande voyageuse', en: 'Foodie traveler', mg: 'Mpandeha tia sakafo' } },
   ],
   'biodiversite-andasibe': [
-    { id: 161, name: 'Paul Girard', avatar: '/images/avatar2.jpg', stars: 5,
+    { id: 161, name: 'Paul Girard', avatar: '/images/avatar2.webp', stars: 5,
       date: { fr: 'Juillet 2026', en: 'July 2026', mg: 'Jolay 2026' },
       text: { fr: "Le chant des Indris au lever du jour m'a donné des frissons. Accessible en un week-end depuis Tana, aucune excuse pour rater ça.", en: 'The Indris\' song at dawn gave me chills. Reachable in a weekend from Tana, no excuse to miss it.', mg: 'Nampiendrika ahy ny hiran\'ny Indry amin\'ny fahazavan\'ny andro. Azo tratrarina amin\'ny herinandro faran\'i Tana, tsy misy antony hahatsy hitsidika azy.' },
       tag: { fr: 'Amoureux des lémuriens', en: 'Lemur lover', mg: 'Tia gidro' } },
-    { id: 162, name: 'Yuki Tanaka', avatar: '/images/avatar3.jpg', stars: 5,
+    { id: 162, name: 'Yuki Tanaka', avatar: '/images/avatar3.webp', stars: 5,
       date: { fr: 'Juin 2026', en: 'June 2026', mg: 'Jona 2026' },
       text: { fr: 'Sortie nocturne incroyable, on a vu des caméléons partout. Jean a un œil hors du commun pour repérer la faune.', en: 'Incredible night walk, we saw chameleons everywhere. Jean has an extraordinary eye for spotting wildlife.', mg: 'Mahagaga be ilay fivoahana amin\'ny alina, nahita tanalahy be dia be izahay. Manana maso miavaka i Jean amin\'ny fikarohana biby.' },
       tag: { fr: 'Photographe naturaliste', en: 'Wildlife photographer', mg: 'Mpaka sary natiora' } },
@@ -139,11 +139,11 @@ const REVIEWS_BY_SLUG = {
       tag: { fr: 'Découverte nature', en: 'Nature discovery', mg: 'Fikarohana natiora' } },
   ],
   'histoire-ambohimanga': [
-    { id: 171, name: 'Pierre Lefebvre', avatar: '/images/avatar1.jpg', stars: 5,
+    { id: 171, name: 'Pierre Lefebvre', avatar: '/images/avatar1.webp', stars: 5,
       date: { fr: 'Mai 2026', en: 'May 2026', mg: 'Mey 2026' },
       text: { fr: "La colline royale d'Ambohimanga porte une charge historique impressionnante. Nirina raconte l'histoire merina avec passion.", en: 'The royal hill of Ambohimanga carries an impressive historical weight. Nirina tells the Merina history with passion.', mg: 'Mitondra tantara lehibe ny havoana mpanjakan\'i Ambohimanga. Milaza ny tantaran\'ny Merina amin-kafanam-po i Nirina.' },
       tag: { fr: "Passionné d'histoire", en: 'History enthusiast', mg: 'Tia tantara' } },
-    { id: 172, name: 'Sarah Cohen', avatar: '/images/avatar2.jpg', stars: 4,
+    { id: 172, name: 'Sarah Cohen', avatar: '/images/avatar2.webp', stars: 4,
       date: { fr: 'Avril 2026', en: 'April 2026', mg: 'Aprily 2026' },
       text: { fr: 'Belle immersion patrimoniale, la Haute-Ville de Fianarantsoa est magnifique au coucher du soleil.', en: 'Beautiful heritage immersion, the Upper Town of Fianarantsoa is magnificent at sunset.', mg: 'Tsara ilay fidirana amin\'ny lova ara-kolontsaina, tena tsara tarehy ny Tanàna Ambony ao Fianarantsoa amin\'ny filentehan\'ny masoandro.' },
       tag: { fr: 'Amatrice de patrimoine', en: 'Heritage enthusiast', mg: 'Tia lova ara-kolontsaina' } },
@@ -153,11 +153,11 @@ const REVIEWS_BY_SLUG = {
       tag: { fr: 'Curieuse du monde', en: 'World explorer', mg: 'Liana amin\'izao tontolo izao' } },
   ],
   'sainte-marie-pirates-baleines': [
-    { id: 181, name: 'Nicolas Roy', avatar: '/images/avatar3.jpg', stars: 5,
+    { id: 181, name: 'Nicolas Roy', avatar: '/images/avatar3.webp', stars: 5,
       date: { fr: 'Août 2026', en: 'August 2026', mg: 'Aogositra 2026' },
       text: { fr: 'Voir des baleines à bosse depuis le bateau, un moment suspendu. Toute la famille était bouche bée.', en: 'Seeing humpback whales from the boat, a suspended moment. The whole family was speechless.', mg: 'Ny fahitana trozona avy amin\'ny sambo, tena fotoana tsy hay adino. Talanjona daholo ny fianakaviana manontolo.' },
       tag: { fr: 'Papa voyageur', en: 'Traveling dad', mg: 'Raiamandreny mpandeha' } },
-    { id: 182, name: 'Emma Wilson', avatar: '/images/avatar1.jpg', stars: 5,
+    { id: 182, name: 'Emma Wilson', avatar: '/images/avatar1.webp', stars: 5,
       date: { fr: 'Juillet 2026', en: 'July 2026', mg: 'Jolay 2026' },
       text: { fr: "Le cimetière pirate est fascinant, et les plages du nord de l'île sont d'une beauté sauvage rare.", en: 'The pirate cemetery is fascinating, and the beaches on the north of the island have a rare wild beauty.', mg: 'Mahavariana ilay fasan\'ny jiolahy an-dranomasina, ary tena tsara tarehy be ireo morontsiraka avaratr\'ilay nosy.' },
       tag: { fr: "Amoureuse d'histoire maritime", en: 'Maritime history lover', mg: 'Tia tantara an-dranomasina' } },
@@ -167,11 +167,11 @@ const REVIEWS_BY_SLUG = {
       tag: { fr: 'Voyageur détente', en: 'Relaxed traveler', mg: 'Mpandeha mitady fiadanana' } },
   ],
   'rizieres-betsileo': [
-    { id: 191, name: 'Charlotte Simon', avatar: '/images/avatar2.jpg', stars: 5,
+    { id: 191, name: 'Charlotte Simon', avatar: '/images/avatar2.webp', stars: 5,
       date: { fr: 'Mai 2026', en: 'May 2026', mg: 'Mey 2026' },
       text: { fr: "Dormir chez l'habitant au milieu des rizières en terrasses, une immersion Betsileo authentique et généreuse.", en: 'Staying with locals amid the terraced rice fields, an authentic and generous Betsileo immersion.', mg: 'Ny fandriana any amin\'ny mponina eo afovoan\'ny tanimbary an-tehezana, fidirana marina sy malala-tanana amin\'ny kolontsaina Betsileo.' },
       tag: { fr: "Amoureuse d'authenticité", en: 'Authenticity seeker', mg: 'Tia zavatra marina' } },
-    { id: 192, name: 'Hassan Youssef', avatar: '/images/avatar3.jpg', stars: 4,
+    { id: 192, name: 'Hassan Youssef', avatar: '/images/avatar3.webp', stars: 4,
       date: { fr: 'Avril 2026', en: 'April 2026', mg: 'Aprily 2026' },
       text: { fr: "L'atelier tissage était passionnant. Petit bémol sur le confort de l'hébergement, mais l'accueil compense largement.", en: 'The weaving workshop was fascinating. Minor downside on accommodation comfort, but the welcome more than makes up for it.', mg: 'Nahavariana ny atelie fanenomana. Kely ny fahatsapana amin\'ny fandriana fa mihoatra lavitra izany ny fandraisana.' },
       tag: { fr: "Curieux d'artisanat", en: 'Craft enthusiast', mg: 'Liana amin\'ny asa tanana' } },
@@ -181,11 +181,11 @@ const REVIEWS_BY_SLUG = {
       tag: { fr: 'Passionnée de culture rurale', en: 'Rural culture enthusiast', mg: 'Tia fomba fiainana ambanivohitra' } },
   ],
   'traversee-nord-sud': [
-    { id: 201, name: 'Alexandre Faure', avatar: '/images/avatar1.jpg', stars: 5,
+    { id: 201, name: 'Alexandre Faure', avatar: '/images/avatar1.webp', stars: 5,
       date: { fr: 'Août 2026', en: 'August 2026', mg: 'Aogositra 2026' },
       text: { fr: '28 jours qui ont changé ma vision du voyage. Traverser Madagascar du nord au sud avec cette équipe, une expérience totale.', en: '28 days that changed my vision of travel. Crossing Madagascar from north to south with this team, a total experience.', mg: 'Andro 28 nanova ny fomba fijeriko ny dia. Ny fitetezana an\'i Madagasikara avy any avaratra ka hatrany atsimo niaraka tamin\'ity ekipa ity, traikefa feno.' },
       tag: { fr: 'Grand voyageur', en: 'Seasoned traveler', mg: 'Mpandeha be traikefa' } },
-    { id: 202, name: 'Ingrid Larsen', avatar: '/images/avatar2.jpg', stars: 5,
+    { id: 202, name: 'Ingrid Larsen', avatar: '/images/avatar2.webp', stars: 5,
       date: { fr: 'Juillet 2026', en: 'July 2026', mg: 'Jolay 2026' },
       text: { fr: "Chaque région révèle un Madagascar différent : volcanique au nord, minéral dans l'Isalo, océanique à Tuléar. Inoubliable.", en: 'Each region reveals a different Madagascar: volcanic in the north, mineral in Isalo, oceanic in Tuléar. Unforgettable.', mg: 'Samy manambara an\'i Madagasikara hafa ny faritra tsirairay: volkanika any avaratra, vato any Isalo, ranomasina any Toliara. Tsy hay hadinoina.' },
       tag: { fr: 'Exploratrice', en: 'Explorer', mg: 'Mpikaroka' } },
@@ -339,6 +339,9 @@ export default function CircuitDetailPage() {
       tag: 'Voyageur Treky',
     }
     setReviews((prev) => [newReview, ...prev])
+    const storageKey = `treky_circuit_reviews_${circuit.slug}`
+    const stored = readJSON(storageKey, [])
+    writeJSON(storageKey, [newReview, ...stored])
     setReviewStars(0)
     setReviewName('')
     setReviewText('')

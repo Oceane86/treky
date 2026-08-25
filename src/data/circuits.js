@@ -10,7 +10,7 @@
     maxDays: 6,
     level: 'Facile',
     badge: 'Populaire',
-    image: '/images/isalo_dmitry.jpg',
+    image: '/images/isalo_dmitry.webp',
     priceAr: 2_000_000,
     prix_original: 3_000_000,
     prix_reduit: 2_000_000,
@@ -120,7 +120,7 @@
       { lat: -22.51, lng: 45.30, title: 'Crête des singes' },
       { lat: -22.55, lng: 45.42, title: "Fenêtre de l'Isalo + Retour" },
     ],
-    photos: ['/images/isalo_dmitry.jpg', '/images/isalo_canyon.jpg', '/images/isalo_cascade.jpg', '/images/Isalo-National-Park.jpg', '/images/isalo_chemin.jpg'],
+    photos: ['/images/isalo_dmitry.webp', '/images/isalo_canyon.webp', '/images/isalo_cascade.webp', '/images/Isalo-National-Park.webp', '/images/isalo_chemin.webp'],
     steps: [
       {
         title: 'Ranohira · Accueil',
@@ -163,7 +163,7 @@
     maxDays: 7,
     level: 'Modéré',
     badge: 'Aventure',
-    image: '/images/tsaratanana.jpg',
+    image: '/images/tsaratanana.webp',
     priceAr: 3_500_000,
     prix_original: 6_000_000,
     prix_reduit: 3_500_000,
@@ -284,7 +284,7 @@
       { lat: -22.21, lng: 47.05, title: 'Sommet Pic Boby · 2 876 m' },
       { lat: -21.84, lng: 46.93, title: 'Descente + Retour' },
     ],
-    photos: ['/images/tsaratanana.jpg', '/images/about3.jpg', '/images/hero-bg.jpg', '/images/about1.jpg', '/images/about2.jpg'],
+    photos: ['/images/tsaratanana.webp', '/images/about3.webp', '/images/hero-bg.webp', '/images/about1.webp', '/images/about2.webp'],
     steps: [
       {
         title: 'Ambalavao · Départ',
@@ -334,7 +334,7 @@
     maxDays: 9,
     level: 'Sportif',
     badge: 'Aventure',
-    image: '/images/tsingyy_ok.jpg',
+    image: '/images/tsingyy_ok.webp',
     priceAr: 6_000_000,
     prix_original: 9_000_000,
     prix_reduit: 6_000_000,
@@ -436,13 +436,13 @@
         },
         {
           title: "Lalan'ny baobab",
-          description: "Fandalovana amin'ny filentehan'ny masoandro amin'ny làlan'ny baobab lehibe.",
+          description: "Fandalovana amin'ny filentehan'ny masoandro amin'ny lalan'ny baobab lehibe.",
           activities: ["Lalan'ny baobab amin'ny fiposahan'ny masoandro", 'Fitsidihana tanàna Sakalava', 'Fanomanana fitaovana via ferrata'],
         },
         {
           title: 'Tsingy · Tetezana mihantona',
-          description: "Fitetezana ny Grand Tsingy amin'ny alalan'ny tetezana mihantona sy làlana amin'ny haavo.",
-          activities: ['Fitetezana amin\'ny tetezana mihantona', 'Fikarohana ny labyrinthe vato sokay', 'Fahitana propithèque sy gidro'],
+          description: "Fitetezana ny Grand Tsingy amin'ny alalan'ny tetezana mihantona sy lalana amin'ny haavo.",
+          activities: ['Fitetezana amin\'ny tetezana mihantona', 'Fikarohana ny labyrinthe vato sokay', 'Fahitana sifaka sy gidro'],
         },
         {
           title: 'Petits Tsingy + Lava-bato',
@@ -477,7 +477,7 @@
       { lat: -20.10, lng: 44.30, title: 'Côte sauvage' },
       { lat: -20.30, lng: 44.32, title: 'Retour Morondava' },
     ],
-    photos: ['/images/tsingy_vu2.jpg', '/images/tsingyy_ok.jpg', '/images/tsingy_pont.jpg', '/images/tsingy_couche.jpg', '/images/tsingy_vu.jpg'],
+    photos: ['/images/tsingy_vu2.webp', '/images/tsingyy_ok.webp', '/images/tsingy_pont.webp', '/images/tsingy_couche.webp', '/images/tsingy_vu.webp'],
     steps: [
       {
         title: 'Morondava · Départ',
@@ -541,7 +541,7 @@
     maxDays: 13,
     level: 'Engagé',
     badge: 'Expédition',
-    image: '/images/canyon-couleurs.jpg',
+    image: '/images/canyon-couleurs.webp',
     priceAr: 10_000_000,
     prix_original: 12_500_000,
     prix_reduit: 10_000_000,
@@ -627,7 +627,7 @@
       location: 'Havoana Makay, faritra Atsimo-Andrefana',
       teaser: "Hantsana tsy voavoatra, ala fôsily ary toby eo afovoan'ny havoana lavitra indrindra any Madagasikara.",
       description:
-        "Ny Fitetezana lehibe Makay dia dia any amin'ny iray amin'ireo faritany mbola virjiny farany any Madagasikara. Hantsana labyrinthe, ala fôsily ary renirano lalina no mamorona lalana natokana ho an'ireo mpitety be traikefa, lavitry ny fotodrafitrasa rehetra. Tsy misy lalambe mankany amin'ny havoana: tokony ho tratrarina izy io, ary izany koa no mahatonga azy ho iray amin'ireo toerana masina farany tena tsy voavoatra any Madagasikara.",
+        "Ny Fitetezana lehibe Makay dia any amin'ny iray amin'ireo faritany mbola virjiny farany any Madagasikara. Hantsana labyrinthe, ala fôsily ary renirano lalina no mamorona lalana natokana ho an'ireo mpitety be traikefa, lavitry ny fotodrafitrasa rehetra. Tsy misy lalambe mankany amin'ny havoana: tokony ho tratrarina izy io, ary izany koa no mahatonga azy ho iray amin'ireo toerana masina farany tena tsy voavoatra any Madagasikara.",
       highlights: ['Hantsana labyrinthe', 'Ala fôsily', 'Toby renirano', 'Faritany tsy voavoatra'],
       included: ['Fitaovana toby feno', 'Sakafo feno any an-tsaha', 'Mpitarika dia manam-pahaizana', 'Mpitondra entana sy mole'],
       non_inclus: ['Sidina mankany Toliara', "Fiantohana dia tsy maintsy atao", 'Fitaovana manokana ara-teknika'],
@@ -687,7 +687,7 @@
       { lat: -21.85, lng: 44.52, title: 'Sortie canyon J9' },
       { lat: -23.35, lng: 43.67, title: 'Retour Tuléar J10' },
     ],
-    photos: ['/images/canyon-couleurs.jpg', '/images/tsaratanana.jpg', '/images/about3.jpg', '/images/isalo_canyon.jpg', '/images/hero-bg.jpg'],
+    photos: ['/images/canyon-couleurs.webp', '/images/tsaratanana.webp', '/images/about3.webp', '/images/isalo_canyon.webp', '/images/hero-bg.webp'],
     steps: [
       {
         title: 'Tuléar · Départ',
@@ -751,7 +751,7 @@
     maxDays: 7,
     level: 'Facile',
     badge: 'Culture',
-    image: '/images/about2.jpg',
+    image: '/images/about2.webp',
     priceAr: 3_000_000,
     prix_original: 5_000_000,
     prix_reduit: 3_000_000,
@@ -833,7 +833,7 @@
         "Fidirana amin'ny alalan'ny RN7 avy any Antananarivo (5 ora eo ho eo ny dia)",
         "Azo aleha mandritra ny taona manontolo, aleo hisorohana ny Janoary-Febroary (orana)",
         "Mendrika ho an'ny fianakaviana sy ny tia kolontsaina",
-        "Mitondrà fanomezana kely ho an'ny mponina",
+        "Mitondra fanomezana kely ho an'ny mponina",
       ],
       steps: [
         {
@@ -872,7 +872,7 @@
       { lat: -20.63, lng: 47.35, title: 'Atelier artisanat' },
       { lat: -20.52, lng: 47.25, title: 'Retour Ambositra' },
     ],
-    photos: ['/images/about2.jpg', '/images/about1.jpg', '/images/hero-bg.jpg', '/images/about3.jpg', '/images/canyon-couleurs.jpg'],
+    photos: ['/images/about2.webp', '/images/about1.webp', '/images/hero-bg.webp', '/images/about3.webp', '/images/canyon-couleurs.webp'],
     steps: [
       {
         title: 'Ambositra · Arrivée',
@@ -922,7 +922,7 @@
     maxDays: 8,
     level: 'Facile',
     badge: 'Nature',
-    image: '/images/circuit2.jpg',
+    image: '/images/circuit2.webp',
     priceAr: 3_500_000,
     prix_original: 6_000_000,
     prix_reduit: 3_500_000,
@@ -1054,7 +1054,7 @@
       { lat: -20.48, lng: 48.38, title: 'Marché aux épices' },
       { lat: -21.20, lng: 48.35, title: 'Retour Mananjary' },
     ],
-    photos: ['/images/circuit2.jpg', '/images/about3.jpg', '/images/about2.jpg', '/images/marche_sac.jpg', '/images/about1.jpg'],
+    photos: ['/images/circuit2.webp', '/images/about3.webp', '/images/about2.webp', '/images/marche_sac.webp', '/images/about1.webp'],
     steps: [
       {
         title: 'Mananjary · Départ',
@@ -1111,7 +1111,7 @@
     maxDays: 5,
     level: 'Facile',
     badge: 'Nature',
-    image: '/images/circuit2.jpg',
+    image: '/images/circuit2.webp',
     priceAr: 2_000_000,
     prix_original: 4_000_000,
     prix_reduit: 2_000_000,
@@ -1207,7 +1207,7 @@
       { lat: -18.78, lng: 48.45, title: 'Mantadia · Forêt primaire' },
       { lat: -18.95, lng: 48.40, title: 'Réserve communautaire + Retour' },
     ],
-    photos: ['/images/circuit2.jpg', '/images/about2.jpg', '/images/about1.jpg', '/images/about3.jpg', '/images/hero-bg.jpg'],
+    photos: ['/images/circuit2.webp', '/images/about2.webp', '/images/about1.webp', '/images/about3.webp', '/images/hero-bg.webp'],
     steps: [
       {
         title: 'Andasibe · Indris + Lémuriens nocturnes',
@@ -1243,7 +1243,7 @@
     maxDays: 6,
     level: 'Facile',
     badge: 'Culture',
-    image: '/images/about1.jpg',
+    image: '/images/about1.webp',
     priceAr: 2_500_000,
     prix_original: 4_500_000,
     prix_reduit: 2_500_000,
@@ -1320,7 +1320,7 @@
         "1 ora avy any Antananarivo i Ambohimanga; fifandraisana mankany Fianarantsoa amin'ny alalan'ny RN7 (7 ora eo ho eo)",
         "Azo aleha mandritra ny taona manontolo",
         "Mendrika ho an'ny tia tantara sy kolontsaina",
-        'Mitondrà fitafiana manaja ho an\'ny toerana masina',
+        'Mitondra fitafiana manaja ho an\'ny toerana masina',
       ],
       steps: [
         {
@@ -1353,7 +1353,7 @@
       { lat: -21.45, lng: 47.09, title: 'Vieille ville Fianarantsoa' },
       { lat: -18.92, lng: 47.54, title: 'Retour' },
     ],
-    photos: ['/images/about1.jpg', '/images/about2.jpg', '/images/hero-bg.jpg', '/images/about3.jpg', '/images/tsaratanana.jpg'],
+    photos: ['/images/about1.webp', '/images/about2.webp', '/images/hero-bg.webp', '/images/about3.webp', '/images/tsaratanana.webp'],
     steps: [
       {
         title: "Antananarivo · Rova",
@@ -1396,7 +1396,7 @@
     maxDays: 7,
     level: 'Facile',
     badge: 'Nature',
-    image: '/images/sainte_marie.jpg',
+    image: '/images/sainte_marie.webp',
     priceAr: 4_000_000,
     prix_original: 6_000_000,
     prix_reduit: 4_000_000,
@@ -1517,7 +1517,7 @@
       { lat: -16.85, lng: 49.95, title: 'Plages + Village de pêcheurs' },
       { lat: -16.90, lng: 49.90, title: 'Retour' },
     ],
-    photos: ['/images/sainte_marie.jpg', '/images/sainte_marie_baleine.jpg', '/images/sainte_marie_lodge.jpg', '/images/cap_sainte_marie.jpg', '/images/sainte_marie_pirate.jpg'],
+    photos: ['/images/sainte_marie.webp', '/images/sainte_marie_baleine.webp', '/images/sainte_marie_lodge.webp', '/images/cap_sainte_marie.webp', '/images/sainte_marie_pirate.webp'],
     steps: [
       {
         title: "Île Sainte-Marie · Arrivée",
@@ -1567,7 +1567,7 @@
     maxDays: 6,
     level: 'Facile',
     badge: 'Culture',
-    image: '/images/about2.jpg',
+    image: '/images/about2.webp',
     priceAr: 2_500_000,
     prix_original: 4_500_000,
     prix_reduit: 2_500_000,
@@ -1644,7 +1644,7 @@
         "Fidirana amin'ny alalan'ny RN7 avy any Antananarivo (7 ka hatramin'ny 8 ora ny dia) na sidina mivantana mankany Fianarantsoa (50 minitra)",
         "Azo aleha mandritra ny taona manontolo",
         'Ilaina ny fanajana ny fomba amam-panao eny an-toerana',
-        "Mitondrà fanomezana kely ho an'ny fianakaviana mampiantrano",
+        "Mitondra fanomezana kely ho an'ny fianakaviana mampiantrano",
       ],
       steps: [
         {
@@ -1677,7 +1677,7 @@
       { lat: -21.58, lng: 47.20, title: 'Village Betsileo · Cuisine + Tissage' },
       { lat: -21.45, lng: 47.09, title: 'Retour Fianarantsoa' },
     ],
-    photos: ['/images/about2.jpg', '/images/about1.jpg', '/images/hero-bg.jpg', '/images/about3.jpg', '/images/tsaratanana.jpg'],
+    photos: ['/images/about2.webp', '/images/about1.webp', '/images/hero-bg.webp', '/images/about3.webp', '/images/tsaratanana.webp'],
     steps: [
       {
         title: 'Fianarantsoa · Arrivée',
@@ -1720,7 +1720,7 @@
     maxDays: 35,
     level: 'Engagé',
     badge: 'Grande Traversée',
-    image: '/images/hero-bg.jpg',
+    image: '/images/hero-bg.webp',
     priceAr: 15_000_000,
     prix_original: 22_500_000,
     prix_reduit: 15_000_000,
@@ -1874,7 +1874,7 @@
       { lat: -23.35, lng: 43.80, title: 'Côte sud J21-24' },
       { lat: -23.35, lng: 43.67, title: 'Tuléar J25-28' },
     ],
-    photos: ['/images/hero-bg.jpg', '/images/tsaratanana.jpg', '/images/isalo.jpg', '/images/canyon-couleurs.jpg', '/images/isalo_canyon.jpg'],
+    photos: ['/images/hero-bg.webp', '/images/tsaratanana.webp', '/images/isalo.webp', '/images/canyon-couleurs.webp', '/images/isalo_canyon.webp'],
     steps: [
       {
         title: "Diego Suarez + Montagne d'Ambre J1-3",
@@ -1940,7 +1940,7 @@ export const guides = [
   {
     id: 1,
     nom: 'Rakoto Jean',
-    photo: '/images/avatar1.jpg',
+    photo: '/images/avatar1.webp',
     note: 4.9,
     nb_avis: 87,
     localisation: 'Ambalavao',
@@ -1961,7 +1961,7 @@ export const guides = [
   {
     id: 2,
     nom: 'Solofo Andry',
-    photo: '/images/avatar2.jpg',
+    photo: '/images/avatar2.webp',
     note: 4.8,
     nb_avis: 64,
     localisation: 'Andasibe',
@@ -1982,7 +1982,7 @@ export const guides = [
   {
     id: 3,
     nom: 'Nirina Mamy',
-    photo: '/images/avatar3.jpg',
+    photo: '/images/avatar3.webp',
     note: 5.0,
     nb_avis: 42,
     localisation: 'Fianarantsoa',
@@ -2015,7 +2015,7 @@ export const blogPosts = [
       "Physiquement, pas besoin d'être un athlète pour la plupart de nos circuits classés Facile ou Modéré. En revanche, une préparation cardio de quelques semaines avant le départ rend l'expérience bien plus agréable, surtout pour les treks en altitude comme l'ascension du Pic Boby dans l'Andringitra.",
       "Enfin, gardez de la marge dans votre planning. Les transferts en 4x4 sur certaines pistes malgaches prennent plus de temps que prévu, et c'est justement cette lenteur qui fait tout le charme du voyage : on traverse des villages, on croise des zébus sur la route, on ralentit vraiment.",
     ],
-    image: '/images/about1.jpg',
+    image: '/images/about1.webp',
     date: '2026-03-12',
     category: 'Conseils',
     readTime: '6 min',
@@ -2032,7 +2032,7 @@ export const blogPosts = [
       "Nirina Mamy, originaire de Fianarantsoa, ouvre les portes de la culture des Hautes Terres : villages Zafimaniry, traditions Betsileo, histoire royale d'Ambohimanga. Parlant français, malgache et italien, elle a une manière unique de raconter l'histoire malgache sans jamais tomber dans le folklore de façade.",
       "Ce qui unit ces trois guides, au-delà de leurs spécialités, c'est qu'ils sont tous originaires des régions qu'ils font découvrir. Ce ne sont pas des guides généralistes récitant un script : ce sont des habitants qui partagent leur maison.",
     ],
-    image: '/images/about2.jpg',
+    image: '/images/about2.webp',
     date: '2026-02-28',
     category: 'Équipe',
     readTime: '4 min',
@@ -2049,7 +2049,7 @@ export const blogPosts = [
       "De décembre à mars, la saison des pluies transforme le paysage : la savane reverdit spectaculairement et les cascades gonflent, mais les averses (souvent brèves et violentes en fin de journée) peuvent rendre certains sentiers glissants, et la chaleur humide est plus éprouvante. Ce n'est pas la meilleure période pour un premier trek, mais les amateurs de photographie apprécient les contrastes de couleurs.",
       "Notre recommandation pour un premier passage à l'Isalo : viser la fenêtre mai-juin ou septembre-octobre, en bordure de la haute saison. Vous gardez un climat fiable tout en évitant les sentiers les plus encombrés.",
     ],
-    image: '/images/isalo.jpg',
+    image: '/images/isalo.webp',
     date: '2026-01-15',
     category: 'Destinations',
     readTime: '5 min',
@@ -2066,7 +2066,7 @@ export const blogPosts = [
       "Le trek Culture Zafimaniry de Treky permet de dormir chez l'habitant, de participer à un atelier de sculpture encadré par un maître artisan, et de marcher entre les villages sur des chemins qui traversent forêts de pins et rizières en terrasse. Une immersion loin des boutiques à touristes d'Antananarivo, directement à la source.",
       "Un conseil si vous ramenez une pièce sculptée : privilégiez les coopératives locales plutôt que les revendeurs de la capitale. Le prix est souvent similaire, mais l'argent reste dans le village qui l'a fabriquée.",
     ],
-    image: '/images/about2.jpg',
+    image: '/images/about2.webp',
     date: '2026-04-08',
     category: 'Artisanat',
     readTime: '5 min',
@@ -2083,7 +2083,7 @@ export const blogPosts = [
       "Dans les Hautes Terres, la coopérative Zafimaniry Artisans réunit des sculpteurs sur bois d'Ambositra et de ses villages environnants. Elle garantit une juste rémunération des artisans et la transmission de leur savoir-faire classé UNESCO aux nouvelles générations.",
       "Voyager avec Treky, c'est donc aussi soutenir ces structures locales sans que cela ne change rien à votre expérience — si ce n'est la certitude que votre trek profite réellement aux communautés qui vous accueillent.",
     ],
-    image: '/images/about3.jpg',
+    image: '/images/about3.webp',
     date: '2026-03-25',
     category: 'Engagements',
     readTime: '4 min',
@@ -2100,7 +2100,7 @@ export const blogPosts = [
       "Le moment qui m'a le plus marquée reste pourtant le plus simple : la Fenêtre de l'Isalo, au coucher du soleil du dernier jour. Cette arche naturelle qui encadre exactement le disque solaire quand on se place au bon endroit, au bon moment. Jean m'a laissée seule quelques minutes face au paysage, comme s'il savait que certains instants ne se partagent pas, même avec le meilleur des guides.",
       "Je suis repartie avec des courbatures, une carte mémoire pleine, et la certitude d'avoir vécu quelque chose de rare. Si vous hésitez à partir seule, ne le faites plus : à Madagascar, on n'est jamais vraiment seul avec un bon guide à ses côtés.",
     ],
-    image: '/images/isalo.jpg',
+    image: '/images/isalo.webp',
     date: '2026-04-20',
     category: 'Récits',
     readTime: '7 min',
@@ -2118,7 +2118,7 @@ export const blogPosts = [
       "L'Isalo est arrivé comme une respiration après l'effort : canyons de grès, piscines naturelles, nuits plus douces. Puis la longue descente vers la côte sud, les baobabs géants de l'Avenue de Morombe, les villages de pêcheurs Vezo, jusqu'à Tuléar et son récif corallien — le point final logique d'un voyage qui avait commencé dans les volcans du nord.",
       "Ce que je retiens surtout, c'est qu'un mois de marche à travers un seul pays donne une compréhension qu'aucun trek d'une semaine ne peut offrir : Madagascar n'est pas une destination, c'est un continent miniature. Chaque région semblait appartenir à un pays différent, reliée aux autres par la même équipe de guides qui, eux, ne changeaient jamais — la seule vraie constante d'un mois entier de dépaysement.",
     ],
-    image: '/images/hero-bg.jpg',
+    image: '/images/hero-bg.webp',
     date: '2026-05-05',
     category: 'Récits',
     readTime: '9 min',
@@ -2135,7 +2135,7 @@ export const blogPosts = [
       "L'ylang-ylang, cette fleur jaune en forme d'étoile, est distillée dans des alambics artisanaux pour en extraire une huile essentielle très recherchée en parfumerie. La visite d'une distillerie traditionnelle, avec son odeur entêtante et sucrée, est une étape sensorielle à part entière du trek Parfums & Épices.",
       "Au marché de Mananjary, tout se retrouve mélangé : vanille, girofle, cannelle, poivre sauvage, dans des effluves qui racontent mieux que n'importe quel discours l'importance économique de ces cultures pour les familles locales. Repartir avec un petit sachet acheté directement au producteur, plutôt qu'en duty-free, c'est aussi soutenir directement cette économie.",
     ],
-    image: '/images/marche_sac.jpg',
+    image: '/images/marche_sac.webp',
     date: '2026-02-10',
     category: 'Nature',
     readTime: '5 min',

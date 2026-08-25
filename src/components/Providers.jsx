@@ -1,5 +1,6 @@
 'use client'
 import { usePathname } from 'next/navigation'
+import NextAuthProvider from './NextAuthProvider'
 import { AuthProvider } from '../context/AuthContext'
 import { CurrencyProvider } from '../context/CurrencyContext'
 import { BookingProvider } from '../context/BookingContext'
@@ -22,6 +23,7 @@ export default function Providers({ children }) {
   const hideChrome = hidesChrome(pathname)
 
   return (
+    <NextAuthProvider>
     <AuthProvider>
       <LocaleProvider>
       <CurrencyProvider>
@@ -36,5 +38,6 @@ export default function Providers({ children }) {
       </CurrencyProvider>
       </LocaleProvider>
     </AuthProvider>
+    </NextAuthProvider>
   )
 }

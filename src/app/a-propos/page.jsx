@@ -8,7 +8,7 @@ export const metadata = {
     title: 'À propos de Treky – Agence de trek à Madagascar',
     description:
       'Circuits responsables, guides locaux certifiés, immersion authentique. Treky vous connecte à l\'essentiel de Madagascar.',
-    images: [{ url: '/images/about1.jpg', width: 1200, height: 630 }],
+    images: [{ url: '/images/about1.webp', width: 1200, height: 630 }],
   },
 }
 

@@ -87,7 +87,7 @@ export default function ContactPage() {
               </ul>
               <div className="contact-info__mvola">
                 <p>Paiement mobile accepté</p>
-                <img src="/images/mvola.png" alt="MVola" />
+                <img src="/images/mvola.webp" alt="MVola" />
               </div>
             </div>
 

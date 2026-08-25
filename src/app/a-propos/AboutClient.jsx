@@ -14,7 +14,7 @@ const TEAM = [
     nom: 'Rakoto Jean',
     role: 'Guide aventure & faune endémique',
     localisation: 'Ambalavao',
-    photo: '/images/avatar1.jpg',
+    photo: '/images/avatar1.webp',
     langues: ['Français', 'Malgache', 'Anglais'],
     note: 4.9,
     avis: 87,
@@ -33,7 +33,7 @@ const TEAM = [
     nom: 'Solofo Andry',
     role: 'Guide nature & photographie',
     localisation: 'Andasibe',
-    photo: '/images/avatar2.jpg',
+    photo: '/images/avatar2.webp',
     langues: ['Français', 'Malgache'],
     note: 4.8,
     avis: 64,
@@ -52,7 +52,7 @@ const TEAM = [
     nom: 'Nirina Mamy',
     role: 'Guide culturel & villages locaux',
     localisation: 'Fianarantsoa',
-    photo: '/images/avatar3.jpg',
+    photo: '/images/avatar3.webp',
     langues: ['Français', 'Malgache', 'Italien'],
     note: 5.0,
     avis: 42,
@@ -235,7 +235,7 @@ export default function AboutClient() {
           <div className="about-page__values page-grid-2">
             <div className="about-page__value">
               <div className="about-page__value-img">
-                <Image src="/images/about2.jpg" alt="Paysages Madagascar" fill sizes="(max-width: 900px) 100vw, 50vw" style={{ objectFit: 'cover' }} />
+                <Image src="/images/about2.webp" alt="Paysages Madagascar" fill sizes="(max-width: 900px) 100vw, 50vw" style={{ objectFit: 'cover' }} />
               </div>
               <div>
                 <h3>{t.landscapesTitle}</h3>
@@ -244,7 +244,7 @@ export default function AboutClient() {
             </div>
             <div className="about-page__value">
               <div className="about-page__value-img">
-                <Image src="/images/about3.jpg" alt="Culture malgache" fill sizes="(max-width: 900px) 100vw, 50vw" style={{ objectFit: 'cover' }} />
+                <Image src="/images/about3.webp" alt="Culture malgache" fill sizes="(max-width: 900px) 100vw, 50vw" style={{ objectFit: 'cover' }} />
               </div>
               <div>
                 <h3>{t.cultureTitle}</h3>

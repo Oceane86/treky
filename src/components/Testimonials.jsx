@@ -10,7 +10,7 @@ const testimonials = [
     id: 1,
     name: 'Jean Dupont',
     role: { fr: 'Randonneur passionné', en: 'Passionate hiker', mg: 'Tia mandeha an-tongotra' },
-    avatar: '/images/avatar1.jpg',
+    avatar: '/images/avatar1.webp',
     rating: 5,
     text: {
       fr: "Une expérience absolument inoubliable. Le guide était exceptionnel, les paysages à couper le souffle. Je recommande Treky à tous ceux qui veulent vivre une vraie aventure à Madagascar.",
@@ -22,7 +22,7 @@ const testimonials = [
     id: 2,
     name: 'Marie Martin',
     role: { fr: 'Voyageuse solo', en: 'Solo traveler', mg: 'Mpandeha irery' },
-    avatar: '/images/avatar2.jpg',
+    avatar: '/images/avatar2.webp',
     rating: 5,
     text: {
       fr: "Mon premier trek à Madagascar avec Treky et certainement pas le dernier ! Organisation parfaite, équipe bienveillante, et des souvenirs plein la tête. Un grand merci à toute l'équipe.",
@@ -34,7 +34,7 @@ const testimonials = [
     id: 3,
     name: 'Thomas Bernard',
     role: { fr: 'Photographe nature', en: 'Nature photographer', mg: 'Mpaka sary natiora' },
-    avatar: '/images/avatar3.jpg',
+    avatar: '/images/avatar3.webp',
     rating: 5,
     text: {
       fr: "En tant que photographe, je cherchais des paysages uniques. Treky m'a emmené dans des endroits que je n'aurais jamais trouvés seul. La biodiversité de Madagascar est époustouflante.",
