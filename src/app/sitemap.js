@@ -1,6 +1,6 @@
 import { circuits, blogPosts } from '../data/circuits'
 
-const BASE_URL = 'https://treky.mg'
+const BASE_URL = 'https://treky.vercel.app'
 
 export default function sitemap() {
   const staticPages = [

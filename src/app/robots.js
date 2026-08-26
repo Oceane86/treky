@@ -1,4 +1,4 @@
-const BASE_URL = 'https://treky.mg'
+const BASE_URL = 'https://treky.vercel.app'
 
 const DISALLOWED_PATHS = [
   '/compte/',

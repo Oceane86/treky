@@ -7,7 +7,7 @@ export function generateMetadata({ params }) {
   return {
     title: `${circuit.name} – Trek ${circuit.region}`,
     description: circuit.teaser,
-    alternates: { canonical: `https://treky.mg/circuits/${circuit.slug}` },
+    alternates: { canonical: `https://treky.vercel.app/circuits/${circuit.slug}` },
     openGraph: {
       title: `${circuit.name} | Treky`,
       description: circuit.teaser,
@@ -30,7 +30,7 @@ function circuitJsonLd(circuit) {
     '@type': 'TouristTrip',
     name: circuit.name,
     description: circuit.description ?? circuit.teaser,
-    image: `https://treky.mg${circuit.image}`,
+    image: `https://treky.vercel.app${circuit.image}`,
     touristType: circuit.level,
     itinerary: {
       '@type': 'ItemList',
@@ -45,7 +45,7 @@ function circuitJsonLd(circuit) {
       '@type': 'Offer',
       priceCurrency: 'EUR',
       price: minEur,
-      url: `https://treky.mg/circuits/${circuit.slug}`,
+      url: `https://treky.vercel.app/circuits/${circuit.slug}`,
       availability: 'https://schema.org/InStock',
     },
     ...(circuit.rating && circuit.reviews
@@ -57,7 +57,7 @@ function circuitJsonLd(circuit) {
           },
         }
       : {}),
-    provider: { '@type': 'TravelAgency', name: 'Treky', url: 'https://treky.mg' },
+    provider: { '@type': 'TravelAgency', name: 'Treky', url: 'https://treky.vercel.app' },
   }
 }
 
@@ -66,9 +66,9 @@ function breadcrumbJsonLd(circuit) {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Accueil', item: 'https://treky.mg' },
-      { '@type': 'ListItem', position: 2, name: 'Circuits', item: 'https://treky.mg/circuits' },
-      { '@type': 'ListItem', position: 3, name: circuit.name, item: `https://treky.mg/circuits/${circuit.slug}` },
+      { '@type': 'ListItem', position: 1, name: 'Accueil', item: 'https://treky.vercel.app' },
+      { '@type': 'ListItem', position: 2, name: 'Circuits', item: 'https://treky.vercel.app/circuits' },
+      { '@type': 'ListItem', position: 3, name: circuit.name, item: `https://treky.vercel.app/circuits/${circuit.slug}` },
     ],
   }
 }

@@ -35,7 +35,7 @@ export default function CookiesPage() {
               informations relatives à votre navigation afin d'améliorer votre expérience.
             </p>
 
-            <h2>2. Cookies utilisés sur treky.mg</h2>
+            <h2>2. Cookies utilisés sur treky.vercel.app</h2>
 
             <h3>Cookies strictement nécessaires</h3>
             <p>

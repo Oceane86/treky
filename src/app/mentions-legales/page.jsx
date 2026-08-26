@@ -29,7 +29,7 @@ export default function MentionsLegalesPage() {
 
           <div className="legal-content">
             <h2>1. Éditeur du site</h2>
-            <p>Le site <strong>treky.mg</strong> est édité par :</p>
+            <p>Le site <strong>treky.vercel.app</strong> est édité par :</p>
             <address>
               <strong>Treky SARL</strong><br />
               Antananarivo 101, Madagascar<br />

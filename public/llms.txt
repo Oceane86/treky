@@ -8,39 +8,39 @@ Devise de référence : Ariary malgache (Ar), avec équivalence en euros (€) a
 
 ## Pages principales
 
-- [Accueil](https://treky.mg/): présentation de l'agence, offre du moment, guides, avis voyageurs.
-- [Circuits](https://treky.mg/circuits): liste complète des treks disponibles, filtrable par thématique.
-- [Composer mon trek](https://treky.mg/composer): questionnaire d'envies qui recommande des circuits et guides compatibles.
-- [Blog](https://treky.mg/blog): articles pratiques, récits de voyageurs, portraits de guides.
-- [À propos](https://treky.mg/a-propos): mission, engagements écotouristiques, équipe de guides, associations partenaires.
-- [Contact](https://treky.mg/contact): coordonnées et formulaire de contact.
+- [Accueil](https://treky.vercel.app/): présentation de l'agence, offre du moment, guides, avis voyageurs.
+- [Circuits](https://treky.vercel.app/circuits): liste complète des treks disponibles, filtrable par thématique.
+- [Composer mon trek](https://treky.vercel.app/composer): questionnaire d'envies qui recommande des circuits et guides compatibles.
+- [Blog](https://treky.vercel.app/blog): articles pratiques, récits de voyageurs, portraits de guides.
+- [À propos](https://treky.vercel.app/a-propos): mission, engagements écotouristiques, équipe de guides, associations partenaires.
+- [Contact](https://treky.vercel.app/contact): coordonnées et formulaire de contact.
 
 ## Circuits (treks)
 
-- [Trek Découverte Isalo](https://treky.mg/circuits/decouverte-isalo): initiation au trekking dans le Parc National de l'Isalo (Sud), 3-4 jours, niveau facile.
-- [Trek Immersion Andringitra](https://treky.mg/circuits/immersion-andringitra): ascension du Pic Boby dans le massif de l'Andringitra, niveau sportif.
-- [Dédale des Tsingy](https://treky.mg/circuits/dedale-tsingy): Tsingy de Bemaraha et route des baobabs de Morondava, fermé en saison des pluies.
-- [Grande Traversée du Makay](https://treky.mg/circuits/makay-traversee): expédition engagée de plusieurs jours dans le massif isolé du Makay (Sud), niveau expédition.
-- [Trek Culture Zafimaniry](https://treky.mg/circuits/zafimaniry-culture): immersion dans les villages de sculpteurs sur bois Zafimaniry (patrimoine UNESCO), Hautes Terres.
-- [Trek Parfums & Épices](https://treky.mg/circuits/parfums-epices): plantations de vanille, girofle et ylang-ylang dans la région de Mananjary.
-- [Trek Biodiversité Andasibe](https://treky.mg/circuits/biodiversite-andasibe): observation des lémuriens Indri à Andasibe, trek facile axé faune endémique.
-- [Trek Histoire Ambohimanga](https://treky.mg/circuits/histoire-ambohimanga): colline royale d'Ambohimanga, trek culturel et historique près d'Antananarivo.
-- [Sainte-Marie : Pirates & Baleines](https://treky.mg/circuits/sainte-marie-pirates-baleines): île Sainte-Marie, cimetière pirate et observation des baleines à bosse (juillet-septembre).
-- [Trek Rizières Betsileo](https://treky.mg/circuits/rizieres-betsileo): paysages de rizières en terrasses et villages Betsileo, Hautes Terres.
-- [Grande Traversée Nord-Sud](https://treky.mg/circuits/traversee-nord-sud): expédition intégrale de Madagascar, plusieurs semaines, niveau le plus engagé du catalogue.
+- [Trek Découverte Isalo](https://treky.vercel.app/circuits/decouverte-isalo): initiation au trekking dans le Parc National de l'Isalo (Sud), 3-4 jours, niveau facile.
+- [Trek Immersion Andringitra](https://treky.vercel.app/circuits/immersion-andringitra): ascension du Pic Boby dans le massif de l'Andringitra, niveau sportif.
+- [Dédale des Tsingy](https://treky.vercel.app/circuits/dedale-tsingy): Tsingy de Bemaraha et route des baobabs de Morondava, fermé en saison des pluies.
+- [Grande Traversée du Makay](https://treky.vercel.app/circuits/makay-traversee): expédition engagée de plusieurs jours dans le massif isolé du Makay (Sud), niveau expédition.
+- [Trek Culture Zafimaniry](https://treky.vercel.app/circuits/zafimaniry-culture): immersion dans les villages de sculpteurs sur bois Zafimaniry (patrimoine UNESCO), Hautes Terres.
+- [Trek Parfums & Épices](https://treky.vercel.app/circuits/parfums-epices): plantations de vanille, girofle et ylang-ylang dans la région de Mananjary.
+- [Trek Biodiversité Andasibe](https://treky.vercel.app/circuits/biodiversite-andasibe): observation des lémuriens Indri à Andasibe, trek facile axé faune endémique.
+- [Trek Histoire Ambohimanga](https://treky.vercel.app/circuits/histoire-ambohimanga): colline royale d'Ambohimanga, trek culturel et historique près d'Antananarivo.
+- [Sainte-Marie : Pirates & Baleines](https://treky.vercel.app/circuits/sainte-marie-pirates-baleines): île Sainte-Marie, cimetière pirate et observation des baleines à bosse (juillet-septembre).
+- [Trek Rizières Betsileo](https://treky.vercel.app/circuits/rizieres-betsileo): paysages de rizières en terrasses et villages Betsileo, Hautes Terres.
+- [Grande Traversée Nord-Sud](https://treky.vercel.app/circuits/traversee-nord-sud): expédition intégrale de Madagascar, plusieurs semaines, niveau le plus engagé du catalogue.
 
 ## Blog
 
-- [Comment préparer son premier trek à Madagascar](https://treky.mg/blog/preparer-premier-trek-madagascar)
-- [Rencontre avec nos guides locaux](https://treky.mg/blog/rencontre-guides-locaux)
-- [L'Isalo : quelle est la meilleure saison ?](https://treky.mg/blog/isalo-meilleure-saison)
-- [Les artisans Zafimaniry : gardiens d'un savoir-faire UNESCO](https://treky.mg/blog/artisans-zafimaniry-bois-unesco)
-- [Nos associations partenaires : ensemble pour Madagascar](https://treky.mg/blog/associations-partenaires-madagascar)
-- [Récit de Camille : 4 jours dans l'Isalo en solo](https://treky.mg/blog/recit-camille-isalo-solo)
-- [Marco : 28 jours pour traverser Madagascar de bout en bout](https://treky.mg/blog/recit-marco-traversee-nord-sud)
-- [Les épices de Madagascar : un voyage olfactif unique](https://treky.mg/blog/epices-madagascar-voyage-olfactif)
+- [Comment préparer son premier trek à Madagascar](https://treky.vercel.app/blog/preparer-premier-trek-madagascar)
+- [Rencontre avec nos guides locaux](https://treky.vercel.app/blog/rencontre-guides-locaux)
+- [L'Isalo : quelle est la meilleure saison ?](https://treky.vercel.app/blog/isalo-meilleure-saison)
+- [Les artisans Zafimaniry : gardiens d'un savoir-faire UNESCO](https://treky.vercel.app/blog/artisans-zafimaniry-bois-unesco)
+- [Nos associations partenaires : ensemble pour Madagascar](https://treky.vercel.app/blog/associations-partenaires-madagascar)
+- [Récit de Camille : 4 jours dans l'Isalo en solo](https://treky.vercel.app/blog/recit-camille-isalo-solo)
+- [Marco : 28 jours pour traverser Madagascar de bout en bout](https://treky.vercel.app/blog/recit-marco-traversee-nord-sud)
+- [Les épices de Madagascar : un voyage olfactif unique](https://treky.vercel.app/blog/epices-madagascar-voyage-olfactif)
 
 ## Optional
 
-- [Sitemap](https://treky.mg/sitemap.xml): index complet des pages indexables du site.
+- [Sitemap](https://treky.vercel.app/sitemap.xml): index complet des pages indexables du site.
 - Contact: contact@treky.mg

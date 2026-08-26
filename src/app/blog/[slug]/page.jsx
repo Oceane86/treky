@@ -7,7 +7,7 @@ export function generateMetadata({ params }) {
   return {
     title: post.title,
     description: post.excerpt,
-    alternates: { canonical: `https://treky.mg/blog/${post.slug}` },
+    alternates: { canonical: `https://treky.vercel.app/blog/${post.slug}` },
     openGraph: {
       title: `${post.title} | Treky`,
       description: post.excerpt,
@@ -30,7 +30,7 @@ function articleJsonLd(post) {
     '@type': 'Article',
     headline: post.title,
     description: post.excerpt,
-    image: `https://treky.mg${post.image}`,
+    image: `https://treky.vercel.app${post.image}`,
     datePublished: post.date,
     dateModified: post.date,
     articleSection: post.category,
@@ -38,9 +38,9 @@ function articleJsonLd(post) {
     publisher: {
       '@type': 'Organization',
       name: 'Treky',
-      logo: { '@type': 'ImageObject', url: 'https://treky.mg/logo.png' },
+      logo: { '@type': 'ImageObject', url: 'https://treky.vercel.app/logo.png' },
     },
-    mainEntityOfPage: { '@type': 'WebPage', '@id': `https://treky.mg/blog/${post.slug}` },
+    mainEntityOfPage: { '@type': 'WebPage', '@id': `https://treky.vercel.app/blog/${post.slug}` },
   }
 }
 
@@ -49,9 +49,9 @@ function breadcrumbJsonLd(post) {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
     itemListElement: [
-      { '@type': 'ListItem', position: 1, name: 'Accueil', item: 'https://treky.mg' },
-      { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://treky.mg/blog' },
-      { '@type': 'ListItem', position: 3, name: post.title, item: `https://treky.mg/blog/${post.slug}` },
+      { '@type': 'ListItem', position: 1, name: 'Accueil', item: 'https://treky.vercel.app' },
+      { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://treky.vercel.app/blog' },
+      { '@type': 'ListItem', position: 3, name: post.title, item: `https://treky.vercel.app/blog/${post.slug}` },
     ],
   }
 }

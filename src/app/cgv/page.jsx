@@ -33,7 +33,7 @@ export default function CGVPage() {
               Les présentes Conditions Générales de Vente (CGV) régissent les relations
               contractuelles entre <strong>Treky SARL</strong> (ci-après « Treky ») et toute
               personne physique (ci-après « le Client ») souhaitant réserver un circuit de
-              trekking ou toute autre prestation proposée sur le site <strong>treky.mg</strong>.
+              trekking ou toute autre prestation proposée sur le site <strong>treky.vercel.app</strong>.
             </p>
             <p>
               Toute réservation implique l'acceptation pleine et entière des présentes CGV.

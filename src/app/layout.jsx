@@ -3,7 +3,7 @@ import Providers from '../components/Providers'
 import '../index.css'
 
 export const metadata = {
-  metadataBase: new URL('https://treky.mg'),
+  metadataBase: new URL('https://treky.vercel.app'),
   title: {
     default: 'Treky – Trek Madagascar avec guides locaux certifiés',
     template: '%s | Treky',
@@ -27,7 +27,7 @@ export const metadata = {
     siteName: 'Treky',
     locale: 'fr_FR',
     type: 'website',
-    url: 'https://treky.mg',
+    url: 'https://treky.vercel.app',
     title: "Treky – Trek Madagascar avec guides locaux certifiés",
     description:
       "Circuits de trekking à Madagascar avec des guides locaux certifiés. Isalo, Tsingy, Tsaratanana.",
@@ -57,8 +57,8 @@ const organizationJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'TravelAgency',
   name: 'Treky',
-  url: 'https://treky.mg',
-  logo: 'https://treky.mg/logo.png',
+  url: 'https://treky.vercel.app',
+  logo: 'https://treky.vercel.app/logo.png',
   description:
     "Treky organise des circuits de trekking à Madagascar avec des guides locaux certifiés.",
   areaServed: { '@type': 'Country', name: 'Madagascar' },
