@@ -2165,7 +2165,3 @@ export function localizeGuide(guide, locale) {
   if (!guide || !translation) return guide
   return { ...guide, ...translation }
 }
-
-export function getGuideById(id) {
-  return guides.find((g) => g.id === id) ?? null
-}

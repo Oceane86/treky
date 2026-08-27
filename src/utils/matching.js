@@ -197,14 +197,7 @@ export function scoreCircuit(circuit, wishes) {
   return { score, seasonStatus, idealMonths: getIdealMonths(circuit), bestGuide: getBestGuide(circuit, wishes) }
 }
 
-export function matchCircuits(circuits, wishes, limit = 3) {
-  return circuits
-    .map((circuit) => ({ circuit, ...scoreCircuit(circuit, wishes) }))
-    .sort((a, b) => b.score - a.score)
-    .slice(0, limit)
-}
-
-// Comme matchCircuits, mais garantit qu'aucune thématique sélectionnée ne soit
+// Comme un simple tri par score, mais garantit qu'aucune thématique sélectionnée ne soit
 // absente du résultat : sans ça, un circuit moins bien noté que le meilleur match
 // d'une autre thématique pouvait disparaître entièrement de la page (il n'apparaît
 // ni ici ni dans les "autres thématiques", qui ne couvre que les thématiques non
