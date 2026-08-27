@@ -50,7 +50,7 @@ export default function InstallPWA() {
   return (
     <div className="install-pwa">
       <div className="install-pwa__icon">
-        <img src="/logo.png" alt="Treky" />
+        <img src="/logo.png" alt="Treky" loading="lazy" />
       </div>
       <div className="install-pwa__text">
         <p className="install-pwa__title">Installer Treky</p>

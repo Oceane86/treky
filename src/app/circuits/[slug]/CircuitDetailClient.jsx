@@ -827,7 +827,7 @@ export default function CircuitDetailPage() {
           <button className="cd__lightbox-close" onClick={closeLightbox}>✕</button>
           <button className="cd__lightbox-prev" onClick={(e) => { e.stopPropagation(); lightboxPrev() }}>‹</button>
           <div className="cd__lightbox-img-wrap" onClick={(e) => e.stopPropagation()}>
-            <img src={photos[lightboxIdx]} alt={`${circuit.name} ${lightboxIdx + 1}`} className="cd__lightbox-img" />
+            <img src={photos[lightboxIdx]} alt={`${circuit.name} ${lightboxIdx + 1}`} className="cd__lightbox-img" loading="lazy" />
             <span className="cd__lightbox-counter">{lightboxIdx + 1} / {photos.length}</span>
           </div>
           <button className="cd__lightbox-next" onClick={(e) => { e.stopPropagation(); lightboxNext() }}>›</button>

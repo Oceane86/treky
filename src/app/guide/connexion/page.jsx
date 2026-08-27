@@ -51,7 +51,7 @@ export default function GuideConnexionPage() {
     <div className="guide-auth">
       <div className="guide-auth__panel">
         <Link href="/" className="guide-auth__brand">
-          <img src="/logo.png" alt="Treky" />
+          <img src="/logo.png" alt="Treky" loading="lazy" />
           <span>Treky <small>Espace guides</small></span>
         </Link>
 

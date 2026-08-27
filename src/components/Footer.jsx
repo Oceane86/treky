@@ -10,7 +10,7 @@ export default function Footer() {
 
           <div className="footer__brand">
             <div className="footer__logo">
-              <img src="/logo.png" alt="Treky" className="footer__logo-img" />
+              <img src="/logo.png" alt="Treky" className="footer__logo-img" loading="lazy" />
               <span className="footer__logo-name">Treky</span>
             </div>
             <p className="footer__tagline">
@@ -72,7 +72,7 @@ export default function Footer() {
             </ul>
             <div className="footer__mvola">
               <p className="footer__mvola-label">Paiement mobile</p>
-              <img src="/images/mvola.webp" alt="MVola" />
+              <img src="/images/mvola.webp" alt="MVola" loading="lazy" />
             </div>
           </div>
 

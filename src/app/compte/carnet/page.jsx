@@ -55,7 +55,7 @@ function DayEntryForm({ dayNumber, onSave }) {
           Enregistrer l'entrée
         </button>
       </div>
-      {photo && <img src={photo} alt="Aperçu" className="journal__photo-preview" />}
+      {photo && <img src={photo} alt="Aperçu" className="journal__photo-preview" loading="lazy" />}
     </form>
   )
 }
@@ -180,7 +180,7 @@ export default function CarnetPage() {
                   {entry ? (
                     <div className="journal__entry">
                       {entry.photo_url && (
-                        <img src={entry.photo_url} alt={`Jour ${day}`} className="journal__entry-photo" />
+                        <img src={entry.photo_url} alt={`Jour ${day}`} className="journal__entry-photo" loading="lazy" />
                       )}
                       <p className="journal__entry-text">{entry.text}</p>
                       <span className="journal__entry-date">

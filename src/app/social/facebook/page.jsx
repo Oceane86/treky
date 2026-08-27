@@ -33,7 +33,7 @@ export default function FacebookPreviewPage() {
             <span className="fb-topbar__icon">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
             </span>
-            <span className="fb-topbar__avatar"><img src="/logo.png" alt="Treky" /></span>
+            <span className="fb-topbar__avatar"><img src="/logo.png" alt="Treky" loading="lazy" /></span>
           </div>
         </div>
       </header>
@@ -44,7 +44,7 @@ export default function FacebookPreviewPage() {
 
       <div className="fb-header">
         <div className="fb-header__inner">
-          <img src="/logo.png" alt="Treky" className="fb-header__avatar" />
+          <img src="/logo.png" alt="Treky" className="fb-header__avatar" loading="lazy" />
           <div className="fb-header__identity">
             <h1 className="fb-header__name">Treky</h1>
             <p className="fb-header__meta">2 940 mentions J'aime · 3 102 abonnés</p>
@@ -96,7 +96,7 @@ export default function FacebookPreviewPage() {
           {posts.map((c, i) => (
             <div key={c.id} className="fb-post">
               <div className="fb-post__header">
-                <img src="/logo.png" alt="Treky" />
+                <img src="/logo.png" alt="Treky" loading="lazy" />
                 <div>
                   <strong>Treky</strong>
                   <span>{2 + i} h · 🌍</span>

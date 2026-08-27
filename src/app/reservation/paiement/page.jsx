@@ -163,7 +163,7 @@ export default function PaiementPage() {
                     checked={paymentMethod === 'mvola'}
                     onChange={() => setPaymentMethod('mvola')}
                   />
-                  <img src="/images/mvola.webp" alt="MVola" className="bm__method-logo" />
+                  <img src="/images/mvola.webp" alt="MVola" className="bm__method-logo" loading="lazy" />
                   <span className="bm__method-label">MVola</span>
                 </label>
                 <label className={`bm__method ${paymentMethod === 'carte' ? 'bm__method--active' : ''}`}>

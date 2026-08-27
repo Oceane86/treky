@@ -24,7 +24,7 @@ export default function InstagramPreviewPage() {
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-            <span className="ig-topbar__avatar"><img src="/logo.png" alt="Treky" /></span>
+            <span className="ig-topbar__avatar"><img src="/logo.png" alt="Treky" loading="lazy" /></span>
           </div>
         </div>
       </header>
@@ -32,7 +32,7 @@ export default function InstagramPreviewPage() {
       <main className="ig-main">
         <div className="ig-profile">
           <div className="ig-profile__avatar-wrap">
-            <img src="/logo.png" alt="Treky" className="ig-profile__avatar" />
+            <img src="/logo.png" alt="Treky" className="ig-profile__avatar" loading="lazy" />
           </div>
           <div className="ig-profile__identity">
             <div className="ig-profile__handle-row">

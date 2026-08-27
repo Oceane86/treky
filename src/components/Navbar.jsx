@@ -66,7 +66,7 @@ export default function Navbar() {
     <nav className={`navbar ${(isScrolled || !isHome) ? 'navbar--scrolled' : ''}`}>
       <div className="navbar__container">
         <Link href="/" className="navbar__logo">
-          <img src="/logo.png" alt="Treky" className="navbar__logo-img" />
+          <img src="/logo.png" alt="Treky" className="navbar__logo-img" loading="lazy" />
           <span className="navbar__logo-text">Treky</span>
         </Link>
 
@@ -152,7 +152,7 @@ export default function Navbar() {
                 aria-expanded={accountOpen}
               >
                 {user?.avatar
-                  ? <img src={user.avatar} alt={user.name} className="navbar__account-avatar" />
+                  ? <img src={user.avatar} alt={user.name} className="navbar__account-avatar" loading="lazy" />
                   : <span className="navbar__account-initials">{user?.name?.[0] ?? 'U'}</span>
                 }
                 <span className="navbar__account-name">{user?.name?.split(' ')[0]}</span>

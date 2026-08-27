@@ -140,7 +140,7 @@ export default function ConnexionClient() {
         <Image src="/images/auth-bg.webp" alt="Madagascar" fill sizes="(max-width: 900px) 100vw, 50vw" priority className="auth__bg" />
         <div className="auth__panel-overlay" />
         <Link href="/" className="auth__brand">
-          <img src="/logo.png" alt="Treky" className="auth__brand-logo" />
+          <img src="/logo.png" alt="Treky" className="auth__brand-logo" loading="lazy" />
           <span className="auth__brand-name">Treky</span>
         </Link>
       </div>
@@ -153,7 +153,7 @@ export default function ConnexionClient() {
         <span className="auth__dot auth__dot--5" />
 
         <div className="auth__content">
-          <img src="/logo.png" alt="Treky" className="auth__logo" />
+          <img src="/logo.png" alt="Treky" className="auth__logo" loading="lazy" />
           <h1 className="auth__title">Se connecter</h1>
 
           <div className="auth__socials">
