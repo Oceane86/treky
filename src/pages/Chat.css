@@ -87,6 +87,25 @@
 
 .chat__context-bar strong { color: var(--log-cabin); }
 
+.chat__continue-bar {
+  background: var(--fern-frond);
+  color: #fff;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  flex-shrink: 0;
+  text-decoration: none;
+}
+
+.chat__continue-bar-cta {
+  white-space: nowrap;
+  font-weight: 700;
+}
+
 /* ── Messages area ── */
 .chat__messages {
   flex: 1;

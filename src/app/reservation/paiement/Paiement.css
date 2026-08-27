@@ -1,0 +1,15 @@
+.paiement-page {
+  min-height: 100vh;
+  background: var(--velvety-cream);
+  padding: 120px 0 80px;
+}
+
+.paiement-page__inner {
+  display: flex;
+  justify-content: center;
+}
+
+.paiement-page__card {
+  position: static;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+}

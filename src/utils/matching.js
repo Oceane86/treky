@@ -122,6 +122,46 @@ function langueScore(circuit, langue) {
   return getCircuitGuides(circuit).some((g) => g.langues.includes(langue)) ? 15 : 0
 }
 
+// Mots-clés associant chaque thématique aux spécialités de guides (texte libre,
+// ex. "Faune endémique", "Culture Betsileo") — sert au matching guide ci-dessous.
+const THEME_KEYWORDS = {
+  'aventure-sommets': ['aventure', 'sommet', 'extrême', 'montagne'],
+  'paysages-mineraux': ['nature', 'paysage', 'minéral', 'géolog'],
+  'faune-biodiversite': ['faune', 'biodiversité', 'naturaliste', 'animal', 'nature'],
+  'culture-traditions': ['culture', 'tradition', 'village'],
+  'histoire-patrimoine': ['histoire', 'patrimoine'],
+  'saveurs-artisanat': ['artisanat', 'saveur', 'cuisine'],
+  'plages-ocean': ['plage', 'océan', 'mer'],
+  'expedition-integrale': ['expédition', 'extrême', 'aventure'],
+}
+
+// Score un guide par rapport aux envies (langue + thématiques ↔ spécialités),
+// utilisé pour matcher circuit ET guide en une seule passe plutôt que d'attacher
+// des guides génériques à un circuit déjà choisi.
+export function guideMatchScore(guide, wishes) {
+  const { themes, langue } = wishes ?? {}
+  let score = langue ? (guide.langues.includes(langue) ? 15 : 0) : 5
+
+  if (themes?.length) {
+    const specText = guide.specialites.join(' ').toLowerCase()
+    const matched = themes.some((themeId) =>
+      (THEME_KEYWORDS[themeId] ?? []).some((kw) => specText.includes(kw))
+    )
+    if (matched) score += 20
+  }
+  return score
+}
+
+// Le guide assigné au circuit le plus compatible avec les envies du voyageur,
+// au lieu des deux premiers guides assignés sans distinction.
+export function getBestGuide(circuit, wishes) {
+  const candidates = getCircuitGuides(circuit)
+  if (!candidates.length) return null
+  return candidates
+    .map((guide) => ({ guide, score: guideMatchScore(guide, wishes) }))
+    .sort((a, b) => b.score - a.score)[0].guide
+}
+
 function groupeScore(circuit, nbPersonnes) {
   if (!nbPersonnes) return 5
   const [min, max] = parseGroupSize(circuit.groupSize)
@@ -154,7 +194,7 @@ export function scoreCircuit(circuit, wishes) {
   else if (seasonStatus === 'avoid') score -= 8
   else if (seasonStatus === 'ideal') score += 5
 
-  return { score, seasonStatus, idealMonths: getIdealMonths(circuit) }
+  return { score, seasonStatus, idealMonths: getIdealMonths(circuit), bestGuide: getBestGuide(circuit, wishes) }
 }
 
 export function matchCircuits(circuits, wishes, limit = 3) {

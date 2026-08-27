@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import Icon from './Icon'
-import { getGuideById, localizeCircuit } from '../data/circuits'
+import { localizeCircuit } from '../data/circuits'
 import { THEMES, getMatchedThemes, themeLabel, niveauLabel } from '../utils/matching'
 import { getMonths, getClosure, getClosureNote } from '../utils/climate'
 import { applyGuideOverrides } from '../utils/guideProfile'
@@ -32,9 +32,9 @@ const SEASON_COPY = {
 }
 
 const COPY = {
-  fr: { compatible: 'compatible', closeTheme: 'Thématique proche', bestPeriod: 'Meilleure période', compatibleGuides: 'Guides compatibles', viewCircuit: 'Voir le circuit complet', days: 'jours', and: 'et' },
-  en: { compatible: 'compatible', closeTheme: 'Related theme', bestPeriod: 'Best period', compatibleGuides: 'Compatible guides', viewCircuit: 'View full trek', days: 'days', and: 'and' },
-  mg: { compatible: 'mifanaraka', closeTheme: 'Lohahevitra mifandraika', bestPeriod: 'Vanim-potoana tsara indrindra', compatibleGuides: 'Mpitarika mifanaraka', viewCircuit: 'Jereo ny sirkoity feno', days: 'andro', and: 'sy' },
+  fr: { compatible: 'compatible', closeTheme: 'Thématique proche', bestPeriod: 'Meilleure période', matchedGuide: 'Votre guide recommandé', viewCircuit: 'Voir le circuit complet', days: 'jours', and: 'et' },
+  en: { compatible: 'compatible', closeTheme: 'Related theme', bestPeriod: 'Best period', matchedGuide: 'Your recommended guide', viewCircuit: 'View full trek', days: 'days', and: 'and' },
+  mg: { compatible: 'mifanaraka', closeTheme: 'Lohahevitra mifandraika', bestPeriod: 'Vanim-potoana tsara indrindra', matchedGuide: 'Ny mpitarika nasaina ho anao', viewCircuit: 'Jereo ny sirkoity feno', days: 'andro', and: 'sy' },
 }
 
 function formatMonths(monthIndexes, locale) {
@@ -45,17 +45,17 @@ function formatMonths(monthIndexes, locale) {
   return `${labels.slice(0, -1).join(', ')} ${and} ${labels[labels.length - 1]}`
 }
 
-export default function RecommendationCard({ circuit: baseCircuit, score, seasonStatus, idealMonths, themeIds, maxScore = 150 }) {
+export default function RecommendationCard({ circuit: baseCircuit, score, seasonStatus, idealMonths, bestGuide, themeIds, maxScore = 150 }) {
   const { locale } = useLocale()
   const circuit = localizeCircuit(baseCircuit, locale)
   const pct = Math.max(8, Math.round((score / maxScore) * 100))
-  const baseGuides = (baseCircuit.guideIds ?? []).map(getGuideById).filter(Boolean).slice(0, 2)
-  const [guides, setGuides] = useState(baseGuides)
+  const [guide, setGuide] = useState(bestGuide)
 
   useEffect(() => {
-    setGuides(applyGuideOverrides(baseGuides))
+    if (!bestGuide) { setGuide(null); return }
+    setGuide(applyGuideOverrides([bestGuide])[0])
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [circuit.id])
+  }, [bestGuide?.id])
 
   const season = seasonStatus ? (SEASON_COPY[locale] ?? SEASON_COPY.fr)[seasonStatus] : null
   const closure = getClosure(baseCircuit)
@@ -115,26 +115,24 @@ export default function RecommendationCard({ circuit: baseCircuit, score, season
           </div>
         )}
 
-        {guides.length > 0 && (
+        {guide && (
           <div className="resultats__guides">
-            <span className="resultats__guides-label">{copy.compatibleGuides}</span>
+            <span className="resultats__guides-label">{copy.matchedGuide}</span>
             <div className="resultats__guides-list">
-              {guides.map((g) => (
-                <div key={g.id} className="resultats__guide">
-                  <Image
-                    src={g.photo}
-                    alt={g.nom}
-                    width={28}
-                    height={28}
-                    unoptimized={g.photo?.startsWith('data:')}
-                    style={{ objectFit: 'cover' }}
-                  />
-                  <div>
-                    <span className="resultats__guide-name">{g.nom}</span>
-                    <span className="resultats__guide-meta">★ {g.note} · {g.langues.join(', ')}</span>
-                  </div>
+              <div className="resultats__guide resultats__guide--matched">
+                <Image
+                  src={guide.photo}
+                  alt={guide.nom}
+                  width={28}
+                  height={28}
+                  unoptimized={guide.photo?.startsWith('data:')}
+                  style={{ objectFit: 'cover' }}
+                />
+                <div>
+                  <span className="resultats__guide-name">{guide.nom}</span>
+                  <span className="resultats__guide-meta">★ {guide.note} · {guide.langues.join(', ')}</span>
                 </div>
-              ))}
+              </div>
             </div>
           </div>
         )}

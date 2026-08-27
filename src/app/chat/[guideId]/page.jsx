@@ -99,6 +99,13 @@ export default function ChatPage() {
         </div>
       )}
 
+      {booking?.guide?.id === Number(guideId) && !booking.paid && (
+        <Link href="/reservation/paiement" className="chat__continue-bar">
+          <span>Prêt à réserver ? Continuez vers le paiement</span>
+          <span className="chat__continue-bar-cta">Continuer →</span>
+        </Link>
+      )}
+
       <div className="chat__messages">
         <div className="chat__date-divider">Aujourd'hui</div>
 

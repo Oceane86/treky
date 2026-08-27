@@ -63,6 +63,27 @@
   transform: translateY(-2px);
 }
 
+.guide-sel__card--recommended {
+  border-color: var(--fern-frond);
+  box-shadow: 0 2px 20px rgba(91, 140, 26, 0.15);
+  position: relative;
+}
+
+.guide-sel__recommended-badge {
+  position: absolute;
+  top: -13px;
+  left: 24px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--fern-frond);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 20px;
+}
+
 /* ── Top row ── */
 .guide-sel__card-top {
   display: flex;

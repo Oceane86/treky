@@ -2,9 +2,11 @@
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import { guides as baseGuides } from '../../../data/circuits'
+import { guides as baseGuides, getCircuitBySlug } from '../../../data/circuits'
 import { useBooking } from '../../../context/BookingContext'
 import { applyGuideOverrides } from '../../../utils/guideProfile'
+import { getBestGuide } from '../../../utils/matching'
+import { readJSON } from '../../../utils/storage'
 import Icon from '../../../components/Icon'
 import '../../../pages/GuideSelection.css'
 
@@ -31,15 +33,21 @@ export default function GuideSelectionPage() {
     !booking.guide_ids || booking.guide_ids.includes(g.id)
   )
 
+  // Le guide déjà mis en avant lors du matching (formulaire d'envies), s'il fait
+  // partie des guides disponibles pour ce circuit.
+  const fullCircuit = getCircuitBySlug(booking.circuit.slug)
+  const wishes = readJSON('treky_wishes', null)
+  const recommended = fullCircuit && wishes ? getBestGuide(fullCircuit, wishes) : null
+
   function chooseGuide(guide) {
     setBooking({ ...booking, guide: { id: guide.id, nom: guide.nom, photo: guide.photo, note: guide.note } })
-    router.push('/reservation/confirmation')
+    router.push(`/chat/${guide.id}`)
   }
 
   return (
     <div className="guide-sel">
       <div className="guide-sel__hero">
-        <p className="guide-sel__eyebrow">Étape finale</p>
+        <p className="guide-sel__eyebrow">Étape 2 sur 3</p>
         <h1 className="guide-sel__title">Choisissez votre guide</h1>
         <p className="guide-sel__subtitle">
           Guides disponibles du {formatDate(booking.checkin)} au {formatDate(booking.checkout)} · {booking.circuit.name}
@@ -48,8 +56,15 @@ export default function GuideSelectionPage() {
 
       <div className="container guide-sel__body">
         <div className="guide-sel__grid">
-          {availableGuides.map((guide) => (
-            <div key={guide.id} className="guide-sel__card">
+          {availableGuides.map((guide) => {
+            const isRecommended = recommended?.id === guide.id
+            return (
+            <div key={guide.id} className={`guide-sel__card ${isRecommended ? 'guide-sel__card--recommended' : ''}`}>
+              {isRecommended && (
+                <span className="guide-sel__recommended-badge">
+                  <Icon name="sparkles" size={13} /> Recommandé pour vous
+                </span>
+              )}
               <div className="guide-sel__card-top">
                 <Image
                   src={guide.photo}
@@ -88,7 +103,8 @@ export default function GuideSelectionPage() {
                 Choisir ce guide →
               </button>
             </div>
-          ))}
+            )
+          })}
         </div>
       </div>
     </div>

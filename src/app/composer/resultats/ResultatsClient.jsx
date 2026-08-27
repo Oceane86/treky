@@ -58,13 +58,14 @@ export default function ResultatsClient() {
           </div>
 
           <div className="resultats__list">
-            {matches.map(({ circuit, score, seasonStatus, idealMonths }) => (
+            {matches.map(({ circuit, score, seasonStatus, idealMonths, bestGuide }) => (
               <RecommendationCard
                 key={circuit.id}
                 circuit={circuit}
                 score={score}
                 seasonStatus={seasonStatus}
                 idealMonths={idealMonths}
+                bestGuide={bestGuide}
                 themeIds={wishes.themes}
               />
             ))}

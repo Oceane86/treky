@@ -135,6 +135,13 @@
   gap: 6px;
 }
 
+.resultats__guide--matched {
+  background: rgba(91, 140, 26, 0.08);
+  border: 1px solid rgba(91, 140, 26, 0.25);
+  border-radius: 20px;
+  padding: 4px 12px 4px 4px;
+}
+
 .resultats__guide img {
   width: 28px;
   height: 28px;

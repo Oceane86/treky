@@ -98,13 +98,14 @@ export default function CircuitsPage() {
                 <h2 className="circuits-reco__title"><Icon name="target" size={20} /> {t.yourRecommendations}</h2>
               </div>
               <div className="resultats__list">
-                {recommended.map(({ circuit, score, seasonStatus, idealMonths }) => (
+                {recommended.map(({ circuit, score, seasonStatus, idealMonths, bestGuide }) => (
                   <RecommendationCard
                     key={circuit.id}
                     circuit={circuit}
                     score={score}
                     seasonStatus={seasonStatus}
                     idealMonths={idealMonths}
+                    bestGuide={bestGuide}
                     themeIds={wishes.themes}
                   />
                 ))}

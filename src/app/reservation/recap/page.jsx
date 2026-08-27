@@ -73,6 +73,12 @@ export default function BookingRecapPage() {
               <span className="recap__item-label">Voyageurs</span>
               <span className="recap__item-val">{b.nb_personnes} personne{b.nb_personnes > 1 ? 's' : ''}</span>
             </div>
+            {b.guide && (
+              <div className="recap__item">
+                <span className="recap__item-label">Guide</span>
+                <span className="recap__item-val">{b.guide.nom}</span>
+              </div>
+            )}
             <div className="recap__item">
               <span className="recap__item-label">Paiement</span>
               <span className="recap__item-val">{METHOD_LABEL[b.payment_method] ?? 'MVola'}</span>
@@ -119,16 +125,18 @@ export default function BookingRecapPage() {
 
           <RefundPolicy />
 
-          <div className="recap__next-step">
-            <div className="recap__next-icon"><Icon name="compass" size={22} /></div>
-            <div className="recap__next-text">
-              <strong>Prochaine étape</strong>
-              <p>Choisissez votre guide parmi nos experts disponibles aux dates sélectionnées.</p>
+          {b.guide && (
+            <div className="recap__next-step">
+              <div className="recap__next-icon"><Icon name="compass" size={22} /></div>
+              <div className="recap__next-text">
+                <strong>Prochaine étape</strong>
+                <p>Retrouvez le récapitulatif complet de votre trek et échangez avec {b.guide.nom}.</p>
+              </div>
             </div>
-          </div>
+          )}
 
-          <button className="btn-primary recap__cta" onClick={() => router.push('/reservation/guides')}>
-            Choisir mon guide →
+          <button className="btn-primary recap__cta" onClick={() => router.push('/reservation/confirmation')}>
+            Voir ma confirmation →
           </button>
 
           <Link href={`/circuits/${b.circuit.slug}`} className="recap__back-link">

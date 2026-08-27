@@ -1,9 +1,7 @@
 'use client'
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { useAuth } from '../context/AuthContext'
 import { useBooking } from '../context/BookingContext'
-import { INSTALLMENT_THRESHOLD_AR, buildInstallments } from '../utils/pricing'
 import { readJSON } from '../utils/storage'
 import PriceBreakdown from './PriceBreakdown'
 import RefundPolicy from './RefundPolicy'
@@ -31,7 +29,7 @@ function formatAr(n) {
 }
 
 function StepIndicator({ current }) {
-  const steps = ['Dates', 'Voyageurs', 'Paiement']
+  const steps = ['Dates', 'Voyageurs']
   return (
     <div className="bm__steps">
       {steps.map((label, i) => {
@@ -52,9 +50,11 @@ function StepIndicator({ current }) {
   )
 }
 
+// Dates + Voyageurs seulement : le prix est calculé et affiché ici (transparence totale
+// avant tout engagement), mais le choix du guide, la messagerie puis le paiement se font
+// sur les pages suivantes — /reservation/guides, /chat/[guideId], /reservation/paiement.
 export default function BookingModal({ circuit, selectedDays, priceAr, onClose }) {
   const router = useRouter()
-  const { user } = useAuth()
   const { setBooking } = useBooking()
 
   const today = new Date().toISOString().split('T')[0]
@@ -68,21 +68,13 @@ export default function BookingModal({ circuit, selectedDays, priceAr, onClose }
   const [promoInput, setPromoInput] = useState('')
   const [promoApplied, setPromoApplied] = useState(false)
   const [promoError, setPromoError] = useState('')
-  const [paymentMethod, setPaymentMethod] = useState('mvola')
-  const [cardNumber, setCardNumber] = useState('')
-  const [cardExpiry, setCardExpiry] = useState('')
-  const [cardCvv, setCardCvv] = useState('')
-  const [paying, setPaying] = useState(false)
   const [showRefundPolicy, setShowRefundPolicy] = useState(false)
-  const [paymentPlan, setPaymentPlan] = useState('unique')
 
   const prixBase = priceAr * nbPersonnes
   const remise = promoApplied ? PROMO_REMISE : 0
   const trekPrice = prixBase - remise
   const total = trekPrice + FRAIS_SERVICE
   const checkout = date ? addDays(date, selectedDays) : ''
-  const eligibleInstallments = total >= INSTALLMENT_THRESHOLD_AR
-  const installments = eligibleInstallments && paymentPlan === 'fractionne' ? buildInstallments(total, date) : null
 
   function handleDateNext() {
     if (!date) { setDateError('Choisissez une date de départ.'); return }
@@ -99,28 +91,21 @@ export default function BookingModal({ circuit, selectedDays, priceAr, onClose }
     }
   }
 
-  const bookingState = {
-    circuit: { name: circuit.name, slug: circuit.slug },
-    checkin: date,
-    checkout,
-    nb_personnes: nbPersonnes,
-    activite: `${circuit.name} – ${selectedDays} jours`,
-    code_promo: promoApplied ? PROMO_CODE : null,
-    remise,
-    frais_service: FRAIS_SERVICE,
-    prix_total: total,
-    payment_method: paymentMethod,
-    payment_plan: eligibleInstallments ? paymentPlan : 'unique',
-    installments,
-    guide_ids: circuit.guideIds ?? [1, 2],
-  }
-
-  function handlePay() {
-    setPaying(true)
-    setTimeout(() => {
-      setBooking(bookingState)
-      router.push('/reservation/recap')
-    }, 2200)
+  function handleContinue() {
+    setBooking({
+      circuit: { name: circuit.name, slug: circuit.slug },
+      checkin: date,
+      checkout,
+      nb_personnes: nbPersonnes,
+      activite: `${circuit.name} – ${selectedDays} jours`,
+      code_promo: promoApplied ? PROMO_CODE : null,
+      remise,
+      frais_service: FRAIS_SERVICE,
+      prix_total: total,
+      guide_ids: circuit.guideIds ?? [1, 2],
+    })
+    onClose()
+    router.push('/reservation/guides')
   }
 
   return (
@@ -259,190 +244,10 @@ export default function BookingModal({ circuit, selectedDays, priceAr, onClose }
 
             <div className="bm__btn-row">
               <button className="bm__back-btn" onClick={() => setStep(1)}>← Retour</button>
-              <button className="btn-primary bm__next-btn bm__next-btn--flex" onClick={() => setStep(3)}>
-                Passer au paiement →
+              <button className="btn-primary bm__next-btn bm__next-btn--flex" onClick={handleContinue}>
+                Choisir mon guide →
               </button>
             </div>
-          </div>
-        )}
-
-        {/* ── ÉTAPE 3 : PAIEMENT ── */}
-        {step === 3 && (
-          <div className="bm__step-body">
-            {paying ? (
-              <div className="bm__paying">
-                <div className="bm__paying-spinner" />
-                <p className="bm__paying-text">
-                  {paymentMethod === 'mvola' ? 'Traitement du paiement MVola…' : 'Vérification de votre carte…'}
-                </p>
-              </div>
-            ) : (
-              <>
-                <h3 className="bm__step-title">Paiement</h3>
-
-                <div className="bm__recap-box">
-                  <div className="bm__recap-row">
-                    <span>Circuit</span>
-                    <span>{circuit.name}</span>
-                  </div>
-                  <div className="bm__recap-row">
-                    <span>Départ</span>
-                    <span>{formatDate(date)}</span>
-                  </div>
-                  <div className="bm__recap-row">
-                    <span>Retour</span>
-                    <span>{formatDate(checkout)}</span>
-                  </div>
-                  <div className="bm__recap-row">
-                    <span>Voyageurs</span>
-                    <span>{nbPersonnes}</span>
-                  </div>
-                  <div className="bm__recap-row bm__recap-row--total">
-                    <span>Total</span>
-                    <span>{formatAr(total)}</span>
-                  </div>
-                </div>
-
-                {eligibleInstallments && (
-                  <div className="bm__field">
-                    <label className="bm__label">Modalités de paiement</label>
-                    <div className="bm__plan-options">
-                      <label className={`bm__plan-opt ${paymentPlan === 'unique' ? 'bm__plan-opt--active' : ''}`}>
-                        <input
-                          type="radio"
-                          name="plan"
-                          value="unique"
-                          checked={paymentPlan === 'unique'}
-                          onChange={() => setPaymentPlan('unique')}
-                        />
-                        Paiement en une fois
-                      </label>
-                      <label className={`bm__plan-opt ${paymentPlan === 'fractionne' ? 'bm__plan-opt--active' : ''}`}>
-                        <input
-                          type="radio"
-                          name="plan"
-                          value="fractionne"
-                          checked={paymentPlan === 'fractionne'}
-                          onChange={() => setPaymentPlan('fractionne')}
-                        />
-                        Paiement fractionné (acompte 30 % + 2 échéances)
-                      </label>
-                    </div>
-                    {installments && (
-                      <div className="bm__installments">
-                        {installments.map((inst) => (
-                          <div key={inst.label} className="bm__installment-row">
-                            <span>{inst.label} · {formatDate(inst.date)}</span>
-                            <span>{formatAr(inst.amount)}</span>
-                          </div>
-                        ))}
-                        <p className="bm__installment-note">
-                          Prélevé automatiquement via Stripe (PaymentIntent + charges off_session) aux échéances indiquées.
-                        </p>
-                      </div>
-                    )}
-                  </div>
-                )}
-
-                <PriceBreakdown amount={trekPrice} compact />
-
-                <div className="bm__payment-methods">
-                  <label className={`bm__method ${paymentMethod === 'mvola' ? 'bm__method--active' : ''}`}>
-                    <input
-                      type="radio"
-                      name="payment"
-                      value="mvola"
-                      checked={paymentMethod === 'mvola'}
-                      onChange={() => setPaymentMethod('mvola')}
-                    />
-                    <img src="/images/mvola.webp" alt="MVola" className="bm__method-logo" />
-                    <span className="bm__method-label">MVola</span>
-                  </label>
-                  <label className={`bm__method ${paymentMethod === 'carte' ? 'bm__method--active' : ''}`}>
-                    <input
-                      type="radio"
-                      name="payment"
-                      value="carte"
-                      checked={paymentMethod === 'carte'}
-                      onChange={() => setPaymentMethod('carte')}
-                    />
-                    <span className="bm__method-icons"><Icon name="card" size={20} /></span>
-                    <span className="bm__method-label">Carte bancaire</span>
-                  </label>
-                </div>
-
-                {paymentMethod === 'mvola' && (
-                  <div className="bm__mvola-block">
-                    <div className="bm__field">
-                      <label className="bm__label">Numéro MVola</label>
-                      <input type="tel" className="bm__input" defaultValue="034 86 123 45" readOnly />
-                      <p className="bm__field-hint">Compte associé : {user?.name}</p>
-                    </div>
-                    <div className="bm__mvola-amount">
-                      À débiter aujourd'hui : <strong>{formatAr(installments ? installments[0].amount : total)}</strong>
-                      {installments && <span className="bm__installment-hint"> (acompte, solde échelonné)</span>}
-                    </div>
-                  </div>
-                )}
-
-                {paymentMethod === 'carte' && (
-                  <div className="bm__card-block">
-                    <div className="bm__field">
-                      <label className="bm__label">Numéro de carte</label>
-                      <input
-                        type="text"
-                        className="bm__input"
-                        placeholder="1234 5678 9012 3456"
-                        maxLength={19}
-                        value={cardNumber}
-                        onChange={(e) => {
-                          const v = e.target.value.replace(/\D/g, '').slice(0, 16)
-                          setCardNumber(v.replace(/(.{4})/g, '$1 ').trim())
-                        }}
-                      />
-                    </div>
-                    <div className="bm__card-row">
-                      <div className="bm__field">
-                        <label className="bm__label">Date d'expiration</label>
-                        <input
-                          type="text"
-                          className="bm__input"
-                          placeholder="MM/AA"
-                          maxLength={5}
-                          value={cardExpiry}
-                          onChange={(e) => {
-                            const v = e.target.value.replace(/\D/g, '').slice(0, 4)
-                            setCardExpiry(v.length > 2 ? v.slice(0, 2) + '/' + v.slice(2) : v)
-                          }}
-                        />
-                      </div>
-                      <div className="bm__field">
-                        <label className="bm__label">CVV</label>
-                        <input
-                          type="text"
-                          className="bm__input"
-                          placeholder="123"
-                          maxLength={3}
-                          value={cardCvv}
-                          onChange={(e) => setCardCvv(e.target.value.replace(/\D/g, '').slice(0, 3))}
-                        />
-                      </div>
-                    </div>
-                    <div className="bm__mvola-amount">
-                      À débiter aujourd'hui : <strong>{formatAr(installments ? installments[0].amount : total)}</strong>
-                      {installments && <span className="bm__installment-hint"> (acompte, solde échelonné)</span>}
-                    </div>
-                  </div>
-                )}
-
-                <div className="bm__btn-row">
-                  <button className="bm__back-btn" onClick={() => setStep(2)}>← Retour</button>
-                  <button className="btn-primary bm__next-btn bm__next-btn--flex bm__pay-btn" onClick={handlePay}>
-                    Confirmer et payer
-                  </button>
-                </div>
-              </>
-            )}
           </div>
         )}
       </div>
