@@ -15,6 +15,7 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const [accountOpen, setAccountOpen] = useState(false)
+  const [profileOpen, setProfileOpen] = useState(false)
   const pathname = usePathname()
   const router = useRouter()
   const { currency, toggle } = useCurrency()
@@ -42,6 +43,7 @@ export default function Navbar() {
   useEffect(() => {
     setMenuOpen(false)
     setAccountOpen(false)
+    setProfileOpen(false)
   }, [pathname])
 
   useEffect(() => {
@@ -101,43 +103,51 @@ export default function Navbar() {
           )}
           {menuOpen && isLoggedIn && (
             <li className="navbar__mobile-account">
-              <div className="navbar__mobile-account-header">
+              <button
+                type="button"
+                className="navbar__mobile-account-toggle"
+                onClick={() => setProfileOpen((v) => !v)}
+                aria-expanded={profileOpen}
+              >
                 {user?.avatar
                   ? <img src={user.avatar} alt={user.name} className="navbar__mobile-account-avatar" loading="lazy" />
                   : <span className="navbar__mobile-account-initials">{user?.name?.[0] ?? 'U'}</span>
                 }
-                <span className="navbar__mobile-account-name">{user?.name}</span>
-              </div>
-
-              <div className="navbar__mobile-account-links">
-                {isGuide ? (
-                  <Link href="/guide/tableau-de-bord" className="navbar__mobile-account-link">
-                    <Icon name="compass" size={16} /> Espace guides
-                  </Link>
-                ) : (
-                  <>
-                    <Link href="/compte/reservations" className="navbar__mobile-account-link">
-                      <Icon name="route" size={16} /> Mes réservations
-                    </Link>
-                    <Link href="/compte/favoris" className="navbar__mobile-account-link">
-                      <Icon name="heartOutline" size={16} /> Mes favoris
-                      {favorites.length > 0 && (
-                        <span className="navbar__mobile-account-badge">{favorites.length}</span>
-                      )}
-                    </Link>
-                    <Link href={chatHref} className="navbar__mobile-account-link">
-                      <Icon name="chat" size={16} /> Messages guide
-                    </Link>
-                    <Link href="/compte/carnet" className="navbar__mobile-account-link">
-                      <Icon name="journal" size={16} /> Carnet de trek
-                    </Link>
-                  </>
-                )}
-              </div>
-
-              <button className="navbar__mobile-account-logout" onClick={handleLogout}>
-                <span>↪</span> Déconnexion
+                <span className="navbar__mobile-account-name">Profil</span>
+                <span className="navbar__mobile-account-chevron">{profileOpen ? '▲' : '▼'}</span>
               </button>
+
+              {profileOpen && (
+                <div className="navbar__mobile-account-links">
+                  {isGuide ? (
+                    <Link href="/guide/tableau-de-bord" className="navbar__mobile-account-link">
+                      <Icon name="compass" size={16} /> Espace guides
+                    </Link>
+                  ) : (
+                    <>
+                      <Link href="/compte/reservations" className="navbar__mobile-account-link">
+                        <Icon name="route" size={16} /> Mes réservations
+                      </Link>
+                      <Link href="/compte/favoris" className="navbar__mobile-account-link">
+                        <Icon name="heartOutline" size={16} /> Mes favoris
+                        {favorites.length > 0 && (
+                          <span className="navbar__mobile-account-badge">{favorites.length}</span>
+                        )}
+                      </Link>
+                      <Link href={chatHref} className="navbar__mobile-account-link">
+                        <Icon name="chat" size={16} /> Messages guide
+                      </Link>
+                      <Link href="/compte/carnet" className="navbar__mobile-account-link">
+                        <Icon name="journal" size={16} /> Carnet de trek
+                      </Link>
+                    </>
+                  )}
+
+                  <button className="navbar__mobile-account-logout" onClick={handleLogout}>
+                    <span>↪</span> Déconnexion
+                  </button>
+                </div>
+              )}
             </li>
           )}
         </ul>
