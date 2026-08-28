@@ -106,6 +106,26 @@
   font-weight: 700;
 }
 
+.chat__login-bar {
+  background: #fff;
+  border-top: 1px solid #eee;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 0.85rem;
+  color: #666;
+  flex-shrink: 0;
+}
+
+.chat__login-cta {
+  color: var(--fern-frond);
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
 /* ── Messages area ── */
 .chat__messages {
   flex: 1;

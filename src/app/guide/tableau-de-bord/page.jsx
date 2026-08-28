@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { useAuth } from '../../../context/AuthContext'
 import { guides as guidesData } from '../../../data/circuits'
 import { readJSON, writeJSON } from '../../../utils/storage'
+import { getConversationsForGuide, appendMessage, markGuideRead } from '../../../utils/messages'
 import Icon from '../../../components/Icon'
 import '../../../pages/Page.css'
 import '../../../pages/GuideDashboard.css'
@@ -13,8 +14,13 @@ const TABS = [
   { id: 'profil', label: 'Profil', icon: 'user' },
   { id: 'dispo', label: 'Disponibilités', icon: 'calendar' },
   { id: 'reservations', label: 'Réservations', icon: 'route' },
+  { id: 'messages', label: 'Messages', icon: 'chat' },
   { id: 'avis', label: 'Avis reçus', icon: 'star' },
 ]
+
+function formatTime(iso) {
+  return new Date(iso).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })
+}
 
 const DAYS_OF_WEEK = ['Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa', 'Di']
 
@@ -51,6 +57,9 @@ export default function GuideDashboardPage() {
   const [reviews, setReviews] = useState([])
   const [bookings, setBookings] = useState(DEMO_BOOKINGS)
   const [monthOffset, setMonthOffset] = useState(0)
+  const [conversations, setConversations] = useState([])
+  const [selectedConvId, setSelectedConvId] = useState(null)
+  const [reply, setReply] = useState('')
 
   useEffect(() => {
     if (!isGuide || !user) return
@@ -78,7 +87,21 @@ export default function GuideDashboardPage() {
         prix: r.prix,
       }))
     setBookings([...realBookings, ...DEMO_BOOKINGS])
+
+    setConversations(getConversationsForGuide(user.guideId))
   }, [isGuide, user])
+
+  // Un voyageur peut écrire pendant que le guide est sur le dashboard (autre onglet) :
+  // on garde la liste et le fil ouvert à jour.
+  useEffect(() => {
+    if (!user?.guideId) return
+    function onStorage(e) {
+      if (e.key !== 'treky_conversations') return
+      setConversations(getConversationsForGuide(user.guideId))
+    }
+    window.addEventListener('storage', onStorage)
+    return () => window.removeEventListener('storage', onStorage)
+  }, [user?.guideId])
 
   useEffect(() => {
     if (authReady && !isGuide) router.replace('/guide/connexion')
@@ -109,12 +132,39 @@ export default function GuideDashboardPage() {
     })
   }
 
+  function selectConversation(convId) {
+    setSelectedConvId(convId)
+    const conv = conversations.find((c) => c.id === convId)
+    if (conv?.guideUnread) {
+      markGuideRead(user.guideId, conv.travelerEmail)
+      setConversations(getConversationsForGuide(user.guideId))
+    }
+  }
+
+  function sendReply(e) {
+    e.preventDefault()
+    const text = reply.trim()
+    const conv = conversations.find((c) => c.id === selectedConvId)
+    if (!text || !conv) return
+    const msg = { id: `g-${Date.now()}`, from: 'guide', text, at: new Date().toISOString() }
+    appendMessage(
+      user.guideId,
+      { email: conv.travelerEmail, name: conv.travelerName, avatar: conv.travelerAvatar },
+      conv.circuitName,
+      msg
+    )
+    setConversations(getConversationsForGuide(user.guideId))
+    setReply('')
+  }
+
   const today = new Date()
   const viewDate = new Date(today.getFullYear(), today.getMonth() + monthOffset, 1)
   const days = buildMonthDays(viewDate.getFullYear(), viewDate.getMonth())
   const avgReview = reviews.length
     ? (reviews.reduce((s, r) => s + r.rating, 0) / reviews.length).toFixed(1)
     : null
+  const selectedConv = conversations.find((c) => c.id === selectedConvId) ?? null
+  const unreadCount = conversations.filter((c) => c.guideUnread).length
 
   return (
     <div className="page guide-dash">
@@ -135,6 +185,9 @@ export default function GuideDashboardPage() {
               onClick={() => setTab(t.id)}
             >
               <span><Icon name={t.icon} size={15} /></span> {t.label}
+              {t.id === 'messages' && unreadCount > 0 && (
+                <span className="guide-dash__tab-badge">{unreadCount}</span>
+              )}
             </button>
           ))}
           <button className="guide-dash__tab guide-dash__tab--logout" onClick={() => { logout(); router.push('/') }}>
@@ -293,6 +346,69 @@ export default function GuideDashboardPage() {
                   </div>
                 </div>
               ))}
+            </div>
+          )}
+
+          {tab === 'messages' && (
+            <div className="guide-dash__messages">
+              <div className="guide-dash__conv-list">
+                {conversations.length === 0 ? (
+                  <p className="guide-dash__messages-empty">Aucune conversation pour le moment.</p>
+                ) : (
+                  conversations.map((c) => {
+                    const last = c.messages[c.messages.length - 1]
+                    return (
+                      <button
+                        key={c.id}
+                        type="button"
+                        className={`guide-dash__conv-item ${selectedConvId === c.id ? 'guide-dash__conv-item--active' : ''}`}
+                        onClick={() => selectConversation(c.id)}
+                      >
+                        <span className="guide-dash__conv-name">
+                          {c.travelerName}
+                          {c.guideUnread && <span className="guide-dash__conv-dot" />}
+                        </span>
+                        {c.circuitName && <span className="guide-dash__conv-circuit">{c.circuitName}</span>}
+                        {last && <span className="guide-dash__conv-preview">{last.text}</span>}
+                      </button>
+                    )
+                  })
+                )}
+              </div>
+
+              <div className="guide-dash__conv-thread">
+                {selectedConv ? (
+                  <>
+                    <div className="guide-dash__thread-header">
+                      <strong>{selectedConv.travelerName}</strong>
+                      {selectedConv.circuitName && <span>{selectedConv.circuitName}</span>}
+                    </div>
+                    <div className="guide-dash__thread-messages">
+                      {selectedConv.messages.map((m) => (
+                        <div
+                          key={m.id}
+                          className={`guide-dash__thread-bubble guide-dash__thread-bubble--${m.from === 'guide' ? 'me' : 'them'}`}
+                        >
+                          <p>{m.text}</p>
+                          <span>{formatTime(m.at)}</span>
+                        </div>
+                      ))}
+                    </div>
+                    <form className="guide-dash__thread-input" onSubmit={sendReply}>
+                      <input
+                        type="text"
+                        placeholder="Répondre…"
+                        value={reply}
+                        onChange={(e) => setReply(e.target.value)}
+                        autoComplete="off"
+                      />
+                      <button type="submit" disabled={!reply.trim()}>Envoyer</button>
+                    </form>
+                  </>
+                ) : (
+                  <p className="guide-dash__messages-empty">Sélectionnez une conversation.</p>
+                )}
+              </div>
             </div>
           )}
 

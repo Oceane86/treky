@@ -6,39 +6,63 @@ import { useParams } from 'next/navigation'
 import { guides } from '../../../data/circuits'
 import { useAuth } from '../../../context/AuthContext'
 import { useBooking } from '../../../context/BookingContext'
+import { ensureConversation, getConversation, appendMessage, markTravelerRead } from '../../../utils/messages'
 import Icon from '../../../components/Icon'
 import '../../../pages/Chat.css'
 
-function now() {
-  return new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })
+function formatTime(iso) {
+  return new Date(iso).toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })
 }
 
 export default function ChatPage() {
   const { guideId } = useParams()
-  const { user } = useAuth()
+  const numericGuideId = Number(guideId)
+  const { user, isLoggedIn } = useAuth()
   const { booking } = useBooking()
 
-  const guide = guides.find((g) => g.id === Number(guideId)) ?? guides[0]
+  const guide = guides.find((g) => g.id === numericGuideId) ?? guides[0]
   const circuitName = booking?.circuit?.name ?? 'votre circuit'
 
-  const initialMessages = [
-    {
-      id: 1,
-      from: 'guide',
-      text: `Bonjour ! Je suis ${guide.nom}, votre guide pour ${circuitName}. Je suis ravi de vous accompagner dans cette aventure 🌿`,
-      time: '09:00',
-    },
-    {
-      id: 2,
-      from: 'guide',
-      text: `N'hésitez pas à me poser toutes vos questions sur l'itinéraire, l'équipement à prévoir, ou les conditions sur le terrain. Je suis là pour vous aider à préparer le meilleur trek possible !`,
-      time: '09:01',
-    },
-  ]
-
-  const [messages, setMessages] = useState(initialMessages)
+  const [messages, setMessages] = useState([])
   const [input, setInput] = useState('')
   const bottomRef = useRef(null)
+
+  useEffect(() => {
+    if (!isLoggedIn || !user?.email) return
+    const traveler = { email: user.email, name: user.name, avatar: user.avatar ?? null }
+    const greeting = [
+      {
+        id: 'greeting-1',
+        from: 'guide',
+        text: `Bonjour ! Je suis ${guide.nom}, votre guide pour ${circuitName}. Je suis ravi de vous accompagner dans cette aventure 🌿`,
+        at: new Date().toISOString(),
+      },
+      {
+        id: 'greeting-2',
+        from: 'guide',
+        text: `N'hésitez pas à me poser toutes vos questions sur l'itinéraire, l'équipement à prévoir, ou les conditions sur le terrain. Je suis là pour vous aider à préparer le meilleur trek possible !`,
+        at: new Date().toISOString(),
+      },
+    ]
+    const conv = ensureConversation(numericGuideId, traveler, booking?.circuit?.name ?? null, greeting)
+    setMessages(conv.messages)
+    markTravelerRead(numericGuideId, user.email)
+  }, [isLoggedIn, user?.email, numericGuideId])
+
+  // Si le guide répond depuis son espace (autre onglet du même navigateur), on suit la conversation.
+  useEffect(() => {
+    if (!user?.email) return
+    function onStorage(e) {
+      if (e.key !== 'treky_conversations') return
+      const conv = getConversation(numericGuideId, user.email)
+      if (conv) {
+        setMessages(conv.messages)
+        markTravelerRead(numericGuideId, user.email)
+      }
+    }
+    window.addEventListener('storage', onStorage)
+    return () => window.removeEventListener('storage', onStorage)
+  }, [user?.email, numericGuideId])
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -47,26 +71,13 @@ export default function ChatPage() {
   function sendMessage(e) {
     e.preventDefault()
     const text = input.trim()
-    if (!text) return
+    if (!text || !user?.email) return
 
-    const userMsg = { id: Date.now(), from: 'user', text, time: now() }
-    setMessages((prev) => [...prev, userMsg])
+    const traveler = { email: user.email, name: user.name, avatar: user.avatar ?? null }
+    const msg = { id: `u-${Date.now()}`, from: 'user', text, at: new Date().toISOString() }
+    appendMessage(numericGuideId, traveler, booking?.circuit?.name ?? null, msg)
+    setMessages((prev) => [...prev, msg])
     setInput('')
-
-    setTimeout(() => {
-      const replies = [
-        `Bonne question ! Je vous prépare un briefing complet la veille du départ.`,
-        `Absolument, c'est bien prévu dans l'itinéraire. Vous verrez, c'est magnifique !`,
-        `Pour l'équipement, pensez à des chaussures de randonnée montantes et une veste imperméable.`,
-        `La meilleure période est la saison sèche. Vous avez fait le bon choix de dates !`,
-        `Je confirme, on se retrouve au point de départ à 7h. Je serai là avec tout le matériel.`,
-      ]
-      const reply = replies[Math.floor(Math.random() * replies.length)]
-      setMessages((prev) => [
-        ...prev,
-        { id: Date.now() + 1, from: 'guide', text: reply, time: now() },
-      ])
-    }, 1000 + Math.random() * 800)
   }
 
   return (
@@ -99,7 +110,7 @@ export default function ChatPage() {
         </div>
       )}
 
-      {booking?.guide?.id === Number(guideId) && !booking.paid && (
+      {booking?.guide?.id === numericGuideId && !booking.paid && (
         <Link href="/reservation/paiement" className="chat__continue-bar">
           <span>Prêt à réserver ? Continuez vers le paiement</span>
           <span className="chat__continue-bar-cta">Continuer →</span>
@@ -118,7 +129,7 @@ export default function ChatPage() {
               )}
               <div className={`chat__bubble ${isUser ? 'chat__bubble--user' : 'chat__bubble--guide'}`}>
                 <p>{msg.text}</p>
-                <span className="chat__bubble-time">{msg.time}</span>
+                <span className="chat__bubble-time">{formatTime(msg.at)}</span>
               </div>
             </div>
           )
@@ -126,22 +137,29 @@ export default function ChatPage() {
         <div ref={bottomRef} />
       </div>
 
-      <form className="chat__input-bar" onSubmit={sendMessage}>
-        <input
-          type="text"
-          className="chat__input"
-          placeholder="Écrire un message…"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          autoComplete="off"
-        />
-        <button type="submit" className="chat__send-btn" disabled={!input.trim()}>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
-            <line x1="22" y1="2" x2="11" y2="13"/>
-            <polygon points="22 2 15 22 11 13 2 9 22 2"/>
-          </svg>
-        </button>
-      </form>
+      {isLoggedIn ? (
+        <form className="chat__input-bar" onSubmit={sendMessage}>
+          <input
+            type="text"
+            className="chat__input"
+            placeholder="Écrire un message…"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            autoComplete="off"
+          />
+          <button type="submit" className="chat__send-btn" disabled={!input.trim()}>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+              <line x1="22" y1="2" x2="11" y2="13"/>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+            </svg>
+          </button>
+        </form>
+      ) : (
+        <div className="chat__login-bar">
+          <span>Connectez-vous pour discuter avec {guide.nom}.</span>
+          <Link href="/connexion" className="chat__login-cta">Se connecter →</Link>
+        </div>
+      )}
     </div>
   )
 }
