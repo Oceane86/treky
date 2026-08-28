@@ -99,28 +99,46 @@ export default function Navbar() {
               <Link href="/connexion" className="navbar__link navbar__link--cta">{t.login}</Link>
             </li>
           )}
-          {menuOpen && isLoggedIn && isGuide && (
-            <>
-              <li><Link href="/guide/tableau-de-bord" className="navbar__link">Espace guides</Link></li>
-              <li>
-                <button className="navbar__link navbar__link--logout" onClick={handleLogout}>
-                  Déconnexion
-                </button>
-              </li>
-            </>
-          )}
-          {menuOpen && isLoggedIn && !isGuide && (
-            <>
-              <li><Link href="/compte/reservations" className="navbar__link">Mes réservations</Link></li>
-              <li><Link href="/compte/favoris" className="navbar__link">Mes favoris</Link></li>
-              <li><Link href={chatHref} className="navbar__link">Messages guide</Link></li>
-              <li><Link href="/compte/carnet" className="navbar__link">Carnet de trek</Link></li>
-              <li>
-                <button className="navbar__link navbar__link--logout" onClick={handleLogout}>
-                  Déconnexion
-                </button>
-              </li>
-            </>
+          {menuOpen && isLoggedIn && (
+            <li className="navbar__mobile-account">
+              <div className="navbar__mobile-account-header">
+                {user?.avatar
+                  ? <img src={user.avatar} alt={user.name} className="navbar__mobile-account-avatar" loading="lazy" />
+                  : <span className="navbar__mobile-account-initials">{user?.name?.[0] ?? 'U'}</span>
+                }
+                <span className="navbar__mobile-account-name">{user?.name}</span>
+              </div>
+
+              <div className="navbar__mobile-account-links">
+                {isGuide ? (
+                  <Link href="/guide/tableau-de-bord" className="navbar__mobile-account-link">
+                    <Icon name="compass" size={16} /> Espace guides
+                  </Link>
+                ) : (
+                  <>
+                    <Link href="/compte/reservations" className="navbar__mobile-account-link">
+                      <Icon name="route" size={16} /> Mes réservations
+                    </Link>
+                    <Link href="/compte/favoris" className="navbar__mobile-account-link">
+                      <Icon name="heartOutline" size={16} /> Mes favoris
+                      {favorites.length > 0 && (
+                        <span className="navbar__mobile-account-badge">{favorites.length}</span>
+                      )}
+                    </Link>
+                    <Link href={chatHref} className="navbar__mobile-account-link">
+                      <Icon name="chat" size={16} /> Messages guide
+                    </Link>
+                    <Link href="/compte/carnet" className="navbar__mobile-account-link">
+                      <Icon name="journal" size={16} /> Carnet de trek
+                    </Link>
+                  </>
+                )}
+              </div>
+
+              <button className="navbar__mobile-account-logout" onClick={handleLogout}>
+                <span>↪</span> Déconnexion
+              </button>
+            </li>
           )}
         </ul>
 
