@@ -9,6 +9,7 @@ import { LocaleProvider } from '../context/LocaleContext'
 import Navbar from './Navbar'
 import Footer from './Footer'
 import InstallPWA from './InstallPWA'
+import CookieConsent from './CookieConsent'
 
 const AUTH_ROUTES = ['/inscription', '/connexion']
 
@@ -33,6 +34,7 @@ export default function Providers({ children }) {
           <main>{children}</main>
           {!hideChrome && <Footer />}
           <InstallPWA />
+          {!pathname.startsWith('/social/') && <CookieConsent />}
         </BookingProvider>
         </FavoritesProvider>
       </CurrencyProvider>

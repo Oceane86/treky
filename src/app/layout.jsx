@@ -1,4 +1,4 @@
-import { Analytics } from '@vercel/analytics/react'
+import AnalyticsGate from '../components/AnalyticsGate'
 import Providers from '../components/Providers'
 import '../index.css'
 
@@ -96,7 +96,7 @@ export default function RootLayout({ children }) {
       </head>
       <body>
         <Providers>{children}</Providers>
-        <Analytics />
+        <AnalyticsGate />
       </body>
     </html>
   )

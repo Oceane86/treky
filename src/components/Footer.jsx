@@ -1,3 +1,4 @@
+'use client'
 import Link from 'next/link'
 import Icon from './Icon'
 import './Footer.css'
@@ -51,6 +52,15 @@ export default function Footer() {
               <li><Link href="/confidentialite">Confidentialité</Link></li>
               <li><Link href="/cgv">CGV</Link></li>
               <li><Link href="/cookies">Cookies</Link></li>
+              <li>
+                <button
+                  type="button"
+                  className="footer__link-btn"
+                  onClick={() => window.dispatchEvent(new Event('treky:open-cookie-prefs'))}
+                >
+                  Gérer les cookies
+                </button>
+              </li>
             </ul>
           </div>
 
