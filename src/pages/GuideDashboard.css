@@ -540,6 +540,16 @@
   .guide-dash__conv-item {
     min-width: 200px;
   }
+  .guide-dash__panel {
+    min-height: 0;
+  }
+  .guide-dash__messages {
+    min-height: 0;
+    align-content: start;
+  }
+  .guide-dash__conv-thread {
+    max-height: none;
+  }
 }
 
 @media (max-width: 800px) {
