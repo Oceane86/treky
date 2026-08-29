@@ -125,6 +125,7 @@ export default function RegisterPage() {
   const handleSubmit = (e) => {
     e.preventDefault()
     if (!validate()) return
+    auth.register({ name: form.name, email: form.email, password: form.password })
     setSuccess(true)
     setTimeout(() => router.push('/connexion'), 2000)
   }

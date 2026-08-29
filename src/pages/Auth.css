@@ -268,10 +268,22 @@
   color: var(--fern-frond);
   text-decoration: none;
   transition: opacity 0.2s ease;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
 }
 
 .auth__forgot-link:hover {
   opacity: 0.75;
+}
+
+.auth__forgot-hint {
+  font-size: 0.88rem;
+  color: #777;
+  margin-bottom: 20px;
+  line-height: 1.5;
 }
 
 /* ── Bouton submit ── */
@@ -614,6 +626,15 @@
 
 .auth__switch-link:hover {
   opacity: 0.75;
+}
+
+.auth__switch-link--btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
 }
 
 /* ── Responsive ── */

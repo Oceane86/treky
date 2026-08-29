@@ -23,6 +23,22 @@ const DEMO_GUIDE_CREDENTIALS = { email: 'rakoto.guide@treky.mg', password: 'guid
 const DEMO_SMS_CODE = '123456'
 
 const LS_KEY = 'treky_user'
+const ACCOUNTS_KEY = 'treky_accounts'
+
+// Comptes crees via /inscription — persistes localement, distincts du compte
+// demo unique gere par DEMO_CREDENTIALS.
+function readAccounts() {
+  try {
+    const raw = localStorage.getItem(ACCOUNTS_KEY)
+    return raw ? JSON.parse(raw) : []
+  } catch {
+    return []
+  }
+}
+
+function writeAccounts(accounts) {
+  try { localStorage.setItem(ACCOUNTS_KEY, JSON.stringify(accounts)) } catch {}
+}
 
 const AuthContext = createContext(null)
 
@@ -63,12 +79,17 @@ export function AuthProvider({ children }) {
   }
 
   function login(email, password) {
-    if (
-      email.trim().toLowerCase() === DEMO_CREDENTIALS.email &&
-      password === DEMO_CREDENTIALS.password
-    ) {
+    const normalizedEmail = email.trim().toLowerCase()
+    if (normalizedEmail === DEMO_CREDENTIALS.email && password === DEMO_CREDENTIALS.password) {
       setUser(DEMO_USER)
       localStorage.setItem(LS_KEY, JSON.stringify(DEMO_USER))
+      return true
+    }
+    const account = readAccounts().find((a) => a.email === normalizedEmail && a.password === password)
+    if (account) {
+      const u = { name: account.name, email: account.email, avatar: null, role: 'voyageur' }
+      setUser(u)
+      localStorage.setItem(LS_KEY, JSON.stringify(u))
       return true
     }
     return false
@@ -78,6 +99,32 @@ export function AuthProvider({ children }) {
     const u = { role: 'voyageur', ...(userData || DEMO_USER) }
     setUser(u)
     localStorage.setItem(LS_KEY, JSON.stringify(u))
+  }
+
+  // Inscription /inscription — cree (ou remplace) un compte local avec lequel
+  // on peut ensuite se reconnecter depuis /connexion.
+  function register({ name, email, password }) {
+    const normalizedEmail = email.trim().toLowerCase()
+    const accounts = readAccounts().filter((a) => a.email !== normalizedEmail)
+    accounts.push({ name: name.trim(), email: normalizedEmail, password })
+    writeAccounts(accounts)
+  }
+
+  function accountExists(email) {
+    const normalizedEmail = email.trim().toLowerCase()
+    return normalizedEmail === DEMO_CREDENTIALS.email || readAccounts().some((a) => a.email === normalizedEmail)
+  }
+
+  // "Mot de passe oublie" — pas d'envoi d'e-mail reel possible sans backend,
+  // mais le mot de passe est bien mis a jour pour les comptes crees localement.
+  function resetPassword(email, newPassword) {
+    const normalizedEmail = email.trim().toLowerCase()
+    const accounts = readAccounts()
+    const idx = accounts.findIndex((a) => a.email === normalizedEmail)
+    if (idx === -1) return false
+    accounts[idx] = { ...accounts[idx], password: newPassword }
+    writeAccounts(accounts)
+    return true
   }
 
   // Étape 1 : vérification email + mot de passe (ne connecte pas encore).
@@ -117,6 +164,9 @@ export function AuthProvider({ children }) {
         login,
         loginSocial,
         loginGoogle,
+        register,
+        accountExists,
+        resetPassword,
         guideLoginRequest,
         guideLoginVerify,
         logout,
