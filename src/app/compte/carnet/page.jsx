@@ -1,16 +1,23 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { Suspense, useState, useEffect } from 'react'
 import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
 import { useAuth } from '../../../context/AuthContext'
 import { readJSON, writeJSON } from '../../../utils/storage'
 import Icon from '../../../components/Icon'
 import '../../../pages/Page.css'
 import '../../../pages/Journal.css'
 
-const BOOKING_ID = 'TRK-2026-0042'
-const TREK_DAYS = 4
-const CIRCUIT_NAME = 'Trek Découverte Isalo'
-const STORAGE_KEY = `treky_journal_${BOOKING_ID}`
+const DEMO_RESERVATION = {
+  id: 'TRK-2026-0042',
+  circuit: 'Trek Découverte Isalo',
+  duree: '4 jours',
+}
+
+function parseDuree(duree) {
+  const n = parseInt(duree, 10)
+  return Number.isFinite(n) && n > 0 ? n : 4
+}
 
 function fileToDataUrl(file) {
   return new Promise((resolve, reject) => {
@@ -60,15 +67,31 @@ function DayEntryForm({ dayNumber, onSave }) {
   )
 }
 
-export default function CarnetPage() {
+function CarnetContent() {
   const { isLoggedIn, user } = useAuth()
+  const searchParams = useSearchParams()
+  const [reservations, setReservations] = useState([DEMO_RESERVATION])
+  const [selectedId, setSelectedId] = useState(null)
   const [entries, setEntries] = useState([])
   const [online, setOnline] = useState(true)
   const [syncToast, setSyncToast] = useState(null)
   const [hydrated, setHydrated] = useState(false)
 
   useEffect(() => {
-    setEntries(readJSON(STORAGE_KEY, []))
+    const stored = readJSON('treky_reservations', [])
+    const all = [...stored, DEMO_RESERVATION]
+    setReservations(all)
+    const requestedId = searchParams.get('id')
+    const match = all.find((r) => r.id === requestedId)
+    setSelectedId(match ? match.id : all[0].id)
+  }, [searchParams])
+
+  const reservation = reservations.find((r) => r.id === selectedId) ?? reservations[0]
+  const storageKey = `treky_journal_${reservation.id}`
+  const trekDays = parseDuree(reservation.duree)
+
+  useEffect(() => {
+    setEntries(readJSON(storageKey, []))
     setOnline(typeof navigator !== 'undefined' ? navigator.onLine : true)
     setHydrated(true)
 
@@ -78,7 +101,7 @@ export default function CarnetPage() {
         const pending = prev.filter((e) => !e.synced).length
         if (pending === 0) return prev
         const next = prev.map((e) => ({ ...e, synced: true }))
-        writeJSON(STORAGE_KEY, next)
+        writeJSON(storageKey, next)
         setSyncToast(`${pending} entrée${pending > 1 ? 's' : ''} synchronisée${pending > 1 ? 's' : ''}`)
         setTimeout(() => setSyncToast(null), 3500)
         return next
@@ -92,7 +115,7 @@ export default function CarnetPage() {
       window.removeEventListener('online', handleOnline)
       window.removeEventListener('offline', handleOffline)
     }
-  }, [])
+  }, [storageKey])
 
   function saveEntry({ day_number, text, photo_url }) {
     const entry = {
@@ -106,7 +129,7 @@ export default function CarnetPage() {
       const next = [...prev.filter((e) => e.day_number !== day_number), entry].sort(
         (a, b) => a.day_number - b.day_number
       )
-      writeJSON(STORAGE_KEY, next)
+      writeJSON(storageKey, next)
       return next
     })
   }
@@ -124,7 +147,7 @@ export default function CarnetPage() {
     )
   }
 
-  const days = Array.from({ length: TREK_DAYS }, (_, i) => i + 1)
+  const days = Array.from({ length: trekDays }, (_, i) => i + 1)
   const completed = entries.length
 
   return (
@@ -134,13 +157,27 @@ export default function CarnetPage() {
           <p className="page-hero__eyebrow">Mon compte · {user?.name}</p>
           <h1 className="page-hero__title">Carnet de trek</h1>
           <p className="page-hero__subtitle">
-            {CIRCUIT_NAME} — une réflexion chaque soir, jour après jour.
+            {reservation.circuit} — une réflexion chaque soir, jour après jour.
           </p>
         </div>
       </header>
 
       <section className="page-content">
         <div className="container journal">
+
+          {reservations.length > 1 && (
+            <div className="journal__trek-switcher">
+              {reservations.map((r) => (
+                <Link
+                  key={r.id}
+                  href={`/compte/carnet?id=${r.id}`}
+                  className={`journal__trek-chip ${r.id === reservation.id ? 'journal__trek-chip--active' : ''}`}
+                >
+                  {r.circuit}
+                </Link>
+              ))}
+            </div>
+          )}
 
           {hydrated && !online && (
             <div className="journal__offline-banner">
@@ -151,9 +188,9 @@ export default function CarnetPage() {
 
           <div className="journal__progress">
             <div className="journal__progress-bar">
-              <div className="journal__progress-fill" style={{ width: `${(completed / TREK_DAYS) * 100}%` }} />
+              <div className="journal__progress-fill" style={{ width: `${(completed / trekDays) * 100}%` }} />
             </div>
-            <span className="journal__progress-label">{completed} / {TREK_DAYS} jours documentés</span>
+            <span className="journal__progress-label">{completed} / {trekDays} jours documentés</span>
           </div>
 
           <div className="journal__days">
@@ -197,7 +234,7 @@ export default function CarnetPage() {
             })}
           </div>
 
-          {completed === TREK_DAYS && (
+          {completed === trekDays && (
             <div className="journal__complete-cta">
               <h3>Votre carnet est complet <Icon name="sparkles" size={18} /></h3>
               <p>Relisez votre cheminement, puis partagez en quoi ce trek vous a changé.</p>
@@ -207,5 +244,13 @@ export default function CarnetPage() {
         </div>
       </section>
     </div>
+  )
+}
+
+export default function CarnetPage() {
+  return (
+    <Suspense fallback={null}>
+      <CarnetContent />
+    </Suspense>
   )
 }

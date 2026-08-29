@@ -103,7 +103,7 @@ export default function ReservationsPage() {
                   <Link href={`/chat/${r.guideId}`} className="btn-primary">
                     <Icon name="chat" size={16} /> Contacter mon guide
                   </Link>
-                  <Link href="/compte/carnet" className="btn-secondary">
+                  <Link href={`/compte/carnet?id=${r.id}`} className="btn-secondary">
                     <Icon name="journal" size={16} /> Mon carnet de trek
                   </Link>
                   <Link href="/compte/avis" className="btn-secondary">

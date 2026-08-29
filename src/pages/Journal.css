@@ -2,6 +2,35 @@
   max-width: 720px;
 }
 
+.journal__trek-switcher {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.journal__trek-chip {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--log-cabin);
+  background: #fff;
+  border: 1px solid #e2ddd0;
+  border-radius: 20px;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.journal__trek-chip:hover {
+  border-color: var(--fern-frond);
+}
+
+.journal__trek-chip--active {
+  background: var(--fern-frond);
+  border-color: var(--fern-frond);
+  color: #fff;
+}
+
 .journal__offline-banner {
   display: flex;
   align-items: center;
