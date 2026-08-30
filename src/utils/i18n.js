@@ -5,6 +5,7 @@
 export const UI = {
   fr: {
     nav: {
+      home: 'Accueil',
       circuits: 'Circuits',
       blog: 'Blog',
       about: 'À propos',
@@ -231,6 +232,7 @@ export const UI = {
   },
   en: {
     nav: {
+      home: 'Home',
       circuits: 'Treks',
       blog: 'Blog',
       about: 'About',
@@ -457,6 +459,7 @@ export const UI = {
   },
   mg: {
     nav: {
+      home: 'Fandraisana',
       circuits: 'Fitetezana',
       blog: 'Blaogy',
       about: 'Momba anay',

@@ -73,6 +73,15 @@ export default function Navbar() {
         </Link>
 
         <ul className={`navbar__links ${menuOpen ? 'navbar__links--open' : ''}`}>
+          {/* Mobile-only : la navbar est masquee derriere le menu plein ecran, donc le logo
+              (qui ramene a l'accueil sur desktop) n'est plus cliquable — on duplique ce lien ici. */}
+          {menuOpen && (
+            <li>
+              <Link href="/" className={`navbar__link ${isHome ? 'navbar__link--active' : ''}`}>
+                {t.home}
+              </Link>
+            </li>
+          )}
           {navLinks.map(({ to, label }) => {
             const active = pathname === to || pathname.startsWith(`${to}/`)
             return (
@@ -92,6 +101,13 @@ export default function Navbar() {
               <button type="button" className={`navbar__mobile-locale-opt ${locale === 'fr' ? 'active' : ''}`} onClick={() => setLocale('fr')}>FR</button>
               <button type="button" className={`navbar__mobile-locale-opt ${locale === 'en' ? 'active' : ''}`} onClick={() => setLocale('en')}>EN</button>
               <button type="button" className={`navbar__mobile-locale-opt ${locale === 'mg' ? 'active' : ''}`} onClick={() => setLocale('mg')}>MG</button>
+            </li>
+          )}
+          {/* Mobile-only currency switcher */}
+          {menuOpen && (
+            <li className="navbar__mobile-locale" role="group" aria-label="Choisir la devise">
+              <button type="button" className={`navbar__mobile-locale-opt ${currency === 'AR' ? 'active' : ''}`} onClick={() => currency !== 'AR' && toggle()}>Ar</button>
+              <button type="button" className={`navbar__mobile-locale-opt ${currency === 'EUR' ? 'active' : ''}`} onClick={() => currency !== 'EUR' && toggle()}>€</button>
             </li>
           )}
           {/* Mobile-only auth links */}
